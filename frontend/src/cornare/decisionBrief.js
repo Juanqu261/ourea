@@ -1,5 +1,7 @@
 import { NBS_LABELS, STRESS_LABELS, CLASS_LABELS } from '../domain/evidence.js';
 import { dimensionName, stressNarrative } from '../domain/explanations.js';
+import { computeLeaveOneOutImpact } from '../domain/portfolioSearch.js';
+import { buildBriefMapImage } from './briefMap.js';
 import {
   BRIEF_BOTTOM,
   THEME,
@@ -148,13 +150,45 @@ function shortDimension(id) {
   return SHORT_DIMENSION[id] ?? dimensionName(id);
 }
 
-function whyEnters(measure) {
-  const level = measure.classificationLabel.toLowerCase();
-  const dim = shortDimension(measure.dimensionId);
-  if (measure.part?.factor != null && measure.part.factor < 1) {
-    return `Por qué entra: vulnerabilidad ${level} en ${dim}. El aporte baja: ya hay otra medida de la misma dimensión.`;
+function lossDigits(loss) {
+  return loss < 0.01 ? 4 : 3;
+}
+
+function rationalePlace(measure) {
+  if (measure.scope === 'corridor' || String(measure.place?.localization ?? '').startsWith('Corredor')) return 'el corredor';
+  return measure.place?.localization ?? '';
+}
+
+export function selectionRationale(measure, analysis, impact) {
+  const row = analysis.matrix.rows.find((item) => item.id === measure.id);
+  const score = formatDecimal(row?.standaloneVerifiedScore ?? 0, 3);
+  const contribution = formatDecimal(measure.part.contribution, 3);
+  const dimension = shortDimension(measure.dimensionId);
+  const place = rationalePlace(measure);
+  const high = measure.classScore >= 0.6;
+  const documented = !measure.recurrence.withheld && measure.recurrence.count > 0;
+  const lines = [];
+  if (high) {
+    lines.push(`Prioridad: ${dimension} ${measure.classificationLabel} en ${place}.`);
+  } else if (documented) {
+    lines.push(`Prioridad: ${dimension} es ${measure.classificationLabel}. Hay recurrencia documentada y no se solapa con otra medida de esa dimensión.`);
+  } else {
+    lines.push(`Prioridad: ${dimension} es ${measure.classificationLabel}. Entra por costo y por la mejor combinación factible, no por esa clase sola.`);
   }
-  return `Por qué entra: vulnerabilidad ${level} en ${dim}.`;
+  if (measure.part.factor < 1) {
+    lines.push(`Aporte: ${score} por sí sola. En el portafolio conserva el ${percent(measure.part.factor)} del término de vulnerabilidad y suma ${contribution}.`);
+  } else if (measure.recurrence.withheld) {
+    lines.push(`Aporte: ${score} verificado. La recurrencia no integrada no se cuenta como cero. En el conjunto suma ${contribution}.`);
+  } else {
+    lines.push(`Aporte: ${score} verificado. En el conjunto suma ${contribution}.`);
+  }
+  const cost = formatMillions(measure.cost);
+  if (impact && impact.objectiveLoss > 0) {
+    lines.push(`Rol: COP ${cost} M. Si se excluye, el mejor portafolio pierde ${formatDecimal(impact.objectiveLoss, lossDigits(impact.objectiveLoss))}.`);
+  } else {
+    lines.push(`Rol: COP ${cost} M. Existe una solución equivalente bajo la evidencia integrada.`);
+  }
+  return lines.join(' ');
 }
 
 export function sacrificeView(analysis) {
@@ -214,7 +248,7 @@ function linkedLine(pdf, label, url, x, y, size = 9, color = THEME.bronze) {
   return height;
 }
 
-function drawCover(brief, analysis) {
+function drawCover(brief, analysis, map) {
   const { pdf, margin, contentWidth, bottom } = brief;
   const budget = formatMillions(analysis.parameters.budget_million_cop);
   const used = formatMillions(analysis.portfolio.cost);
@@ -331,83 +365,56 @@ function drawCover(brief, analysis) {
 
   const mapH = bottom - y;
   brief.guard(y + 110, 'portada');
-  drawCorridor(pdf, margin, y, contentWidth, mapH, names);
+  drawTerritory(pdf, margin, y, contentWidth, mapH, map);
   brief.guard(y + mapH, 'mapa');
 }
 
-function scalePoly(poly, x, y, w, h, pad) {
-  return poly.map(([px, py]) => [x + pad + px * (w - pad * 2), y + pad + py * (h - pad * 2)]);
-}
-
-function drawCorridor(pdf, x, y, w, h, names) {
+function drawTerritory(pdf, x, y, w, h, map) {
   card(pdf, x, y, w, h);
-  pdf.text('Corredor de decisión', x + 12, y + 8, { size: 9, bold: true, color: THEME.ink, lineHeight: 12 });
-  const plotX = x + 12;
-  const plotY = y + 26;
-  const plotW = w * 0.62;
-  const plotH = h - 58;
-  const shapes = [
-    {
-      name: names[1] ?? 'Guarne',
-      fill: THEME.guarne,
-      poly: [[0.06, 0.04], [0.4, 0.0], [0.46, 0.22], [0.32, 0.42], [0.04, 0.36]],
-      label: [0.24, 0.2],
-    },
-    {
-      name: names[0] ?? 'Rionegro',
-      fill: THEME.rionegro,
-      poly: [[0.02, 0.4], [0.34, 0.44], [0.4, 0.62], [0.28, 0.98], [0.0, 0.86]],
-      label: [0.18, 0.68],
-    },
-    {
-      name: names[2] ?? 'Marinilla',
-      fill: THEME.marinilla,
-      poly: [[0.5, 0.14], [0.86, 0.04], [0.98, 0.36], [0.8, 0.7], [0.52, 0.56], [0.48, 0.3]],
-      label: [0.72, 0.34],
-    },
-  ];
-  shapes.forEach((shape) => {
-    const points = scalePoly(shape.poly, plotX, plotY, plotW, plotH, 8);
-    pdf.fillPath(points, shape.fill);
-    pdf.strokePath([...points, points[0]], { color: THEME.goldDeep, lineWidth: 1.3 });
-    const [lx, ly] = scalePoly([shape.label], plotX, plotY, plotW, plotH, 8)[0];
-    const labelW = widthOf(shape.name, 8.5, true) + 8;
-    pdf.fillRect(lx - labelW / 2, ly - 2, labelW, 13, THEME.paper);
-    pdf.text(shape.name, lx, ly, { size: 8.5, bold: true, color: THEME.ink, align: 'center', lineHeight: 11 });
+  pdf.text('CONTEXTO TERRITORIAL DEL PORTAFOLIO', x + 12, y + 8, {
+    size: 9,
+    bold: true,
+    color: THEME.ink,
+    lineHeight: 12,
   });
-  const river = scalePoly([[0.18, 0.24], [0.32, 0.4], [0.46, 0.36], [0.62, 0.42], [0.76, 0.3]], plotX, plotY, plotW, plotH, 8);
-  pdf.strokePath(river, { color: THEME.water, lineWidth: 1.6 });
-
-  const legendX = x + plotW + 28;
-  const legend = [
-    [THEME.rionegro, names[0] ?? 'Rionegro'],
-    [THEME.guarne, names[1] ?? 'Guarne'],
-    [THEME.marinilla, names[2] ?? 'Marinilla'],
-  ];
-  legend.forEach(([color, label], index) => {
-    const row = index % 3;
-    const ly = y + 28 + row * 18;
-    pdf.fillRect(legendX, ly, 10, 10, color);
-    pdf.text(label, legendX + 16, ly - 1, { size: 8.5, color: THEME.ink, lineHeight: 11 });
+  const caption = 'Rionegro, Guarne y Marinilla. Límites municipales: DANE MGN 2025. Contexto hídrico y ecosistémico: CORNARE.';
+  const guardrail = 'Las capas muestran contexto territorial; no representan sitios definitivos de obra.';
+  const captionH = pdf.measure(caption, { size: 8, maxWidth: w - 24, lineHeight: 10.5 })
+    + pdf.measure(guardrail, { size: 8, maxWidth: w - 24, lineHeight: 10.5 });
+  const plotX = x + 10;
+  const plotY = y + 24;
+  const plotW = w - 20;
+  const plotH = h - 30 - captionH;
+  const scale = Math.min(plotW / map.width, plotH / map.height);
+  const displayW = map.width * scale;
+  const displayH = map.height * scale;
+  const imageX = plotX + (plotW - displayW) / 2;
+  const imageY = plotY + (plotH - displayH) / 2;
+  pdf.addJpeg({
+    bytes: map.bytes,
+    width: map.width,
+    height: map.height,
+    x: imageX,
+    y: imageY,
+    displayWidth: displayW,
+    displayHeight: displayH,
   });
-  pdf.text('Trazo dorado: ámbito de la decisión.', legendX, plotY + 70, {
-    size: 8.5,
-    color: THEME.muted,
-    maxWidth: w - plotW - 40,
-    lineHeight: 11.5,
+  map.labels.forEach((label) => {
+    const labelX = imageX + (label.x / map.width) * displayW;
+    const labelY = imageY + (label.y / map.height) * displayH - 5;
+    const labelW = widthOf(label.name, 7.5, true) + 8;
+    pdf.fillRect(labelX - labelW / 2, labelY - 1, labelW, 11, [24, 22, 20]);
+    pdf.text(label.name, labelX, labelY, {
+      size: 7.5,
+      bold: true,
+      color: THEME.heroText,
+      align: 'center',
+      lineHeight: 9,
+    });
   });
-  pdf.text('Línea azul: red hídrica esquemática.', legendX, plotY + 96, {
-    size: 8.5,
-    color: THEME.muted,
-    maxWidth: w - plotW - 40,
-    lineHeight: 11.5,
-  });
-  pdf.text('Esquema del corredor para leer la decisión. No usa teselas remotas.', x + 12, y + h - 22, {
-    size: 8.5,
-    color: THEME.muted,
-    maxWidth: w - 24,
-    lineHeight: 11.5,
-  });
+  let cursor = y + h - captionH - 8;
+  cursor += pdf.text(caption, x + 12, cursor, { size: 8, color: THEME.muted, maxWidth: w - 24, lineHeight: 10.5 });
+  pdf.text(guardrail, x + 12, cursor, { size: 8, color: THEME.muted, maxWidth: w - 24, lineHeight: 10.5 });
 }
 
 function drawLogic(brief, analysis) {
@@ -575,7 +582,7 @@ function drawMatrix(pdf, x, y, width, analysis) {
   return y;
 }
 
-function drawPortfolio(brief, analysis) {
+function drawPortfolio(brief, analysis, impacts) {
   const { pdf, margin, contentWidth, bottom } = brief;
   const budget = formatMillions(analysis.parameters.budget_million_cop);
   let y = 36;
@@ -591,7 +598,7 @@ function drawPortfolio(brief, analysis) {
     const pair = [measures[index], measures[index + 1]].filter(Boolean);
     pairs.push({
       pair,
-      height: Math.max(...pair.map((measure) => measureCardHeight(pdf, measure, cardW))),
+      height: Math.max(...pair.map((measure) => measureCardHeight(pdf, measure, cardW, analysis, impacts))),
     });
   }
   const sacrificePreview = sacrificeView(analysis);
@@ -602,7 +609,7 @@ function drawPortfolio(brief, analysis) {
   pairs.forEach((row) => {
     const rowH = row.height + bump;
     row.pair.forEach((measure, offset) => {
-      drawMeasureCard(pdf, measure, margin + offset * (cardW + gap), y, cardW, rowH);
+      drawMeasureCard(pdf, measure, margin + offset * (cardW + gap), y, cardW, rowH, analysis, impacts);
     });
     y += rowH + gap;
   });
@@ -678,15 +685,16 @@ function drawPortfolio(brief, analysis) {
   brief.guard(y, 'portafolio');
 }
 
-function measureCardHeight(pdf, measure, width) {
+function measureCardHeight(pdf, measure, width, analysis, impacts) {
   const inner = width - 24;
   const nameH = pdf.measure(measure.name, { size: 10, bold: true, maxWidth: inner, lineHeight: 13 });
   const scopeH = pdf.measure(measure.place.localization, { size: 8.5, maxWidth: inner, lineHeight: 11.5 });
-  const whyH = pdf.measure(whyEnters(measure), { size: 8.5, maxWidth: inner, lineHeight: 11.5 });
-  return 12 + nameH + 3 + scopeH + 4 + 16 + 16 + 4 + whyH + 10;
+  const why = selectionRationale(measure, analysis, impacts.get(measure.id));
+  const whyH = pdf.measure(why, { size: 8, maxWidth: inner, lineHeight: 10.5 });
+  return nameH + scopeH + whyH + 66;
 }
 
-function drawMeasureCard(pdf, measure, x, y, w, h) {
+function drawMeasureCard(pdf, measure, x, y, w, h, analysis, impacts) {
   card(pdf, x, y, w, h);
   const inner = w - 24;
   let cursor = y + 8;
@@ -717,12 +725,19 @@ function drawMeasureCard(pdf, measure, x, y, w, h) {
   bx += badge(pdf, bx, cursor, dimLabel, THEME.wash, THEME.ink) + 4;
   const nbsLabel = NBS_LABELS[measure.nbsClass] ?? measure.nbsClass;
   badge(pdf, bx, cursor, nbsLabel, NBS_WASH[measure.nbsClass] ?? THEME.wash, NBS_INK[measure.nbsClass] ?? THEME.ink);
-  cursor += 18;
-  pdf.text(whyEnters(measure), x + 12, cursor, {
-    size: 8.5,
+  cursor += 16;
+  pdf.text('POR QUÉ LA SELECCIONAMOS', x + 12, cursor, {
+    size: 7.5,
+    bold: true,
+    color: THEME.bronze,
+    lineHeight: 10,
+  });
+  cursor += 12;
+  pdf.text(selectionRationale(measure, analysis, impacts.get(measure.id)), x + 12, cursor, {
+    size: 8,
     color: THEME.ink,
     maxWidth: inner,
-    lineHeight: 11.5,
+    lineHeight: 10.5,
   });
 }
 
@@ -938,66 +953,190 @@ function drawPitchClose(pdf, x, y, width) {
   return height;
 }
 
-function drawAppendix(brief, analysis, date) {
+function equation(pdf, x, y, width, line) {
+  const height = 22;
+  pdf.fillRect(x, y, width, height, THEME.hero);
+  pdf.fillRect(x, y, 2, height, THEME.gold);
+  pdf.text(line, x + 10, y + 5, { size: 9, color: THEME.heroText, lineHeight: 12 });
+  return height;
+}
+
+function drawModel(brief, analysis) {
   const { pdf, margin, contentWidth } = brief;
   const weights = analysis.parameters.weights;
+  const scores = analysis.parameters.class_scores;
+  const alpha = analysis.parameters.diminishing_second_measure.institucional;
+  const budget = analysis.parameters.budget_million_cop;
+  const objective = analysis.portfolio.institucional.objective;
+  const count = analysis.prepared.length;
+  const hinge = analysis.hinges?.[0];
+  const shift = analysis.stress.shift;
+  const scenario = formatScenario(shift.scenario);
+  const psa = analysis.portfolio.measures.find((measure) => measure.id === 'bio_psa');
+  const areas = analysis.portfolio.measures.find((measure) => measure.id === 'bio_pa');
+  const rowOf = (id) => analysis.matrix.rows.find((row) => row.id === id);
+  let y = 36;
+  y = kicker(pdf, 'MODELO', margin, y);
+  y += 2;
+  y = sectionTitle(pdf, 'MODELO DETERMINÍSTICO', margin, y, contentWidth);
+  y += pdf.text('Cómo Ourea convierte evidencia institucional en una decisión presupuestal.', margin, y, {
+    size: 10,
+    color: THEME.muted,
+    maxWidth: contentWidth,
+    lineHeight: 13,
+  });
+  y += 6;
+  y += pdf.text('Ourea no predice probabilidades de éxito ni recalcula el riesgo climático. Evalúa exhaustivamente portafolios discretos utilizando la evidencia institucional integrada.', margin, y, {
+    size: 9,
+    color: THEME.ink,
+    maxWidth: contentWidth,
+    lineHeight: 12,
+  });
+  y += 8;
+
+  const scale = `Muy baja ${formatDecimal(scores.muy_baja, 1)} · Baja ${formatDecimal(scores.baja, 1)} · Media ${formatDecimal(scores.media, 1)} · Alta ${formatDecimal(scores.alta, 1)} · Muy alta ${formatDecimal(scores.muy_alta, 1)}`;
+  y += pdf.text('i es la medida. d(i) es su dimensión. x_i vale 1 si se financia y 0 si no. c_i es su costo en COP millones. v_i es la clase de vulnerabilidad. r_i es la recurrencia documentada normalizada, cuando está observada. p_i es el componente participativo.', margin, y, {
+    size: 8.5,
+    color: THEME.ink,
+    maxWidth: contentWidth,
+    lineHeight: 11.5,
+  });
+  y += 4;
+  y += pdf.text(scale, margin, y, { size: 8.5, color: THEME.muted, maxWidth: contentWidth, lineHeight: 11.5 });
+  y += 8;
+
+  pdf.text('FÓRMULA INSTITUCIONAL PUBLICADA', margin, y, { size: 8.5, bold: true, color: THEME.bronze, lineHeight: 11 });
+  y += 14;
+  y += equation(pdf, margin, y, contentWidth, `S_i = ${formatDecimal(weights.vulnerability, 2)} v_i + ${formatDecimal(weights.recurrence, 2)} r_i + ${formatDecimal(weights.workshops, 2)} p_i`);
+  y += 6;
+  y += pdf.text(`${percent(weights.vulnerability)} vulnerabilidad, ${percent(weights.recurrence)} recurrencia documentada y ${percent(weights.workshops)} recurrencia participativa.`, margin, y, {
+    size: 8.5,
+    color: THEME.ink,
+    maxWidth: contentWidth,
+    lineHeight: 11.5,
+  });
+  y += 8;
+
+  pdf.text('PUNTAJE VERIFICADO QUE SE OPTIMIZA', margin, y, { size: 8.5, bold: true, color: THEME.bronze, lineHeight: 11 });
+  y += 14;
+  y += equation(pdf, margin, y, contentWidth, `Sver_i = ${formatDecimal(weights.vulnerability, 2)} v_i + I_i × ${formatDecimal(weights.recurrence, 2)} r_i`);
+  y += 6;
+  y += pdf.text('I_i vale 1 si la recurrencia documentada tiene cobertura suficiente, y 0 en el objetivo verificado cuando esa evidencia no está disponible. Eso no afirma que la recurrencia sea cero: ese aporte no se cuenta como evidencia verificada. El componente participativo aún no está integrado en la evidencia operacional; se conserva explícitamente como incertidumbre y no se imputa.', margin, y, {
+    size: 8.5,
+    color: THEME.ink,
+    maxWidth: contentWidth,
+    lineHeight: 11.5,
+  });
+  y += 4;
+  y += pdf.text(`Incertidumbre participativa: 0 <= ${formatDecimal(weights.workshops, 2)} p_i <= ${formatDecimal(weights.workshops, 2)}.`, margin, y, {
+    size: 8.5,
+    color: THEME.muted,
+    maxWidth: contentWidth,
+    lineHeight: 11.5,
+  });
+  y += 8;
+
+  pdf.text('SOLAPAMIENTO POR DIMENSIÓN', margin, y, { size: 8.5, bold: true, color: THEME.bronze, lineHeight: 11 });
+  y += 14;
+  y += equation(pdf, margin, y, contentWidth, `A_i(P) = alfa_i(P) × ${formatDecimal(weights.vulnerability, 2)} v_i + I_i × ${formatDecimal(weights.recurrence, 2)} r_i`);
+  y += 6;
+  const overlap = `alfa_i vale 1,00 para la medida de mayor puntaje verificado en la dimensión y ${formatDecimal(alpha, 2)} para una medida adicional. El factor multiplica solo el término de vulnerabilidad. Una segunda medida de la misma dimensión sigue aportando valor, pero Ourea evita contabilizar dos veces la misma prioridad territorial.`;
+  y += pdf.text(overlap, margin, y, { size: 8.5, color: THEME.ink, maxWidth: contentWidth, lineHeight: 11.5 });
+  if (psa && areas) {
+    y += 3;
+    const example = `${psa.name.split('–')[0].trim()}: ${formatDecimal(rowOf(psa.id).standaloneVerifiedScore, 3)} por sí sola. ${areas.name.split('–')[0].trim()}: ${formatDecimal(rowOf(areas.id).standaloneVerifiedScore, 3)} por sí sola y ${formatDecimal(areas.part.contribution, 3)} dentro del portafolio, con el término de vulnerabilidad en ${percent(areas.part.factor)}.`;
+    y += pdf.text(example, margin, y, { size: 8.5, color: THEME.ink, maxWidth: contentWidth, lineHeight: 11.5 });
+  }
+  y += 8;
+
+  pdf.text('BÚSQUEDA', margin, y, { size: 8.5, bold: true, color: THEME.bronze, lineHeight: 11 });
+  y += 14;
+  y += equation(pdf, margin, y, contentWidth, `maximizar Z(P) = suma x_i A_i(P), con suma c_i x_i <= ${formatMillions(budget)} y x_i en {0, 1}`);
+  y += 6;
+  y += pdf.text(`${count} medidas indivisibles, una unidad funcional por medida. ${formatMillions(2 ** count)} subconjuntos se enumeran de forma exhaustiva y determinística.`, margin, y, {
+    size: 8.5,
+    color: THEME.ink,
+    maxWidth: contentWidth,
+    lineHeight: 11.5,
+  });
+  y += 3;
+  y += pdf.text('Si dos portafolios empatan en Z, se prefiere el que deja más presupuesto sin usar. Si el empate continúa, decide el orden lexicográfico de los identificadores ya ordenados.', margin, y, {
+    size: 8.5,
+    color: THEME.ink,
+    maxWidth: contentWidth,
+    lineHeight: 11.5,
+  });
+  y += 6;
+  y += pdf.text(`Portafolio recomendado: Z* = ${formatDecimal(objective, 4)}. COP ${formatMillions(analysis.portfolio.cost)} M. ${analysis.portfolio.measures.length} medidas. P* es el portafolio que maximiza Z bajo el presupuesto.`, margin, y, {
+    size: 9,
+    bold: true,
+    color: THEME.ink,
+    maxWidth: contentWidth,
+    lineHeight: 12,
+  });
+  y += 8;
+
+  if (hinge) {
+    const relative = formatDecimal(hinge.rangeFraction * 100, 1);
+    y += pdf.text(`Sensibilidad: la brecha con la alternativa más cercana es ${hinge.gapDisplay}. El rango ponderado del criterio participativo es ${formatDecimal(weights.workshops, 2)}. ${hinge.gapDisplay} / ${formatDecimal(weights.workshops, 2)} = ${relative}% de ese rango. Una diferencia de ese tamaño puede invertir el ordenamiento más cercano. No es un porcentaje de talleres ni una probabilidad.`, margin, y, {
+      size: 8.5,
+      color: THEME.ink,
+      maxWidth: contentWidth,
+      lineHeight: 11.5,
+    });
+    y += 6;
+  }
+  y += pdf.text(`SSP3-7.0 es una prueba posterior, no la optimización. El cambio cuantificado es ${placeName(shift.municipality_id)}, ${dimensionName(shift.dimension_id)}: ${formatDecimal(shift.from_value, 2)} ${RISK_CLASS[shift.from_class] ?? shift.from_class} hacia ${formatDecimal(shift.to_value, 2)} ${RISK_CLASS[shift.to_class] ?? shift.to_class} en ${shift.year} bajo ${scenario}. ${analysis.stress.sameSet ? 'El conjunto seleccionado no cambia ante ese cambio cuantificado.' : 'El conjunto seleccionado cambia ante ese cambio cuantificado.'} Esto no significa que todas las dimensiones tengan series ${scenario}.`, margin, y, {
+    size: 8.5,
+    color: THEME.ink,
+    maxWidth: contentWidth,
+    lineHeight: 11.5,
+  });
+  y += 8;
+
+  const flow = [
+    'CLASE DE VULNERABILIDAD',
+    'RECURRENCIA OBSERVADA',
+    'PUNTAJE VERIFICADO',
+    'SOLAPAMIENTO POR DIMENSIÓN',
+    'APORTE AL PORTAFOLIO',
+    `RESTRICCIÓN COP ${formatMillions(budget)} M`,
+    `${formatMillions(2 ** count)} SUBCONJUNTOS`,
+    'PORTAFOLIO RECOMENDADO',
+    scenario,
+    'RIESGO RESIDUAL / MEA',
+  ];
+  flow.forEach((step, index) => {
+    pdf.fillCircle(margin + 3, y + 4, 2.2, THEME.gold);
+    pdf.text(step, margin + 12, y, { size: 8, bold: true, color: THEME.ink, lineHeight: 10 });
+    if (index < flow.length - 1) {
+      pdf.strokePath([[margin + 3, y + 8], [margin + 3, y + 12]], { color: THEME.goldDeep, lineWidth: 1 });
+    }
+    y += 12;
+  });
+  brief.guard(y, 'modelo');
+}
+
+function drawSources(brief, analysis, date) {
+  const { pdf, margin, contentWidth } = brief;
   let y = 36;
   y = kicker(pdf, 'APÉNDICE', margin, y);
   y += 2;
-  y = sectionTitle(pdf, 'Metodología y fuentes', margin, y, contentWidth);
-
-  const formulaH = 96;
-  card(pdf, margin, y, contentWidth, formulaH, { accent: THEME.goldDeep });
-  pdf.text('FÓRMULA INSTITUCIONAL', margin + 14, y + 8, { size: 8.5, bold: true, color: THEME.bronze, lineHeight: 11 });
-  pdf.text(`Puntaje = ${percent(weights.vulnerability)} vulnerabilidad + ${percent(weights.recurrence)} recurrencia documentada + ${percent(weights.workshops)} componente participativo.`, margin + 14, y + 24, {
-    size: 10,
+  y = sectionTitle(pdf, 'Fuentes y guardarraíles', margin, y, contentWidth);
+  y += pdf.text('El contexto espacial no entra al puntaje. El tamiz de soluciones basadas en la naturaleza no certifica medidas. La mitigación y las emisiones no sustituyen la adaptación.', margin, y, {
+    size: 9.5,
     color: THEME.ink,
-    maxWidth: contentWidth - 28,
-    lineHeight: 13.5,
+    maxWidth: contentWidth,
+    lineHeight: 13,
   });
-  const diminish = percent(analysis.parameters.diminishing_second_measure.institucional);
-  const workshopLine = analysis.parameters.workshops_scored
-    ? 'El componente participativo entra con el peso definido.'
-    : 'El componente participativo no se imputa: el paquete no trae esos conteos.';
-  pdf.text(`La segunda medida de una dimensión conserva el ${diminish} de su término de vulnerabilidad. ${workshopLine}`, margin + 14, y + 46, {
-    size: 8.5,
-    color: THEME.muted,
-    maxWidth: contentWidth - 28,
-    lineHeight: 11.5,
-  });
-  y += formulaH + 10;
-
-  pdf.text('Cómo se relacionan los datos', margin, y, { size: 12, bold: true, color: THEME.ink, lineHeight: 16 });
-  y += 18;
-  const relations = [
-    ['Vulnerabilidad', 'define la prioridad territorial'],
-    ['Recurrencia documentada', 'aporta evidencia institucional'],
-    ['Costos', 'limitan los portafolios factibles'],
-    ['SIG', 'da contexto espacial'],
-    ['Evidencia NbS', 'caracteriza cobeneficios, fuera del puntaje'],
-    ['Escenario', 'prueba la decisión ya seleccionada'],
-    ['MEA', 'cierra el ciclo de monitoreo'],
-  ];
-  relations.forEach(([left, right]) => {
-    pdf.text(left, margin, y, { size: 9, bold: true, color: THEME.ink, lineHeight: 12 });
-    pdf.text('>', margin + 148, y, { size: 9, bold: true, color: THEME.goldDeep, lineHeight: 12 });
-    pdf.text(right, margin + 168, y, { size: 9, color: THEME.muted, lineHeight: 12 });
-    y += 15;
-  });
-  y += 4;
-  y += pdf.text('Esos vínculos quedan integrados en la secuencia de decisión.', margin, y, { size: 8.5, color: THEME.muted, lineHeight: 11.5 });
-  y += 12;
-
+  y += 8;
   const standard = (analysis.nbsScreen?.find((item) => item.standard)?.standard
     ?? 'Tamiz cualitativo de ocho criterios. No es una certificación.')
     .replace(/^Screening contra/, 'Tamiz contra');
-  y += pdf.text(standard, margin, y, { size: 9.5, color: THEME.ink, maxWidth: contentWidth, lineHeight: 13 });
-  y += 10;
+  y += pdf.text(standard, margin, y, { size: 9, color: THEME.muted, maxWidth: contentWidth, lineHeight: 12 });
+  y += 8;
   divider(pdf, margin, y, contentWidth);
   y += 10;
-
-  pdf.text('Fuentes principales', margin, y, { size: 12, bold: true, color: THEME.ink, lineHeight: 16 });
-  y += 16;
   PRINCIPAL_SOURCES.forEach((source) => {
     const titleH = source.url
       ? linkedLine(pdf, source.title, source.url, margin, y, 9.5)
@@ -1009,43 +1148,47 @@ function drawAppendix(brief, analysis, date) {
       maxWidth: contentWidth,
       lineHeight: 11.5,
     });
-    y += 6;
+    y += 8;
   });
-
-  y += 4;
-  const closeH = 78;
-  const closeY = Math.max(y + 8, brief.bottom - closeH);
-  card(pdf, margin, closeY, contentWidth, closeH, { fill: THEME.hero });
-  pdf.text('Ourea no reemplaza el diagnóstico climático de CORNARE. Lo convierte en una decisión presupuestal explicable, reproducible y adaptable.', margin + 14, closeY + 10, {
-    size: 9.5,
+  y += 10;
+  const limits = [
+    'No se recalcula el riesgo climático publicado por CORNARE.',
+    'No se inventan probabilidades de éxito.',
+    'No se imputa el componente participativo como cero observado.',
+    'No se convierten las capas geográficas en puntaje.',
+  ];
+  limits.forEach((line) => {
+    pdf.fillCircle(margin + 4, y + 5, 1.6, THEME.goldDeep);
+    y += pdf.text(line, margin + 14, y, { size: 9, color: THEME.ink, maxWidth: contentWidth - 14, lineHeight: 12 });
+    y += 4;
+  });
+  const barY = Math.max(y + 16, brief.bottom - 40);
+  card(pdf, margin, barY, contentWidth, 36, { fill: THEME.hero });
+  pdf.text(`${formatBriefDate(date)} · Ourea · versión ${PRODUCT_VERSION}`, margin + 14, barY + 12, {
+    size: 9,
     color: THEME.heroText,
-    maxWidth: contentWidth - 28,
-    lineHeight: 13,
+    lineHeight: 12,
   });
-  pdf.text(`Decision fingerprint: ${analysis.fingerprint}`, margin + 14, closeY + 42, {
-    size: 8.5,
-    color: THEME.gold,
-    lineHeight: 11,
-  });
-  pdf.text(`${formatBriefDate(date)} · versión ${PRODUCT_VERSION}`, margin + 14, closeY + 56, {
-    size: 8.5,
-    color: THEME.heroMuted,
-    lineHeight: 11,
-  });
-  y = closeY + closeH;
-  brief.guard(y, 'apéndice');
+  brief.guard(barY + 36, 'fuentes');
 }
 
-export function composeDecisionBrief(analysis, date = new Date()) {
+export async function composeDecisionBrief(analysis, date = new Date(), options = {}) {
+  const map = options.map ?? await buildBriefMapImage(options.mapOptions);
+  const impacts = new Map(
+    computeLeaveOneOutImpact(analysis.prepared, analysis.parameters, analysis.portfolio)
+      .map((item) => [item.id, item]),
+  );
   const brief = openBrief();
-  drawCover(brief, analysis);
+  drawCover(brief, analysis, map);
   brief.newPage();
   drawLogic(brief, analysis);
   brief.newPage();
-  drawPortfolio(brief, analysis);
+  drawPortfolio(brief, analysis, impacts);
   brief.newPage();
   drawRobustness(brief, analysis);
   brief.newPage();
-  drawAppendix(brief, analysis, date);
+  drawModel(brief, analysis);
+  brief.newPage();
+  drawSources(brief, analysis, date);
   return brief.finish();
 }

@@ -178,6 +178,24 @@ export function searchPortfolios(prepared, parameters) {
   };
 }
 
+export function computeLeaveOneOutImpact(prepared, parameters, portfolio) {
+  const current = portfolio.institucional?.objective ?? portfolio.objective;
+  const selected = portfolio.ids;
+  return selected.map((id) => {
+    const subset = prepared.filter((measure) => measure.id !== id);
+    const best = searchPortfolios(subset, parameters).institucional;
+    const objectiveWithout = best.institucional.objective;
+    const loss = round6(current - objectiveWithout);
+    return {
+      id,
+      bestWithoutMeasure: best.ids,
+      objectiveWithoutMeasure: objectiveWithout,
+      objectiveLoss: loss > 1e-6 ? loss : 0,
+      replacementMeasures: best.ids.filter((item) => !selected.includes(item)),
+    };
+  });
+}
+
 export function searchWithUrgency(prepared, parameters) {
   const budget = parameters.budget_million_cop;
   const count = prepared.length;
