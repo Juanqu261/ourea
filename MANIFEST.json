@@ -11,8 +11,8 @@
   "files": [
     {
       "path": ".env.example",
-      "bytes": 868,
-      "sha256": "cf9f253a03a2a5cfc521dc87e0c738f41902e08d9ff98cffbec5cfd6a35d0a1e"
+      "bytes": 933,
+      "sha256": "54617fb5cfd6223101e11ebd62ba3a6a19ab76827b9e3484a919404812d0e611"
     },
     {
       "path": ".github/workflows/ourea.yml",
@@ -1031,13 +1031,13 @@
     },
     {
       "path": "services/decision_ai/agents/copilot/graph.py",
-      "bytes": 9147,
-      "sha256": "94aff2f48603d787e3ea3aeeb2de37c0912bdfc21f0f30cfb85434f880cffa69"
+      "bytes": 9352,
+      "sha256": "34e991bd43f347af616f7ebf356cd2a733edaae5db2fe53e4fb54c1ac2ff92d9"
     },
     {
       "path": "services/decision_ai/agents/copilot/prompt.md",
-      "bytes": 4144,
-      "sha256": "2fa0ce1c8b850452bb6746912d70d772a23f80cb3d1f8aa10f146cef0ddf195e"
+      "bytes": 4987,
+      "sha256": "7d0a2a91bd539ccba02171df6b41b53d9d9b94c144cea9ef2df6378a861a4e8e"
     },
     {
       "path": "services/decision_ai/agents/copilot/refusals.py",
@@ -1076,8 +1076,8 @@
     },
     {
       "path": "services/decision_ai/agents/shared/model.py",
-      "bytes": 572,
-      "sha256": "c4964b651b772705149555b24727edfb5c63717c8166ce2141733506154ef013"
+      "bytes": 941,
+      "sha256": "edcf3999a8ae87666d83752a7c267d0120388515c7f816dbef7f88e1baa87d6b"
     },
     {
       "path": "services/decision_ai/agents/shared/verify.py",
@@ -1216,8 +1216,8 @@
     },
     {
       "path": "tests/test_ai_graphs.py",
-      "bytes": 10271,
-      "sha256": "ef3431061176e120b4982ffef6513fde81aee132c2a7b1868d8df0c541aef6f3"
+      "bytes": 11155,
+      "sha256": "9b4bf6ffffc072f9616957a69e32c45daaba49481fed743a3a43c6c04bb3b40a"
     },
     {
       "path": "tests/test_ai_tools.py",

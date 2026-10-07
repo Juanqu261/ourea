@@ -75,19 +75,20 @@ def build_copilot(model, settings: Settings, checkpointer=None):
         return {"route": route, "run_id": _run_id(config), "tool_results": [], "tool_calls": 0,
                 "draft": None, "errors": [], "retries": 0, "answer": None, "status": "running"}
 
-    def finish(answer: dict, status: str, extra: dict | None = None):
+    def finish(state: CopilotState, answer: dict, status: str, extra: dict | None = None):
         update = {"answer": answer, "status": status, "messages": [AIMessage(content=answer["respuesta"])]}
-        focus = (answer.get("enfoque_mapa") or {}).get("intervention_id")
+        # The thread remembers the measure in play, so a later «¿dónde exactamente?» can focus the map.
+        focus = (answer.get("enfoque_mapa") or {}).get("intervention_id") or refusals.measure_in(_question(state))
         if focus:
             update["last_focus"] = focus
         return update | (extra or {})
 
     def refuse(state: CopilotState):
         _, spec = refusals.classify(_question(state))
-        return finish(refusals.refuse(spec), "refused")
+        return finish(state, refusals.refuse(spec), "refused")
 
     def refuse_write(state: CopilotState):
-        return finish(refusals.refuse_write(), "refused")
+        return finish(state, refusals.refuse_write(), "refused")
 
     def locate(state: CopilotState):
         measure_id = refusals.measure_in(_question(state)) or state.get("last_focus")
@@ -95,7 +96,7 @@ def build_copilot(model, settings: Settings, checkpointer=None):
         if measure_id:
             output = registry.run_tool("get_spatial_context", {"intervention_id": measure_id}, state["run_id"], "copilot")
             layers = output["result"]["layers"]
-        return finish(refusals.locate(measure_id, layers), "answered", {"tool_results": call_log.outputs(state["run_id"])})
+        return finish(state, refusals.locate(measure_id, layers), "answered", {"tool_results": call_log.outputs(state["run_id"])})
 
     def agent(state: CopilotState):
         reply = model_with_tools.invoke([SystemMessage(PROMPT), *state["messages"]])
@@ -125,7 +126,7 @@ def build_copilot(model, settings: Settings, checkpointer=None):
     def check(state: CopilotState):
         errors = verify(state["draft"], state.get("tool_results") or [], settings.max_words)
         if not errors:
-            return finish(state["draft"], "answered", {"errors": []})
+            return finish(state, state["draft"], "answered", {"errors": []})
         return {"errors": errors, "retries": state.get("retries", 0) + 1}
 
     def after_verify(state: CopilotState) -> str:
@@ -134,7 +135,7 @@ def build_copilot(model, settings: Settings, checkpointer=None):
         return "fallback" if state.get("retries", 0) >= settings.max_verify_retries else "compose"
 
     def fallback(state: CopilotState):
-        return finish(fallback_answer(state.get("tool_results") or []), "fallback")
+        return finish(state, fallback_answer(state.get("tool_results") or []), "fallback")
 
     graph = StateGraph(CopilotState)
     graph.add_node("guard_input", guard_input)

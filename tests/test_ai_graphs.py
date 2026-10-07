@@ -84,6 +84,12 @@ class CopilotGraphTests(unittest.TestCase):
         self.assertEqual(where["answer"]["brechas_relacionadas"], ["gap-sites"])
         self.assertEqual(where["answer"]["enfoque_mapa"], {"intervention_id": "infra_resilient"})
 
+    def test_where_exactly_uses_the_measure_asked_about(self):
+        draft = GOOD | {"enfoque_mapa": None}  # the model forgot the focus
+        model = ScriptedModel.of(tool_call("price_of_constraint", {"force": ["infra_resilient"]}), final(), draft)
+        _, where = self.run_copilot(model, "¿Y si exigimos infraestructura gris?", "¿Dónde exactamente?", thread="where2")
+        self.assertEqual(where["answer"]["enfoque_mapa"], {"intervention_id": "infra_resilient"})
+
     def test_bad_draft_is_retried_with_errors(self):
         model = ScriptedModel.of(tool_call("price_of_constraint", {"force": ["infra_resilient"]}), final(), BAD, GOOD)
         [result] = self.run_copilot(model, "¿Y si exigimos infraestructura gris?", thread="retry")
@@ -105,6 +111,16 @@ class CopilotGraphTests(unittest.TestCase):
         [result] = self.run_copilot(model, "Busca muchas veces", thread="cap")
         self.assertEqual(len(result["tools"]), cap)
         self.assertEqual(model.calls, ["chat"] * cap + ["structured", "chat"])  # no seventh agent turn
+
+
+class ModelSettingsTests(unittest.TestCase):
+    def test_temperature_is_sent_only_when_configured(self):
+        from services.decision_ai.agents.shared.model import temperature_for
+
+        for configured in (None, "", "none", "None"):
+            self.assertIsNone(temperature_for(configured))
+        self.assertEqual(temperature_for("0"), 0.0)
+        self.assertEqual(temperature_for("0.3"), 0.3)
 
 
 @unittest.skipUnless(HAS_LANGGRAPH, "requirements-ai.txt not installed")
