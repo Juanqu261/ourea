@@ -1,5 +1,7 @@
 import { dimensionName } from './explanations.js';
 
+export const ROBUSTNESS_MEANING = 'Mayormente robusta significa que el conjunto permanece estable ante la evidencia de escenario disponible; no significa que todas las dimensiones tengan series SSP3-7.0.';
+
 export function decisionRobustness(analysis) {
   const shift = analysis.stress.shift;
   const nearest = analysis.rejected[0] ?? null;

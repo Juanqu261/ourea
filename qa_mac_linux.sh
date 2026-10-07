@@ -27,6 +27,6 @@ echo "== Decision engine outputs =="
 python -m decision_engine.build --check
 
 echo "== Reproducibility manifest =="
-python scripts/make_manifest.py
+python scripts/make_manifest.py --check
 
 echo "Ourea QA completed."

@@ -9,6 +9,23 @@ const CRITERIA = [
   ['mainstreaming', 'Arreglo institucional'],
 ];
 
+const PROVENANCE = {
+  societal: 'Clase de vulnerabilidad del reto 2026',
+  scale: 'Estándar UICN 2020, criterio de escala',
+  biodiversity: 'Estándar UICN 2020, criterio de biodiversidad',
+  feasibility: 'Costo del ejercicio y fichas CORNARE 2026',
+  governance: 'Fichas de adaptación CORNARE 2026',
+  tradeoffs: 'Matriz institucional de este corredor',
+  adaptive: 'Indicadores MEA del reto',
+  mainstreaming: 'Estándar UICN 2020, criterio de arreglo institucional',
+};
+
+const STATUS_LABEL = {
+  SUPPORTED: 'Con soporte',
+  PARTIAL: 'Parcial',
+  'TO VALIDATE': 'Por validar',
+};
+
 const SCREENS = {
   bio_pa: {
     societal: ['SUPPORTED', 'La clase de biodiversidad del corredor es Muy alta.'],
@@ -84,7 +101,14 @@ export function screenNbs(measures) {
       standard: 'Screening contra los ocho criterios del Estándar Global de NbS de la UICN. No es una certificación.',
       criteria: CRITERIA.map(([id, label]) => {
         const [status, evidence] = SCREENS[measure.id][id];
-        return { id, label, status, evidence };
+        return {
+          id,
+          label,
+          status,
+          statusLabel: STATUS_LABEL[status],
+          evidence,
+          source: PROVENANCE[id],
+        };
       }),
     }));
 }

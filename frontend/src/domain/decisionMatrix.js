@@ -3,6 +3,20 @@ import { dimensionName } from './explanations.js';
 
 const CLOSE_COUNT = 3;
 
+function round6(value) {
+  return Math.round(value * 1e6) / 1e6;
+}
+
+function standaloneVerifiedScore(measure) {
+  const recurrence = measure.recurrence.withheld ? 0 : measure.recurrence.term;
+  return round6(measure.vulnTerm + recurrence);
+}
+
+function evidenceStatus(measure) {
+  if (measure.recurrence.withheld) return 'to_integrate';
+  return 'partial';
+}
+
 export function buildDecisionMatrix({ prepared, portfolio, rejected, explanations, mea, profiles }) {
   const selected = new Set(portfolio.ids);
   const partById = new Map(portfolio.institucional.parts.map((part) => [part.id, part]));
@@ -20,7 +34,7 @@ export function buildDecisionMatrix({ prepared, portfolio, rejected, explanation
       dimension: dimensionName(measure.dimensionId),
       scope: place.localization,
       vulnerabilityClass: measure.classificationLabel,
-      vulnerabilityComponent: part ? part.vulnerability : measure.vulnTerm,
+      vulnerabilityComponent: measure.vulnTerm,
       recurrence: {
         withheld: recurrenceWithheld,
         observed: recurrenceWithheld ? null : measure.recurrence.term,
@@ -37,7 +51,11 @@ export function buildDecisionMatrix({ prepared, portfolio, rejected, explanation
       },
       cost: measure.cost,
       nbsClass: measure.nbsClass,
-      verifiedScore: part ? part.contribution : null,
+      standaloneVerifiedScore: standaloneVerifiedScore(measure),
+      verifiedScore: standaloneVerifiedScore(measure),
+      portfolioMarginalScore: part ? part.contribution : null,
+      bestContainingPortfolioGap: selected.has(measure.id) ? 0 : (rejection?.gap ?? null),
+      evidence: evidenceStatus(measure),
       cobenefit: {
         term: measure.cobenefit.term,
         appliedToInstitutionalScore: false,
@@ -69,7 +87,11 @@ export function buildDecisionMatrix({ prepared, portfolio, rejected, explanation
   rows.sort((left, right) => {
     const rank = order[left.decision] - order[right.decision];
     if (rank !== 0) return rank;
-    if (left.decision === 'SELECTED') return (right.verifiedScore ?? 0) - (left.verifiedScore ?? 0);
+    if (left.decision === 'SELECTED') {
+      const delta = right.portfolioMarginalScore - left.portfolioMarginalScore;
+      if (delta !== 0) return delta;
+      return left.id.localeCompare(right.id);
+    }
     return (left.rejection?.gap ?? 99) - (right.rejection?.gap ?? 99);
   });
   return {

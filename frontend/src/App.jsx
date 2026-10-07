@@ -5,8 +5,10 @@ import {
 } from 'lucide-react';
 import { OureaLogo } from './components/OureaLogo.jsx';
 import { analyzeCorridor, bundleDataset } from './domain/cornareDecision.js';
+import { comparisonCards } from './domain/comparison.js';
 import { NBS_LABELS, STRESS_LABELS } from './domain/evidence.js';
 import { dimensionName } from './domain/explanations.js';
+import { ROBUSTNESS_MEANING } from './domain/robustness.js';
 import { CLASS_COLOR, STEPS, copMillions } from './cornare/copy.js';
 import { DecisionMatrix } from './cornare/DecisionMatrix.jsx';
 import { DecisionMap } from './cornare/map/DecisionMap.jsx';
@@ -233,8 +235,9 @@ function Priority({ analysis, onCompare, onMatrix }) {
   const [open, setOpen] = useState(false);
   return (
     <>
-      <p className="panel-lead">15 medidas compiten por COP 5.000 M. El puntaje institucional usa solo vulnerabilidad y recurrencia observada.</p>
-      <p>Puntaje verificado {analysis.portfolio.institucional.objective.toFixed(2)}</p>
+      <p className="panel-lead">Portafolio recomendado con evidencia verificada. Mejor conjunto bajo la evidencia institucional actualmente integrada.</p>
+      <p>15 medidas compiten por COP 5.000 M. El puntaje institucional usa solo vulnerabilidad y recurrencia observada.</p>
+      <p>Puntaje institucional verificado {analysis.portfolio.institucional.objective.toFixed(2)}</p>
       <DecisionMatrix rows={analysis.matrix.rows} compact />
       <button type="button" data-testid="open-matrix" onClick={onMatrix}>Ver matriz completa</button>
       <button type="button" data-testid="open-compare" onClick={onCompare}>Comparar alternativas</button>
@@ -297,19 +300,42 @@ function Portfolio({ analysis, raw, focusId, setFocusId, openWhy, setOpenWhy, on
 
 function Horizon({ analysis, horizon, setHorizon }) {
   const shift = analysis.stress.shift;
-  const kept = analysis.stress.sameSet ? analysis.portfolio.ids.length : null;
+  const signalCount = analysis.stress.evidencedDimensions.length;
   return (
     <>
       <div className="scenario-switch" role="group" aria-label="Escenario">
         <button type="button" className={horizon === 'reference' ? 'is-active' : ''} onClick={() => setHorizon('reference')}>Referencia</button>
         <button type="button" data-testid="scenario-2060" className={horizon === '2060' ? 'is-active' : ''} onClick={() => setHorizon('2060')}>SSP3-7.0 · 2060</button>
       </div>
-      <p data-testid="stress-status" className={`status status-${analysis.stress.status}`}>{STRESS_LABELS[analysis.stress.status]}</p>
-      <p>Portafolio retenido: {kept ?? analysis.portfolio.ids.length} / {analysis.portfolio.ids.length}</p>
+      <p data-testid="stress-status" className={`status status-${analysis.stress.status}`} title={ROBUSTNESS_MEANING}>{STRESS_LABELS[analysis.stress.status]}</p>
+      <p className="fine" data-testid="stress-meaning">{ROBUSTNESS_MEANING}</p>
+      <p data-testid="stress-outcome">{analysis.stress.sameSet ? 'El portafolio no cambia ante el cambio cuantificado' : 'El portafolio cambia ante el cambio cuantificado'}</p>
       <p>Rionegro, riesgo de desastres: {shift.from_value} → {shift.to_value}. {classLabel(shift.from_class)} → {classLabel(shift.to_class)}.</p>
-      <p>Cobertura de escenario: Rionegro · riesgo de desastres · cuantificado. Otras dimensiones · integración requerida.</p>
+      <section data-testid="stress-coverage">
+        <h3>Cobertura del stress test</h3>
+        <p>{signalCount === 1 ? '1 señal cuantificada' : `${signalCount} señales cuantificadas`}</p>
+        <p>Rionegro · {dimensionName(shift.dimension_id)}</p>
+        <p>Otras dimensiones: Integración de escenario requerida</p>
+      </section>
       <section data-testid="robustness-panel">
         <h3>¿Qué podría cambiar esta decisión?</h3>
+        <div data-testid="decision-hinge">
+          <h3>Umbral de cambio de decisión</h3>
+          {analysis.hinges.map((hinge) => (
+            <article key={hinge.id} className="hinge-card">
+              <p><strong>{hinge.name}</strong></p>
+              <p>Brecha verificada: {hinge.gapDisplay}</p>
+              <p>{hinge.label}</p>
+              <p>{hinge.interpretation}</p>
+              <p>Evidencia que puede cambiar la decisión</p>
+              <ul>{hinge.criteria.map((criterion) => <li key={criterion.id}>{criterion.label}</li>)}</ul>
+              <p>Diferencia ponderada mínima: {hinge.minimumDisplay}</p>
+              <p>{hinge.sentence}</p>
+              <p className="fine">{hinge.assignment}</p>
+            </article>
+          ))}
+          <p className="fine">{analysis.hinges[0]?.thresholds}</p>
+        </div>
         <p>Estable ante</p>
         <ul>{analysis.robustness.stable.map((line) => <li key={line}>{line}</li>)}</ul>
         <p>Sensible a</p>
@@ -354,10 +380,19 @@ function Followup({ analysis, engine }) {
       <section data-testid="nbs-screen">
         <h3>Screening NbS, no es certificación</h3>
         {analysis.nbsScreen.map((item) => (
-          <p key={item.id}><strong>{item.name}</strong> · {item.criteria.filter((criterion) => criterion.status === 'SUPPORTED').length} criterios con soporte · {item.criteria.filter((criterion) => criterion.status === 'TO VALIDATE').length} por validar</p>
+          <div key={item.id}>
+            <p><strong>{item.name}</strong> · {item.criteria.filter((criterion) => criterion.status === 'SUPPORTED').length} criterios con soporte · {item.criteria.filter((criterion) => criterion.status === 'TO VALIDATE').length} por validar</p>
+            <p className="fine">{item.standard}</p>
+            <details>
+              <summary>Criterios y procedencia</summary>
+              {item.criteria.map((criterion) => (
+                <p key={criterion.id}>{criterion.label}: {criterion.statusLabel} · {criterion.source}</p>
+              ))}
+            </details>
+          </div>
         ))}
       </section>
-      <p data-testid="decision-line">El puntaje institucional financia áreas protegidas y PSA. No compra la obra gris de COP 2.500 M.</p>
+      <p data-testid="decision-line">Con la evidencia institucional verificada, Ourea asigna los COP 5.000 M a seis medidas. La selección no cambia ante el cambio SSP3-7.0 cuantificado para Rionegro, pero es sensible al componente participativo aún por integrar.</p>
       <button type="button" data-testid="export-pdf" onClick={() => downloadPitchPdf(analysis)}>Descargar PDF</button>
       <p className="fine">Huella {analysis.fingerprint}</p>
       <EngineAnnex engine={engine} />
@@ -395,22 +430,26 @@ function Method() {
 }
 
 function Compare({ analysis }) {
-  const rows = [
-    ['Recomendado', analysis.lenses.institucional],
-    ['Con cobeneficio', analysis.lenses.naturaleza],
-    ['Bajo arrepentimiento', analysis.lenses.bajo_arrepentimiento],
-    ['Infraestructura gris', analysis.baselines.grey],
-  ];
+  const cards = comparisonCards(analysis);
   return (
     <>
       <h2>Comparar alternativas</h2>
+      <p className="fine">El puntaje institucional verificado es la métrica común. El objetivo de cada lente se muestra aparte y no se compara en la misma columna.</p>
       <div className="compare-grid">
-        {rows.map(([title, portfolio]) => (
-          <article key={title}>
-            <h3>{title}</h3>
-            <p>{copMillions(portfolio.cost)} · puntaje {portfolio.institucional.objective.toFixed(2)}</p>
-            <p>{portfolio.ids.length} medidas</p>
-            <p>{portfolio.measures.map((measure) => shortName(measure.name)).join(' · ')}</p>
+        {cards.map((card) => (
+          <article key={card.id} data-testid={`compare-${card.id}`}>
+            <h3>{card.title}</h3>
+            <p>{copMillions(card.cost)}</p>
+            <p className="compare-metric" data-testid={`compare-institutional-${card.id}`}>Puntaje institucional verificado: {card.institutional.toFixed(3)}</p>
+            {card.lens && (
+              <p className="compare-lens" data-testid={`compare-lens-${card.id}`}>
+                {card.lens.label}: {card.lens.value.toFixed(3)}
+                <span className="fine"> {card.lens.note}</span>
+              </p>
+            )}
+            {card.note && <p className="fine">{card.note}</p>}
+            <p>{card.measures.length} medidas</p>
+            <p>{card.measures.map((name) => shortName(name)).join(' · ')}</p>
           </article>
         ))}
       </div>

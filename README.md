@@ -109,4 +109,12 @@ python -m unittest discover -s tests -p "test_*.py" -v
 python scripts/climaterisk/validate_inputs.py
 ```
 
-En Windows, `qa_windows.bat` recorre esas comprobaciones.
+En Windows, `qa_windows.bat` recorre esas comprobaciones. En macOS o Linux, `./qa_mac_linux.sh`.
+
+Antes de hacer push, regenera el manifiesto y deja que QA solo lo compruebe:
+
+```bash
+python scripts/make_manifest.py
+```
+
+El despliegue en GitHub Pages, y el ajuste único de Settings → Pages → Source → GitHub Actions, están en [docs/deployment.md](docs/deployment.md).

@@ -54,7 +54,7 @@ export function explainRejection(measure, best, alternative) {
   const gap = best.institucional.objective - alternative.institucional.objective;
   return [
     `${measure.name} queda por fuera del portafolio institucional.`,
-    `Forzarla y reoptimizar el resto usa ${money(alternative.cost)} y baja el puntaje de prioridad en ${gap.toFixed(3)}.`,
+    `Incluirla y volver a armar el resto usa ${money(alternative.cost)} y baja el puntaje de prioridad en ${gap.toFixed(3)}.`,
     `Su costo es ${money(measure.cost)} y su vulnerabilidad de referencia es ${measure.classificationLabel.toLowerCase()}.`,
     'El descarte no afirma que la medida sea inútil. Afirma que, con esta regla y este fondo, otra combinación puntúa más.',
   ];
