@@ -402,7 +402,7 @@
     {
       "path": "frontend/playwright.config.js",
       "bytes": 982,
-      "sha256": "f906e16f8052cc71e565e2a908a89b78a2c04987784a2f2e9b0761bef83e2a85"
+      "sha256": "e7c7b3d30ae2c2625084325f346288b1284a8e6cab57d524fb235a74cf46e282"
     },
     {
       "path": "frontend/public/data/cornare/adaptation_history.json",
