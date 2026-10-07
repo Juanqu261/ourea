@@ -10,6 +10,7 @@ import { NBS_LABELS, STRESS_LABELS } from './domain/evidence.js';
 import { dimensionName } from './domain/explanations.js';
 import { ROBUSTNESS_MEANING } from './domain/robustness.js';
 import { CLASS_COLOR, STEPS, copMillions } from './cornare/copy.js';
+import { CalculationGuide } from './cornare/CalculationGuide.jsx';
 import { DecisionMatrix } from './cornare/DecisionMatrix.jsx';
 import { DecisionMap } from './cornare/map/DecisionMap.jsx';
 import { focusForMeasure } from './cornare/map/focus.js';
@@ -138,7 +139,7 @@ export default function App() {
                 setSelectedMunicipality={setSelectedMunicipality}
               />
             )}
-            {step === 'priority' && <Priority analysis={analysis} onCompare={() => setDrawer('compare')} onMatrix={() => setDrawer('matrix')} />}
+            {step === 'priority' && <Priority analysis={analysis} onMatrix={() => setDrawer('matrix')} onMethod={() => setDrawer('method')} />}
             {step === 'portfolio' && (
               <Portfolio
                 analysis={analysis}
@@ -173,10 +174,10 @@ export default function App() {
       </div>
       {drawer && (
         <div className="drawer-backdrop" onClick={() => setDrawer(null)}>
-          <div className={drawer === 'matrix' ? 'drawer drawer-wide' : 'drawer'} data-testid={`${drawer}-drawer`} onClick={(event) => event.stopPropagation()}>
+          <div className={drawer === 'matrix' || drawer === 'method' ? 'drawer drawer-wide' : 'drawer'} data-testid={`${drawer}-drawer`} onClick={(event) => event.stopPropagation()}>
             <button type="button" data-testid="drawer-close" autoFocus onClick={() => setDrawer(null)}>Cerrar</button>
             {drawer === 'sources' && <Sources raw={raw} />}
-            {drawer === 'method' && <Method />}
+            {drawer === 'method' && <CalculationGuide analysis={analysis} />}
             {drawer === 'compare' && <Compare analysis={analysis} />}
             {drawer === 'matrix' && <DecisionMatrix rows={analysis.matrix.rows} />}
           </div>
@@ -231,25 +232,24 @@ function Territory({ raw, dimensionId, setDimensionId, metric, setMetric, select
   );
 }
 
-function Priority({ analysis, onCompare, onMatrix }) {
-  const [open, setOpen] = useState(false);
+function Priority({ analysis, onMatrix, onMethod }) {
+  const budget = analysis.parameters.budget_million_cop;
+  const candidates = analysis.prepared.length;
+  const selected = analysis.portfolio.measures.length;
   return (
     <>
       <p className="panel-lead">Portafolio recomendado con evidencia verificada. Mejor conjunto bajo la evidencia institucional actualmente integrada.</p>
-      <p>15 medidas compiten por COP 5.000 M. El puntaje institucional usa solo vulnerabilidad y recurrencia observada.</p>
-      <p>Puntaje institucional verificado {analysis.portfolio.institucional.objective.toFixed(2)}</p>
+      <ul className="summary-chips">
+        <li>{candidates.toLocaleString('es-CO')} medidas</li>
+        <li>COP {budget.toLocaleString('es-CO')} M</li>
+        <li>{(2 ** candidates).toLocaleString('es-CO')} combinaciones</li>
+        <li>{selected.toLocaleString('es-CO')} seleccionadas</li>
+      </ul>
       <DecisionMatrix rows={analysis.matrix.rows} compact />
-      <button type="button" data-testid="open-matrix" onClick={onMatrix}>Ver matriz completa</button>
-      <button type="button" data-testid="open-compare" onClick={onCompare}>Comparar alternativas</button>
-      <button type="button" className="text-button" onClick={() => setOpen((value) => !value)}>¿Cómo se calcula?</button>
-      {open && (
-        <ul>
-          <li>70% clase de vulnerabilidad.</li>
-          <li>15% recurrencia documentada, solo con cobertura de al menos 5 registros.</li>
-          <li>15% componente participativo pendiente de integración. No se muestra como cero.</li>
-          <li>El cobeneficio se ve en la matriz y no entra a este puntaje.</li>
-        </ul>
-      )}
+      <div className="priority-actions">
+        <button type="button" data-testid="open-matrix" onClick={onMatrix}>Ver matriz completa</button>
+        <button type="button" className="text-button" data-testid="open-calc" onClick={onMethod}>¿Cómo se calcula?</button>
+      </div>
     </>
   );
 }
@@ -409,22 +409,6 @@ function Sources({ raw }) {
         {sources.map((source) => <li key={source.id}>{source.institution} · {source.title}</li>)}
         <li>CORNARE, fichas de adaptación regionales, 2026. Solo explican el estado institucional.</li>
       </ul>
-    </>
-  );
-}
-
-function Method() {
-  return (
-    <>
-      <h2>Cómo se calculó</h2>
-      <ul>
-        <li>70% vulnerabilidad.</li>
-        <li>15% recurrencia de acciones verificada.</li>
-        <li>15% componente participativo pendiente de integración. No se trata como cero.</li>
-      <li>El cobeneficio nombrado por la unidad funcional no entra al puntaje institucional. La lente de naturaleza sí puede usarlo.</li>
-      </ul>
-      <p>Las capas GIS no entran al puntaje. Una geometría no es un sitio de obra.</p>
-      <p>El plan regional de Valles de San Nicolás, 2026, prioriza PSA y eficiencia hídrica para nueve municipios. Ese orden no reemplaza el portafolio de este corredor.</p>
     </>
   );
 }

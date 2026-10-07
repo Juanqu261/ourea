@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import { Info } from 'lucide-react';
 import { Map, NavigationControl, AttributionControl, setWorkerUrl } from 'maplibre-gl';
 import 'maplibre-gl/dist/maplibre-gl.css';
 import { boundsOf } from './bounds.js';
@@ -61,6 +62,7 @@ export function DecisionMap({
   const [hillshadeOn, setHillshadeOn] = useState(true);
   const [shadingOn, setShadingOn] = useState(true);
   const [note, setNote] = useState('');
+  const [readoutOpen, setReadoutOpen] = useState(false);
   const [card, setCard] = useState(null);
   const [cardOpen, setCardOpen] = useState(true);
   const [cardDetail, setCardDetail] = useState(false);
@@ -152,7 +154,7 @@ export function DecisionMap({
       fadeDuration: 0,
     });
     map.addControl(new NavigationControl({ visualizePitch: true }), 'top-right');
-    map.addControl(new AttributionControl({ compact: true }), 'bottom-right');
+    map.addControl(new AttributionControl({ compact: false }), 'bottom-right');
     mapRef.current = map;
     window.__oureaMapMounts = (window.__oureaMapMounts || 0) + 1;
 
@@ -405,17 +407,35 @@ export function DecisionMap({
           <p>Contexto espacial para mirar conectividad y soluciones basadas en la naturaleza. No marca predios óptimos.</p>
         </div>
       )}
-      <p className="map-help">Arrastra para mover · Ctrl/arrastre o clic derecho para rotar</p>
       {note && <p className="map-note" data-testid="map-note">{note}</p>}
-      <figcaption>{shadingLabel}</figcaption>
-      <ul className="map-legend">
-        {(boundaries?.features ?? []).map((feature) => (
-          <li key={feature.properties.id}>
-            <i style={{ background: colors?.[feature.properties.id] ?? '#2a3338' }} />
-            {feature.properties.name}
-          </li>
-        ))}
-      </ul>
+      <div className="map-legend-wrap">
+        <div className="map-legend-bar">
+          <ul className="map-legend">
+            {(boundaries?.features ?? []).map((feature) => (
+              <li key={feature.properties.id}>
+                <i style={{ background: colors?.[feature.properties.id] ?? '#2a3338' }} />
+                {feature.properties.name}
+              </li>
+            ))}
+          </ul>
+          <button
+            type="button"
+            className="map-info"
+            data-testid="map-readout-toggle"
+            aria-expanded={readoutOpen}
+            aria-controls="map-readout"
+            onClick={() => setReadoutOpen((open) => !open)}
+          >
+            <Info size={14} />
+            <span>Lectura</span>
+          </button>
+        </div>
+        {readoutOpen && (
+          <p id="map-readout" className="map-readout" data-testid="map-readout">
+            {shadingLabel} Arrastra para mover. Ctrl o clic derecho para rotar.
+          </p>
+        )}
+      </div>
       {card && cardOpen && (
         <aside className="map-card" data-testid="map-focus-card">
           <div className="map-card-head">
