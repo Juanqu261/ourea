@@ -84,7 +84,7 @@ function glyphWidth(char, bold) {
   return table[char] ?? 600;
 }
 
-function widthOf(text, size, bold = false) {
+export function widthOf(text, size, bold = false) {
   let width = 0;
   for (const char of String(text ?? '')) width += (glyphWidth(char, bold) * size) / 1000;
   return width;
@@ -210,6 +210,7 @@ export function createPdf(options = {}) {
       let drawX = x;
       if (align === 'right') drawX = x - lineWidth;
       if (align === 'right' && width != null) drawX = x + width - lineWidth;
+      if (align === 'center') drawX = width != null ? x + (width - lineWidth) / 2 : x - lineWidth / 2;
       const baseline = yFromTop(y + size * 0.8 + index * leading);
       ops.push('BT');
       ops.push(`/${font} ${size} Tf`);
@@ -252,7 +253,20 @@ export function createPdf(options = {}) {
     ops.push('Q');
   }
 
-  function strokePath(points, { color = [238, 232, 220], lineWidth = 1.2 } = {}) {
+  function fillPath(points, color) {
+    if (!points || points.length < 3) return;
+    const parts = [];
+    points.forEach((point, index) => {
+      const x = Number(point[0]);
+      const y = yFromTop(point[1]);
+      if (!Number.isFinite(x) || !Number.isFinite(y)) return;
+      parts.push(`${x.toFixed(2)} ${y.toFixed(2)} ${index === 0 ? 'm' : 'l'}`);
+    });
+    if (parts.length < 3) return;
+    ops.push(`${rgb(color)} rg ${parts.join(' ')} h f`);
+  }
+
+  function strokePath(points, { color = [24, 32, 36], lineWidth = 1.2 } = {}) {
     if (!points.length) return;
     const parts = points.map((point, index) => {
       const x = Number(point[0]);
@@ -264,7 +278,7 @@ export function createPdf(options = {}) {
     ops.push(`${lineWidth.toFixed(2)} w 1 J 1 j ${rgb(color)} RG ${parts.join(' ')} S`);
   }
 
-  function strokeCommands(commands, { color = [238, 232, 220], lineWidth = 1.2 } = {}) {
+  function strokeCommands(commands, { color = [24, 32, 36], lineWidth = 1.2 } = {}) {
     if (!commands.length) return;
     const parts = commands.map((command) => {
       const [op, ...nums] = command;
@@ -310,6 +324,7 @@ export function createPdf(options = {}) {
     addPage: () => addPage(),
     fillRect,
     strokeRect,
+    fillPath,
     strokePath,
     strokeCommands,
     strokeCircle,
