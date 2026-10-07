@@ -17,23 +17,23 @@ if exist "node_modules\.bin\vite.cmd" (
 
 cd ..
 echo == Python syntax ==
-python -m compileall -q scripts decision_engine services
+uv run python -m compileall -q scripts decision_engine services
 if errorlevel 1 exit /b 1
 
 echo == Python unit tests ==
-python -m unittest discover -s tests -p "test_*.py" -v
+uv run python -m unittest discover -s tests -p "test_*.py" -v
 if errorlevel 1 exit /b 1
 
 echo == CORNARE input validation ==
-python scripts\climaterisk\validate_inputs.py
+uv run python scripts\climaterisk\validate_inputs.py
 if errorlevel 1 exit /b 1
 
 echo == Decision engine outputs ==
-python -m decision_engine.build --check
+uv run python -m decision_engine.build --check
 if errorlevel 1 exit /b 1
 
 echo == Reproducibility manifest ==
-python scripts\make_manifest.py --check
+uv run python scripts\make_manifest.py --check
 if errorlevel 1 exit /b 1
 
 echo Ourea QA completed.

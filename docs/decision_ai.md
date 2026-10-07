@@ -75,7 +75,7 @@ En el paso de Seguimiento, la insignia dice «0 hallazgos críticos · N afirmac
 
 ```bash
 uv venv .venv --python 3.12
-uv pip install -r requirements.txt -r requirements-ai.txt   # CI usa pip con los mismos archivos
+uv pip install -r requirements.txt -r requirements-ai.txt   # CI también usa uv
 cp .env.example .env            # OUREA_AI_ENABLED=1 y OPENAI_API_KEY para los agentes
 uv run uvicorn services.decision_ai.app:app --port 8787 --env-file .env
 cd frontend && npm run dev      # VITE_OUREA_AI_API_URL=http://127.0.0.1:8787/api

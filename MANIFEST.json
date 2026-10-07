@@ -16,8 +16,8 @@
     },
     {
       "path": ".github/workflows/ourea.yml",
-      "bytes": 8378,
-      "sha256": "5e62e8fc1e79224755b911bcecb58777d2ce690cf598ecf492b76ad4ab879c0b"
+      "bytes": 8527,
+      "sha256": "ace495d903f768326360009ed24a9c9a20a4223142d90ad8b8c813119c38164e"
     },
     {
       "path": ".gitignore",
@@ -36,8 +36,8 @@
     },
     {
       "path": "README.md",
-      "bytes": 7159,
-      "sha256": "5a9de7b5027e68a162cc8a30a9d65a4296575e51ac5912677d284e3cd65d8ca8"
+      "bytes": 7132,
+      "sha256": "559584d9d2f615b67103da8ad358ed99aed41ec07a0ca2dca76e07922d91f8b2"
     },
     {
       "path": "decision_engine/__init__.py",
@@ -481,8 +481,8 @@
     },
     {
       "path": "docs/decision_ai.md",
-      "bytes": 7031,
-      "sha256": "a98d41bf38e4c96d914d0a1eaeece51558dc4598cf5844b677e54cf5a553af73"
+      "bytes": 7015,
+      "sha256": "cef04be8b237dc5108dae1b7a938a6e7bd1443220093bc016e97aed724ec380f"
     },
     {
       "path": "docs/deployment.md",
@@ -901,13 +901,13 @@
     },
     {
       "path": "qa_mac_linux.sh",
-      "bytes": 731,
-      "sha256": "df2e7a18e894277c4005e514cdaee8b26dddbcabd8df0cdbba88e4ef7011dc39"
+      "bytes": 766,
+      "sha256": "8b128e45dfd7a7d59d74f77a722e44589570b79712cc1b0f853cfdcc9dded337"
     },
     {
       "path": "qa_windows.bat",
-      "bytes": 862,
-      "sha256": "c5fb354b28008211b3c15bb89cb6fed386fa4d74058f6cd94821e3291d41eb27"
+      "bytes": 897,
+      "sha256": "4f865f66bc0594f75addb8caf4a85ab26801948b4ae73ff2499a47a90335031c"
     },
     {
       "path": "requirements-ai.txt",
