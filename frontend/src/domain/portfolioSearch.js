@@ -2,7 +2,12 @@ function round6(value) {
   return Math.round(value * 1e6) / 1e6;
 }
 
-export function scoreSet(chosen, diminishing, { useUrgency = false, regret = false, parameters = null } = {}) {
+export function scoreSet(chosen, diminishing, {
+  useUrgency = false,
+  regret = false,
+  parameters = null,
+  includeCobenefit = false,
+} = {}) {
   const groups = new Map();
   chosen.forEach((measure) => {
     if (!groups.has(measure.dimensionId)) groups.set(measure.dimensionId, []);
@@ -12,7 +17,7 @@ export function scoreSet(chosen, diminishing, { useUrgency = false, regret = fal
   let objective = 0;
   groups.forEach((items, dimensionId) => {
     const ordered = items.slice().sort((left, right) => {
-      const rank = undiminished(right, useUrgency) - undiminished(left, useUrgency);
+      const rank = undiminished(right, useUrgency, includeCobenefit) - undiminished(left, useUrgency, includeCobenefit);
       if (rank !== 0) return rank;
       return left.id.localeCompare(right.id);
     });
@@ -20,7 +25,7 @@ export function scoreSet(chosen, diminishing, { useUrgency = false, regret = fal
       const factor = index === 0 ? 1 : diminishing;
       const vulnerability = factor * measure.vulnTerm;
       const recurrence = measure.recurrence.withheld ? 0 : measure.recurrence.term;
-      const cobenefit = measure.cobenefit.term;
+      const cobenefit = includeCobenefit ? measure.cobenefit.term : 0;
       const urgency = useUrgency ? factor * measure.urgencyTerm : 0;
       let contribution = vulnerability + recurrence + cobenefit + urgency;
       if (regret) {
@@ -38,7 +43,8 @@ export function scoreSet(chosen, diminishing, { useUrgency = false, regret = fal
         vulnerability,
         recurrence: measure.recurrence.withheld ? null : measure.recurrence.term,
         recurrenceWithheld: measure.recurrence.withheld,
-        cobenefit,
+        cobenefit: measure.cobenefit.term,
+        cobenefitApplied: includeCobenefit,
         urgency,
         contribution,
       });
@@ -47,10 +53,10 @@ export function scoreSet(chosen, diminishing, { useUrgency = false, regret = fal
   return { objective: round6(objective), parts };
 }
 
-function undiminished(measure, useUrgency) {
+function undiminished(measure, useUrgency, includeCobenefit) {
   return measure.vulnTerm
     + (measure.recurrence.withheld ? 0 : measure.recurrence.term)
-    + measure.cobenefit.term
+    + (includeCobenefit ? measure.cobenefit.term : 0)
     + (useUrgency ? measure.urgencyTerm : 0);
 }
 
@@ -68,7 +74,7 @@ function compareInstitutional(left, right) {
 }
 
 function compareNature(left, right) {
-  const delta = compareBy((item) => item.institucional.objective, left, right);
+  const delta = compareBy((item) => item.withCobenefit.objective, left, right);
   if (delta !== 0) return delta;
   if (left.nbsDirect !== right.nbsDirect) return right.nbsDirect - left.nbsDirect;
   if (left.nbsHybrid !== right.nbsHybrid) return right.nbsHybrid - left.nbsHybrid;
@@ -129,10 +135,16 @@ export function searchPortfolios(prepared, parameters) {
       remaining: budget - cost,
       count: chosen.length,
       institucional: scoreSet(chosen, parameters.diminishing_second_measure.institucional),
-      multi: scoreSet(chosen, parameters.diminishing_second_measure.multidimensional),
+      withCobenefit: scoreSet(chosen, parameters.diminishing_second_measure.institucional, {
+        includeCobenefit: true,
+      }),
+      multi: scoreSet(chosen, parameters.diminishing_second_measure.multidimensional, {
+        includeCobenefit: true,
+      }),
       regret: scoreSet(chosen, parameters.diminishing_second_measure.bajo_arrepentimiento, {
         regret: true,
         parameters,
+        includeCobenefit: true,
       }),
       nbsDirect: chosen.filter((measure) => measure.nbsClass === 'NBS_DIRECT').length,
       nbsHybrid: chosen.filter((measure) => measure.nbsClass === 'NBS_HYBRID').length,

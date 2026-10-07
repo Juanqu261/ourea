@@ -62,6 +62,8 @@ export function DecisionMap({
   const [shadingOn, setShadingOn] = useState(true);
   const [note, setNote] = useState('');
   const [card, setCard] = useState(null);
+  const [cardOpen, setCardOpen] = useState(true);
+  const [cardDetail, setCardDetail] = useState(false);
   boundariesRef.current = boundaries;
   colorsRef.current = colors;
   selectedRef.current = selectedIds;
@@ -69,7 +71,23 @@ export function DecisionMap({
   modeRef.current = mode;
   exaggerationRef.current = exaggeration;
   focusRef.current = focus;
-  handlers.current = { onCard: setCard, onMunicipality, shading: shadingLabel };
+  handlers.current = {
+    onCard: (next) => {
+      setCardOpen(true);
+      setCardDetail(false);
+      if (next?.lines && !next.summary) {
+        setCard({
+          title: next.title,
+          summary: next.lines.slice(0, 3),
+          detail: next.lines.slice(3),
+        });
+        return;
+      }
+      setCard(next);
+    },
+    onMunicipality,
+    shading: shadingLabel,
+  };
 
   function commitLayers(updater) {
     setLayers((current) => {
@@ -274,13 +292,18 @@ export function DecisionMap({
       return;
     }
     hadFocus.current = true;
+    setCardOpen(true);
+    setCardDetail(false);
     setCard({
       title: focus.title,
-      lines: [
-        ['Ámbito de decisión', focus.scopeLabel],
-        ['Contexto espacial disponible', focus.contextLabel],
-        ['Ubicación exacta', focus.exactLocation],
-        ['Fuente', focus.sourceLabel],
+      summary: [
+        ['Ámbito', focus.scopeLabel],
+        ['Sitio', focus.exactLocation],
+        ['Fuente', 'DANE MGN 2025 · CORNARE'],
+      ],
+      detail: [
+        ['Contexto', focus.contextLabel],
+        ['Procedencia', focus.sourceLabel],
       ],
     });
     commitLayers((current) => {
@@ -393,14 +416,29 @@ export function DecisionMap({
           </li>
         ))}
       </ul>
-      {card && (
+      {card && cardOpen && (
         <aside className="map-card" data-testid="map-focus-card">
-          <h3>{card.title}</h3>
+          <div className="map-card-head">
+            <h3>{card.title}</h3>
+            <button type="button" data-testid="map-card-close" aria-label="Cerrar ficha del mapa" onClick={() => setCardOpen(false)}>Cerrar</button>
+          </div>
           <dl>
-            {card.lines.map(([label, value]) => (
+            {card.summary.map(([label, value]) => (
               <div key={label}><dt>{label}</dt><dd>{value}</dd></div>
             ))}
           </dl>
+          {card.detail?.length > 0 && (
+            <>
+              <button type="button" onClick={() => setCardDetail((open) => !open)}>{cardDetail ? 'Ocultar detalle' : 'Ver detalle'}</button>
+              {cardDetail && (
+                <dl>
+                  {card.detail.map(([label, value]) => (
+                    <div key={label}><dt>{label}</dt><dd>{value}</dd></div>
+                  ))}
+                </dl>
+              )}
+            </>
+          )}
         </aside>
       )}
     </figure>

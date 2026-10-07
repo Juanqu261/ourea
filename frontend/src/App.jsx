@@ -8,6 +8,7 @@ import { analyzeCorridor, bundleDataset } from './domain/cornareDecision.js';
 import { NBS_LABELS, STRESS_LABELS } from './domain/evidence.js';
 import { dimensionName } from './domain/explanations.js';
 import { CLASS_COLOR, STEPS, copMillions } from './cornare/copy.js';
+import { DecisionMatrix } from './cornare/DecisionMatrix.jsx';
 import { DecisionMap } from './cornare/map/DecisionMap.jsx';
 import { focusForMeasure } from './cornare/map/focus.js';
 import { downloadDecisionJson, downloadPitchPdf } from './cornare/exportDecision.js';
@@ -26,6 +27,7 @@ const RANK = { muy_alta: 5, alta: 4, media: 3, baja: 2, muy_baja: 1 };
 
 const READINESS = {
   bio_pa: 'Tiene precedente: CORNARE reporta un SIRAP consolidado. El predio del corredor sigue por validar.',
+  bio_psa: 'Tiene precedente regional. El arreglo del corredor sigue por validar.',
   water_eff: 'Tiene precedente: los referentes 2024–2027 nombran las fuentes del acueducto. La obra no está localizada.',
   hab_green: 'Requiere validación de sitio.',
   health: 'Requiere arreglo institucional.',
@@ -47,6 +49,15 @@ export default function App() {
   useEffect(() => {
     loadCornareData().then(setRaw).catch((cause) => setError(cause.message));
   }, []);
+
+  useEffect(() => {
+    if (!drawer) return undefined;
+    const onKey = (event) => {
+      if (event.key === 'Escape') setDrawer(null);
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [drawer]);
 
   const dataset = useMemo(() => (raw ? bundleDataset({
     interventions: raw.interventions,
@@ -90,9 +101,9 @@ export default function App() {
         </div>
         <p className="budget-pill" data-testid="budget-pill">COP 5.000 M</p>
         <div className="shell-actions">
-          <button type="button" data-testid="open-sources" onClick={() => setDrawer('sources')}><Database size={16} /> Fuentes</button>
-          <button type="button" data-testid="open-method" onClick={() => setDrawer('method')}><Info size={16} /> Método</button>
-          <button type="button" data-testid="export-json" onClick={() => downloadDecisionJson(analysis)}><FileDown size={16} /> Exportar</button>
+          <button type="button" data-testid="open-sources" aria-label="Fuentes" onClick={() => setDrawer('sources')}><Database size={16} /> <span className="action-label">Fuentes</span></button>
+          <button type="button" data-testid="open-method" aria-label="Método" onClick={() => setDrawer('method')}><Info size={16} /> <span className="action-label">Método</span></button>
+          <button type="button" data-testid="export-json" aria-label="Exportar" onClick={() => downloadDecisionJson(analysis)}><FileDown size={16} /> <span className="action-label">Exportar</span></button>
         </div>
       </header>
       <div className="shell-body">
@@ -121,7 +132,7 @@ export default function App() {
                 setSelectedMunicipality={setSelectedMunicipality}
               />
             )}
-            {step === 'priority' && <Priority analysis={analysis} onCompare={() => setDrawer('compare')} />}
+            {step === 'priority' && <Priority analysis={analysis} onCompare={() => setDrawer('compare')} onMatrix={() => setDrawer('matrix')} />}
             {step === 'portfolio' && (
               <Portfolio
                 analysis={analysis}
@@ -149,11 +160,12 @@ export default function App() {
       </div>
       {drawer && (
         <div className="drawer-backdrop" onClick={() => setDrawer(null)}>
-          <div className="drawer" data-testid={`${drawer}-drawer`} onClick={(event) => event.stopPropagation()}>
-            <button type="button" onClick={() => setDrawer(null)}>Cerrar</button>
+          <div className={drawer === 'matrix' ? 'drawer drawer-wide' : 'drawer'} data-testid={`${drawer}-drawer`} onClick={(event) => event.stopPropagation()}>
+            <button type="button" data-testid="drawer-close" autoFocus onClick={() => setDrawer(null)}>Cerrar</button>
             {drawer === 'sources' && <Sources raw={raw} />}
-            {drawer === 'method' && <Method analysis={analysis} />}
+            {drawer === 'method' && <Method />}
             {drawer === 'compare' && <Compare analysis={analysis} />}
+            {drawer === 'matrix' && <DecisionMatrix rows={analysis.matrix.rows} />}
           </div>
         </div>
       )}
@@ -206,19 +218,22 @@ function Territory({ raw, dimensionId, setDimensionId, metric, setMetric, select
   );
 }
 
-function Priority({ analysis, onCompare }) {
+function Priority({ analysis, onCompare, onMatrix }) {
   const [open, setOpen] = useState(false);
   return (
     <>
-      <p className="panel-lead">15 medidas compiten por COP 5.000 M. Ourea elige el conjunto con mayor prioridad territorial.</p>
-      <p>Puntaje institucional {analysis.portfolio.institucional.objective.toFixed(2)}</p>
+      <p className="panel-lead">15 medidas compiten por COP 5.000 M. El puntaje institucional usa solo vulnerabilidad y recurrencia observada.</p>
+      <p>Puntaje verificado {analysis.portfolio.institucional.objective.toFixed(2)}</p>
+      <DecisionMatrix rows={analysis.matrix.rows} compact />
+      <button type="button" data-testid="open-matrix" onClick={onMatrix}>Ver matriz completa</button>
       <button type="button" data-testid="open-compare" onClick={onCompare}>Comparar alternativas</button>
       <button type="button" className="text-button" onClick={() => setOpen((value) => !value)}>¿Cómo se calcula?</button>
       {open && (
         <ul>
           <li>70% clase de vulnerabilidad.</li>
           <li>15% recurrencia documentada, solo con cobertura de al menos 5 registros.</li>
-          <li>15% componente participativo pendiente de integración. No se imputa.</li>
+          <li>15% componente participativo pendiente de integración. No se muestra como cero.</li>
+          <li>El cobeneficio se ve en la matriz y no entra a este puntaje.</li>
         </ul>
       )}
     </>
@@ -240,23 +255,26 @@ function Portfolio({ analysis, raw, focusId, setFocusId, openWhy, setOpenWhy, on
           const ficha = fichas.get(measure.id);
           return (
             <article key={measure.id} className={measure.id === focusId ? 'measure-row is-active' : 'measure-row'} data-testid={`measure-${measure.id}`}>
-              <Leaf size={16} />
-              <div>
-                <strong>{shortName(measure.name)}</strong>
-                <p>{measure.place.localization} · {copMillions(measure.cost)}</p>
+              <div className="measure-icon"><Leaf size={16} /></div>
+              <div className="measure-main">
+                <strong>{measure.name}</strong>
+                <p>{measure.place.localization}</p>
+                <p>{copMillions(measure.cost)}</p>
                 <p>{shortDimension(raw, measure.dimensionId)} · {measure.classificationLabel} · {NBS_LABELS[measure.nbsClass]}</p>
               </div>
-              <span>
+              <div className="measure-actions">
                 <button type="button" data-testid={`map-focus-${measure.id}`} onClick={() => setFocusId(measure.id)}>Mapa</button>
-                <button type="button" onClick={() => setOpenWhy(openWhy === measure.id ? null : measure.id)}>Por qué</button>
-              </span>
+                <button type="button" data-testid={`why-${measure.id}`} aria-expanded={openWhy === measure.id} onClick={() => setOpenWhy(openWhy === measure.id ? null : measure.id)}>Por qué</button>
+              </div>
               {openWhy === measure.id && (
-                <ul>
-                  {analysis.explanations[measure.id].lines.slice(0, 4).map((line) => <li key={line}>{line}</li>)}
-                  <li>{focusForMeasure(measure).exactLocation}. No es un predio seleccionado.</li>
-                  {ficha?.status && <li>Precedente institucional: {ficha.status.slice(0, 180)}</li>}
-                  <li>{READINESS[measure.id] ?? 'Requiere caracterización local.'}</li>
-                </ul>
+                <div className="measure-why">
+                  <ul>
+                    {analysis.explanations[measure.id].lines.slice(0, 4).map((line) => <li key={line}>{line}</li>)}
+                    <li>{focusForMeasure(measure).exactLocation}. No es un predio seleccionado.</li>
+                    {ficha?.status && <li>Precedente institucional: {ficha.status.slice(0, 180)}</li>}
+                    <li>{READINESS[measure.id] ?? 'Requiere caracterización local.'}</li>
+                  </ul>
+                </div>
               )}
             </article>
           );
@@ -275,10 +293,23 @@ function Horizon({ analysis, horizon, setHorizon }) {
         <button type="button" className={horizon === 'reference' ? 'is-active' : ''} onClick={() => setHorizon('reference')}>Referencia</button>
         <button type="button" data-testid="scenario-2060" className={horizon === '2060' ? 'is-active' : ''} onClick={() => setHorizon('2060')}>SSP3-7.0 · 2060</button>
       </div>
-      <p className={`status status-${analysis.stress.status}`} data-testid="stress-status">{STRESS_LABELS[analysis.stress.status]}</p>
+      <p data-testid="stress-status" className={`status status-${analysis.stress.status}`}>{STRESS_LABELS[analysis.stress.status]}</p>
       <p>Portafolio retenido: {kept ?? analysis.portfolio.ids.length} / {analysis.portfolio.ids.length}</p>
       <p>Rionegro, riesgo de desastres: {shift.from_value} → {shift.to_value}. {classLabel(shift.from_class)} → {classLabel(shift.to_class)}.</p>
-      <p>Las demás dimensiones siguen sin serie de escenario. Requieren integración antes de cambiar el conjunto.</p>
+      <p>Cobertura de escenario: Rionegro · riesgo de desastres · cuantificado. Otras dimensiones · integración requerida.</p>
+      <section data-testid="robustness-panel">
+        <h3>¿Qué podría cambiar esta decisión?</h3>
+        <p>Estable ante</p>
+        <ul>{analysis.robustness.stable.map((line) => <li key={line}>{line}</li>)}</ul>
+        <p>Sensible a</p>
+        <ul>{analysis.robustness.sensitive.map((line) => <li key={line}>{line}</li>)}</ul>
+      </section>
+      <section data-testid="pathway-panel">
+        <h3>Hoy, monitorear, reevaluar</h3>
+        {analysis.pathways.map((path) => (
+          <p key={path.dimensionId}><strong>{path.dimension}</strong> · {path.current} · {path.threshold}</p>
+        ))}
+      </section>
     </>
   );
 }
@@ -307,9 +338,15 @@ function Followup({ analysis }) {
       <p>{analysis.mea.regional_context.statement}</p>
       {analysis.portfolio.measures.slice(0, 4).map((measure) => {
         const indicator = analysis.mea.indicators.find((item) => item.intervention_id === measure.id);
-        return <p key={measure.id}><strong>{shortName(measure.name)}</strong> · {indicator?.name ?? 'Seguimiento requerido'}</p>;
+        return <p key={measure.id}><strong>{measure.name}</strong> · {indicator?.name ?? 'Seguimiento requerido'}</p>;
       })}
-      <p data-testid="decision-line">Proteger biodiversidad del corredor y agua en Marinilla. No comprar la obra gris de COP 2.500 M.</p>
+      <section data-testid="nbs-screen">
+        <h3>Screening NbS, no es certificación</h3>
+        {analysis.nbsScreen.map((item) => (
+          <p key={item.id}><strong>{item.name}</strong> · {item.criteria.filter((criterion) => criterion.status === 'SUPPORTED').length} criterios con soporte · {item.criteria.filter((criterion) => criterion.status === 'TO VALIDATE').length} por validar</p>
+        ))}
+      </section>
+      <p data-testid="decision-line">El puntaje institucional financia áreas protegidas y PSA. No compra la obra gris de COP 2.500 M.</p>
       <button type="button" data-testid="export-pdf" onClick={() => downloadPitchPdf(analysis)}>Descargar PDF</button>
       <p className="fine">Huella {analysis.fingerprint}</p>
     </>
@@ -336,7 +373,8 @@ function Method() {
       <ul>
         <li>70% vulnerabilidad.</li>
         <li>15% recurrencia de acciones verificada.</li>
-        <li>15% componente participativo pendiente de integración.</li>
+        <li>15% componente participativo pendiente de integración. No se trata como cero.</li>
+      <li>El cobeneficio nombrado por la unidad funcional no entra al puntaje institucional. La lente de naturaleza sí puede usarlo.</li>
       </ul>
       <p>Las capas GIS no entran al puntaje. Una geometría no es un sitio de obra.</p>
       <p>El plan regional de Valles de San Nicolás, 2026, prioriza PSA y eficiencia hídrica para nueve municipios. Ese orden no reemplaza el portafolio de este corredor.</p>
@@ -347,6 +385,7 @@ function Method() {
 function Compare({ analysis }) {
   const rows = [
     ['Recomendado', analysis.lenses.institucional],
+    ['Con cobeneficio', analysis.lenses.naturaleza],
     ['Bajo arrepentimiento', analysis.lenses.bajo_arrepentimiento],
     ['Infraestructura gris', analysis.baselines.grey],
   ];

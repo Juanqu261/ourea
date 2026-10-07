@@ -92,7 +92,9 @@ body,
   right: 12px;
   bottom: 42px;
   z-index: 3;
-  width: min(280px, 40%);
+  width: min(300px, calc(100% - 24px));
+  max-height: 42vh;
+  overflow: auto;
   margin: 0;
 }
 
@@ -100,13 +102,15 @@ body,
   display: flex;
   flex-direction: column;
   min-height: 0;
+  min-width: 0;
   border-left: 1px solid var(--border);
   background: #141a1d;
 }
 .panel-scroll { flex: 1; overflow: auto; padding: 18px 18px 8px; }
 .panel-kicker { margin: 0 0 6px; color: var(--accent-soft); font-size: 0.75rem; letter-spacing: 0.08em; }
 .panel-scroll h2 { margin: 0 0 8px; font-size: 1.35rem; line-height: 1.2; display: flex; gap: 8px; align-items: flex-start; }
-.budget-pill { margin: 0; color: var(--accent-soft); font-size: 0.85rem; letter-spacing: 0.04em; }
+.shell-header { min-width: 0; }
+.budget-pill { margin: 0; color: var(--accent-soft); font-size: 0.85rem; letter-spacing: 0.04em; white-space: nowrap; }
 .pill-row button.is-active, .scenario-switch button.is-active { border-color: var(--accent); background: var(--accent-dim); }
 .map-panel details { margin: 0 0 8px; }
 .map-panel summary { cursor: pointer; color: var(--text-secondary); }
@@ -121,9 +125,9 @@ body,
 .panel-actions button { display: inline-flex; align-items: center; gap: 6px; padding: 0 14px; }
 .panel-actions button:disabled { opacity: 0.4; }
 
-.place-row, .measure-row {
+.place-row {
   display: grid;
-  grid-template-columns: 28px 1fr auto;
+  grid-template-columns: 28px minmax(0, 1fr);
   gap: 8px;
   align-items: center;
   width: 100%;
@@ -135,9 +139,53 @@ body,
   color: inherit;
   text-align: left;
 }
+.measure-row {
+  container-type: inline-size;
+  display: grid;
+  grid-template-columns: 24px minmax(0, 1fr);
+  gap: 6px 8px;
+  align-items: start;
+  width: 100%;
+  margin: 0 0 8px;
+  padding: 10px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: transparent;
+  color: inherit;
+  text-align: left;
+  min-width: 0;
+}
+.measure-icon { grid-column: 1; grid-row: 1; }
+.measure-main { grid-column: 2; grid-row: 1; min-width: 0; }
+.measure-main strong,
+.measure-main p {
+  display: block;
+  min-width: 0;
+  overflow-wrap: break-word;
+  word-break: normal;
+}
+.measure-actions {
+  grid-column: 2;
+  grid-row: 2;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.measure-actions button { min-height: 36px; min-width: 44px; }
+.measure-why {
+  grid-column: 1 / -1;
+  min-width: 0;
+}
+.measure-why ul { margin: 8px 0 0; padding-left: 18px; }
+.measure-why li { overflow-wrap: break-word; }
+@container (min-width: 460px) {
+  .measure-row { grid-template-columns: 24px minmax(0, 1fr) auto; }
+  .measure-actions { grid-column: 3; grid-row: 1; align-self: start; }
+  .measure-why { grid-column: 1 / -1; grid-row: 2; }
+}
 .place-row.is-active, .measure-row.is-active { border-color: var(--accent); background: var(--accent-dim); }
-.place-row strong, .measure-row strong { display: block; }
-.place-row span, .measure-row p { color: var(--text-muted); font-size: 0.82rem; }
+.place-row strong { display: block; }
+.place-row span, .measure-row p { color: var(--text-muted); font-size: 0.92rem; }
 .insight {
   display: grid;
   grid-template-columns: 28px 1fr;
@@ -171,7 +219,43 @@ body,
   background: #161c1f;
   border-left: 1px solid var(--border);
 }
-.compare-grid { display: grid; gap: 10px; }
+.drawer-wide { width: min(960px, 100%); }
+.matrix-wrap { max-width: 100%; min-width: 0; }
+.matrix-scroll { overflow: auto; max-width: 100%; }
+.matrix-scroll table { border-collapse: collapse; width: max-content; min-width: 100%; }
+.matrix-scroll th, .matrix-scroll td {
+  padding: 6px 8px;
+  border-bottom: 1px solid var(--border);
+  text-align: left;
+  vertical-align: top;
+}
+.matrix-scroll th[scope="row"] {
+  position: sticky;
+  left: 0;
+  z-index: 1;
+  min-width: 168px;
+  max-width: 220px;
+  background: #161c1f;
+  overflow-wrap: break-word;
+  white-space: normal;
+}
+.matrix-legend { color: var(--text-muted); font-size: 0.85rem; }
+.action-label { white-space: nowrap; }
+button:focus-visible, a:focus-visible { outline: 2px solid var(--accent-soft); outline-offset: 2px; }
+@media (max-width: 1180px) {
+  .action-label {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+  .shell-place { display: none; }
+}
 .compare-grid article { padding: 12px; border: 1px solid var(--border); border-radius: 12px; }
 .scenario-switch { display: flex; gap: 8px; margin-bottom: 12px; }
 

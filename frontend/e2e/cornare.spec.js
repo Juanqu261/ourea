@@ -52,17 +52,32 @@ test('six steps share one map on a projector, a laptop and a small desktop', asy
   await page.getByTestId('map-focus-bio_pa').click();
   await expect(page.getByTestId('map-focus-card')).toContainText('Área candidata para prefactibilidad', { timeout: 20000 });
   await page.locator('.decision-map').screenshot({ path: '../docs/climaterisk/figures/portfolio-measure.png' });
-  await expect(page.getByTestId('budget-remaining')).toContainText('200');
+  await expect(page.getByTestId('budget-remaining')).toHaveText('0');
+  await page.getByTestId('why-bio_pa').click();
+  await page.locator('.measure-why').scrollIntoViewIfNeeded();
+  await expect(page.locator('.measure-why')).toContainText('vulnerabilidad');
+  await page.screenshot({ path: '../docs/climaterisk/figures/portfolio-why-1920.png' });
 
   await page.getByTestId('open-compare').click();
   await expect(page.getByTestId('compare-drawer')).toContainText('Infraestructura gris');
-  await page.getByRole('button', { name: 'Cerrar' }).click();
+  await page.screenshot({ path: '../docs/climaterisk/figures/compare-drawer-1920.png' });
+  await page.getByTestId('drawer-close').click();
+
+  while (await page.getByTestId('step-priority').count() === 0) {
+    await page.getByTestId('step-back').click();
+  }
+  await page.getByTestId('open-matrix').click();
+  await expect(page.getByTestId('matrix-full')).toBeVisible();
+  await expect(page.getByTestId('matrix-bio_restore')).toContainText('Por integrar');
+  await page.screenshot({ path: '../docs/climaterisk/figures/decision-matrix-1920.png' });
+  await page.keyboard.press('Escape');
+  await expect(page.getByTestId('matrix-drawer')).toHaveCount(0);
 
   await page.getByTestId('open-sources').click();
   await expect(page.getByTestId('sources-drawer')).toContainText('CORNARE');
   await expect(page.locator('body')).not.toContainText('CORNARE no entregó');
   await expect(page.locator('body')).not.toContainText('no nos dieron');
-  await page.getByRole('button', { name: 'Cerrar' }).click();
+  await page.getByTestId('drawer-close').click();
 
   while (await page.getByTestId('step-territory').count() === 0) {
     await page.getByTestId('step-back').click();
@@ -76,13 +91,34 @@ test('six steps share one map on a projector, a laptop and a small desktop', asy
   await page.getByTestId('scenario-2060').click();
   await expect(page.getByTestId('stress-status')).toContainText('Mayormente robusta');
   await expect(page.locator('.decision-map figcaption')).toContainText('2060');
-  await page.screenshot({ path: '../docs/climaterisk/figures/step-horizon-2060-1920.png' });
+  await page.getByTestId('robustness-panel').scrollIntoViewIfNeeded();
+  await page.screenshot({ path: '../docs/climaterisk/figures/robustness-1920.png' });
+  while (await page.getByTestId('step-followup').count() === 0) {
+    await page.getByTestId('step-next').click();
+  }
+  await page.getByTestId('nbs-screen').scrollIntoViewIfNeeded();
+  await page.screenshot({ path: '../docs/climaterisk/figures/nbs-screen-1920.png' });
 
-  for (const size of [[1440, 900], [1280, 800]]) {
-    await page.setViewportSize({ width: size[0], height: size[1] });
-    await expect(page.locator('.shell-map')).toBeVisible();
-    await expect(page.getByTestId('step-horizon')).toBeVisible();
-    await page.screenshot({ path: `../docs/climaterisk/figures/step-horizon-${size[0]}.png` });
+  const sizes = [[1366, 768], [1024, 768], [390, 844]];
+  for (const [width, height] of sizes) {
+    await page.setViewportSize({ width, height });
+    while (await page.getByTestId('step-territory').count() === 0) {
+      await page.getByTestId('step-back').click();
+    }
+    for (const step of steps) {
+      while (await page.getByTestId(`step-${step}`).count() === 0) {
+        await page.getByTestId('step-next').click();
+      }
+      const fits = await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth + 1);
+      expect(fits).toBe(true);
+      await page.screenshot({ path: `../docs/climaterisk/figures/step-${step}-${width}.png` });
+    }
+  }
+  for (const [width, height] of [[820, 1180], [768, 1024], [430, 932], [360, 800], [1440, 900], [1280, 800]]) {
+    await page.setViewportSize({ width, height });
+    const fits = await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth + 1);
+    expect(fits).toBe(true);
+    await page.screenshot({ path: `../docs/climaterisk/figures/qa-${width}x${height}.png` });
   }
 });
 
