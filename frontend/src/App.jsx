@@ -393,7 +393,7 @@ function Followup({ analysis, engine }) {
         ))}
       </section>
       <p data-testid="decision-line">Con la evidencia institucional verificada, Ourea asigna los COP 5.000 M a seis medidas. La selección no cambia ante el cambio SSP3-7.0 cuantificado para Rionegro, pero es sensible al componente participativo aún por integrar.</p>
-      <button type="button" data-testid="export-pdf" onClick={() => downloadPitchPdf(analysis)}>Descargar PDF</button>
+      <button type="button" data-testid="export-pdf" onClick={() => { downloadPitchPdf(analysis).catch(() => {}); }}>Descargar PDF</button>
       <p className="fine">Huella {analysis.fingerprint}</p>
       <EngineAnnex engine={engine} />
     </>

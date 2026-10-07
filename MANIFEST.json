@@ -7,7 +7,7 @@
   "catalogue_measures": 15,
   "catalogue_total_million_cop": 18900,
   "guardrails": 5,
-  "file_count_excluding_manifest": 197,
+  "file_count_excluding_manifest": 199,
   "files": [
     {
       "path": ".env.example",
@@ -651,13 +651,13 @@
     },
     {
       "path": "frontend/scripts/renderDecisionBrief.mjs",
-      "bytes": 1122,
-      "sha256": "3de8cbeb9affff7f82f249730035957edc78a5b59a4f21958db27dfdfc378267"
+      "bytes": 1339,
+      "sha256": "57814bc1b893cf1f06f570ac5dc79d9678075dd27c6928d0e25d080aa2d7d5c8"
     },
     {
       "path": "frontend/src/App.jsx",
-      "bytes": 24462,
-      "sha256": "512fddba9b83efde4c05e5fb7ba5c1101bf893e5e19fc3f1dae7f8341ecc9ef5"
+      "bytes": 24483,
+      "sha256": "d644e289804fb683deabfe397bce76d64300456581e990a9dc0de9d1c794d183"
     },
     {
       "path": "frontend/src/components/ErrorBoundary.jsx",
@@ -695,19 +695,29 @@
       "sha256": "5345f99f51d91dd4b7da254281848054de0385ffc2836bc4518db18a7ec8ce56"
     },
     {
+      "path": "frontend/src/cornare/briefMap.js",
+      "bytes": 8220,
+      "sha256": "7d72d9474bb6101c816dd672bb5c549e0aab7666f2a6e1f0f782f014a501bfb7"
+    },
+    {
       "path": "frontend/src/cornare/copy.js",
       "bytes": 971,
       "sha256": "b56049e8e907fe71b900844edb2e84c4172755914371995290ea703622a9e7f2"
     },
     {
       "path": "frontend/src/cornare/decisionBrief.js",
-      "bytes": 40360,
-      "sha256": "6ee453a9eb2848fe7bbb3eed8fe5b59e7f17532495f5b100e31f5ca72b34d9b5"
+      "bytes": 48789,
+      "sha256": "3cccefcff6c8f4fdb1d6cea73bf0626dc4b2223f90a571709f911bd036031ce6"
     },
     {
       "path": "frontend/src/cornare/exportDecision.js",
-      "bytes": 1464,
-      "sha256": "78bb3b48dc9d8523e9ad2cf72bb17b54969563ed51543f0ab8a549ee7429f3f1"
+      "bytes": 1478,
+      "sha256": "063594103e88dbab6ac39226dc86051d8d65418747e39cacf522b5c0da456b7f"
+    },
+    {
+      "path": "frontend/src/cornare/jpegEncode.js",
+      "bytes": 9390,
+      "sha256": "d1a28e3e41042f83d0d1750b92195bd3a2260cc2626555bad9d8332ab103e8fa"
     },
     {
       "path": "frontend/src/cornare/loadData.js",
@@ -786,8 +796,8 @@
     },
     {
       "path": "frontend/src/domain/portfolioSearch.js",
-      "bytes": 7480,
-      "sha256": "442d899b1051d02a370b6479c7f5f3f40bee90e7927c8fa9662372bd6245d212"
+      "bytes": 8197,
+      "sha256": "fcd5e82ec3ca021e0b42f3b743283fb568d41589eb778b2cc27ec274aa23f9f5"
     },
     {
       "path": "frontend/src/domain/robustness.js",
@@ -841,8 +851,8 @@
     },
     {
       "path": "frontend/tests/decisionBrief.test.js",
-      "bytes": 2970,
-      "sha256": "1b3a4318c74f3778c72cba55a2f0ddb8b9b1438c0ca50d56e0c7ee44cf393d91"
+      "bytes": 5205,
+      "sha256": "1b9bbeac5266bfc8a0988ce94a6ce037be0a22a7d9aee8204c49382298888e83"
     },
     {
       "path": "frontend/tests/mapContext.test.js",
