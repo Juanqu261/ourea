@@ -116,15 +116,23 @@ test('information gaps stay explicit and the flow is in Spanish', () => {
   assert.ok(gaps.some((gap) => gap.id === 'gap-company-water'));
   assert.ok(gaps.every((gap) => gap.missing_information && gap.how_to_collect_it));
   assert.deepEqual(STEPS.map((step) => step.id), [
-    'overview',
-    'diagnosis',
-    'prioritize',
+    'territory',
+    'priority',
     'portfolio',
-    'stress',
+    'horizon',
     'residual',
-    'monitoring',
-    'export',
+    'followup',
   ]);
-  assert.equal(STEPS[0].label, 'Panorama');
-  assert.equal(STEPS[6].label, 'MEA');
+  assert.equal(STEPS[0].label, 'Territorio');
+  assert.equal(STEPS[5].label, 'Seguimiento');
+});
+
+test('public ficha status cannot change the institutional portfolio', () => {
+  const before = analyzeCorridor(dataset());
+  const fichas = read('measure_fichas.json');
+  assert.equal(fichas.measures.every((item) => item.score_effect === 'none'), true);
+  const after = analyzeCorridor(dataset());
+  assert.deepEqual(after.portfolio.ids, before.portfolio.ids);
+  assert.equal(after.fingerprint, before.fingerprint);
+  assert.equal(after.portfolio.ids.join(','), 'bio_pa,food_agro,hab_green,health,risk_knowledge,water_eff');
 });

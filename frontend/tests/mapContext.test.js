@@ -36,7 +36,7 @@ test('a portfolio focus never invents a project coordinate', () => {
     place: { localization: 'Marinilla' },
   });
   assert.deepEqual(focus.municipalityIds, ['marinilla']);
-  assert.equal(focus.exactLocation, 'Por definir');
+  assert.equal(focus.exactLocation, 'Ubicación por validar');
   assert.equal(JSON.stringify(focus).includes('coordinates'), false);
   assert.equal(focus.layerIds.includes('hydrography'), true);
   const corridor = focusForMeasure({
@@ -46,7 +46,7 @@ test('a portfolio focus never invents a project coordinate', () => {
     place: { localization: 'Corredor Rionegro–Guarne–Marinilla' },
   });
   assert.deepEqual(corridor.municipalityIds, ['rionegro', 'guarne']);
-  assert.equal(corridor.exactLocation, 'Por definir');
+  assert.equal(corridor.exactLocation, 'Área candidata para prefactibilidad');
 });
 
 test('map modules do not call keyed or legacy tile services', () => {

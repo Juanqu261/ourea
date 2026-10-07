@@ -1,0 +1,177 @@
+{
+  "accessed": "2026-10-07",
+  "source": "CORNARE referentes ambientales 2024-2027",
+  "limitation": "Contexto de capacidad existente. No entra al optimizador.",
+  "municipalities": [
+    {
+      "municipality_id": "guarne",
+      "url": "https://www.cornare.gov.co/SIAR/REFERENTES_AMBIENTALES/2024-2027/RA_Guarne.pdf",
+      "bytes": 3113634,
+      "pages": 19,
+      "score_effect": "none",
+      "use": "explainability",
+      "brief": "769 concesiones vigentes y 1,76 m³/s concesionados. Acueducto urbano: La Charanga, La Brizuela y El Salado.",
+      "hits": [
+        {
+          "needle": "769",
+          "found": true,
+          "excerpts": [
+            "le.10 - 20 95% 4% Índice de Riesgo de la Calidad del Agua (IRCA): Demanda: Se cuenta con 769 expedientes vigentes relacionados con concesiones de agua y Registro Único de Recurso Hídrico (RURH), los cuales tienen un caudal concesio"
+          ]
+        },
+        {
+          "needle": "Charanga",
+          "found": true,
+          "excerpts": [
+            "24 y OMYA de la quebrada La Mosca Calidad EXCELENTE en las bocatomas de las quebradas La Charanga y La Brizuela. ha ha ha Alto = La presión de la demanda es alta con respecto a la oferta disponible.20 - 50 Moderado = La presión de la de",
+            "bana. El caudal concesionado para uso doméstico es de 145,83 l/s de tres (3) fuentes: La Charanga, La Brizuela y El Salado (brazo La Honda). Saneamiento: El municipio tiene 3 PTARD: Principal donde se debe priorizar la implementación de"
+          ]
+        },
+        {
+          "needle": "Brizuela",
+          "found": true,
+          "excerpts": [
+            "la quebrada La Mosca Calidad EXCELENTE en las bocatomas de las quebradas La Charanga y La Brizuela. ha ha ha Alto = La presión de la demanda es alta con respecto a la oferta disponible.20 - 50 Moderado = La presión de la demanda es moder",
+            "al concesionado para uso doméstico es de 145,83 l/s de tres (3) fuentes: La Charanga, La Brizuela y El Salado (brazo La Honda). Saneamiento: El municipio tiene 3 PTARD: Principal donde se debe priorizar la implementación de nuevas unida"
+          ]
+        },
+        {
+          "needle": "Salado",
+          "found": true,
+          "excerpts": [
+            "do para uso doméstico es de 145,83 l/s de tres (3) fuentes: La Charanga, La Brizuela y El Salado (brazo La Honda). Saneamiento: El municipio tiene 3 PTARD: Principal donde se debe priorizar la implementación de nuevas unidades en el tr"
+          ]
+        },
+        {
+          "needle": "IRCA",
+          "found": true,
+          "excerpts": [
+            "da indicios de los problemas de contaminación. Índice de Riesgo de la Calidad de Agua (IRCA): Identiﬁca el grado de riesgo que enfrentan las personas cuando consumen aguas según el cumplimiento de las características físicas, qu",
+            "respecto a la oferta disponible.10 - 20 95% 4% Índice de Riesgo de la Calidad del Agua (IRCA): Demanda: Se cuenta con 769 expedientes vigentes relacionados con concesiones de agua y Registro Único de Recurso Hídrico (RURH), los cu"
+          ]
+        },
+        {
+          "needle": "concesi",
+          "found": true,
+          "excerpts": [
+            "alidad del Agua (IRCA): Demanda: Se cuenta con 769 expedientes vigentes relacionados con concesiones de agua y Registro Único de Recurso Hídrico (RURH), los cuales tienen un caudal concesionado de 1,76 m/three.sups/s. Acueducto municip",
+            "cesiones de agua y Registro Único de Recurso Hídrico (RURH), los cuales tienen un caudal concesionado de 1,76 m/three.sups/s. Acueducto municipal: Saneamiento urbano: El municipio posee 2 concesiones de agua para el acueducto que abaste"
+          ]
+        }
+      ]
+    },
+    {
+      "municipality_id": "marinilla",
+      "url": "https://www.cornare.gov.co/SIAR/REFERENTES_AMBIENTALES/2024-2027/RA_Marinilla.pdf",
+      "bytes": 2764593,
+      "pages": 19,
+      "score_effect": "none",
+      "use": "explainability",
+      "brief": "Acueducto urbano: Barbacoas y La Bolsa, 144,9 l/s. Bocatomas con calidad excelente en el referente 2024–2027.",
+      "hits": [
+        {
+          "needle": "Bolsa",
+          "found": true,
+          "excerpts": [
+            "Cimarrona y estación Alcaravanes quebrada La Marinilla. Calidad EXCELENTE bocatomas La Bolsa y Barbacoas. ha 468 ha ha Índice de Riesgo de la Calidad del Agua (IRCA): Demanda: Se cuenta con 272 expedientes vigentes relaciona",
+            "audal concesionado para uso doméstico es de 144,9 l/s de dos (2) fuentes: Barbacoas y La Bolsa. Saneamiento: El municipio tiene 2 PTARD: Principal y Corbelén donde se debe priorizar la implementación de nuevas unidades en el tren de"
+          ]
+        },
+        {
+          "needle": "Barbacoas",
+          "found": true,
+          "excerpts": [
+            "na y estación Alcaravanes quebrada La Marinilla. Calidad EXCELENTE bocatomas La Bolsa y Barbacoas. ha 468 ha ha Índice de Riesgo de la Calidad del Agua (IRCA): Demanda: Se cuenta con 272 expedientes vigentes relacionados con conc",
+            "ea urbana. El caudal concesionado para uso doméstico es de 144,9 l/s de dos (2) fuentes: Barbacoas y La Bolsa. Saneamiento: El municipio tiene 2 PTARD: Principal y Corbelén donde se debe priorizar la implementación de nuevas unidades en"
+          ]
+        },
+        {
+          "needle": "Marinilla",
+          "found": true,
+          "excerpts": [
+            "l. PRAE: Proyecto Ambiental Escolar. ha: Hectáreas ONG: Organización No Gubernamental. MARINILLA Nombre del municipio categoríaMARINILLA 69.343 50.477 18.866 11.194 11.662 Población total Área total urbana rural ruralurbana",
+            ": Hectáreas ONG: Organización No Gubernamental. MARINILLA Nombre del municipio categoríaMARINILLA 69.343 50.477 18.866 11.194 11.662 Población total Área total urbana rural ruralurbana TRES Información general Fuente: Departa"
+          ]
+        },
+        {
+          "needle": "IRCA",
+          "found": true,
+          "excerpts": [
+            "da indicios de los problemas de contaminación. Índice de Riesgo de la Calidad de Agua (IRCA): Identiﬁca el grado de riesgo que enfrentan las personas cuando consumen aguas según el cumplimiento de las características físicas, qu",
+            "atomas La Bolsa y Barbacoas. ha 468 ha ha Índice de Riesgo de la Calidad del Agua (IRCA): Demanda: Se cuenta con 272 expedientes vigentes relacionados con concesiones de agua y Registro Único de Recurso Hídrico (RURH), los cu"
+          ]
+        },
+        {
+          "needle": "ronda",
+          "found": true,
+          "excerpts": [
+            "023-2021. El municipio cuenta con los siguientes estudios de riesgo: Gestión del riesgo: Rondas hídricas: Zonas de condición de amenaza para priorizar estudios de detalle AMENAZA Alta Media Baja Áreas degradadas: Se han identiﬁcado 5"
+          ]
+        }
+      ]
+    },
+    {
+      "municipality_id": "rionegro",
+      "url": "https://www.cornare.gov.co/SIAR/REFERENTES_AMBIENTALES/2024-2027/RA_Rionegro.pdf",
+      "bytes": 2701812,
+      "pages": 19,
+      "score_effect": "none",
+      "use": "explainability",
+      "brief": "Acueducto urbano: Río Negro, Abreo Mal Paso y La Pereira, 982,15 l/s concesionados.",
+      "hits": [
+        {
+          "needle": "982",
+          "found": true,
+          "excerpts": [
+            "l acueducto que abastece el área urbana. El caudal concesionado para uso doméstico es de 982,15 l/s de tres (3) fuentes: Rio Negro, Abreo Mal Paso y La Pereira. Saneamiento: El municipio tiene 18 PTAR: donde la PTAR de zona urbana"
+          ]
+        },
+        {
+          "needle": "Pereira",
+          "found": true,
+          "excerpts": [
+            "rada Yarumal – Chachafruto, estación Riotex quebrada La Mosca. Calidad MALA bocatoma La Pereira y estación Casa Mia quebrada La Pereira. ha 842 ha ha Muy alto = La presión de la demanda es muy alta con respecto a la oferta dispon",
+            "tex quebrada La Mosca. Calidad MALA bocatoma La Pereira y estación Casa Mia quebrada La Pereira. ha 842 ha ha Muy alto = La presión de la demanda es muy alta con respecto a la oferta disponible.50 Alto = La presión de la demanda"
+          ]
+        },
+        {
+          "needle": "Abreo",
+          "found": true,
+          "excerpts": [
+            "caudal concesionado para uso doméstico es de 982,15 l/s de tres (3) fuentes: Rio Negro, Abreo Mal Paso y La Pereira. Saneamiento: El municipio tiene 18 PTAR: donde la PTAR de zona urbana a la fecha está en proceso de optimización p"
+          ]
+        },
+        {
+          "needle": "Mal Paso",
+          "found": true,
+          "excerpts": [
+            "l concesionado para uso doméstico es de 982,15 l/s de tres (3) fuentes: Rio Negro, Abreo Mal Paso y La Pereira. Saneamiento: El municipio tiene 18 PTAR: donde la PTAR de zona urbana a la fecha está en proceso de optimización por parte"
+          ]
+        },
+        {
+          "needle": "Río Negro",
+          "found": true,
+          "excerpts": [
+            "reo ubicadas en el municipio: Calidad BUENA en las estaciones Montenevado y Charco Manso río Negro, estación colegio Guillermo Gaviria quebrada Yarumal – Chachafruto. Calidad MEDIA en la estación Puente Real, estación puente antes de la",
+            "iduales EPRIO, estación La Fresera y estación Puente Autopista y estación Bocatoma en el río Negro, estación Las delicias quebrada Yarumal – Chachafruto, estación Riotex quebrada La Mosca. Calidad MALA bocatoma La Pereira y estación Cas"
+          ]
+        },
+        {
+          "needle": "Rio Negro",
+          "found": true,
+          "excerpts": [
+            "urbana. El caudal concesionado para uso doméstico es de 982,15 l/s de tres (3) fuentes: Rio Negro, Abreo Mal Paso y La Pereira. Saneamiento: El municipio tiene 18 PTAR: donde la PTAR de zona urbana a la fecha está en proceso de optimiz"
+          ]
+        },
+        {
+          "needle": "IRCA",
+          "found": true,
+          "excerpts": [
+            "da indicios de los problemas de contaminación. Índice de Riesgo de la Calidad de Agua (IRCA): Identiﬁca el grado de riesgo que enfrentan las personas cuando consumen aguas según el cumplimiento de las características físicas, qu",
+            "especto a la oferta disponible.20 - 50 19% 81% Índice de Riesgo de la Calidad del Agua (IRCA): Demanda: Se cuenta con 710 expedientes vigentes relacionados con concesiones de agua y Registro Único de Recurso Hídrico (RURH), los cu"
+          ]
+        }
+      ]
+    }
+  ]
+}

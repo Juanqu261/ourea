@@ -2,7 +2,7 @@ export const EVIDENCE_LABELS = Object.freeze({
   institutional: 'Dato institucional',
   team_inference: 'Inferencia del equipo',
   assumption: 'Supuesto',
-  missing: 'Información faltante',
+  missing: 'Validación requerida',
 });
 
 export const NBS_LABELS = Object.freeze({
