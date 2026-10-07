@@ -29,7 +29,7 @@ python scripts\climaterisk\validate_inputs.py
 if errorlevel 1 exit /b 1
 
 echo == Reproducibility manifest ==
-python scripts\make_manifest.py
+python scripts\make_manifest.py --check
 if errorlevel 1 exit /b 1
 
 echo Ourea QA completed.

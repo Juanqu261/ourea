@@ -24,6 +24,6 @@ echo "== CORNARE input validation =="
 python scripts/climaterisk/validate_inputs.py
 
 echo "== Reproducibility manifest =="
-python scripts/make_manifest.py
+python scripts/make_manifest.py --check
 
 echo "Ourea QA completed."
