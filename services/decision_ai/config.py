@@ -24,6 +24,8 @@ class Settings:
     model: str = "gpt-5.6-terra"
     model_provider: str | None = None
     allowed_origins: tuple[str, ...] = ()
+    # Preview deployments get a new URL each time; one regex admits them all.
+    allowed_origin_regex: str | None = None
     max_tool_calls: int = 6
     max_verify_retries: int = 2
     max_words: int = 120
@@ -39,12 +41,17 @@ class Settings:
 
 def load_settings() -> Settings:
     origins = tuple(o.strip() for o in os.environ.get("ALLOWED_ORIGINS", "").split(",") if o.strip())
+    # Serverless hosts (Vercel) only allow writes under /tmp: OUREA_VAR_DIR=/tmp/ourea.
+    var = Path(os.environ["OUREA_VAR_DIR"]) if os.environ.get("OUREA_VAR_DIR", "").strip() else VAR
     return Settings(
         ai_enabled=_flag("OUREA_AI_ENABLED") and bool(os.environ.get("OPENAI_API_KEY") or os.environ.get("OUREA_MODEL_PROVIDER")),
         model=os.environ.get("OPENAI_MODEL", Settings.model),
         model_provider=os.environ.get("OUREA_MODEL_PROVIDER") or None,
         allowed_origins=origins,
+        allowed_origin_regex=os.environ.get("ALLOWED_ORIGIN_REGEX", "").strip() or None,
         flip_threshold=float(os.environ.get("OUREA_FLIP_THRESHOLD", Settings.flip_threshold)),
         langsmith=_flag("LANGSMITH_TRACING"),
+        log_dir=var / "logs",
+        interview_dir=var / "interviews",
         interview_priority_fallback=_flag("OUREA_INTERVIEW_PRIORITY_FALLBACK"),
     )

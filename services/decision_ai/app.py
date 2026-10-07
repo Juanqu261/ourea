@@ -38,6 +38,7 @@ app = FastAPI(title="Ourea decision AI", version="1.0.0")
 app.add_middleware(
     CORSMiddleware,
     allow_origins=list(settings.allowed_origins),
+    allow_origin_regex=settings.allowed_origin_regex,
     allow_methods=["GET", "POST"],
     allow_headers=["Content-Type"],
 )

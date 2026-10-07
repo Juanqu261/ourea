@@ -1,0 +1,25 @@
+# Vercel deployment of the decision AI service (services/decision_ai). See docs/deployment.md.
+# Local work and CI keep using requirements.txt + requirements-ai.txt; these pins must match them.
+# numpy is exact: the engine fingerprint includes its version, so another version stops matching
+# the committed robustness JSON.
+
+[project]
+name = "ourea-decision-ai"
+version = "1.0.0"
+requires-python = "==3.12.*"
+dependencies = [
+    "numpy==2.5.3",
+    "langchain==1.4.3",
+    "langchain-core==1.6.7",
+    "langchain-openai==1.6.7",
+    "langgraph==1.2.14",
+    "langgraph-checkpoint==4.2.0",
+    "langgraph-prebuilt==1.1.0",
+    "pydantic==2.13.5",
+    "fastapi==0.142.2",
+    "httpx==0.28.1",
+    "python-dotenv==1.2.4",
+]
+
+[tool.vercel]
+entrypoint = "services.decision_ai.app:app"

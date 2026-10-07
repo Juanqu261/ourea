@@ -7,12 +7,12 @@
   "catalogue_measures": 15,
   "catalogue_total_million_cop": 18900,
   "guardrails": 5,
-  "file_count_excluding_manifest": 255,
+  "file_count_excluding_manifest": 257,
   "files": [
     {
       "path": ".env.example",
-      "bytes": 933,
-      "sha256": "54617fb5cfd6223101e11ebd62ba3a6a19ab76827b9e3484a919404812d0e611"
+      "bytes": 1204,
+      "sha256": "2596c772acdf2be6061d76f5bc16225306346cfb335a55affe7fc02d593d33f7"
     },
     {
       "path": ".github/workflows/ourea.yml",
@@ -23,11 +23,6 @@
       "path": ".gitignore",
       "bytes": 921,
       "sha256": "0d1b1ef59f6f920811917348f548a7c0bbc86fe79cd9586abae1e20300b383df"
-    },
-    {
-      "path": ".vercelignore",
-      "bytes": 89,
-      "sha256": "dd7df01646b0bad5ade46536c5fde13c9e709504a8494c2721fae818ec7752ca"
     },
     {
       "path": "CHANGELOG.md",
@@ -486,8 +481,8 @@
     },
     {
       "path": "docs/deployment.md",
-      "bytes": 2555,
-      "sha256": "bd58b6e12334418c93cd223e706984d4792f7f26136a8687e719498759b02500"
+      "bytes": 4608,
+      "sha256": "01ebf9e5be1303124403bbd5c32d95a8209799bef51da60045a0a406150df060"
     },
     {
       "path": "frontend/e2e/copilot.spec.js",
@@ -925,6 +920,11 @@
       "sha256": "d1195fd1b6799a2252613b1ea99c430763086e752564f34018455ae65178c071"
     },
     {
+      "path": "pyproject.toml",
+      "bytes": 781,
+      "sha256": "6ac7d8f8c2b4b540f3b5df1ae8c1af85d0fd92c1d038c0d64f64ece87608eee7"
+    },
+    {
       "path": "qa_mac_linux.sh",
       "bytes": 766,
       "sha256": "8b128e45dfd7a7d59d74f77a722e44589570b79712cc1b0f853cfdcc9dded337"
@@ -1111,8 +1111,8 @@
     },
     {
       "path": "services/decision_ai/app.py",
-      "bytes": 6276,
-      "sha256": "30875263970c33a4b3da99a703aeddb18f39b0fbb52ae98997482283f9d01c9f"
+      "bytes": 6330,
+      "sha256": "8405977e3f63ed33472063afc04347c729bba33dff2a9dc9b33a9813610383f8"
     },
     {
       "path": "services/decision_ai/ask.py",
@@ -1151,8 +1151,8 @@
     },
     {
       "path": "services/decision_ai/config.py",
-      "bytes": 1890,
-      "sha256": "1ce32c03aeadc2d72e826c6b57850f77690d644942de9d97cc444198499545aa"
+      "bytes": 2361,
+      "sha256": "5a5e6a886b292bc9b736108a358f0b83c989756bf083ae7c1ec9b64682b02b71"
     },
     {
       "path": "services/decision_ai/demo/synthetic_flower_grower.json",
@@ -1283,6 +1283,16 @@
       "path": "tests/test_spatial_rings.py",
       "bytes": 841,
       "sha256": "fb0a0727b766101a7ede5b1a6b53c3883b4896c7358c4c6a6ad2a5e2aabb1201"
+    },
+    {
+      "path": "uv.lock",
+      "bytes": 104230,
+      "sha256": "221d212b9333d3db81ebb09579aae4aa04d8454137104d4b658b3b4f9db6bde9"
+    },
+    {
+      "path": "vercel.json",
+      "bytes": 386,
+      "sha256": "7e39e58a537cd8ec34311279b139856b3f13a0ab97a4d4076fbe696de546bb5d"
     }
   ]
 }

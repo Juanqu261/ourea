@@ -1,0 +1,9 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "functions": {
+    "services/decision_ai/app.py": {
+      "maxDuration": 300,
+      "excludeFiles": "{frontend/node_modules/**,frontend/dist/**,frontend/src/**,frontend/e2e/**,frontend/tests/**,frontend/scripts/**,frontend/test-results/**,docs/**,tests/**,.github/**,.venv/**,.cache/**,services/decision_ai/var/**}"
+    }
+  }
+}
