@@ -6,6 +6,7 @@ import { buildDecisionMatrix } from './decisionMatrix.js';
 import { assessMissingEvidence } from './evidenceBounds.js';
 import { screenCatalogueNbs } from './nbsScreen.js';
 import { adaptivePathways, decisionRobustness } from './robustness.js';
+import { decisionHinges } from './decisionHinge.js';
 import {
   criticalFindings,
   explainRejection,
@@ -50,7 +51,13 @@ export function analyzeCorridor(dataset) {
       const gap = alternative
         ? search.institucional.institucional.objective - alternative.institucional.objective
         : null;
-      return { id: measure.id, name: measure.name, gap, cost: measure.cost };
+      return {
+        id: measure.id,
+        name: measure.name,
+        gap,
+        cost: measure.cost,
+        alternativeIds: alternative?.ids ?? [],
+      };
     })
     .sort((left, right) => (left.gap ?? 99) - (right.gap ?? 99));
 
@@ -108,6 +115,12 @@ export function analyzeCorridor(dataset) {
     sensitivity,
     matrix,
     nbsScreen,
+    hinges: decisionHinges({
+      rejected,
+      prepared,
+      recommendedIds: portfolio.ids,
+      participatoryRange: dataset.parameters.weights.workshops,
+    }),
   });
 }
 
