@@ -1,0 +1,2618 @@
+{
+  "schema": "ourea.cornare.robustness",
+  "seed": 20261007,
+  "n_worlds": 4000,
+  "fingerprint": "ourea-aa929747",
+  "numpy": "2.5.3",
+  "evidence_labels": {
+    "institutional": "Dato institucional",
+    "team_inference": "Inferencia del equipo",
+    "assumption": "Supuesto",
+    "missing": "Información faltante",
+    "exploratory": "Exploratorio"
+  },
+  "field_evidence": {
+    "worlds": "assumption",
+    "worlds.eff": "exploratory",
+    "worlds.ssp_shift": "exploratory",
+    "acceptability.near": "team_inference",
+    "acceptability.rank1": "team_inference",
+    "inclusion": "team_inference",
+    "pathways.signal": "exploratory",
+    "pathways.reserve.delay_cost_share": "assumption"
+  },
+  "wording_rules": [
+    "Se dice «casi óptimo en X% de los N mundos probados». Nunca «probabilidad».",
+    "Los parámetros exploratorios no se reportan como hallazgos: solo aparecen en puntos de quiebre y señales, rotulados.",
+    "El puntaje es un puntaje de prioridad. No hay «% de vulnerabilidad reducida» ni pérdidas evitadas.",
+    "«Sin desagregar» es información faltante, nunca «baja»."
+  ],
+  "s_star": {
+    "ids": [
+      "bio_pa",
+      "bio_psa",
+      "bio_restore",
+      "risk_knowledge",
+      "water_eff"
+    ],
+    "cost": 4900,
+    "dimensions": [
+      "biodiversity",
+      "disaster",
+      "water"
+    ],
+    "world0_score": 2.4225,
+    "world0_regret": 0.138667,
+    "all": {
+      "rank1": 0.0963,
+      "near_1": 0.1205,
+      "near_2": 0.1497,
+      "near_5": 0.2253
+    },
+    "reference": {
+      "rank1": 0.107,
+      "near_1": 0.136,
+      "near_2": 0.171,
+      "near_5": 0.2415
+    },
+    "ssp3_7_0": {
+      "rank1": 0.0855,
+      "near_1": 0.105,
+      "near_2": 0.1285,
+      "near_5": 0.209
+    }
+  },
+  "s_star_by_threshold": {
+    "near_1": [
+      "bio_pa",
+      "bio_psa",
+      "bio_restore",
+      "risk_knowledge",
+      "water_eff"
+    ],
+    "near_2": [
+      "bio_pa",
+      "bio_psa",
+      "bio_restore",
+      "risk_knowledge",
+      "water_eff"
+    ],
+    "near_5": [
+      "bio_pa",
+      "bio_psa",
+      "bio_restore",
+      "risk_knowledge",
+      "water_eff"
+    ]
+  },
+  "s_star_stable_across_thresholds": true,
+  "s_star_sentence": "El portafolio bio_pa, bio_psa, bio_restore, risk_knowledge, water_eff es casi óptimo (a menos de 5% del mejor) en 23% de los 4.000 mundos probados.",
+  "top_sets": [
+    {
+      "ids": [
+        "bio_pa",
+        "bio_psa",
+        "bio_restore",
+        "risk_knowledge",
+        "water_eff"
+      ],
+      "cost": 4900,
+      "dimensions": [
+        "biodiversity",
+        "disaster",
+        "water"
+      ],
+      "world0_score": 2.4225,
+      "world0_regret": 0.138667,
+      "all": {
+        "rank1": 0.0963,
+        "near_1": 0.1205,
+        "near_2": 0.1497,
+        "near_5": 0.2253
+      },
+      "reference": {
+        "rank1": 0.107,
+        "near_1": 0.136,
+        "near_2": 0.171,
+        "near_5": 0.2415
+      },
+      "ssp3_7_0": {
+        "rank1": 0.0855,
+        "near_1": 0.105,
+        "near_2": 0.1285,
+        "near_5": 0.209
+      }
+    },
+    {
+      "ids": [
+        "bio_pa",
+        "bio_psa",
+        "food_agro",
+        "health",
+        "risk_knowledge",
+        "water_eff"
+      ],
+      "cost": 5000,
+      "dimensions": [
+        "biodiversity",
+        "disaster",
+        "food",
+        "health",
+        "water"
+      ],
+      "world0_score": 2.8125,
+      "world0_regret": 0.0,
+      "all": {
+        "rank1": 0.0333,
+        "near_1": 0.0467,
+        "near_2": 0.0658,
+        "near_5": 0.1435
+      },
+      "reference": {
+        "rank1": 0.0345,
+        "near_1": 0.05,
+        "near_2": 0.0645,
+        "near_5": 0.1465
+      },
+      "ssp3_7_0": {
+        "rank1": 0.032,
+        "near_1": 0.0435,
+        "near_2": 0.067,
+        "near_5": 0.1405
+      }
+    },
+    {
+      "ids": [
+        "bio_pa",
+        "bio_psa",
+        "risk_knowledge",
+        "water_eff",
+        "water_head"
+      ],
+      "cost": 5000,
+      "dimensions": [
+        "biodiversity",
+        "disaster",
+        "water"
+      ],
+      "world0_score": 2.2985,
+      "world0_regret": 0.182756,
+      "all": {
+        "rank1": 0.0222,
+        "near_1": 0.0333,
+        "near_2": 0.0503,
+        "near_5": 0.117
+      },
+      "reference": {
+        "rank1": 0.021,
+        "near_1": 0.03,
+        "near_2": 0.045,
+        "near_5": 0.1105
+      },
+      "ssp3_7_0": {
+        "rank1": 0.0235,
+        "near_1": 0.0365,
+        "near_2": 0.0555,
+        "near_5": 0.1235
+      }
+    },
+    {
+      "ids": [
+        "bio_pa",
+        "bio_psa",
+        "food_agro",
+        "water_eff",
+        "water_riparian"
+      ],
+      "cost": 4900,
+      "dimensions": [
+        "biodiversity",
+        "food",
+        "water"
+      ],
+      "world0_score": 2.1685,
+      "world0_regret": 0.228978,
+      "all": {
+        "rank1": 0.024,
+        "near_1": 0.0382,
+        "near_2": 0.054,
+        "near_5": 0.1168
+      },
+      "reference": {
+        "rank1": 0.026,
+        "near_1": 0.043,
+        "near_2": 0.059,
+        "near_5": 0.117
+      },
+      "ssp3_7_0": {
+        "rank1": 0.022,
+        "near_1": 0.0335,
+        "near_2": 0.049,
+        "near_5": 0.1165
+      }
+    },
+    {
+      "ids": [
+        "bio_pa",
+        "bio_restore",
+        "risk_knowledge",
+        "water_eff",
+        "water_riparian"
+      ],
+      "cost": 5000,
+      "dimensions": [
+        "biodiversity",
+        "disaster",
+        "water"
+      ],
+      "world0_score": 2.336,
+      "world0_regret": 0.169422,
+      "all": {
+        "rank1": 0.023,
+        "near_1": 0.035,
+        "near_2": 0.051,
+        "near_5": 0.1168
+      },
+      "reference": {
+        "rank1": 0.025,
+        "near_1": 0.0345,
+        "near_2": 0.05,
+        "near_5": 0.12
+      },
+      "ssp3_7_0": {
+        "rank1": 0.021,
+        "near_1": 0.0355,
+        "near_2": 0.052,
+        "near_5": 0.1135
+      }
+    },
+    {
+      "ids": [
+        "bio_pa",
+        "bio_psa",
+        "bio_restore",
+        "water_head"
+      ],
+      "cost": 5000,
+      "dimensions": [
+        "biodiversity",
+        "water"
+      ],
+      "world0_score": 1.8625,
+      "world0_regret": 0.337778,
+      "all": {
+        "rank1": 0.0372,
+        "near_1": 0.047,
+        "near_2": 0.0587,
+        "near_5": 0.1072
+      },
+      "reference": {
+        "rank1": 0.036,
+        "near_1": 0.046,
+        "near_2": 0.0585,
+        "near_5": 0.106
+      },
+      "ssp3_7_0": {
+        "rank1": 0.0385,
+        "near_1": 0.048,
+        "near_2": 0.059,
+        "near_5": 0.1085
+      }
+    },
+    {
+      "ids": [
+        "bio_psa",
+        "bio_restore",
+        "food_agro",
+        "risk_knowledge",
+        "water_eff"
+      ],
+      "cost": 5000,
+      "dimensions": [
+        "biodiversity",
+        "disaster",
+        "food",
+        "water"
+      ],
+      "world0_score": 2.6075,
+      "world0_regret": 0.072889,
+      "all": {
+        "rank1": 0.0135,
+        "near_1": 0.023,
+        "near_2": 0.034,
+        "near_5": 0.0973
+      },
+      "reference": {
+        "rank1": 0.0125,
+        "near_1": 0.0255,
+        "near_2": 0.039,
+        "near_5": 0.105
+      },
+      "ssp3_7_0": {
+        "rank1": 0.0145,
+        "near_1": 0.0205,
+        "near_2": 0.029,
+        "near_5": 0.0895
+      }
+    },
+    {
+      "ids": [
+        "bio_pa",
+        "bio_restore",
+        "food_agro",
+        "risk_knowledge",
+        "water_riparian"
+      ],
+      "cost": 4900,
+      "dimensions": [
+        "biodiversity",
+        "disaster",
+        "food",
+        "water"
+      ],
+      "world0_score": 2.57,
+      "world0_regret": 0.086222,
+      "all": {
+        "rank1": 0.0158,
+        "near_1": 0.0222,
+        "near_2": 0.036,
+        "near_5": 0.0882
+      },
+      "reference": {
+        "rank1": 0.0215,
+        "near_1": 0.027,
+        "near_2": 0.041,
+        "near_5": 0.1005
+      },
+      "ssp3_7_0": {
+        "rank1": 0.01,
+        "near_1": 0.0175,
+        "near_2": 0.031,
+        "near_5": 0.076
+      }
+    },
+    {
+      "ids": [
+        "bio_pa",
+        "bio_psa",
+        "food_agro",
+        "risk_knowledge",
+        "water_head"
+      ],
+      "cost": 4900,
+      "dimensions": [
+        "biodiversity",
+        "disaster",
+        "food",
+        "water"
+      ],
+      "world0_score": 2.5325,
+      "world0_regret": 0.099556,
+      "all": {
+        "rank1": 0.0147,
+        "near_1": 0.025,
+        "near_2": 0.0375,
+        "near_5": 0.088
+      },
+      "reference": {
+        "rank1": 0.014,
+        "near_1": 0.0245,
+        "near_2": 0.039,
+        "near_5": 0.093
+      },
+      "ssp3_7_0": {
+        "rank1": 0.0155,
+        "near_1": 0.0255,
+        "near_2": 0.036,
+        "near_5": 0.083
+      }
+    },
+    {
+      "ids": [
+        "bio_pa",
+        "bio_psa",
+        "risk_knowledge",
+        "water_eff",
+        "water_riparian"
+      ],
+      "cost": 4700,
+      "dimensions": [
+        "biodiversity",
+        "disaster",
+        "water"
+      ],
+      "world0_score": 2.2985,
+      "world0_regret": 0.182756,
+      "all": {
+        "rank1": 0.007,
+        "near_1": 0.014,
+        "near_2": 0.0248,
+        "near_5": 0.0788
+      },
+      "reference": {
+        "rank1": 0.006,
+        "near_1": 0.013,
+        "near_2": 0.0255,
+        "near_5": 0.0715
+      },
+      "ssp3_7_0": {
+        "rank1": 0.008,
+        "near_1": 0.015,
+        "near_2": 0.024,
+        "near_5": 0.086
+      }
+    },
+    {
+      "ids": [
+        "bio_pa",
+        "food_agro",
+        "infra_services",
+        "risk_knowledge",
+        "water_eff"
+      ],
+      "cost": 5000,
+      "dimensions": [
+        "biodiversity",
+        "disaster",
+        "food",
+        "infrastructure",
+        "water"
+      ],
+      "world0_score": 2.81,
+      "world0_regret": 0.000889,
+      "all": {
+        "rank1": 0.028,
+        "near_1": 0.0367,
+        "near_2": 0.0445,
+        "near_5": 0.0785
+      },
+      "reference": {
+        "rank1": 0.0275,
+        "near_1": 0.036,
+        "near_2": 0.044,
+        "near_5": 0.0795
+      },
+      "ssp3_7_0": {
+        "rank1": 0.0285,
+        "near_1": 0.0375,
+        "near_2": 0.045,
+        "near_5": 0.0775
+      }
+    },
+    {
+      "ids": [
+        "bio_pa",
+        "bio_psa",
+        "bio_restore",
+        "water_riparian"
+      ],
+      "cost": 4700,
+      "dimensions": [
+        "biodiversity",
+        "water"
+      ],
+      "world0_score": 1.8625,
+      "world0_regret": 0.337778,
+      "all": {
+        "rank1": 0.0165,
+        "near_1": 0.0245,
+        "near_2": 0.0365,
+        "near_5": 0.0757
+      },
+      "reference": {
+        "rank1": 0.0155,
+        "near_1": 0.022,
+        "near_2": 0.036,
+        "near_5": 0.081
+      },
+      "ssp3_7_0": {
+        "rank1": 0.0175,
+        "near_1": 0.027,
+        "near_2": 0.037,
+        "near_5": 0.0705
+      }
+    },
+    {
+      "ids": [
+        "bio_pa",
+        "food_agro",
+        "hab_green",
+        "health",
+        "risk_knowledge",
+        "water_eff"
+      ],
+      "cost": 4800,
+      "dimensions": [
+        "biodiversity",
+        "disaster",
+        "food",
+        "habitat",
+        "health",
+        "water"
+      ],
+      "world0_score": 2.81,
+      "world0_regret": 0.000889,
+      "all": {
+        "rank1": 0.0147,
+        "near_1": 0.0213,
+        "near_2": 0.0307,
+        "near_5": 0.0695
+      },
+      "reference": {
+        "rank1": 0.013,
+        "near_1": 0.018,
+        "near_2": 0.0275,
+        "near_5": 0.0685
+      },
+      "ssp3_7_0": {
+        "rank1": 0.0165,
+        "near_1": 0.0245,
+        "near_2": 0.034,
+        "near_5": 0.0705
+      }
+    },
+    {
+      "ids": [
+        "bio_pa",
+        "food_agro",
+        "health",
+        "risk_knowledge",
+        "risk_sat",
+        "water_eff"
+      ],
+      "cost": 5000,
+      "dimensions": [
+        "biodiversity",
+        "disaster",
+        "food",
+        "health",
+        "water"
+      ],
+      "world0_score": 2.726,
+      "world0_regret": 0.030756,
+      "all": {
+        "rank1": 0.0115,
+        "near_1": 0.0173,
+        "near_2": 0.0262,
+        "near_5": 0.0597
+      },
+      "reference": {
+        "rank1": 0.0115,
+        "near_1": 0.0165,
+        "near_2": 0.0245,
+        "near_5": 0.0585
+      },
+      "ssp3_7_0": {
+        "rank1": 0.0115,
+        "near_1": 0.018,
+        "near_2": 0.028,
+        "near_5": 0.061
+      }
+    },
+    {
+      "ids": [
+        "bio_pa",
+        "bio_psa",
+        "bio_restore",
+        "water_eff"
+      ],
+      "cost": 4300,
+      "dimensions": [
+        "biodiversity",
+        "water"
+      ],
+      "world0_score": 1.8625,
+      "world0_regret": 0.337778,
+      "all": {
+        "rank1": 0.0,
+        "near_1": 0.0057,
+        "near_2": 0.013,
+        "near_5": 0.0575
+      },
+      "reference": {
+        "rank1": 0.0,
+        "near_1": 0.005,
+        "near_2": 0.0155,
+        "near_5": 0.064
+      },
+      "ssp3_7_0": {
+        "rank1": 0.0,
+        "near_1": 0.0065,
+        "near_2": 0.0105,
+        "near_5": 0.051
+      }
+    },
+    {
+      "ids": [
+        "bio_pa",
+        "bio_psa",
+        "bio_restore",
+        "food_agro",
+        "risk_knowledge"
+      ],
+      "cost": 4800,
+      "dimensions": [
+        "biodiversity",
+        "disaster",
+        "food"
+      ],
+      "world0_score": 2.2925,
+      "world0_regret": 0.184889,
+      "all": {
+        "rank1": 0.0132,
+        "near_1": 0.0198,
+        "near_2": 0.0267,
+        "near_5": 0.0568
+      },
+      "reference": {
+        "rank1": 0.017,
+        "near_1": 0.025,
+        "near_2": 0.033,
+        "near_5": 0.068
+      },
+      "ssp3_7_0": {
+        "rank1": 0.0095,
+        "near_1": 0.0145,
+        "near_2": 0.0205,
+        "near_5": 0.0455
+      }
+    },
+    {
+      "ids": [
+        "bio_pa",
+        "food_agro",
+        "risk_knowledge",
+        "water_head",
+        "water_riparian"
+      ],
+      "cost": 5000,
+      "dimensions": [
+        "biodiversity",
+        "disaster",
+        "food",
+        "water"
+      ],
+      "world0_score": 2.446,
+      "world0_regret": 0.130311,
+      "all": {
+        "rank1": 0.0073,
+        "near_1": 0.0127,
+        "near_2": 0.021,
+        "near_5": 0.0555
+      },
+      "reference": {
+        "rank1": 0.0085,
+        "near_1": 0.0155,
+        "near_2": 0.022,
+        "near_5": 0.0585
+      },
+      "ssp3_7_0": {
+        "rank1": 0.006,
+        "near_1": 0.01,
+        "near_2": 0.02,
+        "near_5": 0.0525
+      }
+    },
+    {
+      "ids": [
+        "bio_pa",
+        "bio_psa",
+        "food_agro",
+        "risk_knowledge",
+        "water_riparian"
+      ],
+      "cost": 4600,
+      "dimensions": [
+        "biodiversity",
+        "disaster",
+        "food",
+        "water"
+      ],
+      "world0_score": 2.5325,
+      "world0_regret": 0.099556,
+      "all": {
+        "rank1": 0.005,
+        "near_1": 0.0088,
+        "near_2": 0.0147,
+        "near_5": 0.0553
+      },
+      "reference": {
+        "rank1": 0.006,
+        "near_1": 0.011,
+        "near_2": 0.02,
+        "near_5": 0.0595
+      },
+      "ssp3_7_0": {
+        "rank1": 0.004,
+        "near_1": 0.0065,
+        "near_2": 0.0095,
+        "near_5": 0.051
+      }
+    },
+    {
+      "ids": [
+        "bio_pa",
+        "bio_restore",
+        "food_agro",
+        "risk_knowledge",
+        "water_eff"
+      ],
+      "cost": 4500,
+      "dimensions": [
+        "biodiversity",
+        "disaster",
+        "food",
+        "water"
+      ],
+      "world0_score": 2.57,
+      "world0_regret": 0.086222,
+      "all": {
+        "rank1": 0.0013,
+        "near_1": 0.0053,
+        "near_2": 0.0092,
+        "near_5": 0.054
+      },
+      "reference": {
+        "rank1": 0.0025,
+        "near_1": 0.006,
+        "near_2": 0.0095,
+        "near_5": 0.059
+      },
+      "ssp3_7_0": {
+        "rank1": 0.0,
+        "near_1": 0.0045,
+        "near_2": 0.009,
+        "near_5": 0.049
+      }
+    },
+    {
+      "ids": [
+        "bio_psa",
+        "water_eff",
+        "water_head",
+        "water_riparian"
+      ],
+      "cost": 5000,
+      "dimensions": [
+        "biodiversity",
+        "water"
+      ],
+      "world0_score": 1.6895,
+      "world0_regret": 0.399289,
+      "all": {
+        "rank1": 0.017,
+        "near_1": 0.0217,
+        "near_2": 0.0295,
+        "near_5": 0.0515
+      },
+      "reference": {
+        "rank1": 0.018,
+        "near_1": 0.0225,
+        "near_2": 0.03,
+        "near_5": 0.0455
+      },
+      "ssp3_7_0": {
+        "rank1": 0.016,
+        "near_1": 0.021,
+        "near_2": 0.029,
+        "near_5": 0.0575
+      }
+    }
+  ],
+  "inclusion": {
+    "bio_psa": {
+      "all": {
+        "incl_best": 0.4815,
+        "incl_near": 0.465247
+      },
+      "reference": {
+        "incl_best": 0.4845,
+        "incl_near": 0.473434
+      },
+      "ssp3_7_0": {
+        "incl_best": 0.4785,
+        "incl_near": 0.457061
+      },
+      "class": "contingent"
+    },
+    "bio_restore": {
+      "all": {
+        "incl_best": 0.38325,
+        "incl_near": 0.35992
+      },
+      "reference": {
+        "incl_best": 0.397,
+        "incl_near": 0.372161
+      },
+      "ssp3_7_0": {
+        "incl_best": 0.3695,
+        "incl_near": 0.347679
+      },
+      "class": "contingent"
+    },
+    "bio_pa": {
+      "all": {
+        "incl_best": 0.698,
+        "incl_near": 0.678223
+      },
+      "reference": {
+        "incl_best": 0.709,
+        "incl_near": 0.684106
+      },
+      "ssp3_7_0": {
+        "incl_best": 0.687,
+        "incl_near": 0.672339
+      },
+      "class": "contingent"
+    },
+    "water_eff": {
+      "all": {
+        "incl_best": 0.56025,
+        "incl_near": 0.555799
+      },
+      "reference": {
+        "incl_best": 0.56,
+        "incl_near": 0.550793
+      },
+      "ssp3_7_0": {
+        "incl_best": 0.5605,
+        "incl_near": 0.560804
+      },
+      "class": "contingent"
+    },
+    "water_riparian": {
+      "all": {
+        "incl_best": 0.28925,
+        "incl_near": 0.296356
+      },
+      "reference": {
+        "incl_best": 0.291,
+        "incl_near": 0.295188
+      },
+      "ssp3_7_0": {
+        "incl_best": 0.2875,
+        "incl_near": 0.297524
+      },
+      "class": "contingent"
+    },
+    "water_head": {
+      "all": {
+        "incl_best": 0.23225,
+        "incl_near": 0.232465
+      },
+      "reference": {
+        "incl_best": 0.228,
+        "incl_near": 0.234582
+      },
+      "ssp3_7_0": {
+        "incl_best": 0.2365,
+        "incl_near": 0.230347
+      },
+      "class": "contingent"
+    },
+    "food_soil": {
+      "all": {
+        "incl_best": 0.07875,
+        "incl_near": 0.116637
+      },
+      "reference": {
+        "incl_best": 0.0615,
+        "incl_near": 0.101681
+      },
+      "ssp3_7_0": {
+        "incl_best": 0.096,
+        "incl_near": 0.131592
+      },
+      "class": "rarely"
+    },
+    "food_agro": {
+      "all": {
+        "incl_best": 0.5205,
+        "incl_near": 0.491714
+      },
+      "reference": {
+        "incl_best": 0.552,
+        "incl_near": 0.518961
+      },
+      "ssp3_7_0": {
+        "incl_best": 0.489,
+        "incl_near": 0.464467
+      },
+      "class": "contingent"
+    },
+    "hab_green": {
+      "all": {
+        "incl_best": 0.21475,
+        "incl_near": 0.219123
+      },
+      "reference": {
+        "incl_best": 0.1915,
+        "incl_near": 0.199363
+      },
+      "ssp3_7_0": {
+        "incl_best": 0.238,
+        "incl_near": 0.238883
+      },
+      "class": "contingent"
+    },
+    "hab_suds": {
+      "all": {
+        "incl_best": 0.02025,
+        "incl_near": 0.023544
+      },
+      "reference": {
+        "incl_best": 0.017,
+        "incl_near": 0.019846
+      },
+      "ssp3_7_0": {
+        "incl_best": 0.0235,
+        "incl_near": 0.027243
+      },
+      "class": "rarely"
+    },
+    "infra_resilient": {
+      "all": {
+        "incl_best": 0.05725,
+        "incl_near": 0.051954
+      },
+      "reference": {
+        "incl_best": 0.061,
+        "incl_near": 0.056098
+      },
+      "ssp3_7_0": {
+        "incl_best": 0.0535,
+        "incl_near": 0.04781
+      },
+      "class": "rarely"
+    },
+    "infra_services": {
+      "all": {
+        "incl_best": 0.1555,
+        "incl_near": 0.142409
+      },
+      "reference": {
+        "incl_best": 0.1535,
+        "incl_near": 0.137607
+      },
+      "ssp3_7_0": {
+        "incl_best": 0.1575,
+        "incl_near": 0.147212
+      },
+      "class": "rarely"
+    },
+    "risk_sat": {
+      "all": {
+        "incl_best": 0.1575,
+        "incl_near": 0.168159
+      },
+      "reference": {
+        "incl_best": 0.158,
+        "incl_near": 0.16884
+      },
+      "ssp3_7_0": {
+        "incl_best": 0.157,
+        "incl_near": 0.167478
+      },
+      "class": "rarely"
+    },
+    "risk_knowledge": {
+      "all": {
+        "incl_best": 0.60825,
+        "incl_near": 0.580428
+      },
+      "reference": {
+        "incl_best": 0.619,
+        "incl_near": 0.588331
+      },
+      "ssp3_7_0": {
+        "incl_best": 0.5975,
+        "incl_near": 0.572526
+      },
+      "class": "contingent"
+    },
+    "health": {
+      "all": {
+        "incl_best": 0.2835,
+        "incl_near": 0.300084
+      },
+      "reference": {
+        "incl_best": 0.2595,
+        "incl_near": 0.282335
+      },
+      "ssp3_7_0": {
+        "incl_best": 0.3075,
+        "incl_near": 0.317832
+      },
+      "class": "contingent"
+    }
+  },
+  "core": [],
+  "contingent": [
+    "bio_psa",
+    "bio_restore",
+    "bio_pa",
+    "water_eff",
+    "water_riparian",
+    "water_head",
+    "food_agro",
+    "hab_green",
+    "risk_knowledge",
+    "health"
+  ],
+  "rarely": [
+    "food_soil",
+    "hab_suds",
+    "infra_resilient",
+    "infra_services",
+    "risk_sat"
+  ],
+  "central_parameters": [
+    {
+      "ids": [
+        "bio_pa",
+        "bio_psa",
+        "bio_restore",
+        "risk_knowledge",
+        "water_eff"
+      ],
+      "wins": 385,
+      "most_distinct": [
+        {
+          "parameter": "dim_w[biodiversity]",
+          "mean_where_wins": 2.725,
+          "mean_all": 1.5477,
+          "z": 1.188
+        },
+        {
+          "parameter": "dim_emphasis",
+          "mean_where_wins": 0.8831,
+          "mean_all": 0.5,
+          "z": 0.766
+        },
+        {
+          "parameter": "eff[water_eff]",
+          "mean_where_wins": 1.1566,
+          "mean_all": 1.0,
+          "z": 0.542
+        },
+        {
+          "parameter": "dim_penalty",
+          "mean_where_wins": 0.4227,
+          "mean_all": 0.35,
+          "z": 0.504
+        },
+        {
+          "parameter": "gamma",
+          "mean_where_wins": 1.5088,
+          "mean_all": 1.2427,
+          "z": 0.471
+        }
+      ]
+    },
+    {
+      "ids": [
+        "bio_pa",
+        "bio_psa",
+        "bio_restore",
+        "water_head"
+      ],
+      "wins": 149,
+      "most_distinct": [
+        {
+          "parameter": "dim_w[biodiversity]",
+          "mean_where_wins": 2.7386,
+          "mean_all": 1.5477,
+          "z": 1.202
+        },
+        {
+          "parameter": "eff[water_head]",
+          "mean_where_wins": 1.2449,
+          "mean_all": 1.0,
+          "z": 0.848
+        },
+        {
+          "parameter": "dim_emphasis",
+          "mean_where_wins": 0.8993,
+          "mean_all": 0.5,
+          "z": 0.799
+        },
+        {
+          "parameter": "eff[water_eff]",
+          "mean_where_wins": 0.7836,
+          "mean_all": 1.0,
+          "z": -0.75
+        },
+        {
+          "parameter": "dim_w[disaster]",
+          "mean_where_wins": 0.3182,
+          "mean_all": 0.7784,
+          "z": -0.652
+        }
+      ]
+    },
+    {
+      "ids": [
+        "bio_pa",
+        "bio_psa",
+        "food_agro",
+        "health",
+        "risk_knowledge",
+        "water_eff"
+      ],
+      "wins": 133,
+      "most_distinct": [
+        {
+          "parameter": "eff[water_eff]",
+          "mean_where_wins": 1.1698,
+          "mean_all": 1.0,
+          "z": 0.588
+        },
+        {
+          "parameter": "eff[bio_restore]",
+          "mean_where_wins": 0.833,
+          "mean_all": 1.0,
+          "z": -0.579
+        },
+        {
+          "parameter": "eff[bio_psa]",
+          "mean_where_wins": 1.1631,
+          "mean_all": 1.0,
+          "z": 0.565
+        },
+        {
+          "parameter": "dim_w[health]",
+          "mean_where_wins": 1.1901,
+          "mean_all": 0.7914,
+          "z": 0.557
+        },
+        {
+          "parameter": "dim_w[infrastructure]",
+          "mean_where_wins": 0.4723,
+          "mean_all": 0.7882,
+          "z": -0.438
+        }
+      ]
+    },
+    {
+      "ids": [
+        "bio_pa",
+        "food_agro",
+        "infra_services",
+        "risk_knowledge",
+        "water_eff"
+      ],
+      "wins": 112,
+      "most_distinct": [
+        {
+          "parameter": "dim_w[infrastructure]",
+          "mean_where_wins": 1.489,
+          "mean_all": 0.7882,
+          "z": 0.971
+        },
+        {
+          "parameter": "eff[water_eff]",
+          "mean_where_wins": 1.1761,
+          "mean_all": 1.0,
+          "z": 0.61
+        },
+        {
+          "parameter": "dim_penalty",
+          "mean_where_wins": 0.2785,
+          "mean_all": 0.35,
+          "z": -0.496
+        },
+        {
+          "parameter": "eff[infra_services]",
+          "mean_where_wins": 1.1429,
+          "mean_all": 1.0,
+          "z": 0.495
+        },
+        {
+          "parameter": "dim_w[biodiversity]",
+          "mean_where_wins": 1.0888,
+          "mean_all": 1.5477,
+          "z": -0.463
+        }
+      ]
+    },
+    {
+      "ids": [
+        "bio_pa",
+        "bio_psa",
+        "food_agro",
+        "water_eff",
+        "water_riparian"
+      ],
+      "wins": 96,
+      "most_distinct": [
+        {
+          "parameter": "dim_w[water]",
+          "mean_where_wins": 2.5306,
+          "mean_all": 1.535,
+          "z": 1.022
+        },
+        {
+          "parameter": "dim_emphasis",
+          "mean_where_wins": 0.9167,
+          "mean_all": 0.5,
+          "z": 0.833
+        },
+        {
+          "parameter": "dim_w[disaster]",
+          "mean_where_wins": 0.2235,
+          "mean_all": 0.7784,
+          "z": -0.786
+        },
+        {
+          "parameter": "eff[water_head]",
+          "mean_where_wins": 0.8373,
+          "mean_all": 1.0,
+          "z": -0.564
+        },
+        {
+          "parameter": "eff[bio_restore]",
+          "mean_where_wins": 0.8523,
+          "mean_all": 1.0,
+          "z": -0.511
+        }
+      ]
+    }
+  ],
+  "points": {
+    "institucional": {
+      "best_ids": [
+        "bio_pa",
+        "bio_psa",
+        "food_agro",
+        "health",
+        "risk_knowledge",
+        "water_eff"
+      ],
+      "best_score": 2.8125,
+      "s_star_score": 2.4225,
+      "s_star_regret": 0.138667
+    },
+    "multidimensional": {
+      "best_ids": [
+        "bio_pa",
+        "food_agro",
+        "hab_green",
+        "health",
+        "risk_knowledge",
+        "water_eff"
+      ],
+      "best_score": 2.87,
+      "s_star_score": 2.1425,
+      "s_star_regret": 0.253484
+    },
+    "institucional_ssp": {
+      "best_ids": [
+        "bio_pa",
+        "bio_psa",
+        "food_agro",
+        "health",
+        "risk_knowledge",
+        "water_eff"
+      ],
+      "best_score": 2.9525,
+      "s_star_score": 2.5625,
+      "s_star_regret": 0.132091
+    }
+  },
+  "world0_sets_within": {
+    "near_1": 3,
+    "near_2": 3,
+    "near_5": 4,
+    "near_10": 24
+  },
+  "distinct_winners": 455,
+  "pathways": {
+    "s_star": [
+      "bio_pa",
+      "bio_psa",
+      "bio_restore",
+      "risk_knowledge",
+      "water_eff"
+    ],
+    "commit_now": [],
+    "commit_on_signal": [
+      {
+        "id": "bio_psa",
+        "name": "Instrumentos de compensación y Pago por Servicios Ambientales – PSA",
+        "share_in_best": 0.4815,
+        "driver": {
+          "parameter": "dim_w[biodiversity]",
+          "low": 1.1964,
+          "high": null,
+          "condition": "el peso relativo de biodiversidad es mayor que 1,20",
+          "evidence": "assumption",
+          "evidence_label": "Supuesto",
+          "gaps": [],
+          "owner": null,
+          "watch": "Prioridad declarada de CORNARE entre dimensiones.",
+          "value_of_information_pct": 0.05267,
+          "box": {
+            "conditions": [
+              {
+                "parameter": "dim_w[biodiversity]",
+                "low": 1.1964,
+                "high": null,
+                "text": "el peso relativo de biodiversidad es mayor que 1,20",
+                "evidence": "assumption",
+                "evidence_label": "Supuesto",
+                "gaps": [],
+                "watch": "Prioridad declarada de CORNARE entre dimensiones."
+              },
+              {
+                "parameter": "eff[bio_psa]",
+                "low": 0.9364,
+                "high": null,
+                "text": "la efectividad relativa de «Instrumentos de compensación y Pago por Servicios Ambientales – PSA» es mayor que 0,94",
+                "evidence": "exploratory",
+                "evidence_label": "Exploratorio",
+                "gaps": [
+                  "gap-effectiveness"
+                ],
+                "watch": "Indicador MEA de resultado outcome-bio_psa: hoy sin línea base y con meta por definir."
+              },
+              {
+                "parameter": "dim_penalty",
+                "low": 0.1472,
+                "high": null,
+                "text": "el valor de una segunda medida en la misma dimensión es mayor que 0,15",
+                "evidence": "assumption",
+                "evidence_label": "Supuesto",
+                "gaps": [],
+                "watch": "Si CORNARE prefiere profundidad en una dimensión o cobertura de varias."
+              }
+            ],
+            "coverage": 0.5826,
+            "density": 0.8704,
+            "support": 0.3222,
+            "gaps": [
+              "gap-effectiveness"
+            ],
+            "exploratory": true,
+            "sentence": "La medida entra al mejor portafolio con más frecuencia cuando el peso relativo de biodiversidad es mayor que 1,20 y la efectividad relativa de «Instrumentos de compensación y Pago por Servicios Ambientales – PSA» es mayor que 0,94 y el valor de una segunda medida en la misma dimensión es mayor que 0,15 (gap-effectiveness). Cubre 58% de esos mundos; dentro de la caja ocurre en 87%. Incluye parámetros exploratorios: es una señal a vigilar, no un hallazgo."
+          }
+        },
+        "signal": {
+          "parameter": "eff[bio_psa]",
+          "low": 1.1219,
+          "high": null,
+          "condition": "la efectividad relativa de «Instrumentos de compensación y Pago por Servicios Ambientales – PSA» es mayor que 1,12",
+          "evidence": "exploratory",
+          "evidence_label": "Exploratorio",
+          "gaps": [
+            "gap-effectiveness"
+          ],
+          "owner": "CORNARE, módulo MEA",
+          "watch": "Indicador MEA de resultado outcome-bio_psa: hoy sin línea base y con meta por definir.",
+          "value_of_information_pct": 0.005058,
+          "box": {
+            "conditions": [
+              {
+                "parameter": "eff[bio_psa]",
+                "low": 1.1219,
+                "high": null,
+                "text": "la efectividad relativa de «Instrumentos de compensación y Pago por Servicios Ambientales – PSA» es mayor que 1,12",
+                "evidence": "exploratory",
+                "evidence_label": "Exploratorio",
+                "gaps": [
+                  "gap-effectiveness"
+                ],
+                "watch": "Indicador MEA de resultado outcome-bio_psa: hoy sin línea base y con meta por definir."
+              },
+              {
+                "parameter": "eff[bio_restore]",
+                "low": null,
+                "high": 1.3173,
+                "text": "la efectividad relativa de «Restauración de ecosistemas estratégicos» es menor que 1,32",
+                "evidence": "exploratory",
+                "evidence_label": "Exploratorio",
+                "gaps": [
+                  "gap-effectiveness"
+                ],
+                "watch": "Indicador MEA de resultado outcome-bio_restore: hoy sin línea base y con meta por definir."
+              },
+              {
+                "parameter": "eff[bio_pa]",
+                "low": null,
+                "high": 1.3176,
+                "text": "la efectividad relativa de «Fortalecimiento de sistemas de áreas protegidas» es menor que 1,32",
+                "evidence": "exploratory",
+                "evidence_label": "Exploratorio",
+                "gaps": [
+                  "gap-effectiveness"
+                ],
+                "watch": "Indicador MEA de resultado outcome-bio_pa: hoy sin línea base y con meta por definir."
+              }
+            ],
+            "coverage": 0.3982,
+            "density": 0.7716,
+            "support": 0.2485,
+            "gaps": [
+              "gap-effectiveness"
+            ],
+            "exploratory": true,
+            "sentence": "La medida entra al mejor portafolio con más frecuencia cuando la efectividad relativa de «Instrumentos de compensación y Pago por Servicios Ambientales – PSA» es mayor que 1,12 y la efectividad relativa de «Restauración de ecosistemas estratégicos» es menor que 1,32 y la efectividad relativa de «Fortalecimiento de sistemas de áreas protegidas» es menor que 1,32 (gap-effectiveness). Cubre 40% de esos mundos; dentro de la caja ocurre en 77%. Incluye parámetros exploratorios: es una señal a vigilar, no un hallazgo."
+          }
+        },
+        "driver_note": "El motor principal es una prioridad de CORNARE, no un dato faltante: se declara, no se espera.",
+        "value_of_waiting_pct": 0.005058,
+        "keep_reserve": false,
+        "watch_only": false
+      },
+      {
+        "id": "bio_restore",
+        "name": "Restauración de ecosistemas estratégicos",
+        "share_in_best": 0.3832,
+        "driver": {
+          "parameter": "dim_w[biodiversity]",
+          "low": 1.1946,
+          "high": null,
+          "condition": "el peso relativo de biodiversidad es mayor que 1,19",
+          "evidence": "assumption",
+          "evidence_label": "Supuesto",
+          "gaps": [],
+          "owner": null,
+          "watch": "Prioridad declarada de CORNARE entre dimensiones.",
+          "value_of_information_pct": 0.05267,
+          "box": {
+            "conditions": [
+              {
+                "parameter": "dim_w[biodiversity]",
+                "low": 1.1946,
+                "high": null,
+                "text": "el peso relativo de biodiversidad es mayor que 1,19",
+                "evidence": "assumption",
+                "evidence_label": "Supuesto",
+                "gaps": [],
+                "watch": "Prioridad declarada de CORNARE entre dimensiones."
+              },
+              {
+                "parameter": "eff[bio_restore]",
+                "low": 0.9019,
+                "high": null,
+                "text": "la efectividad relativa de «Restauración de ecosistemas estratégicos» es mayor que 0,90",
+                "evidence": "exploratory",
+                "evidence_label": "Exploratorio",
+                "gaps": [
+                  "gap-effectiveness"
+                ],
+                "watch": "Indicador MEA de resultado outcome-bio_restore: hoy sin línea base y con meta por definir."
+              },
+              {
+                "parameter": "dim_penalty",
+                "low": 0.1217,
+                "high": null,
+                "text": "el valor de una segunda medida en la misma dimensión es mayor que 0,12",
+                "evidence": "assumption",
+                "evidence_label": "Supuesto",
+                "gaps": [],
+                "watch": "Si CORNARE prefiere profundidad en una dimensión o cobertura de varias."
+              }
+            ],
+            "coverage": 0.6934,
+            "density": 0.7439,
+            "support": 0.3573,
+            "gaps": [
+              "gap-effectiveness"
+            ],
+            "exploratory": true,
+            "sentence": "La medida entra al mejor portafolio con más frecuencia cuando el peso relativo de biodiversidad es mayor que 1,19 y la efectividad relativa de «Restauración de ecosistemas estratégicos» es mayor que 0,90 y el valor de una segunda medida en la misma dimensión es mayor que 0,12 (gap-effectiveness). Cubre 69% de esos mundos; dentro de la caja ocurre en 74%. Incluye parámetros exploratorios: es una señal a vigilar, no un hallazgo."
+          }
+        },
+        "signal": {
+          "parameter": "eff[bio_restore]",
+          "low": 1.038,
+          "high": null,
+          "condition": "la efectividad relativa de «Restauración de ecosistemas estratégicos» es mayor que 1,04",
+          "evidence": "exploratory",
+          "evidence_label": "Exploratorio",
+          "gaps": [
+            "gap-effectiveness"
+          ],
+          "owner": "CORNARE, módulo MEA",
+          "watch": "Indicador MEA de resultado outcome-bio_restore: hoy sin línea base y con meta por definir.",
+          "value_of_information_pct": 0.012429,
+          "box": {
+            "conditions": [
+              {
+                "parameter": "eff[bio_restore]",
+                "low": 1.038,
+                "high": null,
+                "text": "la efectividad relativa de «Restauración de ecosistemas estratégicos» es mayor que 1,04",
+                "evidence": "exploratory",
+                "evidence_label": "Exploratorio",
+                "gaps": [
+                  "gap-effectiveness"
+                ],
+                "watch": "Indicador MEA de resultado outcome-bio_restore: hoy sin línea base y con meta por definir."
+              },
+              {
+                "parameter": "eff[bio_psa]",
+                "low": null,
+                "high": 1.3997,
+                "text": "la efectividad relativa de «Instrumentos de compensación y Pago por Servicios Ambientales – PSA» es menor que 1,40",
+                "evidence": "exploratory",
+                "evidence_label": "Exploratorio",
+                "gaps": [
+                  "gap-effectiveness"
+                ],
+                "watch": "Indicador MEA de resultado outcome-bio_psa: hoy sin línea base y con meta por definir."
+              },
+              {
+                "parameter": "eff[bio_pa]",
+                "low": null,
+                "high": 1.3551,
+                "text": "la efectividad relativa de «Fortalecimiento de sistemas de áreas protegidas» es menor que 1,36",
+                "evidence": "exploratory",
+                "evidence_label": "Exploratorio",
+                "gaps": [
+                  "gap-effectiveness"
+                ],
+                "watch": "Indicador MEA de resultado outcome-bio_pa: hoy sin línea base y con meta por definir."
+              }
+            ],
+            "coverage": 0.5969,
+            "density": 0.6403,
+            "support": 0.3573,
+            "gaps": [
+              "gap-effectiveness"
+            ],
+            "exploratory": true,
+            "sentence": "La medida entra al mejor portafolio con más frecuencia cuando la efectividad relativa de «Restauración de ecosistemas estratégicos» es mayor que 1,04 y la efectividad relativa de «Instrumentos de compensación y Pago por Servicios Ambientales – PSA» es menor que 1,40 y la efectividad relativa de «Fortalecimiento de sistemas de áreas protegidas» es menor que 1,36 (gap-effectiveness). Cubre 60% de esos mundos; dentro de la caja ocurre en 64%. Incluye parámetros exploratorios: es una señal a vigilar, no un hallazgo."
+          }
+        },
+        "driver_note": "El motor principal es una prioridad de CORNARE, no un dato faltante: se declara, no se espera.",
+        "value_of_waiting_pct": 0.012429,
+        "keep_reserve": false,
+        "watch_only": true
+      },
+      {
+        "id": "bio_pa",
+        "name": "Fortalecimiento de sistemas de áreas protegidas",
+        "share_in_best": 0.698,
+        "driver": {
+          "parameter": "dim_w[biodiversity]",
+          "low": 0.6363,
+          "high": null,
+          "condition": "el peso relativo de biodiversidad es mayor que 0,64",
+          "evidence": "assumption",
+          "evidence_label": "Supuesto",
+          "gaps": [],
+          "owner": null,
+          "watch": "Prioridad declarada de CORNARE entre dimensiones.",
+          "value_of_information_pct": 0.05267,
+          "box": {
+            "conditions": [
+              {
+                "parameter": "dim_w[biodiversity]",
+                "low": 0.6363,
+                "high": null,
+                "text": "el peso relativo de biodiversidad es mayor que 0,64",
+                "evidence": "assumption",
+                "evidence_label": "Supuesto",
+                "gaps": [],
+                "watch": "Prioridad declarada de CORNARE entre dimensiones."
+              },
+              {
+                "parameter": "eff[bio_pa]",
+                "low": 0.9017,
+                "high": null,
+                "text": "la efectividad relativa de «Fortalecimiento de sistemas de áreas protegidas» es mayor que 0,90",
+                "evidence": "exploratory",
+                "evidence_label": "Exploratorio",
+                "gaps": [
+                  "gap-effectiveness"
+                ],
+                "watch": "Indicador MEA de resultado outcome-bio_pa: hoy sin línea base y con meta por definir."
+              }
+            ],
+            "coverage": 0.6121,
+            "density": 0.9248,
+            "support": 0.462,
+            "gaps": [
+              "gap-effectiveness"
+            ],
+            "exploratory": true,
+            "sentence": "La medida entra al mejor portafolio con más frecuencia cuando el peso relativo de biodiversidad es mayor que 0,64 y la efectividad relativa de «Fortalecimiento de sistemas de áreas protegidas» es mayor que 0,90 (gap-effectiveness). Cubre 61% de esos mundos; dentro de la caja ocurre en 92%. Incluye parámetros exploratorios: es una señal a vigilar, no un hallazgo."
+          }
+        },
+        "signal": {
+          "parameter": "eff[bio_pa]",
+          "low": 0.9017,
+          "high": null,
+          "condition": "la efectividad relativa de «Fortalecimiento de sistemas de áreas protegidas» es mayor que 0,90",
+          "evidence": "exploratory",
+          "evidence_label": "Exploratorio",
+          "gaps": [
+            "gap-effectiveness"
+          ],
+          "owner": "CORNARE, módulo MEA",
+          "watch": "Indicador MEA de resultado outcome-bio_pa: hoy sin línea base y con meta por definir.",
+          "value_of_information_pct": 0.008703,
+          "box": {
+            "conditions": [
+              {
+                "parameter": "eff[bio_pa]",
+                "low": 0.9017,
+                "high": null,
+                "text": "la efectividad relativa de «Fortalecimiento de sistemas de áreas protegidas» es mayor que 0,90",
+                "evidence": "exploratory",
+                "evidence_label": "Exploratorio",
+                "gaps": [
+                  "gap-effectiveness"
+                ],
+                "watch": "Indicador MEA de resultado outcome-bio_pa: hoy sin línea base y con meta por definir."
+              }
+            ],
+            "coverage": 0.7117,
+            "density": 0.8303,
+            "support": 0.5982,
+            "gaps": [
+              "gap-effectiveness"
+            ],
+            "exploratory": true,
+            "sentence": "La medida entra al mejor portafolio con más frecuencia cuando la efectividad relativa de «Fortalecimiento de sistemas de áreas protegidas» es mayor que 0,90 (gap-effectiveness). Cubre 71% de esos mundos; dentro de la caja ocurre en 83%. Incluye parámetros exploratorios: es una señal a vigilar, no un hallazgo."
+          }
+        },
+        "driver_note": "El motor principal es una prioridad de CORNARE, no un dato faltante: se declara, no se espera.",
+        "value_of_waiting_pct": 0.008703,
+        "keep_reserve": false,
+        "watch_only": false
+      },
+      {
+        "id": "water_eff",
+        "name": "Uso intersectorial eficiente del recurso hídrico",
+        "share_in_best": 0.5603,
+        "driver": {
+          "parameter": "dim_w[water]",
+          "low": 0.6546,
+          "high": null,
+          "condition": "el peso relativo de recurso hídrico es mayor que 0,65",
+          "evidence": "assumption",
+          "evidence_label": "Supuesto",
+          "gaps": [],
+          "owner": null,
+          "watch": "Prioridad declarada de CORNARE entre dimensiones.",
+          "value_of_information_pct": 0.039467,
+          "box": {
+            "conditions": [
+              {
+                "parameter": "dim_w[water]",
+                "low": 0.6546,
+                "high": null,
+                "text": "el peso relativo de recurso hídrico es mayor que 0,65",
+                "evidence": "assumption",
+                "evidence_label": "Supuesto",
+                "gaps": [],
+                "watch": "Prioridad declarada de CORNARE entre dimensiones."
+              },
+              {
+                "parameter": "eff[water_eff]",
+                "low": 0.9363,
+                "high": null,
+                "text": "la efectividad relativa de «Uso intersectorial eficiente del recurso hídrico» es mayor que 0,94",
+                "evidence": "exploratory",
+                "evidence_label": "Exploratorio",
+                "gaps": [
+                  "gap-effectiveness"
+                ],
+                "watch": "Indicador MEA de resultado outcome-water_eff: hoy sin línea base y con meta por definir."
+              },
+              {
+                "parameter": "eff[water_riparian]",
+                "low": null,
+                "high": 1.4015,
+                "text": "la efectividad relativa de «Protección y recuperación de rondas hídricas» es menor que 1,40",
+                "evidence": "exploratory",
+                "evidence_label": "Exploratorio",
+                "gaps": [
+                  "gap-effectiveness"
+                ],
+                "watch": "Indicador MEA de resultado outcome-water_riparian: hoy sin línea base y con meta por definir."
+              }
+            ],
+            "coverage": 0.6394,
+            "density": 0.9041,
+            "support": 0.3962,
+            "gaps": [
+              "gap-effectiveness"
+            ],
+            "exploratory": true,
+            "sentence": "La medida entra al mejor portafolio con más frecuencia cuando el peso relativo de recurso hídrico es mayor que 0,65 y la efectividad relativa de «Uso intersectorial eficiente del recurso hídrico» es mayor que 0,94 y la efectividad relativa de «Protección y recuperación de rondas hídricas» es menor que 1,40 (gap-effectiveness). Cubre 64% de esos mundos; dentro de la caja ocurre en 90%. Incluye parámetros exploratorios: es una señal a vigilar, no un hallazgo."
+          }
+        },
+        "signal": {
+          "parameter": "eff[water_eff]",
+          "low": 0.9615,
+          "high": null,
+          "condition": "la efectividad relativa de «Uso intersectorial eficiente del recurso hídrico» es mayor que 0,96",
+          "evidence": "exploratory",
+          "evidence_label": "Exploratorio",
+          "gaps": [
+            "gap-effectiveness"
+          ],
+          "owner": "CORNARE, módulo MEA",
+          "watch": "Indicador MEA de resultado outcome-water_eff: hoy sin línea base y con meta por definir.",
+          "value_of_information_pct": 0.012952,
+          "box": {
+            "conditions": [
+              {
+                "parameter": "eff[water_eff]",
+                "low": 0.9615,
+                "high": null,
+                "text": "la efectividad relativa de «Uso intersectorial eficiente del recurso hídrico» es mayor que 0,96",
+                "evidence": "exploratory",
+                "evidence_label": "Exploratorio",
+                "gaps": [
+                  "gap-effectiveness"
+                ],
+                "watch": "Indicador MEA de resultado outcome-water_eff: hoy sin línea base y con meta por definir."
+              },
+              {
+                "parameter": "eff[water_head]",
+                "low": null,
+                "high": 1.2778,
+                "text": "la efectividad relativa de «Protección de cabeceras de cuenca y ecosistemas abastecedores» es menor que 1,28",
+                "evidence": "exploratory",
+                "evidence_label": "Exploratorio",
+                "gaps": [
+                  "gap-effectiveness"
+                ],
+                "watch": "Indicador MEA de resultado outcome-water_head: hoy sin línea base y con meta por definir."
+              },
+              {
+                "parameter": "eff[water_riparian]",
+                "low": null,
+                "high": 1.2799,
+                "text": "la efectividad relativa de «Protección y recuperación de rondas hídricas» es menor que 1,28",
+                "evidence": "exploratory",
+                "evidence_label": "Exploratorio",
+                "gaps": [
+                  "gap-effectiveness"
+                ],
+                "watch": "Indicador MEA de resultado outcome-water_riparian: hoy sin línea base y con meta por definir."
+              }
+            ],
+            "coverage": 0.4819,
+            "density": 0.8379,
+            "support": 0.3222,
+            "gaps": [
+              "gap-effectiveness"
+            ],
+            "exploratory": true,
+            "sentence": "La medida entra al mejor portafolio con más frecuencia cuando la efectividad relativa de «Uso intersectorial eficiente del recurso hídrico» es mayor que 0,96 y la efectividad relativa de «Protección de cabeceras de cuenca y ecosistemas abastecedores» es menor que 1,28 y la efectividad relativa de «Protección y recuperación de rondas hídricas» es menor que 1,28 (gap-effectiveness). Cubre 48% de esos mundos; dentro de la caja ocurre en 84%. Incluye parámetros exploratorios: es una señal a vigilar, no un hallazgo."
+          }
+        },
+        "driver_note": "El motor principal es una prioridad de CORNARE, no un dato faltante: se declara, no se espera.",
+        "value_of_waiting_pct": 0.012952,
+        "keep_reserve": false,
+        "watch_only": true
+      },
+      {
+        "id": "water_riparian",
+        "name": "Protección y recuperación de rondas hídricas",
+        "share_in_best": 0.2893,
+        "driver": {
+          "parameter": "dim_w[water]",
+          "low": 0.9702,
+          "high": null,
+          "condition": "el peso relativo de recurso hídrico es mayor que 0,97",
+          "evidence": "assumption",
+          "evidence_label": "Supuesto",
+          "gaps": [],
+          "owner": null,
+          "watch": "Prioridad declarada de CORNARE entre dimensiones.",
+          "value_of_information_pct": 0.039467,
+          "box": {
+            "conditions": [
+              {
+                "parameter": "dim_w[water]",
+                "low": 0.9702,
+                "high": null,
+                "text": "el peso relativo de recurso hídrico es mayor que 0,97",
+                "evidence": "assumption",
+                "evidence_label": "Supuesto",
+                "gaps": [],
+                "watch": "Prioridad declarada de CORNARE entre dimensiones."
+              },
+              {
+                "parameter": "eff[water_riparian]",
+                "low": 0.9034,
+                "high": null,
+                "text": "la efectividad relativa de «Protección y recuperación de rondas hídricas» es mayor que 0,90",
+                "evidence": "exploratory",
+                "evidence_label": "Exploratorio",
+                "gaps": [
+                  "gap-effectiveness"
+                ],
+                "watch": "Indicador MEA de resultado outcome-water_riparian: hoy sin línea base y con meta por definir."
+              },
+              {
+                "parameter": "dim_w[biodiversity]",
+                "low": null,
+                "high": 3.2761,
+                "text": "el peso relativo de biodiversidad es menor que 3,28",
+                "evidence": "assumption",
+                "evidence_label": "Supuesto",
+                "gaps": [],
+                "watch": "Prioridad declarada de CORNARE entre dimensiones."
+              }
+            ],
+            "coverage": 0.7952,
+            "density": 0.5804,
+            "support": 0.3962,
+            "gaps": [
+              "gap-effectiveness"
+            ],
+            "exploratory": true,
+            "sentence": "La medida entra al mejor portafolio con más frecuencia cuando el peso relativo de recurso hídrico es mayor que 0,97 y la efectividad relativa de «Protección y recuperación de rondas hídricas» es mayor que 0,90 y el peso relativo de biodiversidad es menor que 3,28 (gap-effectiveness). Cubre 80% de esos mundos; dentro de la caja ocurre en 58%. Incluye parámetros exploratorios: es una señal a vigilar, no un hallazgo."
+          }
+        },
+        "signal": {
+          "parameter": "eff[water_riparian]",
+          "low": 1.1017,
+          "high": null,
+          "condition": "la efectividad relativa de «Protección y recuperación de rondas hídricas» es mayor que 1,10",
+          "evidence": "exploratory",
+          "evidence_label": "Exploratorio",
+          "gaps": [
+            "gap-effectiveness"
+          ],
+          "owner": "CORNARE, módulo MEA",
+          "watch": "Indicador MEA de resultado outcome-water_riparian: hoy sin línea base y con meta por definir.",
+          "value_of_information_pct": 0.010307,
+          "box": {
+            "conditions": [
+              {
+                "parameter": "eff[water_riparian]",
+                "low": 1.1017,
+                "high": null,
+                "text": "la efectividad relativa de «Protección y recuperación de rondas hídricas» es mayor que 1,10",
+                "evidence": "exploratory",
+                "evidence_label": "Exploratorio",
+                "gaps": [
+                  "gap-effectiveness"
+                ],
+                "watch": "Indicador MEA de resultado outcome-water_riparian: hoy sin línea base y con meta por definir."
+              },
+              {
+                "parameter": "eff[water_eff]",
+                "low": null,
+                "high": 1.3206,
+                "text": "la efectividad relativa de «Uso intersectorial eficiente del recurso hídrico» es menor que 1,32",
+                "evidence": "exploratory",
+                "evidence_label": "Exploratorio",
+                "gaps": [
+                  "gap-effectiveness"
+                ],
+                "watch": "Indicador MEA de resultado outcome-water_eff: hoy sin línea base y con meta por definir."
+              },
+              {
+                "parameter": "eff[water_head]",
+                "low": null,
+                "high": 1.31,
+                "text": "la efectividad relativa de «Protección de cabeceras de cuenca y ecosistemas abastecedores» es menor que 1,31",
+                "evidence": "exploratory",
+                "evidence_label": "Exploratorio",
+                "gaps": [
+                  "gap-effectiveness"
+                ],
+                "watch": "Indicador MEA de resultado outcome-water_head: hoy sin línea base y con meta por definir."
+              }
+            ],
+            "coverage": 0.5506,
+            "density": 0.6084,
+            "support": 0.2617,
+            "gaps": [
+              "gap-effectiveness"
+            ],
+            "exploratory": true,
+            "sentence": "La medida entra al mejor portafolio con más frecuencia cuando la efectividad relativa de «Protección y recuperación de rondas hídricas» es mayor que 1,10 y la efectividad relativa de «Uso intersectorial eficiente del recurso hídrico» es menor que 1,32 y la efectividad relativa de «Protección de cabeceras de cuenca y ecosistemas abastecedores» es menor que 1,31 (gap-effectiveness). Cubre 55% de esos mundos; dentro de la caja ocurre en 61%. Incluye parámetros exploratorios: es una señal a vigilar, no un hallazgo."
+          }
+        },
+        "driver_note": "El motor principal es una prioridad de CORNARE, no un dato faltante: se declara, no se espera.",
+        "value_of_waiting_pct": 0.010307,
+        "keep_reserve": false,
+        "watch_only": true
+      },
+      {
+        "id": "water_head",
+        "name": "Protección de cabeceras de cuenca y ecosistemas abastecedores",
+        "share_in_best": 0.2323,
+        "driver": {
+          "parameter": "dim_w[water]",
+          "low": 0.8069,
+          "high": null,
+          "condition": "el peso relativo de recurso hídrico es mayor que 0,81",
+          "evidence": "assumption",
+          "evidence_label": "Supuesto",
+          "gaps": [],
+          "owner": null,
+          "watch": "Prioridad declarada de CORNARE entre dimensiones.",
+          "value_of_information_pct": 0.039467,
+          "box": {
+            "conditions": [
+              {
+                "parameter": "dim_w[water]",
+                "low": 0.8069,
+                "high": null,
+                "text": "el peso relativo de recurso hídrico es mayor que 0,81",
+                "evidence": "assumption",
+                "evidence_label": "Supuesto",
+                "gaps": [],
+                "watch": "Prioridad declarada de CORNARE entre dimensiones."
+              },
+              {
+                "parameter": "eff[water_head]",
+                "low": 0.8355,
+                "high": null,
+                "text": "la efectividad relativa de «Protección de cabeceras de cuenca y ecosistemas abastecedores» es mayor que 0,84",
+                "evidence": "exploratory",
+                "evidence_label": "Exploratorio",
+                "gaps": [
+                  "gap-effectiveness"
+                ],
+                "watch": "Indicador MEA de resultado outcome-water_head: hoy sin línea base y con meta por definir."
+              },
+              {
+                "parameter": "eff[water_eff]",
+                "low": null,
+                "high": 1.448,
+                "text": "la efectividad relativa de «Uso intersectorial eficiente del recurso hídrico» es menor que 1,45",
+                "evidence": "exploratory",
+                "evidence_label": "Exploratorio",
+                "gaps": [
+                  "gap-effectiveness"
+                ],
+                "watch": "Indicador MEA de resultado outcome-water_eff: hoy sin línea base y con meta por definir."
+              }
+            ],
+            "coverage": 0.8967,
+            "density": 0.4503,
+            "support": 0.4625,
+            "gaps": [
+              "gap-effectiveness"
+            ],
+            "exploratory": true,
+            "sentence": "La medida entra al mejor portafolio con más frecuencia cuando el peso relativo de recurso hídrico es mayor que 0,81 y la efectividad relativa de «Protección de cabeceras de cuenca y ecosistemas abastecedores» es mayor que 0,84 y la efectividad relativa de «Uso intersectorial eficiente del recurso hídrico» es menor que 1,45 (gap-effectiveness). Cubre 90% de esos mundos; dentro de la caja ocurre en 45%. Incluye parámetros exploratorios: es una señal a vigilar, no un hallazgo."
+          }
+        },
+        "signal": {
+          "parameter": "eff[water_head]",
+          "low": 1.0613,
+          "high": null,
+          "condition": "la efectividad relativa de «Protección de cabeceras de cuenca y ecosistemas abastecedores» es mayor que 1,06",
+          "evidence": "exploratory",
+          "evidence_label": "Exploratorio",
+          "gaps": [
+            "gap-effectiveness"
+          ],
+          "owner": "CORNARE, módulo MEA",
+          "watch": "Indicador MEA de resultado outcome-water_head: hoy sin línea base y con meta por definir.",
+          "value_of_information_pct": 0.009667,
+          "box": {
+            "conditions": [
+              {
+                "parameter": "eff[water_head]",
+                "low": 1.0613,
+                "high": null,
+                "text": "la efectividad relativa de «Protección de cabeceras de cuenca y ecosistemas abastecedores» es mayor que 1,06",
+                "evidence": "exploratory",
+                "evidence_label": "Exploratorio",
+                "gaps": [
+                  "gap-effectiveness"
+                ],
+                "watch": "Indicador MEA de resultado outcome-water_head: hoy sin línea base y con meta por definir."
+              },
+              {
+                "parameter": "eff[water_eff]",
+                "low": null,
+                "high": 1.0692,
+                "text": "la efectividad relativa de «Uso intersectorial eficiente del recurso hídrico» es menor que 1,07",
+                "evidence": "exploratory",
+                "evidence_label": "Exploratorio",
+                "gaps": [
+                  "gap-effectiveness"
+                ],
+                "watch": "Indicador MEA de resultado outcome-water_eff: hoy sin línea base y con meta por definir."
+              },
+              {
+                "parameter": "eff[water_riparian]",
+                "low": null,
+                "high": 1.2606,
+                "text": "la efectividad relativa de «Protección y recuperación de rondas hídricas» es menor que 1,26",
+                "evidence": "exploratory",
+                "evidence_label": "Exploratorio",
+                "gaps": [
+                  "gap-effectiveness"
+                ],
+                "watch": "Indicador MEA de resultado outcome-water_riparian: hoy sin línea base y con meta por definir."
+              }
+            ],
+            "coverage": 0.5145,
+            "density": 0.6232,
+            "support": 0.1918,
+            "gaps": [
+              "gap-effectiveness"
+            ],
+            "exploratory": true,
+            "sentence": "La medida entra al mejor portafolio con más frecuencia cuando la efectividad relativa de «Protección de cabeceras de cuenca y ecosistemas abastecedores» es mayor que 1,06 y la efectividad relativa de «Uso intersectorial eficiente del recurso hídrico» es menor que 1,07 y la efectividad relativa de «Protección y recuperación de rondas hídricas» es menor que 1,26 (gap-effectiveness). Cubre 51% de esos mundos; dentro de la caja ocurre en 62%. Incluye parámetros exploratorios: es una señal a vigilar, no un hallazgo."
+          }
+        },
+        "driver_note": "El motor principal es una prioridad de CORNARE, no un dato faltante: se declara, no se espera.",
+        "value_of_waiting_pct": 0.009667,
+        "keep_reserve": false,
+        "watch_only": false
+      },
+      {
+        "id": "food_agro",
+        "name": "Producción agroecológica y economía rural resiliente",
+        "share_in_best": 0.5205,
+        "driver": {
+          "parameter": "dim_w[food]",
+          "low": 0.5511,
+          "high": null,
+          "condition": "el peso relativo de seguridad alimentaria es mayor que 0,55",
+          "evidence": "assumption",
+          "evidence_label": "Supuesto",
+          "gaps": [],
+          "owner": null,
+          "watch": "Prioridad declarada de CORNARE entre dimensiones.",
+          "value_of_information_pct": 0.018224,
+          "box": {
+            "conditions": [
+              {
+                "parameter": "dim_w[food]",
+                "low": 0.5511,
+                "high": null,
+                "text": "el peso relativo de seguridad alimentaria es mayor que 0,55",
+                "evidence": "assumption",
+                "evidence_label": "Supuesto",
+                "gaps": [],
+                "watch": "Prioridad declarada de CORNARE entre dimensiones."
+              },
+              {
+                "parameter": "dim_w[biodiversity]",
+                "low": null,
+                "high": 2.7073,
+                "text": "el peso relativo de biodiversidad es menor que 2,71",
+                "evidence": "assumption",
+                "evidence_label": "Supuesto",
+                "gaps": [],
+                "watch": "Prioridad declarada de CORNARE entre dimensiones."
+              },
+              {
+                "parameter": "eff[food_agro]",
+                "low": 0.596,
+                "high": null,
+                "text": "la efectividad relativa de «Producción agroecológica y economía rural resiliente» es mayor que 0,60",
+                "evidence": "exploratory",
+                "evidence_label": "Exploratorio",
+                "gaps": [
+                  "gap-effectiveness"
+                ],
+                "watch": "Indicador MEA de resultado outcome-food_agro: hoy sin línea base y con meta por definir."
+              }
+            ],
+            "coverage": 0.6494,
+            "density": 0.7695,
+            "support": 0.4392,
+            "gaps": [
+              "gap-effectiveness"
+            ],
+            "exploratory": true,
+            "sentence": "La medida entra al mejor portafolio con más frecuencia cuando el peso relativo de seguridad alimentaria es mayor que 0,55 y el peso relativo de biodiversidad es menor que 2,71 y la efectividad relativa de «Producción agroecológica y economía rural resiliente» es mayor que 0,60 (gap-effectiveness). Cubre 65% de esos mundos; dentro de la caja ocurre en 77%. Incluye parámetros exploratorios: es una señal a vigilar, no un hallazgo."
+          }
+        },
+        "signal": {
+          "parameter": "w_rec",
+          "low": 0.0954,
+          "high": null,
+          "condition": "el peso de la recurrencia documentada es mayor que 0,10",
+          "evidence": "assumption",
+          "evidence_label": "Supuesto",
+          "gaps": [
+            "gap-workshops",
+            "gap-marinilla-coverage"
+          ],
+          "owner": "CORNARE",
+          "watch": "Conteos de talleres y cobertura completa del reporte de Marinilla.",
+          "value_of_information_pct": 0.0,
+          "box": {
+            "conditions": [
+              {
+                "parameter": "w_rec",
+                "low": 0.0954,
+                "high": null,
+                "text": "el peso de la recurrencia documentada es mayor que 0,10",
+                "evidence": "assumption",
+                "evidence_label": "Supuesto",
+                "gaps": [
+                  "gap-workshops",
+                  "gap-marinilla-coverage"
+                ],
+                "watch": "Conteos de talleres y cobertura completa del reporte de Marinilla."
+              },
+              {
+                "parameter": "ssp_shift[marinilla,food]",
+                "low": 0.0,
+                "high": 0.0,
+                "text": "seguridad alimentaria en Marinilla no sube de clase bajo SSP3-7.0",
+                "evidence": "exploratory",
+                "evidence_label": "Exploratorio",
+                "gaps": [
+                  "gap-ssp-cube"
+                ],
+                "watch": "Clase SSP3-7.0 de seguridad alimentaria en Marinilla en el cubo de escenarios."
+              },
+              {
+                "parameter": "ssp_shift[rionegro,food]",
+                "low": 0.0,
+                "high": 0.0,
+                "text": "seguridad alimentaria en Rionegro no sube de clase bajo SSP3-7.0",
+                "evidence": "exploratory",
+                "evidence_label": "Exploratorio",
+                "gaps": [
+                  "gap-ssp-cube"
+                ],
+                "watch": "Clase SSP3-7.0 de seguridad alimentaria en Rionegro en el cubo de escenarios."
+              }
+            ],
+            "coverage": 0.7185,
+            "density": 0.6124,
+            "support": 0.6108,
+            "gaps": [
+              "gap-workshops",
+              "gap-marinilla-coverage",
+              "gap-ssp-cube"
+            ],
+            "exploratory": true,
+            "sentence": "La medida entra al mejor portafolio con más frecuencia cuando el peso de la recurrencia documentada es mayor que 0,10 y seguridad alimentaria en Marinilla no sube de clase bajo SSP3-7.0 y seguridad alimentaria en Rionegro no sube de clase bajo SSP3-7.0 (gap-workshops, gap-marinilla-coverage, gap-ssp-cube). Cubre 72% de esos mundos; dentro de la caja ocurre en 61%. Incluye parámetros exploratorios: es una señal a vigilar, no un hallazgo."
+          }
+        },
+        "driver_note": "El motor principal es una prioridad de CORNARE, no un dato faltante: se declara, no se espera.",
+        "value_of_waiting_pct": 0.0,
+        "keep_reserve": false,
+        "watch_only": false
+      },
+      {
+        "id": "hab_green",
+        "name": "Espacios verdes urbanos",
+        "share_in_best": 0.2147,
+        "driver": {
+          "parameter": "dim_w[habitat]",
+          "low": 0.9117,
+          "high": null,
+          "condition": "el peso relativo de hábitat es mayor que 0,91",
+          "evidence": "assumption",
+          "evidence_label": "Supuesto",
+          "gaps": [],
+          "owner": null,
+          "watch": "Prioridad declarada de CORNARE entre dimensiones.",
+          "value_of_information_pct": 0.012457,
+          "box": {
+            "conditions": [
+              {
+                "parameter": "dim_w[habitat]",
+                "low": 0.9117,
+                "high": null,
+                "text": "el peso relativo de hábitat es mayor que 0,91",
+                "evidence": "assumption",
+                "evidence_label": "Supuesto",
+                "gaps": [],
+                "watch": "Prioridad declarada de CORNARE entre dimensiones."
+              },
+              {
+                "parameter": "dim_emphasis",
+                "low": 0.0,
+                "high": 0.0,
+                "text": "sin énfasis regional en biodiversidad y agua",
+                "evidence": "assumption",
+                "evidence_label": "Supuesto",
+                "gaps": [],
+                "watch": "Prioridad declarada de CORNARE entre dimensiones."
+              },
+              {
+                "parameter": "eff[hab_green]",
+                "low": 0.5514,
+                "high": null,
+                "text": "la efectividad relativa de «Espacios verdes urbanos» es mayor que 0,55",
+                "evidence": "exploratory",
+                "evidence_label": "Exploratorio",
+                "gaps": [
+                  "gap-effectiveness"
+                ],
+                "watch": "Indicador MEA de resultado outcome-hab_green: hoy sin línea base y con meta por definir."
+              }
+            ],
+            "coverage": 0.6135,
+            "density": 0.638,
+            "support": 0.2065,
+            "gaps": [
+              "gap-effectiveness"
+            ],
+            "exploratory": true,
+            "sentence": "La medida entra al mejor portafolio con más frecuencia cuando el peso relativo de hábitat es mayor que 0,91 y sin énfasis regional en biodiversidad y agua y la efectividad relativa de «Espacios verdes urbanos» es mayor que 0,55 (gap-effectiveness). Cubre 61% de esos mundos; dentro de la caja ocurre en 64%. Incluye parámetros exploratorios: es una señal a vigilar, no un hallazgo."
+          }
+        },
+        "signal": {
+          "parameter": "eff[hab_green]",
+          "low": 0.55,
+          "high": null,
+          "condition": "la efectividad relativa de «Espacios verdes urbanos» es mayor que 0,55",
+          "evidence": "exploratory",
+          "evidence_label": "Exploratorio",
+          "gaps": [
+            "gap-effectiveness"
+          ],
+          "owner": "CORNARE, módulo MEA",
+          "watch": "Indicador MEA de resultado outcome-hab_green: hoy sin línea base y con meta por definir.",
+          "value_of_information_pct": 0.0,
+          "box": {
+            "conditions": [
+              {
+                "parameter": "eff[hab_green]",
+                "low": 0.55,
+                "high": null,
+                "text": "la efectividad relativa de «Espacios verdes urbanos» es mayor que 0,55",
+                "evidence": "exploratory",
+                "evidence_label": "Exploratorio",
+                "gaps": [
+                  "gap-effectiveness"
+                ],
+                "watch": "Indicador MEA de resultado outcome-hab_green: hoy sin línea base y con meta por definir."
+              },
+              {
+                "parameter": "ssp_shift[marinilla,habitat]",
+                "low": 1.0,
+                "high": 1.0,
+                "text": "hábitat en Marinilla sube una clase bajo SSP3-7.0",
+                "evidence": "exploratory",
+                "evidence_label": "Exploratorio",
+                "gaps": [
+                  "gap-ssp-cube"
+                ],
+                "watch": "Clase SSP3-7.0 de hábitat en Marinilla en el cubo de escenarios."
+              },
+              {
+                "parameter": "eff[bio_restore]",
+                "low": 0.5462,
+                "high": null,
+                "text": "la efectividad relativa de «Restauración de ecosistemas estratégicos» es mayor que 0,55",
+                "evidence": "exploratory",
+                "evidence_label": "Exploratorio",
+                "gaps": [
+                  "gap-effectiveness"
+                ],
+                "watch": "Indicador MEA de resultado outcome-bio_restore: hoy sin línea base y con meta por definir."
+              }
+            ],
+            "coverage": 0.1676,
+            "density": 0.3229,
+            "support": 0.1115,
+            "gaps": [
+              "gap-effectiveness",
+              "gap-ssp-cube"
+            ],
+            "exploratory": true,
+            "sentence": "La medida entra al mejor portafolio con más frecuencia cuando la efectividad relativa de «Espacios verdes urbanos» es mayor que 0,55 y hábitat en Marinilla sube una clase bajo SSP3-7.0 y la efectividad relativa de «Restauración de ecosistemas estratégicos» es mayor que 0,55 (gap-effectiveness, gap-ssp-cube). Cubre 17% de esos mundos; dentro de la caja ocurre en 32%. Incluye parámetros exploratorios: es una señal a vigilar, no un hallazgo."
+          }
+        },
+        "driver_note": "El motor principal es una prioridad de CORNARE, no un dato faltante: se declara, no se espera.",
+        "value_of_waiting_pct": 0.0,
+        "keep_reserve": false,
+        "watch_only": false
+      },
+      {
+        "id": "risk_knowledge",
+        "name": "Conocimiento y comunicación sobre amenazas, vulnerabilidad y riesgo climático",
+        "share_in_best": 0.6082,
+        "driver": {
+          "parameter": "dim_w[disaster]",
+          "low": 0.4201,
+          "high": null,
+          "condition": "el peso relativo de riesgo de desastres es mayor que 0,42",
+          "evidence": "assumption",
+          "evidence_label": "Supuesto",
+          "gaps": [],
+          "owner": null,
+          "watch": "Prioridad declarada de CORNARE entre dimensiones.",
+          "value_of_information_pct": 0.024145,
+          "box": {
+            "conditions": [
+              {
+                "parameter": "dim_w[disaster]",
+                "low": 0.4201,
+                "high": null,
+                "text": "el peso relativo de riesgo de desastres es mayor que 0,42",
+                "evidence": "assumption",
+                "evidence_label": "Supuesto",
+                "gaps": [],
+                "watch": "Prioridad declarada de CORNARE entre dimensiones."
+              },
+              {
+                "parameter": "eff[risk_knowledge]",
+                "low": 0.6438,
+                "high": null,
+                "text": "la efectividad relativa de «Conocimiento y comunicación sobre amenazas, vulnerabilidad y riesgo climático» es mayor que 0,64",
+                "evidence": "exploratory",
+                "evidence_label": "Exploratorio",
+                "gaps": [
+                  "gap-effectiveness"
+                ],
+                "watch": "Indicador MEA de resultado outcome-risk_knowledge: hoy sin línea base y con meta por definir."
+              },
+              {
+                "parameter": "dim_w[water]",
+                "low": null,
+                "high": 2.8473,
+                "text": "el peso relativo de recurso hídrico es menor que 2,85",
+                "evidence": "assumption",
+                "evidence_label": "Supuesto",
+                "gaps": [],
+                "watch": "Prioridad declarada de CORNARE entre dimensiones."
+              }
+            ],
+            "coverage": 0.7176,
+            "density": 0.8513,
+            "support": 0.5128,
+            "gaps": [
+              "gap-effectiveness"
+            ],
+            "exploratory": true,
+            "sentence": "La medida entra al mejor portafolio con más frecuencia cuando el peso relativo de riesgo de desastres es mayor que 0,42 y la efectividad relativa de «Conocimiento y comunicación sobre amenazas, vulnerabilidad y riesgo climático» es mayor que 0,64 y el peso relativo de recurso hídrico es menor que 2,85 (gap-effectiveness). Cubre 72% de esos mundos; dentro de la caja ocurre en 85%. Incluye parámetros exploratorios: es una señal a vigilar, no un hallazgo."
+          }
+        },
+        "signal": {
+          "parameter": "eff[risk_knowledge]",
+          "low": 0.9633,
+          "high": null,
+          "condition": "la efectividad relativa de «Conocimiento y comunicación sobre amenazas, vulnerabilidad y riesgo climático» es mayor que 0,96",
+          "evidence": "exploratory",
+          "evidence_label": "Exploratorio",
+          "gaps": [
+            "gap-effectiveness"
+          ],
+          "owner": "CORNARE, módulo MEA",
+          "watch": "Indicador MEA de resultado outcome-risk_knowledge: hoy sin línea base y con meta por definir.",
+          "value_of_information_pct": 0.0,
+          "box": {
+            "conditions": [
+              {
+                "parameter": "eff[risk_knowledge]",
+                "low": 0.9633,
+                "high": null,
+                "text": "la efectividad relativa de «Conocimiento y comunicación sobre amenazas, vulnerabilidad y riesgo climático» es mayor que 0,96",
+                "evidence": "exploratory",
+                "evidence_label": "Exploratorio",
+                "gaps": [
+                  "gap-effectiveness"
+                ],
+                "watch": "Indicador MEA de resultado outcome-risk_knowledge: hoy sin línea base y con meta por definir."
+              },
+              {
+                "parameter": "lever_mismatch",
+                "low": 0.5512,
+                "high": null,
+                "text": "el descuento por palanca equivocada (S frente a CA) es mayor que 0,55",
+                "evidence": "assumption",
+                "evidence_label": "Supuesto",
+                "gaps": [
+                  "gap-ssp-cube"
+                ],
+                "watch": "Sensibilidad y capacidad adaptativa publicadas por celda municipio × dimensión."
+              }
+            ],
+            "coverage": 0.5651,
+            "density": 0.7139,
+            "support": 0.4815,
+            "gaps": [
+              "gap-effectiveness",
+              "gap-ssp-cube"
+            ],
+            "exploratory": true,
+            "sentence": "La medida entra al mejor portafolio con más frecuencia cuando la efectividad relativa de «Conocimiento y comunicación sobre amenazas, vulnerabilidad y riesgo climático» es mayor que 0,96 y el descuento por palanca equivocada (S frente a CA) es mayor que 0,55 (gap-effectiveness, gap-ssp-cube). Cubre 57% de esos mundos; dentro de la caja ocurre en 71%. Incluye parámetros exploratorios: es una señal a vigilar, no un hallazgo."
+          }
+        },
+        "driver_note": "El motor principal es una prioridad de CORNARE, no un dato faltante: se declara, no se espera.",
+        "value_of_waiting_pct": 0.0,
+        "keep_reserve": false,
+        "watch_only": false
+      },
+      {
+        "id": "health",
+        "name": "Sistema de salud y entornos saludables resilientes al clima",
+        "share_in_best": 0.2835,
+        "driver": {
+          "parameter": "dim_w[health]",
+          "low": 0.8557,
+          "high": null,
+          "condition": "el peso relativo de salud es mayor que 0,86",
+          "evidence": "assumption",
+          "evidence_label": "Supuesto",
+          "gaps": [],
+          "owner": null,
+          "watch": "Prioridad declarada de CORNARE entre dimensiones.",
+          "value_of_information_pct": 0.017227,
+          "box": {
+            "conditions": [
+              {
+                "parameter": "dim_w[health]",
+                "low": 0.8557,
+                "high": null,
+                "text": "el peso relativo de salud es mayor que 0,86",
+                "evidence": "assumption",
+                "evidence_label": "Supuesto",
+                "gaps": [],
+                "watch": "Prioridad declarada de CORNARE entre dimensiones."
+              },
+              {
+                "parameter": "gamma",
+                "low": null,
+                "high": 2.138,
+                "text": "la curvatura de la escala de clases es menor que 2,14",
+                "evidence": "assumption",
+                "evidence_label": "Supuesto",
+                "gaps": [],
+                "watch": "Cómo se lee la distancia entre clases (Alta frente a Muy alta)."
+              },
+              {
+                "parameter": "eff[health]",
+                "low": 0.5529,
+                "high": null,
+                "text": "la efectividad relativa de «Sistema de salud y entornos saludables resilientes al clima» es mayor que 0,55",
+                "evidence": "exploratory",
+                "evidence_label": "Exploratorio",
+                "gaps": [
+                  "gap-effectiveness"
+                ],
+                "watch": "Indicador MEA de resultado outcome-health: hoy sin línea base y con meta por definir."
+              }
+            ],
+            "coverage": 0.7504,
+            "density": 0.6953,
+            "support": 0.306,
+            "gaps": [
+              "gap-effectiveness"
+            ],
+            "exploratory": true,
+            "sentence": "La medida entra al mejor portafolio con más frecuencia cuando el peso relativo de salud es mayor que 0,86 y la curvatura de la escala de clases es menor que 2,14 y la efectividad relativa de «Sistema de salud y entornos saludables resilientes al clima» es mayor que 0,55 (gap-effectiveness). Cubre 75% de esos mundos; dentro de la caja ocurre en 70%. Incluye parámetros exploratorios: es una señal a vigilar, no un hallazgo."
+          }
+        },
+        "signal": {
+          "parameter": "eff[health]",
+          "low": 0.6427,
+          "high": null,
+          "condition": "la efectividad relativa de «Sistema de salud y entornos saludables resilientes al clima» es mayor que 0,64",
+          "evidence": "exploratory",
+          "evidence_label": "Exploratorio",
+          "gaps": [
+            "gap-effectiveness"
+          ],
+          "owner": "CORNARE, módulo MEA",
+          "watch": "Indicador MEA de resultado outcome-health: hoy sin línea base y con meta por definir.",
+          "value_of_information_pct": 0.002224,
+          "box": {
+            "conditions": [
+              {
+                "parameter": "eff[health]",
+                "low": 0.6427,
+                "high": null,
+                "text": "la efectividad relativa de «Sistema de salud y entornos saludables resilientes al clima» es mayor que 0,64",
+                "evidence": "exploratory",
+                "evidence_label": "Exploratorio",
+                "gaps": [
+                  "gap-effectiveness"
+                ],
+                "watch": "Indicador MEA de resultado outcome-health: hoy sin línea base y con meta por definir."
+              },
+              {
+                "parameter": "ssp_shift[guarne,health]",
+                "low": 1.0,
+                "high": 1.0,
+                "text": "salud en Guarne sube una clase bajo SSP3-7.0",
+                "evidence": "exploratory",
+                "evidence_label": "Exploratorio",
+                "gaps": [
+                  "gap-ssp-cube"
+                ],
+                "watch": "Clase SSP3-7.0 de salud en Guarne en el cubo de escenarios."
+              },
+              {
+                "parameter": "lever_mismatch",
+                "low": 0.5284,
+                "high": null,
+                "text": "el descuento por palanca equivocada (S frente a CA) es mayor que 0,53",
+                "evidence": "assumption",
+                "evidence_label": "Supuesto",
+                "gaps": [
+                  "gap-ssp-cube"
+                ],
+                "watch": "Sensibilidad y capacidad adaptativa publicadas por celda municipio × dimensión."
+              }
+            ],
+            "coverage": 0.1587,
+            "density": 0.4358,
+            "support": 0.1032,
+            "gaps": [
+              "gap-effectiveness",
+              "gap-ssp-cube"
+            ],
+            "exploratory": true,
+            "sentence": "La medida entra al mejor portafolio con más frecuencia cuando la efectividad relativa de «Sistema de salud y entornos saludables resilientes al clima» es mayor que 0,64 y salud en Guarne sube una clase bajo SSP3-7.0 y el descuento por palanca equivocada (S frente a CA) es mayor que 0,53 (gap-effectiveness, gap-ssp-cube). Cubre 16% de esos mundos; dentro de la caja ocurre en 44%. Incluye parámetros exploratorios: es una señal a vigilar, no un hallazgo."
+          }
+        },
+        "driver_note": "El motor principal es una prioridad de CORNARE, no un dato faltante: se declara, no se espera.",
+        "value_of_waiting_pct": 0.002224,
+        "keep_reserve": false,
+        "watch_only": false
+      }
+    ],
+    "decide_site_later": [
+      {
+        "id": "bio_psa",
+        "name": "Instrumentos de compensación y Pago por Servicios Ambientales – PSA",
+        "world0_candidates": [
+          "rionegro"
+        ],
+        "tied_in_world0": false,
+        "placement_changes_share": 0.0,
+        "best_site_elsewhere_share": 0.3137,
+        "best_site_share": {
+          "rionegro": 0.6863,
+          "guarne": 0.3137,
+          "marinilla": 0.0,
+          "tie": 0.0
+        },
+        "resolving_gap": "gap-sites",
+        "sentence": "«Instrumentos de compensación y Pago por Servicios Ambientales – PSA»: comprometer el monto ahora y confirmar el sitio cuando se cierre gap-sites. Hoy la regla la ubica en Rionegro; la regla cambia de municipio en 0% de los mundos probados y otro municipio puntúa más en 31%."
+      }
+    ],
+    "location_variants": {
+      "free_measures": [
+        "bio_psa",
+        "bio_restore",
+        "water_eff"
+      ],
+      "variant_count": 27,
+      "best_site_share": {
+        "bio_psa": {
+          "rionegro": 0.6863,
+          "guarne": 0.3137,
+          "marinilla": 0.0,
+          "tie": 0.0
+        },
+        "bio_restore": {
+          "rionegro": 0.999,
+          "guarne": 0.001,
+          "marinilla": 0.0,
+          "tie": 0.0
+        },
+        "water_eff": {
+          "rionegro": 0.0,
+          "guarne": 0.0,
+          "marinilla": 0.8638,
+          "tie": 0.1363
+        }
+      }
+    },
+    "reserve": {
+      "delay_cost_share": 0.01,
+      "delay_cost_evidence": "assumption",
+      "keep_reserve_for": [],
+      "decision": "gastar ahora",
+      "watch_only": [
+        "bio_restore",
+        "water_eff",
+        "water_riparian"
+      ],
+      "watch_note": "Señales exploratorias cuyo valor de información supera el costo de esperar. Se vigilan; no justifican reservar fondo.",
+      "rule": "Se reserva fondo solo si el valor de esperar la información (EVPPI corregido del parámetro señal) supera el costo de esperar, un supuesto de 1% del mejor puntaje medio."
+    },
+    "note": "Ninguna medida queda en «comprometer ahora» si ninguna entra al mejor portafolio en 80% o más de los mundos probados."
+  }
+}

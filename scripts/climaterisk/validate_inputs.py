@@ -46,6 +46,10 @@ def main() -> None:
         total += cost
         require(item["dimension_id"], f"{item['id']} has no dimension", errors)
         require(item["evidence"]["cost"] == "assumption", f"{item['id']} cost must stay an assumption", errors)
+        sensitivity = bool(item.get("sensitivity_factors_addressed"))
+        capacity = bool(item.get("adaptive_capacity_factors_strengthened"))
+        expected_lever = "S+CA" if sensitivity and capacity else ("S" if sensitivity else "CA")
+        require(item.get("lever") == expected_lever, f"{item['id']} lever {item.get('lever')} does not match its factor lists ({expected_lever})", errors)
     require(total == interventions["catalogue_total_million_cop"] == 18900, f"Catalogue total {total} is not 18900", errors)
     require("emission" not in json.dumps(model["weights"]), "Weights must not use emissions", errors)
     for excluded in model["excluded_from_score"]:
@@ -88,6 +92,11 @@ def main() -> None:
         for field in ("id", "missing_information", "why_it_matters", "which_decision_it_could_change", "how_to_collect_it", "priority"):
             require(gap.get(field), f"Gap {gap.get('id')} missing {field}", errors)
         require(gap["provenance"] in PROVENANCE, f"Gap provenance {gap['id']}", errors)
+        require(gap.get("kind") in {"dependency", "site", "model"}, f"Gap {gap['id']} has no kind", errors)
+        affected = gap.get("affected_intervention_ids")
+        require(isinstance(affected, list) and len(affected) > 0, f"Gap {gap['id']} has no affected_intervention_ids", errors)
+        for measure_id in affected or []:
+            require(measure_id in ids, f"Gap {gap['id']} links unknown measure {measure_id}", errors)
 
     geo_path = DATA / "municipalities.geojson"
     if geo_path.exists():

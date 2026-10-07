@@ -759,6 +759,58 @@ INTERVENTIONS = [
     ),
 ]
 
+
+# Team inference: the lever each measure acts on, read from its factor lists.
+# S = lowers sensitivity, CA = raises adaptive capacity. validate_inputs.py
+# keeps this tag consistent with the two lists.
+def lever_of(measure: dict) -> str:
+    sensitivity = bool(measure["sensitivity_factors_addressed"])
+    capacity = bool(measure["adaptive_capacity_factors_strengthened"])
+    if sensitivity and capacity:
+        return "S+CA"
+    return "S" if sensitivity else "CA"
+
+
+for _item in INTERVENTIONS:
+    _item["lever"] = lever_of(_item)
+    _item["lever_provenance"] = "team_inference"
+
+# Published S and CA readings per municipality × dimension. Only these five
+# cells have any number; the other 16 stay "sin desagregar" (missing, not low).
+# The level words are the brief's wording; the profile is team inference.
+LEVER_READINGS = [
+    {
+        "municipality_id": "rionegro",
+        "dimension_id": "disaster",
+        "sensitivity": {"value": 0.40, "level": "alta", "wording": "mayor sensibilidad del corredor", "source_metric_id": "rio-disaster-sensitivity"},
+        "adaptive_capacity": {"value": 0.56, "level": "adecuada", "wording": "relativamente favorable", "source_metric_id": "rio-drm-ac"},
+    },
+    {
+        "municipality_id": "marinilla",
+        "dimension_id": "disaster",
+        "sensitivity": None,
+        "adaptive_capacity": {"value": 0.61, "level": "adecuada", "wording": "relativamente favorable", "source_metric_id": "mar-drm-ac"},
+    },
+    {
+        "municipality_id": "rionegro",
+        "dimension_id": "biodiversity",
+        "sensitivity": None,
+        "adaptive_capacity": {"value": 0.22, "level": None, "wording": "el reto no asigna clase a este valor", "source_metric_id": "rio-bio-ac"},
+    },
+    {
+        "municipality_id": "marinilla",
+        "dimension_id": "biodiversity",
+        "sensitivity": None,
+        "adaptive_capacity": {"value": 0.24, "level": None, "wording": "el reto no asigna clase a este valor", "source_metric_id": "mar-bio-ac"},
+    },
+    {
+        "municipality_id": "guarne",
+        "dimension_id": "biodiversity",
+        "sensitivity": None,
+        "adaptive_capacity": {"value": 0.33, "level": "baja", "wording": "sigue en categoría Baja", "source_metric_id": "gua-bio-ac"},
+    },
+]
+
 INFORMATION_GAPS = [
     {
         "id": "gap-company-water",
@@ -891,3 +943,29 @@ INFORMATION_GAPS = [
         "provenance": "team_inference",
     },
 ]
+
+# Team inference, read from each gap's which_decision_it_could_change (to be
+# confirmed with CORNARE). kind: dependency (a fact about who depends on what),
+# site (where to build), model (a number the score uses).
+NON_CORRIDOR_IDS = [item["id"] for item in INTERVENTIONS if item["scope"] != "corridor"]
+GAP_LINKS = {
+    "gap-company-water": ("dependency", ["water_head", "water_eff"]),
+    "gap-company-road": ("dependency", ["infra_resilient"]),
+    "gap-energy": ("dependency", ["infra_services"]),
+    "gap-suppliers": ("dependency", ["food_agro", "food_soil"]),
+    "gap-workers": ("dependency", ["infra_resilient", "infra_services", "risk_sat"]),
+    "gap-ecosystem-service-sites": ("site", ["bio_restore", "water_riparian", "water_head"]),
+    "gap-sites": ("site", NON_CORRIDOR_IDS),
+    "gap-hydrology": ("model", ["hab_suds", "water_riparian", "water_head"]),
+    "gap-maintenance": ("model", ["bio_restore", "hab_suds", "infra_resilient"]),
+    "gap-marinilla-coverage": ("model", ["water_eff", "water_riparian", "water_head", "hab_green", "hab_suds", "health"]),
+    "gap-effectiveness": ("model", [item["id"] for item in INTERVENTIONS]),
+    "gap-workshops": ("model", [item["id"] for item in INTERVENTIONS]),
+    "gap-ssp-cube": ("model", [item["id"] for item in INTERVENTIONS]),
+}
+
+for _gap in INFORMATION_GAPS:
+    _kind, _ids = GAP_LINKS[_gap["id"]]
+    _gap["kind"] = _kind
+    _gap["affected_intervention_ids"] = list(_ids)
+    _gap["affected_provenance"] = "team_inference"

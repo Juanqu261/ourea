@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import {
   Activity, ChevronLeft, ChevronRight, CloudRain, Database, FileDown, Info,
-  Layers, Leaf, Map as MapIcon, Target, TriangleAlert,
+  Layers, Leaf, Map as MapIcon, ShieldCheck, Target, TriangleAlert,
 } from 'lucide-react';
 import { OureaLogo } from './components/OureaLogo.jsx';
 import { analyzeCorridor, bundleDataset } from './domain/cornareDecision.js';
@@ -15,12 +15,14 @@ import { DecisionMap } from './cornare/map/DecisionMap.jsx';
 import { focusForMeasure } from './cornare/map/focus.js';
 import { downloadDecisionJson, downloadPitchPdf } from './cornare/exportDecision.js';
 import { loadCornareData } from './cornare/loadData.js';
+import { EngineAnnex, GapRanking, LeverGrid, RobustnessStep } from './cornare/EnginePanels.jsx';
 
 const ICONS = {
   territory: MapIcon,
   priority: Target,
   portfolio: Layers,
   horizon: CloudRain,
+  robustness: ShieldCheck,
   residual: TriangleAlert,
   followup: Activity,
 };
@@ -88,7 +90,9 @@ export default function App() {
   const mapScenario = step === 'horizon' && horizon === '2060' ? 'ssp3_7_0' : 'reference';
   const colors = colorsFor(raw, mapDimension, mapMetric, mapScenario);
   const selectedIds = focus?.municipalityIds ?? (selectedMunicipality ? [selectedMunicipality] : []);
-  const stepIndex = STEPS.findIndex((item) => item.id === step);
+  // The robustness step needs the precomputed engine output; without it the step is hidden.
+  const steps = STEPS.filter((item) => item.id !== 'robustness' || raw.engine.robustness);
+  const stepIndex = steps.findIndex((item) => item.id === step);
   const StepIcon = ICONS[step];
 
   return (
@@ -121,8 +125,8 @@ export default function App() {
         </div>
         <aside className="shell-panel" data-testid={`step-${step}`}>
           <div className="panel-scroll">
-            <p className="panel-kicker">Paso {stepIndex + 1} de {STEPS.length}</p>
-            <h2><StepIcon size={18} /> {STEPS[stepIndex].title}</h2>
+            <p className="panel-kicker">Paso {stepIndex + 1} de {steps.length}</p>
+            <h2><StepIcon size={18} /> {steps[stepIndex].title}</h2>
             {step === 'territory' && (
               <Territory
                 raw={raw}
@@ -147,14 +151,21 @@ export default function App() {
               />
             )}
             {step === 'horizon' && <Horizon analysis={analysis} horizon={horizon} setHorizon={setHorizon} />}
+            {step === 'robustness' && (
+              <>
+                <RobustnessStep engine={raw.engine} analysis={analysis} />
+                <LeverGrid levers={raw.engine.levers} municipalities={raw.profiles.municipalities} dimensions={raw.interventions.dimensions} />
+                <GapRanking voi={raw.engine.voi} prepared={analysis.prepared} />
+              </>
+            )}
             {step === 'residual' && <Residual analysis={analysis} />}
-            {step === 'followup' && <Followup analysis={analysis} />}
+            {step === 'followup' && <Followup analysis={analysis} engine={raw.engine} />}
           </div>
           <div className="panel-actions">
-            <button type="button" data-testid="step-back" disabled={stepIndex === 0} onClick={() => setStep(STEPS[stepIndex - 1].id)}>
+            <button type="button" data-testid="step-back" disabled={stepIndex === 0} onClick={() => setStep(steps[stepIndex - 1].id)}>
               <ChevronLeft size={16} /> Atrás
             </button>
-            <button type="button" data-testid="step-next" disabled={stepIndex === STEPS.length - 1} onClick={() => setStep(STEPS[stepIndex + 1].id)}>
+            <button type="button" data-testid="step-next" disabled={stepIndex === steps.length - 1} onClick={() => setStep(steps[stepIndex + 1].id)}>
               Continuar <ChevronRight size={16} />
             </button>
           </div>
@@ -358,7 +369,7 @@ function Residual({ analysis }) {
   );
 }
 
-function Followup({ analysis }) {
+function Followup({ analysis, engine }) {
   return (
     <>
       <p>{analysis.mea.regional_context.statement}</p>
@@ -384,6 +395,7 @@ function Followup({ analysis }) {
       <p data-testid="decision-line">Con la evidencia institucional verificada, Ourea asigna los COP 5.000 M a seis medidas. La selección no cambia ante el cambio SSP3-7.0 cuantificado para Rionegro, pero es sensible al componente participativo aún por integrar.</p>
       <button type="button" data-testid="export-pdf" onClick={() => downloadPitchPdf(analysis)}>Descargar PDF</button>
       <p className="fine">Huella {analysis.fingerprint}</p>
+      <EngineAnnex engine={engine} />
     </>
   );
 }

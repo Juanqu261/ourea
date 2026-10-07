@@ -1,8 +1,8 @@
 import { expect, test } from '@playwright/test';
 
-const steps = ['territory', 'priority', 'portfolio', 'horizon', 'residual', 'followup'];
+const steps = ['territory', 'priority', 'portfolio', 'horizon', 'robustness', 'residual', 'followup'];
 
-test('six steps share one map on a projector, a laptop and a small desktop', async ({ page }) => {
+test('seven steps share one map on a projector, a laptop and a small desktop', async ({ page }) => {
   await page.setViewportSize({ width: 1920, height: 1080 });
   const tiles = page.waitForResponse((response) => response.url().includes('.pbf') && response.ok(), { timeout: 25000 });
   await page.goto('/');
@@ -45,10 +45,9 @@ test('six steps share one map on a projector, a laptop and a small desktop', asy
     await page.screenshot({ path: `../docs/climaterisk/figures/step-${step}-1920.png` });
   }
 
-  await page.getByTestId('step-back').click();
-  await page.getByTestId('step-back').click();
-  await page.getByTestId('step-back').click();
-  await expect(page.getByTestId('step-portfolio')).toBeVisible();
+  while (await page.getByTestId('step-portfolio').count() === 0) {
+    await page.getByTestId('step-back').click();
+  }
   await page.getByTestId('map-focus-bio_pa').click();
   await expect(page.getByTestId('map-focus-card')).toContainText('Área candidata para prefactibilidad', { timeout: 20000 });
   await page.locator('.decision-map').screenshot({ path: '../docs/climaterisk/figures/portfolio-measure.png' });
@@ -93,7 +92,6 @@ test('six steps share one map on a projector, a laptop and a small desktop', asy
   }
   await page.getByRole('button', { name: 'Riesgo', exact: true }).click();
   await expect(page.locator('.decision-map figcaption')).toContainText('riesgo');
-
   while (await page.getByTestId('step-horizon').count() === 0) {
     await page.getByTestId('step-next').click();
   }
@@ -111,6 +109,16 @@ test('six steps share one map on a projector, a laptop and a small desktop', asy
   await page.getByTestId('decision-hinge').scrollIntoViewIfNeeded();
   await page.screenshot({ path: '../docs/climaterisk/figures/robustness-1920.png' });
   await page.screenshot({ path: '../docs/climaterisk/figures/decision-hinge-1920.png' });
+  while (await page.getByTestId('step-robustness').count() === 0) {
+    await page.getByTestId('step-next').click();
+  }
+  const nearBest = page.getByTestId('near-best-sentence');
+  await expect(nearBest).toContainText(/Casi óptimo en \d+% de los 4\.000 mundos probados/);
+  await expect(nearBest).not.toContainText('probabilidad');
+  await expect(page.getByTestId('inclusion-bars').locator('li')).toHaveCount(15);
+  await expect(page.getByTestId('lever-grid')).toContainText('Sin desagregar');
+  await expect(page.getByTestId('gap-ranking')).toContainText('gap-company-water');
+
   while (await page.getByTestId('step-followup').count() === 0) {
     await page.getByTestId('step-next').click();
   }

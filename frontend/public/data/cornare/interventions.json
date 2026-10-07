@@ -89,6 +89,8 @@
         "No hay predios ni polígonos de implementación en el paquete."
       ],
       "nbs_reason": "La unidad funcional del reto es un programa de conservación y restauración. El pago es el instrumento, no el ecosistema. No se afirma que cumpla los ocho criterios IUCN.",
+      "lever": "S+CA",
+      "lever_provenance": "team_inference",
       "evidence": {
         "cost": "assumption",
         "name_and_unit": "institutional",
@@ -133,6 +135,8 @@
         "No hay un porcentaje de efectividad de restauración."
       ],
       "nbs_reason": "El mecanismo principal es restaurar ecosistemas. Es una acción de base ecosistémica. La verificación IUCN del proyecto concreto queda pendiente.",
+      "lever": "S+CA",
+      "lever_provenance": "team_inference",
       "evidence": {
         "cost": "assumption",
         "name_and_unit": "institutional",
@@ -176,6 +180,8 @@
         "La conectividad se menciona como propósito de la unidad funcional, no como un vínculo espacial demostrado."
       ],
       "nbs_reason": "Protege y gestiona ecosistemas. La mención de conectividad no autoriza un mapa de enlaces ecológicos.",
+      "lever": "S+CA",
+      "lever_provenance": "team_inference",
       "evidence": {
         "cost": "assumption",
         "name_and_unit": "institutional",
@@ -224,6 +230,8 @@
         "Eficiencia hídrica no es una solución basada en la naturaleza."
       ],
       "nbs_reason": "El mecanismo es gestión de la demanda y medición. Habilita la adaptación hídrica sin intervenir el ecosistema como acción principal.",
+      "lever": "S+CA",
+      "lever_provenance": "team_inference",
       "evidence": {
         "cost": "assumption",
         "name_and_unit": "institutional",
@@ -267,6 +275,8 @@
         "No hay quebradas priorizadas dentro de Rionegro, Guarne o Marinilla en el catálogo del reto."
       ],
       "nbs_reason": "Restaura y aísla ecosistemas ribereños. Es de base ecosistémica. Los tramos exactos no están en la fuente.",
+      "lever": "S+CA",
+      "lever_provenance": "team_inference",
       "evidence": {
         "cost": "assumption",
         "name_and_unit": "institutional",
@@ -312,6 +322,8 @@
         "La microcuenca no está nombrada. No se asigna una bocatoma a una empresa."
       ],
       "nbs_reason": "Protege ecosistemas de cabecera. La microcuenca concreta es una brecha de localización.",
+      "lever": "S+CA",
+      "lever_provenance": "team_inference",
       "evidence": {
         "cost": "assumption",
         "name_and_unit": "institutional",
@@ -357,6 +369,8 @@
         "No se identifican predios ni cultivos específicos del corredor."
       ],
       "nbs_reason": "La reconversión y la conservación de suelo actúan sobre el ecosistema productivo. No se verificó el estándar IUCN en campo.",
+      "lever": "S+CA",
+      "lever_provenance": "team_inference",
       "evidence": {
         "cost": "assumption",
         "name_and_unit": "institutional",
@@ -402,6 +416,8 @@
         "Los registros históricos miden capacitaciones, familias o asistencias, no vulnerabilidad reducida."
       ],
       "nbs_reason": "El manejo agroecológico de suelo y agua es una práctica de base ecosistémica. La asociatividad es habilitadora y va dentro de la misma unidad.",
+      "lever": "S+CA",
+      "lever_provenance": "team_inference",
       "evidence": {
         "cost": "assumption",
         "name_and_unit": "institutional",
@@ -447,6 +463,8 @@
         "No hay un barrio ni un predio designado."
       ],
       "nbs_reason": "Arborización y área verde son el mecanismo principal. Sigue siendo una clasificación de tamiz, no una certificación IUCN.",
+      "lever": "S+CA",
+      "lever_provenance": "team_inference",
       "evidence": {
         "cost": "assumption",
         "name_and_unit": "institutional",
@@ -490,6 +508,8 @@
         "Mezcla elementos verdes y obras. No se afirma una reducción de profundidad de inundación."
       ],
       "nbs_reason": "Combina procesos de infiltración y vegetación con pavimentos y almacenamiento. Por eso es híbrida, no una solución basada en la naturaleza pura ni una obra gris.",
+      "lever": "S+CA",
+      "lever_provenance": "team_inference",
       "evidence": {
         "cost": "assumption",
         "name_and_unit": "institutional",
@@ -534,6 +554,8 @@
         "Una obra vial histórica en Guarne no se trata como esta medida."
       ],
       "nbs_reason": "El mecanismo es adecuar infraestructura. Es infraestructura gris.",
+      "lever": "S+CA",
+      "lever_provenance": "team_inference",
       "evidence": {
         "cost": "assumption",
         "name_and_unit": "institutional",
@@ -577,6 +599,8 @@
         "El servicio esencial no está identificado. No se infieren dependencias de empresas."
       ],
       "nbs_reason": "Obra o servicio esencial como mecanismo principal. Infraestructura gris.",
+      "lever": "S+CA",
+      "lever_provenance": "team_inference",
       "evidence": {
         "cost": "assumption",
         "name_and_unit": "institutional",
@@ -623,6 +647,8 @@
         "Los puntos críticos del corredor no están listados."
       ],
       "nbs_reason": "Instrumentación y protocolos. Medida habilitadora de la capacidad adaptativa.",
+      "lever": "CA",
+      "lever_provenance": "team_inference",
       "evidence": {
         "cost": "assumption",
         "name_and_unit": "institutional",
@@ -668,6 +694,8 @@
         "Produce información. No sustituye la reducción de sensibilidad en campo."
       ],
       "nbs_reason": "Conocimiento y comunicación. Medida habilitadora.",
+      "lever": "CA",
+      "lever_provenance": "team_inference",
       "evidence": {
         "cost": "assumption",
         "name_and_unit": "institutional",
@@ -711,6 +739,8 @@
         "No hay una línea base de morbilidad climática en el paquete."
       ],
       "nbs_reason": "Capacidad del sistema de salud. No es una intervención ecosistémica.",
+      "lever": "S+CA",
+      "lever_provenance": "team_inference",
       "evidence": {
         "cost": "assumption",
         "name_and_unit": "institutional",

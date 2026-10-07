@@ -9,7 +9,13 @@
       "how_to_collect_it": "Cruce, con las empresas de los Acuerdos de Crecimiento Verde y los acueductos, de captaciones autorizadas y usuarios. Solo datos agregados si la información es reservada.",
       "responsible_actor_if_known": "CORNARE, con acueductos y sectores productivos",
       "priority": "alta",
-      "provenance": "institutional"
+      "provenance": "institutional",
+      "kind": "dependency",
+      "affected_intervention_ids": [
+        "water_head",
+        "water_eff"
+      ],
+      "affected_provenance": "team_inference"
     },
     {
       "id": "gap-company-road",
@@ -19,7 +25,12 @@
       "how_to_collect_it": "Inventario municipal de puntos críticos viales ya priorizados por gestión del riesgo, sin inventar la cadena logística de una empresa.",
       "responsible_actor_if_known": "Gobiernos municipales y entidades de gestión del riesgo",
       "priority": "alta",
-      "provenance": "institutional"
+      "provenance": "institutional",
+      "kind": "dependency",
+      "affected_intervention_ids": [
+        "infra_resilient"
+      ],
+      "affected_provenance": "team_inference"
     },
     {
       "id": "gap-suppliers",
@@ -29,7 +40,13 @@
       "how_to_collect_it": "Encuesta agregada y voluntaria a organizaciones de los Acuerdos de Crecimiento Verde sobre proveedores críticos, sin publicar identidades reservadas.",
       "responsible_actor_if_known": "CORNARE",
       "priority": "media",
-      "provenance": "institutional"
+      "provenance": "institutional",
+      "kind": "dependency",
+      "affected_intervention_ids": [
+        "food_agro",
+        "food_soil"
+      ],
+      "affected_provenance": "team_inference"
     },
     {
       "id": "gap-energy",
@@ -39,7 +56,12 @@
       "how_to_collect_it": "Mapa de servicios esenciales ya identificado por los comités municipales de gestión del riesgo.",
       "responsible_actor_if_known": "Entidades de gestión del riesgo y empresas de servicios públicos",
       "priority": "alta",
-      "provenance": "institutional"
+      "provenance": "institutional",
+      "kind": "dependency",
+      "affected_intervention_ids": [
+        "infra_services"
+      ],
+      "affected_provenance": "team_inference"
     },
     {
       "id": "gap-ecosystem-service-sites",
@@ -49,7 +71,14 @@
       "how_to_collect_it": "Cruces con determinantes ambientales, POMCAS y áreas protegidas de CORNARE, a escala de microcuenca.",
       "responsible_actor_if_known": "CORNARE",
       "priority": "alta",
-      "provenance": "team_inference"
+      "provenance": "team_inference",
+      "kind": "site",
+      "affected_intervention_ids": [
+        "bio_restore",
+        "water_riparian",
+        "water_head"
+      ],
+      "affected_provenance": "team_inference"
     },
     {
       "id": "gap-workers",
@@ -59,7 +88,14 @@
       "how_to_collect_it": "Dato agregado de empleo expuesto, construido con las organizaciones y las alcaldías, sin microdatos reservados.",
       "responsible_actor_if_known": null,
       "priority": "media",
-      "provenance": "institutional"
+      "provenance": "institutional",
+      "kind": "dependency",
+      "affected_intervention_ids": [
+        "infra_resilient",
+        "infra_services",
+        "risk_sat"
+      ],
+      "affected_provenance": "team_inference"
     },
     {
       "id": "gap-sites",
@@ -69,7 +105,23 @@
       "how_to_collect_it": "Priorización espacial con los municipios usando POMCAS, rondas y puntos críticos ya oficiales.",
       "responsible_actor_if_known": "CORNARE y gobiernos municipales",
       "priority": "alta",
-      "provenance": "team_inference"
+      "provenance": "team_inference",
+      "kind": "site",
+      "affected_intervention_ids": [
+        "bio_psa",
+        "bio_restore",
+        "water_eff",
+        "water_riparian",
+        "water_head",
+        "food_soil",
+        "food_agro",
+        "hab_green",
+        "hab_suds",
+        "infra_resilient",
+        "infra_services",
+        "health"
+      ],
+      "affected_provenance": "team_inference"
     },
     {
       "id": "gap-effectiveness",
@@ -79,7 +131,26 @@
       "how_to_collect_it": "Línea base y seguimiento MEA de resultado, no solo de actividades. La meta regional de −30% a 2035 no se reparte entre medidas.",
       "responsible_actor_if_known": "CORNARE, módulo MEA",
       "priority": "alta",
-      "provenance": "team_inference"
+      "provenance": "team_inference",
+      "kind": "model",
+      "affected_intervention_ids": [
+        "bio_psa",
+        "bio_restore",
+        "bio_pa",
+        "water_eff",
+        "water_riparian",
+        "water_head",
+        "food_soil",
+        "food_agro",
+        "hab_green",
+        "hab_suds",
+        "infra_resilient",
+        "infra_services",
+        "risk_sat",
+        "risk_knowledge",
+        "health"
+      ],
+      "affected_provenance": "team_inference"
     },
     {
       "id": "gap-hydrology",
@@ -89,7 +160,14 @@
       "how_to_collect_it": "Series de MARCO y estudios de POMCA ya existentes, sin construir un modelo nuevo para el prototipo.",
       "responsible_actor_if_known": "CORNARE",
       "priority": "media",
-      "provenance": "team_inference"
+      "provenance": "team_inference",
+      "kind": "model",
+      "affected_intervention_ids": [
+        "hab_suds",
+        "water_riparian",
+        "water_head"
+      ],
+      "affected_provenance": "team_inference"
     },
     {
       "id": "gap-maintenance",
@@ -99,7 +177,14 @@
       "how_to_collect_it": "Pregunta explícita a alcaldías, acueductos y administradores de áreas sobre presupuesto de operación.",
       "responsible_actor_if_known": "Gobiernos municipales",
       "priority": "media",
-      "provenance": "team_inference"
+      "provenance": "team_inference",
+      "kind": "model",
+      "affected_intervention_ids": [
+        "bio_restore",
+        "hab_suds",
+        "infra_resilient"
+      ],
+      "affected_provenance": "team_inference"
     },
     {
       "id": "gap-workshops",
@@ -109,7 +194,26 @@
       "how_to_collect_it": "Conteo por medida y municipio a partir de las memorias de los talleres de la actualización de riesgos.",
       "responsible_actor_if_known": "CORNARE",
       "priority": "alta",
-      "provenance": "institutional"
+      "provenance": "institutional",
+      "kind": "model",
+      "affected_intervention_ids": [
+        "bio_psa",
+        "bio_restore",
+        "bio_pa",
+        "water_eff",
+        "water_riparian",
+        "water_head",
+        "food_soil",
+        "food_agro",
+        "hab_green",
+        "hab_suds",
+        "infra_resilient",
+        "infra_services",
+        "risk_sat",
+        "risk_knowledge",
+        "health"
+      ],
+      "affected_provenance": "team_inference"
     },
     {
       "id": "gap-ssp-cube",
@@ -119,7 +223,26 @@
       "how_to_collect_it": "Consulta del Observatorio Ambiental por subregión, índice, año, escenario y dimensión, y publicación de la tabla.",
       "responsible_actor_if_known": "CORNARE",
       "priority": "alta",
-      "provenance": "institutional"
+      "provenance": "institutional",
+      "kind": "model",
+      "affected_intervention_ids": [
+        "bio_psa",
+        "bio_restore",
+        "bio_pa",
+        "water_eff",
+        "water_riparian",
+        "water_head",
+        "food_soil",
+        "food_agro",
+        "hab_green",
+        "hab_suds",
+        "infra_resilient",
+        "infra_services",
+        "risk_sat",
+        "risk_knowledge",
+        "health"
+      ],
+      "affected_provenance": "team_inference"
     },
     {
       "id": "gap-marinilla-coverage",
@@ -129,7 +252,17 @@
       "how_to_collect_it": "Completar PAI, PICCA y acciones municipales de Marinilla con la misma ficha de los otros municipios.",
       "responsible_actor_if_known": "CORNARE y municipio de Marinilla",
       "priority": "alta",
-      "provenance": "team_inference"
+      "provenance": "team_inference",
+      "kind": "model",
+      "affected_intervention_ids": [
+        "water_eff",
+        "water_riparian",
+        "water_head",
+        "hab_green",
+        "hab_suds",
+        "health"
+      ],
+      "affected_provenance": "team_inference"
     }
   ]
 }

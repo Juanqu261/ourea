@@ -64,6 +64,19 @@ La auditoría de hojas, duplicados y límites está en [docs/climaterisk/data_au
 
 Los límites municipales salen del Marco Geoestadístico Nacional 2025 del DANE y se guardan en el repositorio. El demo no llama un servicio de mapas.
 
+## Motor de robustez (`decision_engine/`)
+
+Paquete Python (solo numpy) que vuelve a calcular el mundo 0 del navegador y lo prueba en 4.000 mundos (hipercubo latino con semilla, 2.000 por escenario):
+aceptabilidad de cada portafolio, puntos de quiebre (PRIM), ruta adaptativa y valor de la información. El navegador no simula: lee el JSON precalculado.
+
+```bash
+pip install -r requirements.txt          # o: uv venv && uv pip install -r requirements.txt
+python -m decision_engine.build          # escribe uncertainty_ranges, lever_profiles, robustness, breaking_points y value_of_information
+python -m decision_engine.build --check  # falla si el JSON versionado no coincide con una corrida nueva
+```
+
+La paridad con el motor JS (2,8125 · 2,38 · 2,9525 · `ourea-42aeaba8`) se prueba en `tests/test_engine_parity.py`. La capa de IA usa `decision_engine/api.py`.
+
 ## Arquitectura
 
 Aplicación React y Vite. El cálculo del portafolio corre en el navegador, sin un servicio de inteligencia artificial. El mapa usa MapLibre solo para los tres municipios.

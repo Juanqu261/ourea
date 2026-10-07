@@ -426,6 +426,31 @@ button:focus-visible, a:focus-visible { outline: 2px solid var(--accent-soft); o
 .tag-missing { background: #3a2424; color: #e7b2ae; }
 .tag-assumption { background: #24323a; color: #b7d0dc; }
 .tag-team_inference { background: #2d2a22; color: #e6d3a4; }
+.tag-exploratory { background: #2b2436; color: #cdbbe6; }
+.tag-institutional { background: #22302a; color: #b5d6c0; }
+
+.engine-block { margin: 24px 0; }
+.card-grid-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.engine-table td { font-size: 0.8rem; vertical-align: top; }
+.engine-table tr.is-world0 td { color: var(--accent-soft); }
+.lever-reduce_s, .lever-raise_ca, .lever-both, .lever-no_lever { background: var(--accent-dim); }
+.lever-partial { background: var(--surface-raised); }
+.lever-unknown { color: var(--text-faint); }
+.inclusion-list { margin: 12px 0; padding: 0; list-style: none; }
+.inclusion-list li {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(0, 3fr) minmax(0, 1.2fr);
+  gap: 10px;
+  align-items: center;
+  margin: 6px 0;
+  font-size: 0.86rem;
+}
+.inclusion-track { height: 10px; border-radius: 999px; background: var(--bg-secondary); overflow: hidden; }
+.inclusion-fill { display: block; height: 100%; border-radius: 999px; }
+.inclusion-core { background: var(--vegetation-soft); }
+.inclusion-contingent { background: var(--accent); }
+.inclusion-rarely { background: var(--border-strong); }
+.inclusion-value { color: var(--text-muted); }
 
 .table-scroll { overflow-x: auto; }
 .heat { width: 100%; border-collapse: collapse; }
@@ -512,6 +537,7 @@ button:focus-visible, a:focus-visible { outline: 2px solid var(--accent-soft); o
 .boot, .fatal-error { padding: 48px 20px; }
 
 @media (max-width: 800px) {
+  .inclusion-list li { grid-template-columns: 1fr; gap: 4px; }
   .card-grid { grid-template-columns: 1fr; }
   .cornare-top { align-items: flex-start; flex-wrap: wrap; }
   .cornare-footer { align-items: stretch; flex-direction: column; }

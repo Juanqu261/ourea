@@ -7,7 +7,7 @@
   "catalogue_measures": 15,
   "catalogue_total_million_cop": 18900,
   "guardrails": 5,
-  "file_count_excluding_manifest": 164,
+  "file_count_excluding_manifest": 196,
   "files": [
     {
       "path": ".env.example",
@@ -16,8 +16,8 @@
     },
     {
       "path": ".github/workflows/ourea.yml",
-      "bytes": 8077,
-      "sha256": "d9ce64c00abf46b7c7c6b28e99ee77a6e074e02cd4d2524bc5e746b667dcdb7d"
+      "bytes": 8168,
+      "sha256": "858003eb5f3c60f021c1ad18f2f584eecb83e5c2b0c47d649496c5e6ef6ea671"
     },
     {
       "path": ".gitignore",
@@ -36,8 +36,93 @@
     },
     {
       "path": "README.md",
-      "bytes": 5100,
-      "sha256": "3004ef38326fd9c4ddc807319d933390028b869b7e016a2bec6e84585da29371"
+      "bytes": 5965,
+      "sha256": "ab2560731745c2fe47bb68acce03b5dc6d89f9b420860f9c84ca4a0ee6b1198d"
+    },
+    {
+      "path": "decision_engine/__init__.py",
+      "bytes": 193,
+      "sha256": "47fde0beaf5ea921cce77cda64b76f7c33d2cdac572aaae430204d74d53cb4ae"
+    },
+    {
+      "path": "decision_engine/api.py",
+      "bytes": 11713,
+      "sha256": "a81a8a8b79739ba4aef09cd3ea0993ac0a6c80ad5d3a4bbf33f6e9cafbb20b9d"
+    },
+    {
+      "path": "decision_engine/breaking_points.py",
+      "bytes": 12045,
+      "sha256": "92dcdb0340a0929bb02f9412453e47b516749cfcb328c23928e55bac3db11678"
+    },
+    {
+      "path": "decision_engine/build.py",
+      "bytes": 6867,
+      "sha256": "b0b8c7080b9b2077483973ca7f437b4879f2bdf18bb9c03f0d8b671f1ba9b97c"
+    },
+    {
+      "path": "decision_engine/dataset.py",
+      "bytes": 3700,
+      "sha256": "6e36a6d98e8beb6abd1526a13ae34cf0aa41070a55ab2a012552d49d24ba0048"
+    },
+    {
+      "path": "decision_engine/fingerprint.py",
+      "bytes": 2745,
+      "sha256": "c8855da3681fb491de38aa6a8fa085689ad7695a9bce17fb5a7d059d006b8e6d"
+    },
+    {
+      "path": "decision_engine/levers.py",
+      "bytes": 5717,
+      "sha256": "be2cce8adcc07a620f65efabe9ccfa5a6121c6ffaf01c6f937986e905e79cb7b"
+    },
+    {
+      "path": "decision_engine/pathways.py",
+      "bytes": 9026,
+      "sha256": "d58e40d6409104d73fcf154be788543b3ac3fe841a61c798fc7c4cb78d39b3eb"
+    },
+    {
+      "path": "decision_engine/portfolios.py",
+      "bytes": 3023,
+      "sha256": "b82b28772ae74ed40567e7ee155955d45a136fc3ff3c01ea53395bd30ab64319"
+    },
+    {
+      "path": "decision_engine/robustness.py",
+      "bytes": 6926,
+      "sha256": "f4238d5c8bc4ae6b960bc5f564279d276971e6c506cdec4a848785aeac6fcad6"
+    },
+    {
+      "path": "decision_engine/simulation.py",
+      "bytes": 4781,
+      "sha256": "be604e3bda37cbda8b265c7867281be338c253b0b0fb29bc0ff97513c99b479c"
+    },
+    {
+      "path": "decision_engine/uncertainty.py",
+      "bytes": 8667,
+      "sha256": "ed2a2a16050e4464b5a4d0c476e5d2ecdb1556277250fa10dcf01eee6b367ea5"
+    },
+    {
+      "path": "decision_engine/voi.py",
+      "bytes": 12303,
+      "sha256": "cc83dacb864432e97fac1de0a3b6dc84c2003d44eaea6de89faeb99f3731abad"
+    },
+    {
+      "path": "decision_engine/wording.py",
+      "bytes": 1189,
+      "sha256": "ef75e3712e6869c0ce068cb9d76106cf03888771ec0ebfc7860773ee4c3b858e"
+    },
+    {
+      "path": "decision_engine/world0.py",
+      "bytes": 15657,
+      "sha256": "bb9b99073218f4f91b01b40d64028dd0c8e0302d96c8c1b2bcdc09a8e6db85b7"
+    },
+    {
+      "path": "decision_engine/world_score.py",
+      "bytes": 10867,
+      "sha256": "27d1489d27da3359a7d1b75851a89674658c671162d31eb594c8e4ac97c11bcd"
+    },
+    {
+      "path": "decision_engine/worlds.py",
+      "bytes": 7829,
+      "sha256": "0a875aab23bb87a2cf72ea96781c7db666e8a40b1aa95eb0a690d9b2ffd56c59"
     },
     {
       "path": "docs/README.md",
@@ -330,6 +415,26 @@
       "sha256": "f006dc768191f5162adb73d0e04771bc5ede119c73f00b485aa2a419de8cadc9"
     },
     {
+      "path": "docs/climaterisk/figures/step-robustness-1024.png",
+      "bytes": 746231,
+      "sha256": "34c3cfb24f11658f4de0e8849ea5d31a11a674c060b2da1f5e966e2411816bf3"
+    },
+    {
+      "path": "docs/climaterisk/figures/step-robustness-1366.png",
+      "bytes": 996365,
+      "sha256": "ae692475a0d9ca61ef2da3f93fddfd68dd8d4490925a907ca541286956824a34"
+    },
+    {
+      "path": "docs/climaterisk/figures/step-robustness-1920.png",
+      "bytes": 2064016,
+      "sha256": "c0e6fcf43bc78a2b33c69633bfebc72e470603b0c016fa5fd15c85746a8121f8"
+    },
+    {
+      "path": "docs/climaterisk/figures/step-robustness-390.png",
+      "bytes": 36412,
+      "sha256": "eb9c951c80891b4c13c2dfca9f662d3496679a20d5607cee566310cd0dddf11a"
+    },
+    {
       "path": "docs/climaterisk/figures/step-territory-1024.png",
       "bytes": 726631,
       "sha256": "805a4fba1291e1ffd92ce10801f8a81de08ad40876751746bc0eb2e18f5a98cb"
@@ -381,8 +486,8 @@
     },
     {
       "path": "frontend/e2e/cornare.spec.js",
-      "bytes": 10726,
-      "sha256": "6574393fe3dcefec09a20e96e477d678ccebad2036451dff11e7b3932d90c6eb"
+      "bytes": 11235,
+      "sha256": "8abcf01bc76e078cbcb6e2e0ae1d024800d76c278d6959b5cf3abadfd97f187d"
     },
     {
       "path": "frontend/index.html",
@@ -391,8 +496,8 @@
     },
     {
       "path": "frontend/package-lock.json",
-      "bytes": 36315,
-      "sha256": "58dbe1fb9ec6920bee69c91f588600781bf99206648bf20b7e1302d8d9e2690a"
+      "bytes": 36355,
+      "sha256": "51d3ba473a588372614135178eaf57242cab950e38b2a4a394d8afc7b840fced"
     },
     {
       "path": "frontend/package.json",
@@ -410,6 +515,11 @@
       "sha256": "fd103c45ed6cd143d3e63981e771ea4eee5a700d43c81143044caab14fb4b3fe"
     },
     {
+      "path": "frontend/public/data/cornare/breaking_points.json",
+      "bytes": 9652,
+      "sha256": "fcf83015ed1e49a8b4546644c9ab940faecbd67cdee1af387682dcced4d1123e"
+    },
+    {
       "path": "frontend/public/data/cornare/decision_model.json",
       "bytes": 2936,
       "sha256": "b679b0364139c7dba043a8f34fb2c0714dc5e03ce3ebc4a3ccfe02f81e0f4785"
@@ -421,13 +531,18 @@
     },
     {
       "path": "frontend/public/data/cornare/information_gaps.json",
-      "bytes": 8741,
-      "sha256": "5f23a5ca244c9df1531962ca03256c4ce53cef4bdb49dea820c9fa50c0307ced"
+      "bytes": 12059,
+      "sha256": "5f8a6b84078dd3213f151172dcb5241b219fd8ad8ee48daa83e8605b01964784"
     },
     {
       "path": "frontend/public/data/cornare/interventions.json",
-      "bytes": 24909,
-      "sha256": "c8ec26fe34bfef0fa74af7149084fa45330ea9b6d540b872e879febf48aa147e"
+      "bytes": 25910,
+      "sha256": "867a72d75079d6b3b8a97a4239f015207a8c1ba278dca6c2e558ccc7a60254d2"
+    },
+    {
+      "path": "frontend/public/data/cornare/lever_profiles.json",
+      "bytes": 12779,
+      "sha256": "41a5ef3373d8039caa89c04148525e1c9518b9a7c73c15701638afb1ee50312b"
     },
     {
       "path": "frontend/public/data/cornare/map/catalog.json",
@@ -505,6 +620,11 @@
       "sha256": "baf4e0de38b0667ee39c05166f7a5dcfb7d354c6f651836ad5fbf999830926fd"
     },
     {
+      "path": "frontend/public/data/cornare/robustness.json",
+      "bytes": 87653,
+      "sha256": "61539ab4126d5276690e58bcc01d295994ecbd2eb67f57d0464ce4ce2a7e0cea"
+    },
+    {
       "path": "frontend/public/data/cornare/scenario_metrics.json",
       "bytes": 749,
       "sha256": "7d89b0224b2b2588a157de981b24ceee405cfaa68504933eb01b83c1c4c60730"
@@ -513,6 +633,16 @@
       "path": "frontend/public/data/cornare/source_registry.json",
       "bytes": 18405,
       "sha256": "ebf8a13721bbea0bdfd23ceed372cadcc4b643d5f266ab6506ed68f01f457734"
+    },
+    {
+      "path": "frontend/public/data/cornare/uncertainty_ranges.json",
+      "bytes": 27464,
+      "sha256": "828795ef1c8dd02e29ee7c41d08dbd7cbdb63635b49b9b345060c65e8475b90c"
+    },
+    {
+      "path": "frontend/public/data/cornare/value_of_information.json",
+      "bytes": 42614,
+      "sha256": "f4197613f76a719d4999a348236d4202aa03ffdac7f314a62bf226ec9f69c3dd"
     },
     {
       "path": "frontend/public/favicon.svg",
@@ -526,8 +656,8 @@
     },
     {
       "path": "frontend/src/App.jsx",
-      "bytes": 24494,
-      "sha256": "1f93452d0d4c430a9ca7196f136ffcc21d6ee22c54888a1aa8d6e8de7baebb6f"
+      "bytes": 25271,
+      "sha256": "0afae7fcb1eef5df733b16d6f9b20a1bb6db84283ec54e6cc8d62a9a845643b5"
     },
     {
       "path": "frontend/src/components/ErrorBoundary.jsx",
@@ -550,14 +680,19 @@
       "sha256": "e789d0d0039e13ac9a53148a0f46bb7244385f640188f617f177d50c2b9329c8"
     },
     {
+      "path": "frontend/src/cornare/EnginePanels.jsx",
+      "bytes": 12731,
+      "sha256": "21dd56e6fe3725702e0d09387fef5b0ef376f11da45b43da2a1d3e17733da716"
+    },
+    {
       "path": "frontend/src/cornare/briefLayout.js",
       "bytes": 4362,
       "sha256": "5345f99f51d91dd4b7da254281848054de0385ffc2836bc4518db18a7ec8ce56"
     },
     {
       "path": "frontend/src/cornare/copy.js",
-      "bytes": 867,
-      "sha256": "560a7313f934210cdd113791afe10b803442be5cddf2183346f4557aa93f501b"
+      "bytes": 971,
+      "sha256": "b56049e8e907fe71b900844edb2e84c4172755914371995290ea703622a9e7f2"
     },
     {
       "path": "frontend/src/cornare/decisionBrief.js",
@@ -571,8 +706,8 @@
     },
     {
       "path": "frontend/src/cornare/loadData.js",
-      "bytes": 838,
-      "sha256": "76f73ec3466236f3038a30463038070c22430e153b819aa043988a8dc9563e6d"
+      "bytes": 1527,
+      "sha256": "faac7d0212d3b076b88aff1645ae2b7a85d3680332d5e01ea0a6197beaa47953"
     },
     {
       "path": "frontend/src/cornare/map/DecisionMap.jsx",
@@ -616,8 +751,8 @@
     },
     {
       "path": "frontend/src/domain/evidence.js",
-      "bytes": 870,
-      "sha256": "19efaa56220b4c6f4587db69504317c9aee3ea0e501d6c3e68551df388c80e1f"
+      "bytes": 901,
+      "sha256": "241550685c4584d58ad66ffc5fe7fa32ea867e93884311c5d9806909a4e4d51c"
     },
     {
       "path": "frontend/src/domain/evidenceBounds.js",
@@ -671,8 +806,8 @@
     },
     {
       "path": "frontend/src/styles/cornare.css",
-      "bytes": 14754,
-      "sha256": "aff1b8b991085634e30a6ad0bc0bfa53a2db9fe82d08b61c40a5d29de5693637"
+      "bytes": 16002,
+      "sha256": "7a23a7d53020c0fffa4be39893b7bc455d2da378de4696701ea8ab2402524154"
     },
     {
       "path": "frontend/src/styles/index.css",
@@ -691,8 +826,8 @@
     },
     {
       "path": "frontend/tests/cornareDecision.test.js",
-      "bytes": 13230,
-      "sha256": "f983203495b2b353263f3037b82be5698d67f7e572979d9da301ccea519be9cc"
+      "bytes": 13248,
+      "sha256": "84e869736ff096f190617b09d3a18af2cdfc7765149fc5579ddd215ff96ee3d5"
     },
     {
       "path": "frontend/tests/dataValidation.mjs",
@@ -726,18 +861,18 @@
     },
     {
       "path": "qa_mac_linux.sh",
-      "bytes": 628,
-      "sha256": "bed78ef2bfc815c5566502529ea3531bb786f6e273270f93f8b28eea9dd92f38"
+      "bytes": 722,
+      "sha256": "56e4fd924ea0a16f134d588af44276b961d2dc276edc5cb0765e30e721422672"
     },
     {
       "path": "qa_windows.bat",
-      "bytes": 735,
-      "sha256": "cc07e146039e0811f6af281afff3e3fb787e7f6c4c66cb7b19debccdd39cc5d5"
+      "bytes": 853,
+      "sha256": "dd6be3b255bf86022caf1502943142aa55f7e4fce0c374dacba657bb93b8929f"
     },
     {
       "path": "requirements.txt",
-      "bytes": 112,
-      "sha256": "2eaac8965c83be8a1d5d2e282a4942c7f93b86ad34ff06355967bd476b2fa3d6"
+      "bytes": 237,
+      "sha256": "08bcd84a2d12ccc7191c07d44df2e7a549d4135bba86db88c63a342d751d94fa"
     },
     {
       "path": "run_mac_linux.sh",
@@ -796,8 +931,8 @@
     },
     {
       "path": "scripts/climaterisk/institutional.py",
-      "bytes": 41329,
-      "sha256": "461736b79710e5422742fa3452462b89a721a8cccbf61ce390147014d5c0ae4d"
+      "bytes": 45090,
+      "sha256": "df15811c6f28fa690f3a2760b1917f0b038cb0fb8caf17f4d912463f68c2c1e9"
     },
     {
       "path": "scripts/climaterisk/match_measures.py",
@@ -806,8 +941,8 @@
     },
     {
       "path": "scripts/climaterisk/validate_inputs.py",
-      "bytes": 4943,
-      "sha256": "8095b06b2d5dd15e6f19ec04f5d0826335e387e7f3d238fc5230bf18991b9d6d"
+      "bytes": 5775,
+      "sha256": "d62290a1c2f41f5bc8df81bafa8265610763cf7860f7b06a7f10c4b526cc3d74"
     },
     {
       "path": "scripts/make_manifest.py",
@@ -815,9 +950,34 @@
       "sha256": "ff8a5779898431808554a91243b36531c2c3028ea86c3755ec8f281e33f03383"
     },
     {
+      "path": "tests/js/fingerprint_fixtures.mjs",
+      "bytes": 466,
+      "sha256": "90369a8932d7102c73886714ef202ff631984895db9c496f240935effb23ebe4"
+    },
+    {
+      "path": "tests/js/world0_reference.mjs",
+      "bytes": 1704,
+      "sha256": "17cfca74fcb2e4081b374589a3b4a6cf9aa69c1f7ee4368f9fe71ce17d4a73b5"
+    },
+    {
       "path": "tests/test_climaterisk.py",
       "bytes": 1261,
       "sha256": "4623150b8afe801ff6e58c391669576d40b9d600c83e024fe6a55c9940a1946b"
+    },
+    {
+      "path": "tests/test_engine_analysis.py",
+      "bytes": 8195,
+      "sha256": "e026152d5ed149356365ab203f0b5f139722f74e7e366ed411de21bb8f2f9031"
+    },
+    {
+      "path": "tests/test_engine_parity.py",
+      "bytes": 6185,
+      "sha256": "1253eb85908b15fead10782fd67676e6f150841784cf9cddec2d285491e00161"
+    },
+    {
+      "path": "tests/test_engine_world.py",
+      "bytes": 7196,
+      "sha256": "5566acae4ecec7874fa00369a298cb163130bad183e35ed895cf66fb7f6b1780"
     },
     {
       "path": "tests/test_manifest.py",

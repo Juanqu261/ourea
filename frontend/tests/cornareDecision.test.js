@@ -126,11 +126,12 @@ test('information gaps stay explicit and the flow is in Spanish', () => {
     'priority',
     'portfolio',
     'horizon',
+    'robustness',
     'residual',
     'followup',
   ]);
   assert.equal(STEPS[0].label, 'Territorio');
-  assert.equal(STEPS[5].label, 'Seguimiento');
+  assert.equal(STEPS[6].label, 'Seguimiento');
 });
 
 test('public ficha status cannot change the institutional portfolio', () => {

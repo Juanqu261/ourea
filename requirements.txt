@@ -1,4 +1,6 @@
-# Ourea Python dependencies for the CORNARE preprocessing scripts.
+# Ourea Python dependencies for the CORNARE preprocessing scripts and decision_engine.
+# numpy is pinned: the engine fingerprint includes its version (seeded worlds must replay).
+numpy==2.5.3
 pandas==2.2.3
 openpyxl>=3.1.2
 shapely==2.1.2

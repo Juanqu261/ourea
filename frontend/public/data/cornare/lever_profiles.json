@@ -1,0 +1,431 @@
+{
+  "schema": "ourea.cornare.lever_profiles",
+  "seed": 20261007,
+  "n_worlds": 4000,
+  "fingerprint": "ourea-aa929747",
+  "numpy": "2.5.3",
+  "evidence_labels": {
+    "institutional": "Dato institucional",
+    "team_inference": "Inferencia del equipo",
+    "assumption": "Supuesto",
+    "missing": "Información faltante",
+    "exploratory": "Exploratorio"
+  },
+  "field_evidence": {
+    "cells.sensitivity": "institutional",
+    "cells.adaptive_capacity": "institutional",
+    "cells.profile": "team_inference",
+    "measures.lever": "team_inference"
+  },
+  "wording_rules": [
+    "Se dice «casi óptimo en X% de los N mundos probados». Nunca «probabilidad».",
+    "Los parámetros exploratorios no se reportan como hallazgos: solo aparecen en puntos de quiebre y señales, rotulados.",
+    "El puntaje es un puntaje de prioridad. No hay «% de vulnerabilidad reducida» ni pérdidas evitadas.",
+    "«Sin desagregar» es información faltante, nunca «baja»."
+  ],
+  "profile_labels": {
+    "reduce_s": "Expuesto pero organizado: reducir sensibilidad",
+    "raise_ca": "Poco expuesto y poco preparado: fortalecer capacidad adaptativa",
+    "both": "Expuesto y poco preparado: ambas palancas",
+    "no_lever": "Sin palanca dominante",
+    "partial": "Parcial: solo se publicó S o CA",
+    "unknown": "Sin desagregar (información faltante)"
+  },
+  "cells": [
+    {
+      "municipality_id": "rionegro",
+      "dimension_id": "biodiversity",
+      "sensitivity": null,
+      "adaptive_capacity": {
+        "value": 0.22,
+        "level": null,
+        "wording": "el reto no asigna clase a este valor",
+        "source_metric_id": "rio-bio-ac"
+      },
+      "profile": "partial",
+      "profile_label": "Parcial: solo se publicó S o CA",
+      "needed_lever": null,
+      "provenance": "missing",
+      "key": "rionegro|biodiversity"
+    },
+    {
+      "municipality_id": "rionegro",
+      "dimension_id": "water",
+      "sensitivity": null,
+      "adaptive_capacity": null,
+      "profile": "unknown",
+      "profile_label": "Sin desagregar (información faltante)",
+      "needed_lever": null,
+      "provenance": "missing",
+      "key": "rionegro|water"
+    },
+    {
+      "municipality_id": "rionegro",
+      "dimension_id": "disaster",
+      "sensitivity": {
+        "value": 0.4,
+        "level": "alta",
+        "wording": "mayor sensibilidad del corredor",
+        "source_metric_id": "rio-disaster-sensitivity"
+      },
+      "adaptive_capacity": {
+        "value": 0.56,
+        "level": "adecuada",
+        "wording": "relativamente favorable",
+        "source_metric_id": "rio-drm-ac"
+      },
+      "profile": "reduce_s",
+      "profile_label": "Expuesto pero organizado: reducir sensibilidad",
+      "needed_lever": "S",
+      "provenance": "team_inference",
+      "key": "rionegro|disaster"
+    },
+    {
+      "municipality_id": "rionegro",
+      "dimension_id": "health",
+      "sensitivity": null,
+      "adaptive_capacity": null,
+      "profile": "unknown",
+      "profile_label": "Sin desagregar (información faltante)",
+      "needed_lever": null,
+      "provenance": "missing",
+      "key": "rionegro|health"
+    },
+    {
+      "municipality_id": "rionegro",
+      "dimension_id": "infrastructure",
+      "sensitivity": null,
+      "adaptive_capacity": null,
+      "profile": "unknown",
+      "profile_label": "Sin desagregar (información faltante)",
+      "needed_lever": null,
+      "provenance": "missing",
+      "key": "rionegro|infrastructure"
+    },
+    {
+      "municipality_id": "rionegro",
+      "dimension_id": "habitat",
+      "sensitivity": null,
+      "adaptive_capacity": null,
+      "profile": "unknown",
+      "profile_label": "Sin desagregar (información faltante)",
+      "needed_lever": null,
+      "provenance": "missing",
+      "key": "rionegro|habitat"
+    },
+    {
+      "municipality_id": "rionegro",
+      "dimension_id": "food",
+      "sensitivity": null,
+      "adaptive_capacity": null,
+      "profile": "unknown",
+      "profile_label": "Sin desagregar (información faltante)",
+      "needed_lever": null,
+      "provenance": "missing",
+      "key": "rionegro|food"
+    },
+    {
+      "municipality_id": "guarne",
+      "dimension_id": "biodiversity",
+      "sensitivity": null,
+      "adaptive_capacity": {
+        "value": 0.33,
+        "level": "baja",
+        "wording": "sigue en categoría Baja",
+        "source_metric_id": "gua-bio-ac"
+      },
+      "profile": "partial",
+      "profile_label": "Parcial: solo se publicó S o CA",
+      "needed_lever": null,
+      "provenance": "missing",
+      "key": "guarne|biodiversity"
+    },
+    {
+      "municipality_id": "guarne",
+      "dimension_id": "water",
+      "sensitivity": null,
+      "adaptive_capacity": null,
+      "profile": "unknown",
+      "profile_label": "Sin desagregar (información faltante)",
+      "needed_lever": null,
+      "provenance": "missing",
+      "key": "guarne|water"
+    },
+    {
+      "municipality_id": "guarne",
+      "dimension_id": "disaster",
+      "sensitivity": null,
+      "adaptive_capacity": null,
+      "profile": "unknown",
+      "profile_label": "Sin desagregar (información faltante)",
+      "needed_lever": null,
+      "provenance": "missing",
+      "key": "guarne|disaster"
+    },
+    {
+      "municipality_id": "guarne",
+      "dimension_id": "health",
+      "sensitivity": null,
+      "adaptive_capacity": null,
+      "profile": "unknown",
+      "profile_label": "Sin desagregar (información faltante)",
+      "needed_lever": null,
+      "provenance": "missing",
+      "key": "guarne|health"
+    },
+    {
+      "municipality_id": "guarne",
+      "dimension_id": "infrastructure",
+      "sensitivity": null,
+      "adaptive_capacity": null,
+      "profile": "unknown",
+      "profile_label": "Sin desagregar (información faltante)",
+      "needed_lever": null,
+      "provenance": "missing",
+      "key": "guarne|infrastructure"
+    },
+    {
+      "municipality_id": "guarne",
+      "dimension_id": "habitat",
+      "sensitivity": null,
+      "adaptive_capacity": null,
+      "profile": "unknown",
+      "profile_label": "Sin desagregar (información faltante)",
+      "needed_lever": null,
+      "provenance": "missing",
+      "key": "guarne|habitat"
+    },
+    {
+      "municipality_id": "guarne",
+      "dimension_id": "food",
+      "sensitivity": null,
+      "adaptive_capacity": null,
+      "profile": "unknown",
+      "profile_label": "Sin desagregar (información faltante)",
+      "needed_lever": null,
+      "provenance": "missing",
+      "key": "guarne|food"
+    },
+    {
+      "municipality_id": "marinilla",
+      "dimension_id": "biodiversity",
+      "sensitivity": null,
+      "adaptive_capacity": {
+        "value": 0.24,
+        "level": null,
+        "wording": "el reto no asigna clase a este valor",
+        "source_metric_id": "mar-bio-ac"
+      },
+      "profile": "partial",
+      "profile_label": "Parcial: solo se publicó S o CA",
+      "needed_lever": null,
+      "provenance": "missing",
+      "key": "marinilla|biodiversity"
+    },
+    {
+      "municipality_id": "marinilla",
+      "dimension_id": "water",
+      "sensitivity": null,
+      "adaptive_capacity": null,
+      "profile": "unknown",
+      "profile_label": "Sin desagregar (información faltante)",
+      "needed_lever": null,
+      "provenance": "missing",
+      "key": "marinilla|water"
+    },
+    {
+      "municipality_id": "marinilla",
+      "dimension_id": "disaster",
+      "sensitivity": null,
+      "adaptive_capacity": {
+        "value": 0.61,
+        "level": "adecuada",
+        "wording": "relativamente favorable",
+        "source_metric_id": "mar-drm-ac"
+      },
+      "profile": "partial",
+      "profile_label": "Parcial: solo se publicó S o CA",
+      "needed_lever": null,
+      "provenance": "missing",
+      "key": "marinilla|disaster"
+    },
+    {
+      "municipality_id": "marinilla",
+      "dimension_id": "health",
+      "sensitivity": null,
+      "adaptive_capacity": null,
+      "profile": "unknown",
+      "profile_label": "Sin desagregar (información faltante)",
+      "needed_lever": null,
+      "provenance": "missing",
+      "key": "marinilla|health"
+    },
+    {
+      "municipality_id": "marinilla",
+      "dimension_id": "infrastructure",
+      "sensitivity": null,
+      "adaptive_capacity": null,
+      "profile": "unknown",
+      "profile_label": "Sin desagregar (información faltante)",
+      "needed_lever": null,
+      "provenance": "missing",
+      "key": "marinilla|infrastructure"
+    },
+    {
+      "municipality_id": "marinilla",
+      "dimension_id": "habitat",
+      "sensitivity": null,
+      "adaptive_capacity": null,
+      "profile": "unknown",
+      "profile_label": "Sin desagregar (información faltante)",
+      "needed_lever": null,
+      "provenance": "missing",
+      "key": "marinilla|habitat"
+    },
+    {
+      "municipality_id": "marinilla",
+      "dimension_id": "food",
+      "sensitivity": null,
+      "adaptive_capacity": null,
+      "profile": "unknown",
+      "profile_label": "Sin desagregar (información faltante)",
+      "needed_lever": null,
+      "provenance": "missing",
+      "key": "marinilla|food"
+    }
+  ],
+  "measures": [
+    {
+      "id": "bio_psa",
+      "dimension_id": "biodiversity",
+      "lever": "S+CA",
+      "provenance": "team_inference",
+      "mismatch_cells": [],
+      "worlds_penalized_share": 0.0
+    },
+    {
+      "id": "bio_restore",
+      "dimension_id": "biodiversity",
+      "lever": "S+CA",
+      "provenance": "team_inference",
+      "mismatch_cells": [],
+      "worlds_penalized_share": 0.0
+    },
+    {
+      "id": "bio_pa",
+      "dimension_id": "biodiversity",
+      "lever": "S+CA",
+      "provenance": "team_inference",
+      "mismatch_cells": [],
+      "worlds_penalized_share": 0.0
+    },
+    {
+      "id": "water_eff",
+      "dimension_id": "water",
+      "lever": "S+CA",
+      "provenance": "team_inference",
+      "mismatch_cells": [],
+      "worlds_penalized_share": 0.0
+    },
+    {
+      "id": "water_riparian",
+      "dimension_id": "water",
+      "lever": "S+CA",
+      "provenance": "team_inference",
+      "mismatch_cells": [],
+      "worlds_penalized_share": 0.0
+    },
+    {
+      "id": "water_head",
+      "dimension_id": "water",
+      "lever": "S+CA",
+      "provenance": "team_inference",
+      "mismatch_cells": [],
+      "worlds_penalized_share": 0.0
+    },
+    {
+      "id": "food_soil",
+      "dimension_id": "food",
+      "lever": "S+CA",
+      "provenance": "team_inference",
+      "mismatch_cells": [],
+      "worlds_penalized_share": 0.0
+    },
+    {
+      "id": "food_agro",
+      "dimension_id": "food",
+      "lever": "S+CA",
+      "provenance": "team_inference",
+      "mismatch_cells": [],
+      "worlds_penalized_share": 0.0
+    },
+    {
+      "id": "hab_green",
+      "dimension_id": "habitat",
+      "lever": "S+CA",
+      "provenance": "team_inference",
+      "mismatch_cells": [],
+      "worlds_penalized_share": 0.0
+    },
+    {
+      "id": "hab_suds",
+      "dimension_id": "habitat",
+      "lever": "S+CA",
+      "provenance": "team_inference",
+      "mismatch_cells": [],
+      "worlds_penalized_share": 0.0
+    },
+    {
+      "id": "infra_resilient",
+      "dimension_id": "infrastructure",
+      "lever": "S+CA",
+      "provenance": "team_inference",
+      "mismatch_cells": [],
+      "worlds_penalized_share": 0.0
+    },
+    {
+      "id": "infra_services",
+      "dimension_id": "infrastructure",
+      "lever": "S+CA",
+      "provenance": "team_inference",
+      "mismatch_cells": [],
+      "worlds_penalized_share": 0.0
+    },
+    {
+      "id": "risk_sat",
+      "dimension_id": "disaster",
+      "lever": "CA",
+      "provenance": "team_inference",
+      "mismatch_cells": [
+        "rionegro|disaster"
+      ],
+      "worlds_penalized_share": 0.3805
+    },
+    {
+      "id": "risk_knowledge",
+      "dimension_id": "disaster",
+      "lever": "CA",
+      "provenance": "team_inference",
+      "mismatch_cells": [
+        "rionegro|disaster"
+      ],
+      "worlds_penalized_share": 0.3805
+    },
+    {
+      "id": "health",
+      "dimension_id": "health",
+      "lever": "S+CA",
+      "provenance": "team_inference",
+      "mismatch_cells": [],
+      "worlds_penalized_share": 0.0
+    }
+  ],
+  "counts": {
+    "cells": 21,
+    "full": 1,
+    "partial": 4,
+    "unknown": 16
+  },
+  "rule": "Un desajuste exige conocer S y CA en la celda. Con perfil parcial o sin desagregar, lever_fit = 1: el dato faltante no penaliza.",
+  "finding": "Con este paquete solo 1 de 21 celdas municipio × dimensión tiene S y CA publicados. La pregunta del reto (¿reducir sensibilidad o fortalecer capacidad adaptativa?) se puede responder para riesgo de desastres en Rionegro (expuesto pero organizado: reducir sensibilidad). El resto queda sin desagregar (gap-ssp-cube)."
+}

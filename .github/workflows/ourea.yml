@@ -57,11 +57,12 @@ jobs:
         run: python -m pip install --upgrade pip && pip install -r requirements.txt
 
       - id: python
-        name: Python syntax, unit tests, and CORNARE inputs
+        name: Python syntax, unit tests, CORNARE inputs, and decision engine outputs
         run: |
-          python -m compileall -q scripts tests
+          python -m compileall -q scripts tests decision_engine
           python -m unittest discover -s tests -p "test_*.py" -v
           python scripts/climaterisk/validate_inputs.py
+          python -m decision_engine.build --check
 
       - name: Install Playwright Chromium
         working-directory: frontend
