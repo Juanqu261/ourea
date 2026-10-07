@@ -86,10 +86,11 @@ Servicio local FastAPI con LangChain y LangGraph. No decide: lee el motor y expl
 - Cada cifra del copiloto se verifica por código contra la salida de una herramienta y su huella. Si no pasa en dos intentos, responde solo con hechos de las herramientas.
 
 ```bash
-pip install -r requirements.txt -r requirements-ai.txt
-uvicorn services.decision_ai.app:app --port 8787 --env-file .env
-python -m services.decision_ai.audit export.json                   # QA de la exportación, sin llave
-python -m services.decision_ai.ask "¿Y si exigimos infraestructura gris?"   # necesita llave
+uv venv .venv --python 3.12
+uv pip install -r requirements.txt -r requirements-ai.txt          # CI usa pip con los mismos archivos
+uv run uvicorn services.decision_ai.app:app --port 8787 --env-file .env
+uv run python -m services.decision_ai.audit export.json             # QA de la exportación, sin llave
+uv run python -m services.decision_ai.ask "¿Y si exigimos infraestructura gris?"   # necesita llave
 ```
 
 ## Arquitectura
@@ -119,8 +120,8 @@ npm run build
 Python 3.12:
 
 ```bash
-pip install -r requirements.txt -r requirements-ai.txt
-python -m unittest discover -s tests -p "test_*.py" -v
+uv pip install -r requirements.txt -r requirements-ai.txt    # o: pip install …
+uv run python -m unittest discover -s tests -p "test_*.py" -v
 python scripts/climaterisk/validate_inputs.py
 ```
 

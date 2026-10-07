@@ -1,4 +1,4 @@
-"""QA: python -m services.decision_ai.audit <export.json>. Exit 1 when a critical finding blocks export."""
+"""QA: uv run python -m services.decision_ai.audit <export.json>. Exit 1 when a critical finding blocks export."""
 
 from __future__ import annotations
 
@@ -11,7 +11,7 @@ from .checks import run
 
 def main(argv: list[str]) -> int:
     if len(argv) != 1:
-        print("usage: python -m services.decision_ai.audit <export.json>", file=sys.stderr)
+        print("usage: uv run python -m services.decision_ai.audit <export.json>", file=sys.stderr)
         return 2
     bundle = json.loads(Path(argv[0]).read_text(encoding="utf-8"))
     report = run(bundle.get("audit_bundle", bundle))

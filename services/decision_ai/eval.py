@@ -1,4 +1,4 @@
-"""Live eval (manual, needs a key): python -m services.decision_ai.eval [--only id,id]
+"""Live eval (manual, needs a key): uv run python -m services.decision_ai.eval [--only id,id]
 
 Pass = the answer verifies within 2 tries (no fallback), the expected tool is called, traps are refused.
 """

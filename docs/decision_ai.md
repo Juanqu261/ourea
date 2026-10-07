@@ -74,15 +74,16 @@ En el paso de Seguimiento, la insignia dice «0 hallazgos críticos · N afirmac
 ## Ejecutar
 
 ```bash
-pip install -r requirements.txt -r requirements-ai.txt
+uv venv .venv --python 3.12
+uv pip install -r requirements.txt -r requirements-ai.txt   # CI usa pip con los mismos archivos
 cp .env.example .env            # OUREA_AI_ENABLED=1 y OPENAI_API_KEY para los agentes
-uvicorn services.decision_ai.app:app --port 8787 --env-file .env
+uv run uvicorn services.decision_ai.app:app --port 8787 --env-file .env
 cd frontend && npm run dev      # VITE_OUREA_AI_API_URL=http://127.0.0.1:8787/api
 ```
 
-- `python -m services.decision_ai.audit <export.json>`: QA sin llave; sale con 1 si hay un crítico.
-- `python -m services.decision_ai.ask "pregunta" ["seguimiento"]`: copiloto por consola.
-- `python -m services.decision_ai.eval`: evaluación en vivo con las 20 preguntas de `tests/fixtures/ai/copilot_questions.jsonl` (trampas incluidas). Pasa si verifica en dos intentos, llama la herramienta esperada y rechaza las trampas.
+- `uv run python -m services.decision_ai.audit <export.json>`: QA sin llave; sale con 1 si hay un crítico.
+- `uv run python -m services.decision_ai.ask "pregunta" ["seguimiento"]`: copiloto por consola.
+- `uv run python -m services.decision_ai.eval`: evaluación en vivo con las 20 preguntas de `tests/fixtures/ai/copilot_questions.jsonl` (trampas incluidas). Pasa si verifica en dos intentos, llama la herramienta esperada y rechaza las trampas.
 
 Las pruebas (`tests/test_ai_*.py`) usan un modelo con guion y no necesitan red ni llave.
 

@@ -3,7 +3,7 @@
 Deterministic, no key:  GET /api/health · POST /api/tools/{name} · POST /api/audit
 LLM, OUREA_AI_ENABLED:  POST /api/agents/copilot (SSE) · POST /api/agents/interview/{start,answer}
 
-Run: uvicorn services.decision_ai.app:app --port 8787 --env-file .env
+Run: uv run uvicorn services.decision_ai.app:app --port 8787 --env-file .env
 """
 
 from __future__ import annotations

@@ -1,4 +1,4 @@
-"""CLI: python -m services.decision_ai.ask "¿Y si exigimos infraestructura gris?"  (needs a model key)."""
+"""CLI: uv run python -m services.decision_ai.ask "¿Y si exigimos infraestructura gris?"  (needs a model key)."""
 
 from __future__ import annotations
 
@@ -13,7 +13,7 @@ from .tools import call_log
 
 def main(argv: list[str]) -> int:
     if not argv:
-        print('usage: python -m services.decision_ai.ask "pregunta" ["otra pregunta" …]', file=sys.stderr)
+        print('usage: uv run python -m services.decision_ai.ask "pregunta" ["otra pregunta" …]', file=sys.stderr)
         return 2
     try:
         from dotenv import load_dotenv
