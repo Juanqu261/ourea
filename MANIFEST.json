@@ -7,7 +7,7 @@
   "catalogue_measures": 15,
   "catalogue_total_million_cop": 18900,
   "guardrails": 5,
-  "file_count_excluding_manifest": 160,
+  "file_count_excluding_manifest": 164,
   "files": [
     {
       "path": ".env.example",
@@ -520,6 +520,11 @@
       "sha256": "5056c1173195ee4e39a050dbdf9f26f08d74c457226a7cc8c7b722833b4664bd"
     },
     {
+      "path": "frontend/scripts/renderDecisionBrief.mjs",
+      "bytes": 1122,
+      "sha256": "3de8cbeb9affff7f82f249730035957edc78a5b59a4f21958db27dfdfc378267"
+    },
+    {
       "path": "frontend/src/App.jsx",
       "bytes": 24494,
       "sha256": "1f93452d0d4c430a9ca7196f136ffcc21d6ee22c54888a1aa8d6e8de7baebb6f"
@@ -545,14 +550,24 @@
       "sha256": "e789d0d0039e13ac9a53148a0f46bb7244385f640188f617f177d50c2b9329c8"
     },
     {
+      "path": "frontend/src/cornare/briefLayout.js",
+      "bytes": 4362,
+      "sha256": "5345f99f51d91dd4b7da254281848054de0385ffc2836bc4518db18a7ec8ce56"
+    },
+    {
       "path": "frontend/src/cornare/copy.js",
       "bytes": 867,
       "sha256": "560a7313f934210cdd113791afe10b803442be5cddf2183346f4557aa93f501b"
     },
     {
+      "path": "frontend/src/cornare/decisionBrief.js",
+      "bytes": 40360,
+      "sha256": "6ee453a9eb2848fe7bbb3eed8fe5b59e7f17532495f5b100e31f5ca72b34d9b5"
+    },
+    {
       "path": "frontend/src/cornare/exportDecision.js",
-      "bytes": 3959,
-      "sha256": "5459fe0c19ec4e77633e5c9babd5f2bc263ce69caac0dc2aad66a32d28db9cf8"
+      "bytes": 1464,
+      "sha256": "78bb3b48dc9d8523e9ad2cf72bb17b54969563ed51543f0ab8a549ee7429f3f1"
     },
     {
       "path": "frontend/src/cornare/loadData.js",
@@ -626,8 +641,8 @@
     },
     {
       "path": "frontend/src/domain/pdfDocument.js",
-      "bytes": 18282,
-      "sha256": "3032ba9643dbbeb7d4f441b937097bb2c304e49d0556b3e03dc6878fe1d155a5"
+      "bytes": 18860,
+      "sha256": "409cb184d163f7dd989fb08b0216e88de3804bf24625e7ba92339272112c2b88"
     },
     {
       "path": "frontend/src/domain/portfolioSearch.js",
@@ -683,6 +698,11 @@
       "path": "frontend/tests/dataValidation.mjs",
       "bytes": 2104,
       "sha256": "f9452fa31fb0ca256614fa1164b478e268630676f356b2d39c417d685d69d590"
+    },
+    {
+      "path": "frontend/tests/decisionBrief.test.js",
+      "bytes": 2970,
+      "sha256": "1b3a4318c74f3778c72cba55a2f0ddb8b9b1438c0ca50d56e0c7ee44cf393d91"
     },
     {
       "path": "frontend/tests/mapContext.test.js",
