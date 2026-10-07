@@ -39,7 +39,7 @@ export function RobustnessStep({ engine, analysis }) {
   const pathways = robustness.pathways;
   return (
     <section data-testid="robustness">
-      <h2>¿Se sostiene la decisión en los {worlds(n)} mundos probados?</h2>
+      <p className="panel-kicker">{worlds(n)} mundos probados</p>
       <p className="lead">
         Cada mundo cambia los supuestos del modelo dentro de rangos declarados: pesos, escala de clases, valor de una segunda medida,
         efectividad de cada medida y cambios de clase bajo SSP3-7.0. Se cuenta en cuántos mundos cada portafolio queda casi óptimo.

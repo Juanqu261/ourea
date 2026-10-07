@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { Map, NavigationControl, setWorkerUrl } from 'maplibre-gl';
+import { Map, NavigationControl, AttributionControl, setWorkerUrl } from 'maplibre-gl';
 import 'maplibre-gl/dist/maplibre-gl.css';
 import { boundsOf } from './bounds.js';
 import { GREEN_BLUE_LAYERS } from './focus.js';
@@ -50,25 +50,44 @@ export function DecisionMap({
   const modeRef = useRef('2d');
   const exaggerationRef = useRef(1);
   const handlers = useRef({});
+  const focusRef = useRef(focus);
+  const hadFocus = useRef(false);
   const [mode, setMode] = useState('2d');
   const [exaggeration, setExaggeration] = useState(1);
   const [ready, setReady] = useState(false);
-  const [panelOpen, setPanelOpen] = useState(() => (
-    typeof window !== 'undefined' && window.matchMedia('(min-width: 900px)').matches
-  ));
+  const [panelOpen, setPanelOpen] = useState(false);
   const [layers, setLayers] = useState([]);
   const [basemapOn, setBasemapOn] = useState(true);
   const [hillshadeOn, setHillshadeOn] = useState(true);
   const [shadingOn, setShadingOn] = useState(true);
   const [note, setNote] = useState('');
   const [card, setCard] = useState(null);
+  const [cardOpen, setCardOpen] = useState(true);
+  const [cardDetail, setCardDetail] = useState(false);
   boundariesRef.current = boundaries;
   colorsRef.current = colors;
   selectedRef.current = selectedIds;
   shadingRef.current = shadingOn;
   modeRef.current = mode;
   exaggerationRef.current = exaggeration;
-  handlers.current = { onCard: setCard, onMunicipality, shading: shadingLabel };
+  focusRef.current = focus;
+  handlers.current = {
+    onCard: (next) => {
+      setCardOpen(true);
+      setCardDetail(false);
+      if (next?.lines && !next.summary) {
+        setCard({
+          title: next.title,
+          summary: next.lines.slice(0, 3),
+          detail: next.lines.slice(3),
+        });
+        return;
+      }
+      setCard(next);
+    },
+    onMunicipality,
+    shading: shadingLabel,
+  };
 
   function commitLayers(updater) {
     setLayers((current) => {
@@ -129,11 +148,13 @@ export function DecisionMap({
       pitch: 0,
       bearing: 0,
       maxPitch: 85,
-      attributionControl: true,
+      attributionControl: false,
       fadeDuration: 0,
     });
     map.addControl(new NavigationControl({ visualizePitch: true }), 'top-right');
+    map.addControl(new AttributionControl({ compact: true }), 'bottom-right');
     mapRef.current = map;
+    window.__oureaMapMounts = (window.__oureaMapMounts || 0) + 1;
 
     const useLocalStyle = () => {
       styleStep.current = 2;
@@ -258,14 +279,31 @@ export function DecisionMap({
   const loadedLayerIds = layers.map((layer) => layer.id).join(',');
 
   useEffect(() => {
-    if (!focus?.measureId) return;
+    if (!focus?.measureId) {
+      setCard(null);
+      if (hadFocus.current) {
+        hadFocus.current = false;
+        const map = mapRef.current;
+        if (ready && map && boundaries?.features?.length) {
+          const frame = boundsOf(boundaries);
+          if (frame) map.fitBounds(frame, { padding: 48, duration: motion(), pitch: mode === '3d' ? 60 : 0, bearing: mode === '3d' ? -28 : 0 });
+        }
+      }
+      return;
+    }
+    hadFocus.current = true;
+    setCardOpen(true);
+    setCardDetail(false);
     setCard({
       title: focus.title,
-      lines: [
-        ['Ámbito de decisión', focus.scopeLabel],
-        ['Contexto espacial disponible', focus.contextLabel],
-        ['Ubicación exacta', focus.exactLocation],
-        ['Fuente', focus.sourceLabel],
+      summary: [
+        ['Ámbito', focus.scopeLabel],
+        ['Sitio', focus.exactLocation],
+        ['Fuente', 'DANE MGN 2025 · CORNARE'],
+      ],
+      detail: [
+        ['Contexto', focus.contextLabel],
+        ['Procedencia', focus.sourceLabel],
       ],
     });
     commitLayers((current) => {
@@ -336,8 +374,8 @@ export function DecisionMap({
             )}
           </section>
           {GROUPS.map(([id, label]) => (
-            <section key={id}>
-              <h3>{label}</h3>
+            <details key={id} open={id === 'nature'}>
+              <summary>{label}</summary>
               {id === 'decision' && (
                 <label><input type="checkbox" checked={shadingOn} onChange={() => setShadingOn((value) => !value)} /> Sombreado del diagnóstico</label>
               )}
@@ -356,17 +394,14 @@ export function DecisionMap({
                   {layer.unavailable ? ' (no disponible)' : ''}
                 </label>
               ))}
-            </section>
+            </details>
           ))}
-          <button
-            type="button"
-            data-testid="green-blue"
-            onClick={() => commitLayers((current) => current.map((layer) => (
-              GREEN_BLUE_LAYERS.includes(layer.id) ? { ...layer, visible: true } : layer
-            )))}
-          >
-            Red verde-azul
-          </button>
+          <div className="pill-row">
+            <button type="button" onClick={() => applyPreset('territory', commitLayers)}>Territorio</button>
+            <button type="button" data-testid="green-blue" onClick={() => applyPreset('green', commitLayers)}>Red verde-azul</button>
+            <button type="button" onClick={() => applyPreset('hazard', commitLayers)}>Amenazas</button>
+            <button type="button" onClick={() => applyPreset('portfolio', commitLayers, focusRef.current)}>Portafolio</button>
+          </div>
           <p>Contexto espacial para mirar conectividad y soluciones basadas en la naturaleza. No marca predios óptimos.</p>
         </div>
       )}
@@ -381,18 +416,45 @@ export function DecisionMap({
           </li>
         ))}
       </ul>
-      {card && (
+      {card && cardOpen && (
         <aside className="map-card" data-testid="map-focus-card">
-          <h3>{card.title}</h3>
+          <div className="map-card-head">
+            <h3>{card.title}</h3>
+            <button type="button" data-testid="map-card-close" aria-label="Cerrar ficha del mapa" onClick={() => setCardOpen(false)}>Cerrar</button>
+          </div>
           <dl>
-            {card.lines.map(([label, value]) => (
+            {card.summary.map(([label, value]) => (
               <div key={label}><dt>{label}</dt><dd>{value}</dd></div>
             ))}
           </dl>
+          {card.detail?.length > 0 && (
+            <>
+              <button type="button" onClick={() => setCardDetail((open) => !open)}>{cardDetail ? 'Ocultar detalle' : 'Ver detalle'}</button>
+              {cardDetail && (
+                <dl>
+                  {card.detail.map(([label, value]) => (
+                    <div key={label}><dt>{label}</dt><dd>{value}</dd></div>
+                  ))}
+                </dl>
+              )}
+            </>
+          )}
         </aside>
       )}
     </figure>
   );
+}
+
+function applyPreset(name, commitLayers, focus) {
+  const visible = {
+    territory: ['wetlands', 'protected_areas', 'rio_negro_riparian', 'la_marinilla_zoning', 'hydrography'],
+    green: GREEN_BLUE_LAYERS,
+    hazard: ['mass_movement', 'flood', 'hydrography'],
+    portfolio: focus?.layerIds ?? [],
+  }[name] ?? [];
+  commitLayers((current) => current.map((layer) => (
+    visible.includes(layer.id) ? { ...layer, visible: true } : layer
+  )));
 }
 
 function installBase(map, boundaries, terrainFailed, handlers) {
@@ -553,7 +615,7 @@ function bindPointer(map, handlers) {
     const lines = [
       ['Capa', properties.layer_id || 'Municipio'],
       ['Categoría', properties.category || properties.amenaza_label || 'Límite municipal'],
-      ['Ubicación exacta', properties.layer_id ? 'Por definir' : 'No aplica: es el límite municipal'],
+      ['Ubicación exacta', properties.layer_id ? 'Área candidata para prefactibilidad' : 'No aplica: es el límite municipal'],
       ['Fuente', properties.source_id || 'DANE MGN 2025'],
     ];
     if (!properties.layer_id && handlers.current.shading) lines.unshift(['Lectura', handlers.current.shading]);

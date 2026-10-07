@@ -117,7 +117,7 @@
       "sampling": "uniform",
       "low": 0.0,
       "high": 0.1,
-      "world0": 0.05,
+      "world0": 0.0,
       "evidence": "assumption",
       "phrase": "el peso del cobeneficio",
       "gaps": [],
@@ -894,11 +894,11 @@
     }
   ],
   "lenses": {
-    "institucional": "Mundo 0: los valores del modelo institucional.",
-    "multidimensional": "Mundo 0 con dim_penalty = 0.15.",
+    "institucional": "Mundo 0: los pesos publicados de CORNARE, sin cobeneficio.",
+    "multidimensional": "Mundo 0 con dim_penalty = 0.15 y el cobeneficio nombrado.",
     "naturaleza": "Regla de desempate, no un punto del espacio de mundos. Se compara con compare_portfolios.",
     "bajo_arrepentimiento": "Cambia el objetivo a puntaje/costo. No es un punto del espacio de mundos."
   },
-  "fingerprint": "ourea-cc546f34",
+  "fingerprint": "ourea-aa929747",
   "numpy": "2.5.3"
 }

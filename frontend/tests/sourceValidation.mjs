@@ -11,6 +11,8 @@ const banned = [
   /llanaditas/i,
   /riesgo evitado/i,
   /% menos riesgo/i,
+  /CORNARE no entregó/,
+  /no nos dieron/,
 ];
 
 function files(dir, found = []) {

@@ -27,8 +27,8 @@ export function explainSelection(measure, part, profiles) {
       ? `La recurrencia documentada suma ${measure.recurrence.count} registros coincidentes.`
       : 'No hay registros coincidentes en municipios con cobertura suficiente.';
   const cobenefit = measure.cobenefit.term > 0
-    ? `Se reconoce un cobeneficio pequeño hacia ${measure.cobenefit.dimensions.map((item) => dimensionName(item.dimensionId)).join(', ')}, porque la unidad funcional lo nombra.`
-    : 'No se suma un cobeneficio numérico.';
+    ? `La unidad funcional nombra un cobeneficio hacia ${measure.cobenefit.dimensions.map((item) => dimensionName(item.dimensionId)).join(', ')}. Ese término no entra al puntaje institucional.`
+    : 'No se suma un cobeneficio al puntaje institucional.';
   return [
     `${measure.name} se ubica en ${place.localization}.`,
     `La dispara la vulnerabilidad ${measure.classificationLabel.toLowerCase()} en ${dimensionName(measure.dimensionId)} (${place.trigger}).`,

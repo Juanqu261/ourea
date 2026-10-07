@@ -35,8 +35,8 @@ Para la medida situada:
 
 - Vulnerabilidad: `0,70 × clase`, con Muy alta 1,00, Alta 0,80, Media 0,60, Baja 0,40 y Muy baja 0,20.
 - Recurrencia: `0,15 × conteo / máximo conteo del corredor`, solo si la cobertura alcanza cinco registros. El máximo observado es 4, en agroecología de Guarne.
-- Talleres: peso institucional 0,15, sin calificar.
-- Cobeneficio: `0,05 × clase de la segunda dimensión`, solo si la unidad funcional del reto nombra esa dimensión. Hoy aplica a cabeceras, suelos, agroecología y espacios verdes.
+- Talleres: peso institucional 0,15, sin calificar. No se muestra como cero.
+- Cobeneficio: `0,05 × clase de la segunda dimensión` solo en la lente de naturaleza y en la multidimensional. No entra al objetivo institucional.
 
 Dentro de un portafolio, la primera medida de una dimensión conserva el término de vulnerabilidad. Las siguientes conservan 35% en la lente institucional y 15% en la lente multidimensional. Así no se cuenta tres veces la misma clase Muy alta.
 
@@ -46,13 +46,21 @@ Hay 15 medidas indivisibles. Se enumeran las 32.768 combinaciones y se descarta 
 
 Otras lentes, con la misma búsqueda:
 
-- Naturaleza positiva: mismo puntaje. Solo en un empate exacto pesa cuántas medidas son de naturaleza, luego híbridas, y menos gasto gris.
+- Naturaleza positiva: suma el cobeneficio nombrado y, en empate, prefiere más medidas de naturaleza y menos gasto gris.
 - Multidimensional: el penal de la segunda medida en la dimensión baja a 15%.
 - Bajo arrepentimiento: el aporte se divide por el costo. Las clases Alta y Muy alta conservan el peso completo. Las demás conservan la mitad.
 - Máximo número de medidas: primero la mayor cantidad, después el puntaje institucional.
 - Infraestructura gris: obliga la medida de 2.500 millones y completa con el mejor puntaje.
 
-La decisión que se presenta es la institucional. En los datos actuales, naturaleza positiva, multidimensional y máximo número producen el mismo conjunto, porque no hay una segunda medida de la misma dimensión que el penal pueda expulsar. El contraste que sí cambia la decisión es la obra gris.
+La decisión que se presenta es la institucional, sin el cobeneficio de 0,05. En los datos actuales esa corrección cambia el conjunto: entran áreas protegidas y PSA, y salen los espacios verdes, que solo ganaban cuando el cobeneficio sumaba. La lente de naturaleza conserva los espacios verdes porque sí puede usar ese término. El contraste con la obra gris sigue siendo el otro cambio grande. El detalle está en `scoring_audit.md`.
+
+## Portafolio institucional
+
+Medidas: áreas protegidas (700), PSA (1.200), conocimiento del riesgo (600), uso eficiente del agua (900, Marinilla), agroecología (800) y salud (800).
+
+Costo: 5.000 millones. Disponible: 0. Puntaje verificado: 2,8125.
+
+La restauración queda fuera. Los espacios verdes quedan fuera del puntaje institucional y dentro de la lente que sí cuenta el cobeneficio.
 
 ## SSP3-7.0
 
@@ -60,15 +68,7 @@ El reto solo cuantifica un cambio: el riesgo de desastres de Rionegro pasa de 0,
 
 El estado es Robusta solo si el conjunto no cambia y cada dimensión del portafolio tiene evidencia de escenario. Con una sola serie, un conjunto estable que incluye otras dimensiones queda Mayormente robusta. Si el conjunto cambia, Requiere ajuste. Si no hay ningún cambio documentado, Evidencia insuficiente.
 
-## Portafolio que produce esta regla
-
-Medidas, en orden de aporte al puntaje: fortalecimiento de áreas protegidas (700, corredor), conocimiento del riesgo (600, corredor), uso eficiente del agua (900, Marinilla), agroecología (800, Guarne), espacios verdes (1.000, Guarne o Marinilla) y salud (800, Guarne o Marinilla).
-
-Costo: 4.800 millones. Disponible: 200 millones. Puntaje de prioridad: 2,87.
-
-La restauración de ecosistemas queda fuera. Su puntaje unitario es mayor que el de áreas protegidas, pero cuesta 800 millones más y ese margen cubre otra dimensión con más aporte que la diferencia entre ambas medidas de biodiversidad. La infraestructura de Guarne, en clase Alta, también queda fuera: meter la obra de 2.500 millones baja el puntaje a 2,38.
-
-La prueba SSP3-7.0 no cambia el conjunto. El estado es Mayormente robusta, porque las demás dimensiones no tienen serie.
+La prueba no cambia el conjunto institucional. La cobertura de escenario sigue siendo una sola dimensión.
 
 ## Residual
 

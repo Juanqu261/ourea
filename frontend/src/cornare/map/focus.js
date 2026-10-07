@@ -16,6 +16,13 @@ const MEASURE_LAYERS = {
   health: [],
 };
 
+const CANDIDATE_LAYERS = new Set([
+  'protected_areas',
+  'rio_negro_riparian',
+  'la_marinilla_zoning',
+  'la_marinilla_ecosystem',
+]);
+
 export const GREEN_BLUE_LAYERS = [
   'wetlands',
   'protected_areas',
@@ -34,7 +41,9 @@ export function focusForMeasure(measure) {
     municipalityIds,
     layerIds,
     scopeLabel: measure.place?.localization ?? 'Ámbito por confirmar',
-    exactLocation: 'Por definir',
+    exactLocation: layerIds.some((id) => CANDIDATE_LAYERS.has(id))
+      ? 'Área candidata para prefactibilidad'
+      : 'Ubicación por validar',
     contextLabel: layerIds.length
       ? 'Contexto espacial disponible para mirar la medida. Esas geometrías no son el sitio de intervención.'
       : 'No hay una capa que localice esta medida.',

@@ -35,6 +35,9 @@ playwright/.cache/
 # Derived datasets live in frontend/public/data/cornare/.
 /CLIMATERISK/
 
+# Downloaded public PDFs and workbooks. The derived JSON is tracked.
+/data/public/
+
 # OS and editor
 .DS_Store
 Thumbs.db

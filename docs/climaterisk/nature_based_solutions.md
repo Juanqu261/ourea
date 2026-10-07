@@ -36,7 +36,7 @@ El IPCC, en el informe del Grupo de Trabajo II del Sexto Informe (2022), trata l
 
 ## Lo que la clase no dice
 
-Una medida de naturaleza puede perder frente a otra combinación si su costo impide cubrir una vulnerabilidad alta en otra dimensión. El portafolio institucional lo muestra: el fortalecimiento de áreas protegidas entra, y la restauración de 1.500 millones no, porque el puntaje adicional no compensa dejar fuera otras dimensiones. Eso no degrada la restauración. Dice que, con este fondo y sin un porcentaje de efectividad, comprarla desplaza cobertura.
+Una medida de naturaleza puede perder frente a otra combinación si su costo, o un criterio que no es institucional, impide cubrir otra vulnerabilidad. El portafolio institucional incluye áreas protegidas y PSA. Los espacios verdes salen de esa lente y permanecen en la lente que sí cuenta el cobeneficio.
 
 ## Seguimiento
 

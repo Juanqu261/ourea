@@ -15,10 +15,10 @@ from decision_engine.fingerprint import canonical_json, decision_fingerprint, js
 from decision_engine.world0 import analyze_world0  # noqa: E402
 
 NODE = shutil.which("node")
-WORLD0_IDS = ["bio_pa", "food_agro", "hab_green", "health", "risk_knowledge", "water_eff"]
+WORLD0_IDS = ["bio_pa", "bio_psa", "food_agro", "health", "risk_knowledge", "water_eff"]
 JS_REJECTED = {
-    "bio_psa": 0.0275, "infra_services": 0.03, "risk_sat": 0.114, "food_soil": 0.15, "bio_restore": 0.205,
-    "water_head": 0.2225, "water_riparian": 0.235, "hab_suds": 0.31, "infra_resilient": 0.49,
+    "hab_green": 0.0025, "infra_services": 0.0025, "risk_sat": 0.0865, "food_soil": 0.1525, "bio_restore": 0.205,
+    "water_riparian": 0.2075, "water_head": 0.245, "hab_suds": 0.2825, "infra_resilient": 0.4325,
 }
 
 
@@ -40,15 +40,15 @@ class World0ScalarTests(unittest.TestCase):
     def test_institutional_portfolio(self):
         best = self.result["institucional"]
         self.assertEqual(list(best.ids), WORLD0_IDS)
-        self.assertEqual(best.cost, 4800)
-        self.assertEqual(best.objective, 2.87)
-        self.assertEqual(self.result["fingerprint"], "ourea-f92bd48d")
+        self.assertEqual(best.cost, 5000)
+        self.assertEqual(best.objective, 2.8125)
+        self.assertEqual(self.result["fingerprint"], "ourea-42aeaba8")
 
     def test_grey_and_ssp(self):
         self.assertEqual(list(self.result["grey"].ids), ["bio_pa", "infra_resilient", "risk_knowledge", "water_eff"])
         self.assertEqual(self.result["grey"].objective, 2.38)
         self.assertEqual(list(self.result["stress"].ids), WORLD0_IDS)
-        self.assertEqual(self.result["stress"].objective, 3.01)
+        self.assertEqual(self.result["stress"].objective, 2.9525)
 
     def test_rejected_gaps(self):
         self.assertEqual({row["id"]: row["gap"] for row in self.result["rejected"]}, JS_REJECTED)
@@ -84,6 +84,8 @@ class JsParityTests(unittest.TestCase):
 
     def test_measure_terms(self):
         js = {row["id"]: row for row in self.js["measures"]}
+        # JS still computes each measure's co-benefit term; only the lenses add it to the score.
+        cobenefit = {terms.id: terms.cob for terms in self.py["prepared_cobenefit"]}
         for terms in self.py["prepared"]:
             row = js[terms.id]
             self.assertEqual(list(terms.placement.candidates), row["candidates"], terms.id)
@@ -92,12 +94,13 @@ class JsParityTests(unittest.TestCase):
             self.assertEqual(terms.rec is None, row["rec"] is None, terms.id)
             if terms.rec is not None:
                 self.assertAlmostEqual(terms.rec, row["rec"], places=12)
-            self.assertAlmostEqual(terms.cob, row["cob"], places=12)
+            self.assertEqual(terms.cob, 0.0)
+            self.assertAlmostEqual(cobenefit[terms.id], row["cob"], places=12)
 
 
 class FingerprintPortTests(unittest.TestCase):
     FIXTURES = [
-        {"ids": WORLD0_IDS, "cost": 4800, "budget": 5000,
+        {"ids": WORLD0_IDS, "cost": 5000, "budget": 5000,
          "weights": {"vulnerability": 0.7, "recurrence": 0.15, "workshops": 0.15}, "diminishing": 0.35},
         {"a": 1.0, "b": 100.0, "c": -0.0},
         {"small": 5e-05, "tiny": 1e-07, "edge": 1e-06, "below": 1.5e-07},
@@ -111,7 +114,7 @@ class FingerprintPortTests(unittest.TestCase):
     ]
 
     def test_world0_fingerprint(self):
-        self.assertEqual(decision_fingerprint(self.FIXTURES[0]), "ourea-f92bd48d")
+        self.assertEqual(decision_fingerprint(self.FIXTURES[0]), "ourea-42aeaba8")
 
     def test_number_format(self):
         self.assertEqual(js_number(1.0), "1")

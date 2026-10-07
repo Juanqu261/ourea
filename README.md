@@ -75,7 +75,7 @@ python -m decision_engine.build          # escribe uncertainty_ranges, lever_pro
 python -m decision_engine.build --check  # falla si el JSON versionado no coincide con una corrida nueva
 ```
 
-La paridad con el motor JS (2,87 · 2,38 · 3,01 · `ourea-f92bd48d`) se prueba en `tests/test_engine_parity.py`. La capa de IA usa `decision_engine/api.py`.
+La paridad con el motor JS (2,8125 · 2,38 · 2,9525 · `ourea-42aeaba8`) se prueba en `tests/test_engine_parity.py`. La capa de IA usa `decision_engine/api.py`.
 
 ## Arquitectura
 

@@ -305,6 +305,90 @@
       "output_crs": null,
       "filter": "investigated; not ingested",
       "limitation": "No cubre un DEM reproducible del corredor completo, incluido Guarne."
+    },
+    {
+      "id": "lit-decision-robustness-2025",
+      "title": "From climate risk to action: Analysing adaptation decision robustness under uncertainty",
+      "institution": "Climate Risk Management",
+      "year": 2025,
+      "url": "https://doi.org/10.1016/j.crm.2025.100751",
+      "file": null,
+      "level": 4,
+      "kind": "literature",
+      "claim": "La robustez se evalúa sobre la decisión de adaptación, no solo sobre la estimación del riesgo. Justifica el panel de qué podría cambiar la decisión. No se usa su modelo bayesiano.",
+      "accessed": "2026-10-07"
+    },
+    {
+      "id": "lit-haasnoot-2013",
+      "title": "Dynamic adaptive policy pathways: A method for crafting robust decisions for a deeply uncertain world",
+      "institution": "Global Environmental Change",
+      "year": 2013,
+      "url": "https://doi.org/10.1016/j.gloenvcha.2012.12.006",
+      "file": null,
+      "level": 4,
+      "kind": "literature",
+      "claim": "Acciones de corto plazo, señales de monitoreo y decisiones contingentes. Ourea solo usa la secuencia hoy, monitorear, reevaluar. No construye un modelo de pathways.",
+      "accessed": "2026-10-07"
+    },
+    {
+      "id": "lit-nbs-matrix-2025",
+      "title": "A framework for selecting Nature-based Solutions: applications and challenges at the catchment scale",
+      "institution": "Journal of Environmental Management",
+      "year": 2025,
+      "url": "https://doi.org/10.1016/j.jenvman.2025.127220",
+      "file": null,
+      "level": 4,
+      "kind": "literature",
+      "claim": "Una matriz de decisión de NbS junto con contexto SIG. Justifica mostrar la matriz y el mapa. No se importa su catálogo ni sus puntajes.",
+      "accessed": "2026-10-07"
+    },
+    {
+      "id": "lit-nbs-mcdm-review-2025",
+      "title": "Multiple criteria-based assessment of Nature-based Solutions for flood management: A systematic review",
+      "institution": "Science of the Total Environment",
+      "year": 2025,
+      "url": null,
+      "file": null,
+      "level": 4,
+      "kind": "literature",
+      "claim": "Revisa evaluaciones multicriterio de NbS para inundación y varios dominios de objetivo. Justifica mostrar cobeneficios aunque no entren al puntaje institucional. No se adopta AHP ni TOPSIS.",
+      "accessed": "2026-10-07"
+    },
+    {
+      "id": "iucn-nbs-standard-2020",
+      "title": "Global Standard for Nature-based Solutions",
+      "institution": "IUCN",
+      "year": 2020,
+      "url": "https://doi.org/10.2305/IUCN.CH.2020.08.en",
+      "file": null,
+      "level": 4,
+      "kind": "standard",
+      "claim": "Ocho criterios usados solo como screening cualitativo. Ninguna medida queda certificada.",
+      "accessed": "2026-10-07"
+    },
+    {
+      "id": "idb-nbs-infrastructure",
+      "title": "Increasing Infrastructure Resilience with Nature-Based Solutions",
+      "institution": "Banco Interamericano de Desarrollo",
+      "year": 2020,
+      "url": "https://publications.iadb.org/en/increasing-infrastructure-resilience-nature-based-solutions-nbs",
+      "file": null,
+      "level": 4,
+      "kind": "guidance",
+      "claim": "Complemento entre verde y gris, y la necesidad de factibilidad y gobernanza. No aporta un costo ni un sitio del corredor.",
+      "accessed": "2026-10-07"
+    },
+    {
+      "id": "gfdrr-nbs-resilience",
+      "title": "Nature-Based Solutions for Disaster and Climate Resilience",
+      "institution": "World Bank / GFDRR",
+      "year": 2021,
+      "url": "https://naturebasedsolutions.org/",
+      "file": null,
+      "level": 4,
+      "kind": "guidance",
+      "claim": "Implementación, monitoreo y combinación con infraestructura. No se usa como puntaje.",
+      "accessed": "2026-10-07"
     }
   ]
 }

@@ -1,0 +1,143 @@
+{
+  "source": "https://observatorioambiental.cornare.gov.co/wp-content/uploads/2026/04/Copia-de-M-E-2897_Fichas_Adaptacion_Municipales.xlsx",
+  "accessed": "2026-10-07",
+  "product": "Producto 15. Fichas de medidas de adaptación regionales. CORNARE, 2026.",
+  "limitation": "El estado institucional no modifica el puntaje ni selecciona un predio.",
+  "measures": [
+    {
+      "id": "bio_pa",
+      "sheet": "1. Áreas proteg",
+      "name": "Fortalecimiento de sistemas de áreas protegidas",
+      "status": "Avance intermedio: CORNARE cuenta con un SIRAP consolidado que incluye parques naturales regionales, reservas forestales protectoras y áreas de conservación voluntaria. Existen avances en planificación, monitoreo y restauración, con proyectos de conectividad ecológica y pagos por",
+      "scope": "Regional: Páramo, Sector: ambiental",
+      "score_effect": "none",
+      "use": "explainability"
+    },
+    {
+      "id": "bio_psa",
+      "sheet": "3. PSA",
+      "name": "Pago por Servicios Ambientales PSA",
+      "status": "Implementación consolidada con esquemas activos en municipios priorizados (Guatapé, San Rafael, San Vicente, Abejorral, El Peñol), articulada a programas institucionales de CORNARE y alianzas público–privadas.",
+      "scope": "Subregiones: Páramos, Aguas, Bosques, Porce–Nus y Valles de San Nicolás. Sectores: ambiental, agrícola, agua potable y saneamiento básico, y gestión del riesgo.",
+      "score_effect": "none",
+      "use": "explainability"
+    },
+    {
+      "id": "bio_restore",
+      "sheet": "4. Restauración",
+      "name": "Restauración de ecosistemas estratégicos",
+      "status": "Avance intermedio: Restauración incluida en Plan de Acción y acuerdos (MEGA), Proyectos y ejecución territorial: proyectos y convocatorias locales (Restaurando Territorios), pero aún en fase de incremento y focalización. Financiamiento e instrumentos regulatorios: existen instrum",
+      "scope": "Regional: Porce-Nús; Sector: ambiental",
+      "score_effect": "none",
+      "use": "explainability"
+    },
+    {
+      "id": "water_eff",
+      "sheet": "5. Uso Interse RH",
+      "name": "Uso intersectorial del recurso hídrico",
+      "status": "Formulación, Implementación",
+      "scope": "Subregiones de Aguas, Porce–Nus, Bosques, Páramo y Valles de San Nicolás. Sectores: agrícola, industrial, doméstico, energético y minero–ambiental.",
+      "score_effect": "none",
+      "use": "explainability"
+    },
+    {
+      "id": "water_riparian",
+      "sheet": "6. Rondas Hídricas",
+      "name": "Protección y recuperación de rondas hídricas",
+      "status": "Implementación y monitoreo en curso en áreas priorizadas por los POMCA y proyectos de restauración ecológica de CORNARE.",
+      "scope": "Subregiones de Aguas, Bosques, Porce–Nus y Valles de San Nicolás. Aplicable a sectores ambiental, agrícola, urbano y de gestión del riesgo.",
+      "score_effect": "none",
+      "use": "explainability"
+    },
+    {
+      "id": "water_head",
+      "sheet": "7. Cabecera cuencas",
+      "name": "Protección de la cabecera de cuencas y otros ecosistemas abastecedores",
+      "status": "Formulación, implementación o monitoreo de acuerdo con el análisis y normalización",
+      "scope": "Subregiones: Aguas, Porce–Nus, Bosques y Valles de San Nicolás. Sectores: ambiental, agua potable y saneamiento básico, agrícola, energía (pequeña hidro), gestión del riesgo y orde",
+      "score_effect": "none",
+      "use": "explainability"
+    },
+    {
+      "id": "food_soil",
+      "sheet": "8. Protección suelo",
+      "name": "Protección y reconversión de suelos agrícolas estratégicos para soberanía alimentaria",
+      "status": "Avance incipiente a moderado: existen instrumentos programáticos (POMCA/POMCAS, Plan de Acción 2024-2027) y resoluciones que promueven reconversión y protección de suelos; sin embargo, la implementación territorial y las escalas de apoyo financiero y técnico son diferenciales ent",
+      "scope": "Páramo, Porce-Nús, Valles de San Nicolás, Bosques, Aguas",
+      "score_effect": "none",
+      "use": "explainability"
+    },
+    {
+      "id": "food_agro",
+      "sheet": "9. Prod agroeco",
+      "name": "Producción agroecológica y economía rural comunitaria resiliente al cambio climático",
+      "status": "Avance moderado: CORNARE ha impulsado experiencias de producción sostenible a través de programas como 'AgroCORNARE', 'Negocios Verdes' y 'Comunidades Sostenibles', así como proyectos piloto de adaptación basada en ecosistemas y reconversión agropecuaria. Sin embargo, la agroecol",
+      "scope": "Páramo, Porce-Nús, Valles de San Nicolás, Bosques, Aguas",
+      "score_effect": "none",
+      "use": "explainability"
+    },
+    {
+      "id": "hab_green",
+      "sheet": "10. Espacio verde",
+      "name": "Espacios verdes urbanos",
+      "status": "La medida presenta avances significativos en varios municipios de la jurisdicción, especialmente en aquellos con dinámicas urbanas más consolidadas, como Rionegro, Marinilla, La Ceja, El Retiro y Guarne. CORNARE ha acompañado técnica y financieramente iniciativas municipales de a",
+      "scope": "",
+      "score_effect": "none",
+      "use": "explainability"
+    },
+    {
+      "id": "hab_suds",
+      "sheet": "11. SUDS",
+      "name": "Sistemas Urbanos de Drenaje Sostenible (SUDS)",
+      "status": "En etapa de implementación inicial. Algunos municipios (Rionegro, La Ceja, El Retiro) han desarrollado experiencias piloto de jardines de lluvia, humedales urbanos y pavimentos permeables, pero se requiere fortalecimiento técnico, institucional y financiero para su escalamiento r",
+      "scope": "Aplica principalmente en las regionales Valles de San Nicolás, Aguas y Porcenus, con énfasis en centros urbanos intermedios que presentan alta impermeabilización y eventos recurren",
+      "score_effect": "none",
+      "use": "explainability"
+    },
+    {
+      "id": "infra_resilient",
+      "sheet": "13. Infra resil",
+      "name": "Infraestructura resiliente al cambio climático",
+      "status": "En la región de CORNARE se han desarrollado acciones iniciales en materia de infraestructura resiliente, especialmente a través de obras de mitigación, estabilización de taludes, drenajes pluviales y mejoramiento de vías rurales. No obstante, la planificación integral de infraest",
+      "scope": "",
+      "score_effect": "none",
+      "use": "explainability"
+    },
+    {
+      "id": "infra_services",
+      "sheet": "14. Servicios públicos",
+      "name": "Fortalecimiento de la infraestructura resiliente y de los servicios públicos para el hábitat humano",
+      "status": "En los últimos años, CORNARE ha apoyado la ejecución de obras de mitigación, estabilización de taludes, mejoramiento de sistemas de acueducto y alcantarillado, y la rehabilitación de infraestructura comunitaria afectada por eventos climáticos. También se han desarrollado proyecto",
+      "scope": "",
+      "score_effect": "none",
+      "use": "explainability"
+    },
+    {
+      "id": "health",
+      "sheet": "15. Plan Mejora Salud",
+      "name": "Fortalecimiento del sistema de salud y promoción de entornos saludables resilientes al cambio climático",
+      "status": "La medida se encuentra en proceso de implementación articulada con las políticas departamentales y regionales de cambio climático y salud ambiental. En Antioquia, el Plan Integral de Cambio Climático (PICCA) establece la salud humana como un eje transversal, promoviendo la integr",
+      "scope": "",
+      "score_effect": "none",
+      "use": "explainability"
+    },
+    {
+      "id": "risk_sat",
+      "sheet": "16. SAT",
+      "name": "Fortalecimiento de los Sistemas de Alerta Temprana (SAT)",
+      "status": "En fase de formulación e implementación inicial.",
+      "scope": "",
+      "score_effect": "none",
+      "use": "explainability"
+    },
+    {
+      "id": "risk_knowledge",
+      "sheet": "17. Cono del riesgo",
+      "name": "Fortalecimiento del conocimiento y comunicación sobre amenazas, vulnerabilidad y riesgos climáticos",
+      "status": "Formulación",
+      "scope": "",
+      "score_effect": "none",
+      "use": "explainability"
+    }
+  ]
+}

@@ -2,7 +2,7 @@
   "schema": "ourea.cornare.value_of_information",
   "seed": 20261007,
   "n_worlds": 4000,
-  "fingerprint": "ourea-cc546f34",
+  "fingerprint": "ourea-aa929747",
   "numpy": "2.5.3",
   "evidence_labels": {
     "institutional": "Dato institucional",
@@ -52,10 +52,10 @@
         "s_star_not_best_share": 0.9038
       },
       "sentence": "Está en el mejor portafolio en 48% de los mundos probados. Cuando queda fuera, necesitaría valer 1,58 veces su puntaje para entrar (mediana). Cuando está dentro, saldría si valiera menos de 0,73 veces su puntaje (mediana).",
-      "world0_in_best": false,
-      "world0_delta": 0.0275,
+      "world0_in_best": true,
+      "world0_delta": 0.0025,
       "world0_own_contribution": 0.7375,
-      "world0_distance": 0.0373
+      "world0_distance": 0.0034
     },
     "bio_restore": {
       "in_s_star": true,
@@ -106,8 +106,8 @@
       "sentence": "Está en el mejor portafolio en 70% de los mundos probados. Cuando queda fuera, necesitaría valer 1,53 veces su puntaje para entrar (mediana). Cuando está dentro, saldría si valiera menos de 0,61 veces su puntaje (mediana).",
       "world0_in_best": true,
       "world0_delta": 0.205,
-      "world0_own_contribution": 0.7,
-      "world0_distance": 0.2929
+      "world0_own_contribution": 0.245,
+      "world0_distance": 0.8367
     },
     "water_eff": {
       "in_s_star": true,
@@ -131,9 +131,9 @@
       },
       "sentence": "Está en el mejor portafolio en 56% de los mundos probados. Cuando queda fuera, necesitaría valer 1,59 veces su puntaje para entrar (mediana). Cuando está dentro, saldría si valiera menos de 0,70 veces su puntaje (mediana).",
       "world0_in_best": true,
-      "world0_delta": 0.2225,
+      "world0_delta": 0.2075,
       "world0_own_contribution": 0.56,
-      "world0_distance": 0.3973
+      "world0_distance": 0.3705
     },
     "water_riparian": {
       "in_s_star": false,
@@ -157,9 +157,9 @@
       },
       "sentence": "Está en el mejor portafolio en 29% de los mundos probados. Cuando queda fuera, necesitaría valer 1,85 veces su puntaje para entrar (mediana). Cuando está dentro, saldría si valiera menos de 0,80 veces su puntaje (mediana).",
       "world0_in_best": false,
-      "world0_delta": 0.235,
+      "world0_delta": 0.2075,
       "world0_own_contribution": 0.56,
-      "world0_distance": 0.4196
+      "world0_distance": 0.3705
     },
     "water_head": {
       "in_s_star": false,
@@ -183,9 +183,9 @@
       },
       "sentence": "Está en el mejor portafolio en 23% de los mundos probados. Cuando queda fuera, necesitaría valer 1,77 veces su puntaje para entrar (mediana). Cuando está dentro, saldría si valiera menos de 0,83 veces su puntaje (mediana).",
       "world0_in_best": false,
-      "world0_delta": 0.2225,
-      "world0_own_contribution": 0.61,
-      "world0_distance": 0.3648
+      "world0_delta": 0.245,
+      "world0_own_contribution": 0.56,
+      "world0_distance": 0.4375
     },
     "food_soil": {
       "in_s_star": false,
@@ -209,9 +209,9 @@
       },
       "sentence": "Está en el mejor portafolio en 8% de los mundos probados. Cuando queda fuera, necesitaría valer 3,35 veces su puntaje para entrar (mediana). Cuando está dentro, saldría si valiera menos de 0,79 veces su puntaje (mediana).",
       "world0_in_best": false,
-      "world0_delta": 0.15,
-      "world0_own_contribution": 0.31,
-      "world0_distance": 0.4839
+      "world0_delta": 0.1525,
+      "world0_own_contribution": 0.28,
+      "world0_distance": 0.5446
     },
     "food_agro": {
       "in_s_star": false,
@@ -235,9 +235,9 @@
       },
       "sentence": "Está en el mejor portafolio en 52% de los mundos probados. Cuando queda fuera, necesitaría valer 1,69 veces su puntaje para entrar (mediana). Cuando está dentro, saldría si valiera menos de 0,65 veces su puntaje (mediana).",
       "world0_in_best": true,
-      "world0_delta": 0.15,
-      "world0_own_contribution": 0.46,
-      "world0_distance": 0.3261
+      "world0_delta": 0.1525,
+      "world0_own_contribution": 0.43,
+      "world0_distance": 0.3547
     },
     "hab_green": {
       "in_s_star": false,
@@ -260,10 +260,10 @@
         "s_star_not_best_share": 0.9038
       },
       "sentence": "Está en el mejor portafolio en 21% de los mundos probados. Cuando queda fuera, necesitaría valer 3,16 veces su puntaje para entrar (mediana). Cuando está dentro, saldría si valiera menos de 0,68 veces su puntaje (mediana).",
-      "world0_in_best": true,
-      "world0_delta": 0.0275,
-      "world0_own_contribution": 0.31,
-      "world0_distance": 0.0887
+      "world0_in_best": false,
+      "world0_delta": 0.0025,
+      "world0_own_contribution": 0.28,
+      "world0_distance": 0.0089
     },
     "hab_suds": {
       "in_s_star": false,
@@ -287,9 +287,9 @@
       },
       "sentence": "Está en el mejor portafolio en 2% de los mundos probados. Cuando queda fuera, necesitaría valer 5,88 veces su puntaje para entrar (mediana). Cuando está dentro, saldría si valiera menos de 0,85 veces su puntaje (mediana).",
       "world0_in_best": false,
-      "world0_delta": 0.31,
+      "world0_delta": 0.2825,
       "world0_own_contribution": 0.28,
-      "world0_distance": 1.1071
+      "world0_distance": 1.0089
     },
     "infra_resilient": {
       "in_s_star": false,
@@ -313,9 +313,9 @@
       },
       "sentence": "Está en el mejor portafolio en 6% de los mundos probados. Cuando queda fuera, necesitaría valer 4,12 veces su puntaje para entrar (mediana). Cuando está dentro, saldría si valiera menos de 0,80 veces su puntaje (mediana).",
       "world0_in_best": false,
-      "world0_delta": 0.49,
+      "world0_delta": 0.4325,
       "world0_own_contribution": 0.56,
-      "world0_distance": 0.875
+      "world0_distance": 0.7723
     },
     "infra_services": {
       "in_s_star": false,
@@ -339,9 +339,9 @@
       },
       "sentence": "Está en el mejor portafolio en 16% de los mundos probados. Cuando queda fuera, necesitaría valer 3,57 veces su puntaje para entrar (mediana). Cuando está dentro, saldría si valiera menos de 0,76 veces su puntaje (mediana).",
       "world0_in_best": false,
-      "world0_delta": 0.03,
+      "world0_delta": 0.0025,
       "world0_own_contribution": 0.56,
-      "world0_distance": 0.0536
+      "world0_distance": 0.0045
     },
     "risk_sat": {
       "in_s_star": false,
@@ -365,9 +365,9 @@
       },
       "sentence": "Está en el mejor portafolio en 16% de los mundos probados. Cuando queda fuera, necesitaría valer 2,74 veces su puntaje para entrar (mediana). Cuando está dentro, saldría si valiera menos de 0,78 veces su puntaje (mediana).",
       "world0_in_best": false,
-      "world0_delta": 0.114,
+      "world0_delta": 0.0865,
       "world0_own_contribution": 0.196,
-      "world0_distance": 0.5816
+      "world0_distance": 0.4413
     },
     "risk_knowledge": {
       "in_s_star": true,
@@ -391,9 +391,9 @@
       },
       "sentence": "Está en el mejor portafolio en 61% de los mundos probados. Cuando queda fuera, necesitaría valer 2,07 veces su puntaje para entrar (mediana). Cuando está dentro, saldría si valiera menos de 0,50 veces su puntaje (mediana).",
       "world0_in_best": true,
-      "world0_delta": 0.2725,
+      "world0_delta": 0.245,
       "world0_own_contribution": 0.56,
-      "world0_distance": 0.4866
+      "world0_distance": 0.4375
     },
     "health": {
       "in_s_star": false,
@@ -417,21 +417,21 @@
       },
       "sentence": "Está en el mejor portafolio en 28% de los mundos probados. Cuando queda fuera, necesitaría valer 3,57 veces su puntaje para entrar (mediana). Cuando está dentro, saldría si valiera menos de 0,53 veces su puntaje (mediana).",
       "world0_in_best": true,
-      "world0_delta": 0.03,
+      "world0_delta": 0.0025,
       "world0_own_contribution": 0.28,
-      "world0_distance": 0.1071
+      "world0_distance": 0.0089
     }
   },
   "world0_rejected_gaps": {
-    "bio_psa": 0.0275,
     "bio_restore": 0.205,
-    "water_riparian": 0.235,
-    "water_head": 0.2225,
-    "food_soil": 0.15,
-    "hab_suds": 0.31,
-    "infra_resilient": 0.49,
-    "infra_services": 0.03,
-    "risk_sat": 0.114
+    "water_riparian": 0.2075,
+    "water_head": 0.245,
+    "food_soil": 0.1525,
+    "hab_green": 0.0025,
+    "hab_suds": 0.2825,
+    "infra_resilient": 0.4325,
+    "infra_services": 0.0025,
+    "risk_sat": 0.0865
   },
   "evppi": [
     {

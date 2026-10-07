@@ -2,7 +2,7 @@
   "schema": "ourea.cornare.breaking_points",
   "seed": 20261007,
   "n_worlds": 4000,
-  "fingerprint": "ourea-cc546f34",
+  "fingerprint": "ourea-aa929747",
   "numpy": "2.5.3",
   "evidence_labels": {
     "institutional": "Dato institucional",

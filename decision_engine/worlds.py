@@ -173,6 +173,8 @@ def named_points(dataset: Dataset) -> dict[str, np.ndarray]:
     base = world0(dataset)
     return {
         "institucional": world_row(dataset, base),
-        "multidimensional": world_row(dataset, replace(base, dim_penalty=MULTIDIMENSIONAL_PENALTY)),
+        "multidimensional": world_row(dataset, replace(
+            base, dim_penalty=MULTIDIMENSIONAL_PENALTY, cobenefit_w=dataset.parameters["cobenefit_weight"],
+        )),
         "institucional_ssp": world_row(dataset, with_ssp(base, dataset)),
     }

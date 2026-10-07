@@ -41,6 +41,7 @@ class World:
 
 
 def world0(dataset: Dataset) -> World:
+    """The institutional World 0. The co-benefit stays out of this score (CORNARE's published 70/15 weights)."""
     parameters = dataset.parameters
     return World(
         scenario="reference",
@@ -49,7 +50,7 @@ def world0(dataset: Dataset) -> World:
         dim_w=tuple(1.0 for _ in dataset.dimension_ids),
         gamma=1.0,
         dim_penalty=parameters["diminishing_second_measure"]["institucional"],
-        cobenefit_w=parameters["cobenefit_weight"],
+        cobenefit_w=0.0,
         lever_mismatch=1.0,
         eff=tuple(1.0 for _ in dataset.measure_ids),
     )
@@ -286,22 +287,26 @@ def analyze_world0(dataset: Dataset) -> dict:
     grey = None
     containing: dict[str, Candidate] = {}
     nbs = {measure["id"]: measure["nbs_class"] for measure in dataset.interventions}
+    # The naturaleza, multidimensional and low-regret lenses add the named co-benefit back.
+    with_cob = {terms.id: terms for terms in prepare_measures(ctx, replace(base, cobenefit_w=parameters["cobenefit_weight"]))}
     costs = {measure["id"]: measure["cost_million_cop"] for measure in dataset.interventions}
 
-    def nature_key(candidate: Candidate):
+    def nature_key(candidate: Candidate, cob_objective: float):
         classes = [nbs[i] for i in candidate.ids]
         grey_cost = sum(costs[i] for i in candidate.ids if nbs[i] == "GREY_INFRASTRUCTURE")
-        return (-candidate.objective, -classes.count("NBS_DIRECT"), -classes.count("NBS_HYBRID"), grey_cost, *institutional_key(candidate)[1:])
+        return (-cob_objective, -classes.count("NBS_DIRECT"), -classes.count("NBS_HYBRID"), grey_cost, *institutional_key(candidate)[1:])
 
     multidimensional = None
     low_regret = None
     gate = (ctx.low_regret_min_class, ctx.low_regret_other)
     for candidate, chosen in enumerate_candidates(ctx, base):
         key = institutional_key(candidate)
+        chosen_cob = [with_cob[terms.id] for terms in chosen]
         if institutional is None or key < institutional_key(institutional):
             institutional = candidate
-        if nature is None or nature_key(candidate) < nature_key(nature):
-            nature = candidate
+        cob_key = nature_key(candidate, score_set(chosen_cob, lenses["naturaleza"])[0])
+        if nature is None or cob_key < nature[0]:
+            nature = (cob_key, candidate)
         count_key = (-len(candidate.ids), *key)
         if max_count is None or count_key < (-len(max_count.ids), *institutional_key(max_count)):
             max_count = candidate
@@ -310,12 +315,13 @@ def analyze_world0(dataset: Dataset) -> dict:
         for measure_id in candidate.ids:
             if measure_id not in containing or key < institutional_key(containing[measure_id]):
                 containing[measure_id] = candidate
-        multi_key = (-score_set(chosen, lenses["multidimensional"])[0], *key)
+        multi_key = (-score_set(chosen_cob, lenses["multidimensional"])[0], *key)
         if multidimensional is None or multi_key < multidimensional[0]:
             multidimensional = (multi_key, candidate)
-        regret_key = (-score_set(chosen, lenses["bajo_arrepentimiento"], gate)[0], *key)
+        regret_key = (-score_set(chosen_cob, lenses["bajo_arrepentimiento"], gate)[0], *key)
         if low_regret is None or regret_key < low_regret[0]:
             low_regret = (regret_key, candidate)
+    nature = nature[1]
     multidimensional = multidimensional[1]
     low_regret = low_regret[1]
     stress = search(ctx, with_ssp(base, dataset))
@@ -345,5 +351,6 @@ def analyze_world0(dataset: Dataset) -> dict:
         "rejected": rejected,
         "fingerprint": fingerprint,
         "prepared": prepare_measures(ctx, base),
+        "prepared_cobenefit": list(with_cob.values()),
     }
 

@@ -8,6 +8,8 @@ const FILES = [
   ['profiles', 'municipality_profiles.json'],
   ['boundaries', 'municipalities.geojson'],
   ['sources', 'source_registry.json'],
+  ['fichas', 'measure_fichas.json'],
+  ['context', 'municipal_context.json'],
 ];
 
 // Precomputed by `python -m decision_engine.build`. The app works without them: their sections hide.

@@ -46,12 +46,15 @@ test('institutional portfolio stays within COP 5000 million and is reproducible'
   }
   assert.deepEqual(first.portfolio.ids, [
     'bio_pa',
+    'bio_psa',
     'food_agro',
-    'hab_green',
     'health',
     'risk_knowledge',
     'water_eff',
   ]);
+  assert.equal(first.portfolio.cost, 5000);
+  assert.equal(first.lenses.naturaleza.ids.includes('hab_green'), true);
+  assert.equal(first.lenses.naturaleza.ids.includes('bio_psa'), false);
 });
 
 test('missing adaptation coverage is not scored as zero recurrence', () => {
@@ -116,16 +119,63 @@ test('information gaps stay explicit and the flow is in Spanish', () => {
   assert.ok(gaps.some((gap) => gap.id === 'gap-company-water'));
   assert.ok(gaps.every((gap) => gap.missing_information && gap.how_to_collect_it));
   assert.deepEqual(STEPS.map((step) => step.id), [
-    'overview',
-    'diagnosis',
-    'prioritize',
+    'territory',
+    'priority',
     'portfolio',
-    'stress',
+    'horizon',
     'robustness',
     'residual',
-    'monitoring',
-    'export',
+    'followup',
   ]);
-  assert.equal(STEPS[0].label, 'Panorama');
-  assert.equal(STEPS[7].label, 'MEA');
+  assert.equal(STEPS[0].label, 'Territorio');
+  assert.equal(STEPS[6].label, 'Seguimiento');
+});
+
+test('public ficha status cannot change the institutional portfolio', () => {
+  const before = analyzeCorridor(dataset());
+  const fichas = read('measure_fichas.json');
+  assert.equal(fichas.measures.every((item) => item.score_effect === 'none'), true);
+  const after = analyzeCorridor(dataset());
+  assert.deepEqual(after.portfolio.ids, before.portfolio.ids);
+  assert.equal(after.fingerprint, before.fingerprint);
+  assert.equal(after.portfolio.ids.join(','), 'bio_pa,bio_psa,food_agro,health,risk_knowledge,water_eff');
+});
+
+test('institutional weights sum to 1 and cobenefit stays outside that objective', () => {
+  const parameters = read('decision_model.json');
+  const weights = parameters.weights.vulnerability + parameters.weights.recurrence + parameters.weights.workshops;
+  assert.equal(Math.round(weights * 1000) / 1000, 1);
+  const analysis = analyzeCorridor(dataset());
+  analysis.portfolio.institucional.parts.forEach((part) => {
+    assert.equal(part.cobenefitApplied, false);
+    const recurrence = part.recurrenceWithheld ? 0 : part.recurrence;
+    const expected = part.vulnerability + recurrence + part.urgency;
+    assert.ok(Math.abs(part.contribution - expected) < 1e-6);
+  });
+  assert.equal(analysis.matrix.cobenefitInInstitutionalScore, false);
+});
+
+test('the decision matrix lists every measure without treating missing evidence as zero', () => {
+  const analysis = analyzeCorridor(dataset());
+  const catalogue = read('interventions.json');
+  assert.equal(analysis.matrix.rows.length, 15);
+  const selected = analysis.matrix.rows.filter((row) => row.decision === 'SELECTED');
+  assert.deepEqual(selected.map((row) => row.id).sort(), analysis.portfolio.ids);
+  const cost = analysis.matrix.rows.reduce((sum, row) => sum + row.cost, 0);
+  assert.equal(cost, catalogue.interventions.reduce((sum, item) => sum + item.cost_million_cop, 0));
+  analysis.matrix.rows.forEach((row) => {
+    assert.equal(row.workshop.display, 'Por integrar');
+    assert.equal(row.workshop.observed, null);
+    if (row.recurrence.withheld) {
+      assert.equal(row.recurrence.display, 'Por integrar');
+      assert.equal(row.recurrence.observed, null);
+    }
+    assert.equal(row.cobenefit.appliedToInstitutionalScore, false);
+    const text = row.explanation.join(' ');
+    assert.equal(text.includes('% menos riesgo'), false);
+    if (row.decision !== 'SELECTED') assert.ok(row.explanation.length > 0);
+  });
+  const selectedScore = selected.reduce((sum, row) => sum + row.verifiedScore, 0);
+  assert.ok(Math.abs(selectedScore - analysis.portfolio.institucional.objective) < 1e-6);
+  assert.equal(analysis.sensitivity.status, 'SENSITIVE_TO_MISSING_EVIDENCE');
 });

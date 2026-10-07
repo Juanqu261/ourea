@@ -66,8 +66,8 @@ class ScalarEqualsVectorizedTests(unittest.TestCase):
                 world = row_world(self.dataset, self.worlds.columns, row)
                 self.assert_equal_world(world, self.vector_rows(row[None, :])[0])
         rows = self.vector_rows(np.stack(list(named_points(self.dataset).values())))
-        self.assertEqual(rows[0].max(), 2_870_000)
-        self.assertEqual(rows[2].max(), 3_010_000)
+        self.assertEqual(rows[0].max(), 2_812_500)
+        self.assertEqual(rows[2].max(), 2_952_500)
 
     def test_25_random_worlds(self):
         picks = np.random.default_rng(3).choice(self.worlds.size, 25, replace=False)

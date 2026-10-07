@@ -1,13 +1,11 @@
 export const STEPS = [
-  { id: 'overview', label: 'Panorama', title: 'Dónde intervenir primero' },
-  { id: 'diagnosis', label: 'Diagnóstico', title: 'Municipio por dimensión' },
-  { id: 'prioritize', label: 'Priorizar', title: 'Cómo se comparan las opciones' },
-  { id: 'portfolio', label: 'Portafolio', title: 'Medidas dentro del fondo' },
-  { id: 'stress', label: 'SSP3-7.0', title: 'Prueba hacia 2060' },
-  { id: 'robustness', label: 'Robustez', title: 'Mundos probados' },
-  { id: 'residual', label: 'Riesgo residual', title: 'Lo que queda sin resolver' },
-  { id: 'monitoring', label: 'MEA', title: 'Cómo saber si funcionó' },
-  { id: 'export', label: 'Exportar', title: 'Síntesis para el pitch' },
+  { id: 'territory', label: 'Territorio', title: '¿Dónde intervenir primero?' },
+  { id: 'priority', label: 'Prioridad', title: '¿Qué intervenciones generan más valor con recursos limitados?' },
+  { id: 'portfolio', label: 'Portafolio', title: '¿Qué financiamos con COP 5.000 millones?' },
+  { id: 'horizon', label: '2060', title: '¿La decisión sigue siendo válida bajo SSP3-7.0?' },
+  { id: 'robustness', label: 'Robustez', title: '¿Se sostiene la decisión en los mundos probados?' },
+  { id: 'residual', label: 'Residual', title: '¿Qué sigue vulnerable después de invertir?' },
+  { id: 'followup', label: 'Seguimiento', title: '¿Cómo sabremos si funcionó?' },
 ];
 
 export const CLASS_COLOR = {

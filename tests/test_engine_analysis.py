@@ -22,8 +22,8 @@ from decision_engine.voi import _bins, _evppi_statistic, world0_gaps  # noqa: E4
 from decision_engine.wording import FORBIDDEN  # noqa: E402
 
 JS_REJECTED = {
-    "bio_psa": 0.0275, "infra_services": 0.03, "risk_sat": 0.114, "food_soil": 0.15, "bio_restore": 0.205,
-    "water_head": 0.2225, "water_riparian": 0.235, "hab_suds": 0.31, "infra_resilient": 0.49,
+    "hab_green": 0.0025, "infra_services": 0.0025, "risk_sat": 0.0865, "food_soil": 0.1525, "bio_restore": 0.205,
+    "water_riparian": 0.2075, "water_head": 0.245, "hab_suds": 0.2825, "infra_resilient": 0.4325,
 }
 
 
@@ -62,9 +62,9 @@ class FullRunTests(unittest.TestCase):
 
     def test_world0_point(self):
         points = self.payloads["robustness.json"]["points"]
-        self.assertEqual(points["institucional"]["best_score"], 2.87)
-        self.assertEqual(points["institucional_ssp"]["best_score"], 3.01)
-        self.assertEqual(self.payloads["robustness.json"]["world0_sets_within"], {"near_1": 2, "near_2": 3, "near_5": 4, "near_10": 27})
+        self.assertEqual(points["institucional"]["best_score"], 2.8125)
+        self.assertEqual(points["institucional_ssp"]["best_score"], 2.9525)
+        self.assertEqual(self.payloads["robustness.json"]["world0_sets_within"], {"near_1": 3, "near_2": 3, "near_5": 4, "near_10": 24})
 
     def test_inclusion_classes(self):
         inclusion = self.payloads["robustness.json"]["inclusion"]

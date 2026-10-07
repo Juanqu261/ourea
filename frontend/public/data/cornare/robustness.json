@@ -2,7 +2,7 @@
   "schema": "ourea.cornare.robustness",
   "seed": 20261007,
   "n_worlds": 4000,
-  "fingerprint": "ourea-cc546f34",
+  "fingerprint": "ourea-aa929747",
   "numpy": "2.5.3",
   "evidence_labels": {
     "institutional": "Dato institucional",
@@ -42,7 +42,7 @@
       "water"
     ],
     "world0_score": 2.4225,
-    "world0_regret": 0.155923,
+    "world0_regret": 0.138667,
     "all": {
       "rank1": 0.0963,
       "near_1": 0.1205,
@@ -103,7 +103,7 @@
         "water"
       ],
       "world0_score": 2.4225,
-      "world0_regret": 0.155923,
+      "world0_regret": 0.138667,
       "all": {
         "rank1": 0.0963,
         "near_1": 0.1205,
@@ -140,8 +140,8 @@
         "health",
         "water"
       ],
-      "world0_score": 2.8425,
-      "world0_regret": 0.009582,
+      "world0_score": 2.8125,
+      "world0_regret": 0.0,
       "all": {
         "rank1": 0.0333,
         "near_1": 0.0467,
@@ -175,8 +175,8 @@
         "disaster",
         "water"
       ],
-      "world0_score": 2.3485,
-      "world0_regret": 0.181707,
+      "world0_score": 2.2985,
+      "world0_regret": 0.182756,
       "all": {
         "rank1": 0.0222,
         "near_1": 0.0333,
@@ -210,8 +210,8 @@
         "food",
         "water"
       ],
-      "world0_score": 2.1985,
-      "world0_regret": 0.233972,
+      "world0_score": 2.1685,
+      "world0_regret": 0.228978,
       "all": {
         "rank1": 0.024,
         "near_1": 0.0382,
@@ -246,7 +246,7 @@
         "water"
       ],
       "world0_score": 2.336,
-      "world0_regret": 0.186063,
+      "world0_regret": 0.169422,
       "all": {
         "rank1": 0.023,
         "near_1": 0.035,
@@ -278,8 +278,8 @@
         "biodiversity",
         "water"
       ],
-      "world0_score": 1.9125,
-      "world0_regret": 0.333624,
+      "world0_score": 1.8625,
+      "world0_regret": 0.337778,
       "all": {
         "rank1": 0.0372,
         "near_1": 0.047,
@@ -314,8 +314,8 @@
         "food",
         "water"
       ],
-      "world0_score": 2.6375,
-      "world0_regret": 0.08101,
+      "world0_score": 2.6075,
+      "world0_regret": 0.072889,
       "all": {
         "rank1": 0.0135,
         "near_1": 0.023,
@@ -350,8 +350,8 @@
         "food",
         "water"
       ],
-      "world0_score": 2.6,
-      "world0_regret": 0.094077,
+      "world0_score": 2.57,
+      "world0_regret": 0.086222,
       "all": {
         "rank1": 0.0158,
         "near_1": 0.0222,
@@ -386,8 +386,8 @@
         "food",
         "water"
       ],
-      "world0_score": 2.6125,
-      "world0_regret": 0.089721,
+      "world0_score": 2.5325,
+      "world0_regret": 0.099556,
       "all": {
         "rank1": 0.0147,
         "near_1": 0.025,
@@ -422,7 +422,7 @@
         "water"
       ],
       "world0_score": 2.2985,
-      "world0_regret": 0.199129,
+      "world0_regret": 0.182756,
       "all": {
         "rank1": 0.007,
         "near_1": 0.014,
@@ -458,8 +458,8 @@
         "infrastructure",
         "water"
       ],
-      "world0_score": 2.84,
-      "world0_regret": 0.010453,
+      "world0_score": 2.81,
+      "world0_regret": 0.000889,
       "all": {
         "rank1": 0.028,
         "near_1": 0.0367,
@@ -492,7 +492,7 @@
         "water"
       ],
       "world0_score": 1.8625,
-      "world0_regret": 0.351045,
+      "world0_regret": 0.337778,
       "all": {
         "rank1": 0.0165,
         "near_1": 0.0245,
@@ -530,8 +530,8 @@
         "health",
         "water"
       ],
-      "world0_score": 2.87,
-      "world0_regret": 0.0,
+      "world0_score": 2.81,
+      "world0_regret": 0.000889,
       "all": {
         "rank1": 0.0147,
         "near_1": 0.0213,
@@ -568,8 +568,8 @@
         "health",
         "water"
       ],
-      "world0_score": 2.756,
-      "world0_regret": 0.039721,
+      "world0_score": 2.726,
+      "world0_regret": 0.030756,
       "all": {
         "rank1": 0.0115,
         "near_1": 0.0173,
@@ -602,7 +602,7 @@
         "water"
       ],
       "world0_score": 1.8625,
-      "world0_regret": 0.351045,
+      "world0_regret": 0.337778,
       "all": {
         "rank1": 0.0,
         "near_1": 0.0057,
@@ -636,8 +636,8 @@
         "disaster",
         "food"
       ],
-      "world0_score": 2.3225,
-      "world0_regret": 0.190767,
+      "world0_score": 2.2925,
+      "world0_regret": 0.184889,
       "all": {
         "rank1": 0.0132,
         "near_1": 0.0198,
@@ -672,8 +672,8 @@
         "food",
         "water"
       ],
-      "world0_score": 2.526,
-      "world0_regret": 0.119861,
+      "world0_score": 2.446,
+      "world0_regret": 0.130311,
       "all": {
         "rank1": 0.0073,
         "near_1": 0.0127,
@@ -708,8 +708,8 @@
         "food",
         "water"
       ],
-      "world0_score": 2.5625,
-      "world0_regret": 0.107143,
+      "world0_score": 2.5325,
+      "world0_regret": 0.099556,
       "all": {
         "rank1": 0.005,
         "near_1": 0.0088,
@@ -744,8 +744,8 @@
         "food",
         "water"
       ],
-      "world0_score": 2.6,
-      "world0_regret": 0.094077,
+      "world0_score": 2.57,
+      "world0_regret": 0.086222,
       "all": {
         "rank1": 0.0013,
         "near_1": 0.0053,
@@ -777,8 +777,8 @@
         "biodiversity",
         "water"
       ],
-      "world0_score": 1.7395,
-      "world0_regret": 0.393902,
+      "world0_score": 1.6895,
+      "world0_regret": 0.399289,
       "all": {
         "rank1": 0.017,
         "near_1": 0.0217,
@@ -1262,15 +1262,15 @@
     "institucional": {
       "best_ids": [
         "bio_pa",
+        "bio_psa",
         "food_agro",
-        "hab_green",
         "health",
         "risk_knowledge",
         "water_eff"
       ],
-      "best_score": 2.87,
+      "best_score": 2.8125,
       "s_star_score": 2.4225,
-      "s_star_regret": 0.155923
+      "s_star_regret": 0.138667
     },
     "multidimensional": {
       "best_ids": [
@@ -1288,22 +1288,22 @@
     "institucional_ssp": {
       "best_ids": [
         "bio_pa",
+        "bio_psa",
         "food_agro",
-        "hab_green",
         "health",
         "risk_knowledge",
         "water_eff"
       ],
-      "best_score": 3.01,
+      "best_score": 2.9525,
       "s_star_score": 2.5625,
-      "s_star_regret": 0.148671
+      "s_star_regret": 0.132091
     }
   },
   "world0_sets_within": {
-    "near_1": 2,
+    "near_1": 3,
     "near_2": 3,
     "near_5": 4,
-    "near_10": 27
+    "near_10": 24
   },
   "distinct_winners": 455,
   "pathways": {

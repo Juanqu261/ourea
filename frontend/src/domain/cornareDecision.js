@@ -2,6 +2,10 @@ import { decisionFingerprint } from './fingerprint.js';
 import { prepareMeasures } from './cornareModel.js';
 import { searchPortfolios } from './portfolioSearch.js';
 import { compareStress } from './stressTest.js';
+import { buildDecisionMatrix } from './decisionMatrix.js';
+import { assessMissingEvidence } from './evidenceBounds.js';
+import { screenCatalogueNbs } from './nbsScreen.js';
+import { adaptivePathways, decisionRobustness } from './robustness.js';
 import {
   criticalFindings,
   explainRejection,
@@ -55,6 +59,17 @@ export function analyzeCorridor(dataset) {
     throw new Error('Institutional portfolio exceeds COP 5000 million');
   }
 
+  const sensitivity = assessMissingEvidence(prepared, dataset.parameters, portfolio.ids);
+  const matrix = buildDecisionMatrix({
+    prepared,
+    portfolio,
+    rejected,
+    explanations,
+    mea: dataset.mea,
+    profiles,
+  });
+  const nbsScreen = screenCatalogueNbs(prepared, portfolio.ids);
+
   const fingerprint = decisionFingerprint({
     ids: portfolio.ids,
     cost: portfolio.cost,
@@ -63,7 +78,7 @@ export function analyzeCorridor(dataset) {
     diminishing: dataset.parameters.diminishing_second_measure.institucional,
   });
 
-  return {
+  return attachRobustness({
     prepared,
     byId,
     portfolio,
@@ -90,6 +105,17 @@ export function analyzeCorridor(dataset) {
     rejected,
     fingerprint,
     parameters: dataset.parameters,
+    sensitivity,
+    matrix,
+    nbsScreen,
+  });
+}
+
+function attachRobustness(result) {
+  return {
+    ...result,
+    robustness: decisionRobustness(result),
+    pathways: adaptivePathways(result),
   };
 }
 
