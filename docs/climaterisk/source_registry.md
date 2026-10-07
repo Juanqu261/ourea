@@ -78,3 +78,161 @@ Acceso: 2026-10-07. Una fuente externa no reemplaza un valor ya entregado por CO
 
 La monografía de RAND sobre robust decision making respondió 403 al intentar abrirla. No se cita.
 Los libros de emisiones y mitigación se describen en la auditoría de datos y no entran al puntaje de adaptación.
+
+## Contexto espacial
+
+## Humedales
+
+- Institución: CORNARE
+- Año: 2026
+- Nivel: 2
+- Tipo: official
+- URL o archivo: https://mapas.cornare.gov.co/arcgis/rest/services/Determinantes/humedales/MapServer/0
+- Geometría: fill
+- CRS de salida: EPSG:4326
+- Filtro: intersects corridor envelope plus 0.02 degree buffer; simplify 0.00012 degrees
+- Respalda: Contexto espacial de Humedales. 21 geometrías de visualización después de recorte al corredor. No entra al puntaje de prioridad.
+- Límite: Capa de contexto. No es una variable del modelo de decisión ni una ubicación de obra.
+
+## Áreas protegidas
+
+- Institución: CORNARE
+- Año: 2026
+- Nivel: 2
+- Tipo: official
+- URL o archivo: https://mapas.cornare.gov.co/arcgis/rest/services/Areas_Protegidas/Areas_Protegidas_2022/MapServer/0
+- Geometría: fill
+- CRS de salida: EPSG:4326
+- Filtro: intersects corridor envelope plus 0.02 degree buffer; simplify 0.00015 degrees
+- Respalda: Contexto espacial de Áreas protegidas. 7 geometrías de visualización después de recorte al corredor. No entra al puntaje de prioridad.
+- Límite: Capa de contexto. No es una variable del modelo de decisión ni una ubicación de obra.
+
+## Ronda Río Negro
+
+- Institución: CORNARE
+- Año: 2026
+- Nivel: 2
+- Tipo: official
+- URL o archivo: https://mapas.cornare.gov.co/arcgis/rest/services/Rondas/Rondas_251_Q_Rio_Negro/FeatureServer/0
+- Geometría: fill
+- CRS de salida: EPSG:4326
+- Filtro: intersects corridor envelope plus 0.02 degree buffer; simplify 4e-05 degrees
+- Respalda: Contexto espacial de Ronda Río Negro. 1 geometrías de visualización después de recorte al corredor. No entra al puntaje de prioridad.
+- Límite: Capa de contexto. No es una variable del modelo de decisión ni una ubicación de obra.
+
+## Ecosistema Quebrada La Marinilla
+
+- Institución: CORNARE
+- Año: 2026
+- Nivel: 2
+- Tipo: official
+- URL o archivo: https://mapas.cornare.gov.co/arcgis/rest/services/Rondas/Rondas_La_Marinilla_Ecosistemico/FeatureServer/0
+- Geometría: fill
+- CRS de salida: EPSG:4326
+- Filtro: intersects corridor envelope plus 0.02 degree buffer; simplify 4e-05 degrees
+- Respalda: Contexto espacial de Ecosistema Quebrada La Marinilla. 1 geometrías de visualización después de recorte al corredor. No entra al puntaje de prioridad.
+- Límite: Capa de contexto. No es una variable del modelo de decisión ni una ubicación de obra.
+
+## Zonificación Quebrada La Marinilla
+
+- Institución: CORNARE
+- Año: 2026
+- Nivel: 2
+- Tipo: official
+- URL o archivo: https://mapas.cornare.gov.co/arcgis/rest/services/Rondas/Rondas_La_Marinilla_Zonificacion/FeatureServer/0
+- Geometría: fill
+- CRS de salida: EPSG:4326
+- Filtro: intersects corridor envelope plus 0.02 degree buffer; simplify 5e-05 degrees
+- Respalda: Contexto espacial de Zonificación Quebrada La Marinilla. 3 geometrías de visualización después de recorte al corredor. No entra al puntaje de prioridad.
+- Límite: Capa de contexto. No es una variable del modelo de decisión ni una ubicación de obra.
+
+## Ríos principales
+
+- Institución: CORNARE
+- Año: 2026
+- Nivel: 2
+- Tipo: official
+- URL o archivo: https://mapas.cornare.gov.co/arcgis/rest/services/RECURSO_HIDRICO/Hidrologia/MapServer/10
+- Geometría: line
+- CRS de salida: EPSG:4326
+- Filtro: intersects corridor envelope plus 0.02 degree buffer; simplify 8e-05 degrees
+- Respalda: Contexto espacial de Ríos principales. 5 geometrías de visualización después de recorte al corredor. No entra al puntaje de prioridad.
+- Límite: Capa de contexto. No es una variable del modelo de decisión ni una ubicación de obra.
+
+## POMCA Río Negro
+
+- Institución: CORNARE
+- Año: 2026
+- Nivel: 2
+- Tipo: official
+- URL o archivo: https://mapas.cornare.gov.co/arcgis/rest/services/POMCAS/pomca_rio_negro/MapServer/1
+- Geometría: line
+- CRS de salida: EPSG:4326
+- Filtro: intersects corridor envelope plus 0.02 degree buffer; simplify 0.0008 degrees
+- Respalda: Contexto espacial de POMCA Río Negro. 1 geometrías de visualización después de recorte al corredor. No entra al puntaje de prioridad.
+- Límite: Capa de contexto. No es una variable del modelo de decisión ni una ubicación de obra.
+
+## Movimiento en masa
+
+- Institución: CORNARE
+- Año: 2026
+- Nivel: 2
+- Tipo: official
+- URL o archivo: https://mapas.cornare.gov.co/arcgis/rest/services/OAT_Y_GR/Cornare_Movimiento_Masa2/MapServer/0
+- Geometría: fill
+- CRS de salida: EPSG:4326
+- Filtro: intersects corridor envelope plus 0.02 degree buffer; dissolved by threat class; display simplify 0.0035 degrees
+- Respalda: Contexto espacial de Movimiento en masa. 3 geometrías de visualización después de recorte al corredor. No entra al puntaje de prioridad.
+- Límite: Capa de contexto. No es una variable del modelo de decisión ni una ubicación de obra.
+
+## Riesgo de inundación (ráster de consulta)
+
+- Institución: CORNARE
+- Año: 2026
+- Nivel: 2
+- Tipo: official
+- URL o archivo: https://mapas.cornare.gov.co/arcgis/rest/services/OAT_Y_GR/Cornare_Inundacion_22/MapServer/0
+- Geometría: raster
+- CRS de salida: EPSG:3857 tiles
+- Filtro: runtime export only; not cached
+- Respalda: Capa ráster opcional. El MapServer no publica vectores. Si el servicio no responde, el mapa la apaga.
+- Límite: No es el índice de vulnerabilidad climática del reto y no se descarga como polígonos.
+
+## OpenFreeMap Dark, esquema OpenMapTiles
+
+- Institución: OpenFreeMap / OpenStreetMap
+- Año: 2026
+- Nivel: 3
+- Tipo: open-data
+- URL o archivo: https://tiles.openfreemap.org/styles/dark
+- Geometría: vector tiles
+- CRS de salida: EPSG:3857
+- Filtro: runtime style; not copied into the repository
+- Respalda: Mapa base vectorial sin llave: vías, agua, etiquetas y edificios. La extrusión usa render_height del esquema OpenMapTiles.
+- Límite: Contexto cartográfico. Una altura ausente no se reemplaza con un número de pisos inventado.
+
+## Terrain Tiles, codificación Terrarium
+
+- Institución: AWS Open Data / Mapzen
+- Año: 2026
+- Nivel: 3
+- Tipo: open-data
+- URL o archivo: https://s3.amazonaws.com/elevation-tiles-prod/terrarium/{z}/{x}/{y}.png
+- Geometría: raster-dem
+- CRS de salida: EPSG:3857
+- Filtro: runtime tiles
+- Respalda: Elevación de terreno desnudo, teselas XYZ 0–15, sin llave. Exageración por defecto 1.0.
+- Límite: No es el MDT de CORNARE. Bg_Cornare_Mdt_22 devuelve un valor de píxel por consulta identify, pero no un ráster numérico descargable, y no hay MDT municipal de Guarne.
+
+## MDT CORNARE 2022, no usado como terreno
+
+- Institución: CORNARE
+- Año: 2022
+- Nivel: 2
+- Tipo: official
+- URL o archivo: https://mapas.cornare.gov.co/arcgis/rest/services/BASE_CARTOGRAFIA/Bg_Cornare_Mdt_22/MapServer
+- Geometría: rendered raster
+- CRS de salida: None
+- Filtro: investigated; not ingested
+- Respalda: El servicio expone Mdt_Marinilla, Mdt_Rionegro, DTM_Cornare_.img y HILL_DTM_30M_L como Raster Layer. Una prueba identify en Rionegro devolvió Pixel Value cercano a 2079–2085. No hay ImageServer ni descarga GeoTIFF. El relieve coloreado no se usa como elevación.
+- Límite: No cubre un DEM reproducible del corredor completo, incluido Guarne.

@@ -190,6 +190,11 @@ def write_evidence(history: dict, directory: Path) -> None:
         encoding="utf-8",
     )
     registry = source_registry()
+    provenance_path = directory / "map" / "provenance.json"
+    if provenance_path.exists():
+        extra = json.loads(provenance_path.read_text(encoding="utf-8")).get("sources") or []
+        known = {source["id"] for source in registry["sources"]}
+        registry["sources"].extend(source for source in extra if source["id"] not in known)
     (directory / "source_registry.json").write_text(
         json.dumps(registry, ensure_ascii=False, indent=2) + "\n",
         encoding="utf-8",
@@ -211,6 +216,7 @@ def write_evidence(history: dict, directory: Path) -> None:
                 f"- Tipo: {source['kind']}",
                 f"- URL o archivo: {source['url'] or source['file']}",
                 f"- Respalda: {source['claim']}",
+                *([f"- Límite: {source['limitation']}"] if source.get("limitation") else []),
                 "",
             ]
         )

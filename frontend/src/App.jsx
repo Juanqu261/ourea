@@ -2,10 +2,10 @@ import { useEffect, useMemo, useState } from 'react';
 import { OureaLogo } from './components/OureaLogo.jsx';
 import { analyzeCorridor, bundleDataset } from './domain/cornareDecision.js';
 import { EVIDENCE_LABELS, NBS_LABELS, STRESS_LABELS } from './domain/evidence.js';
-import { vulnerabilityClass } from './domain/cornareModel.js';
 import { dimensionName, stressNarrative } from './domain/explanations.js';
 import { CLASS_COLOR, STEPS, copMillions } from './cornare/copy.js';
-import { CorridorMap } from './cornare/CorridorMap.jsx';
+import { DecisionMap } from './cornare/map/DecisionMap.jsx';
+import { focusForMeasure } from './cornare/map/focus.js';
 import { downloadDecisionJson, downloadPitchPdf } from './cornare/exportDecision.js';
 import { loadCornareData } from './cornare/loadData.js';
 import guardrails from './config/scientificGuardrails.json';
@@ -52,6 +52,7 @@ export default function App() {
 
   return (
     <div className="cornare-app">
+      <div className="cornare-sticky">
       <header className="cornare-top">
         <OureaLogo compact />
         <div>
@@ -75,6 +76,7 @@ export default function App() {
           </button>
         ))}
       </nav>
+      </div>
       <main className="cornare-main" data-testid={`step-${step}`}>
         {step === 'overview' && <Overview raw={raw} analysis={analysis} />}
         {step === 'diagnosis' && (
@@ -89,7 +91,7 @@ export default function App() {
         )}
         {step === 'prioritize' && <Prioritize analysis={analysis} />}
         {step === 'portfolio' && (
-          <Portfolio analysis={analysis} openWhy={openWhy} setOpenWhy={setOpenWhy} />
+          <Portfolio analysis={analysis} openWhy={openWhy} setOpenWhy={setOpenWhy} raw={raw} />
         )}
         {step === 'stress' && <Stress analysis={analysis} />}
         {step === 'residual' && <Residual analysis={analysis} />}
@@ -106,10 +108,8 @@ export default function App() {
 }
 
 function Overview({ raw, analysis }) {
-  const colors = Object.fromEntries(raw.profiles.municipalities.map((municipality) => {
-    const classification = vulnerabilityClass(raw.metrics.metrics, municipality.id, 'biodiversity');
-    return [municipality.id, CLASS_COLOR[classification] ?? CLASS_COLOR.missing];
-  }));
+  const [dimensionId, setDimensionId] = useState('biodiversity');
+  const colors = colorsFor(raw, dimensionId, 'vulnerability');
   return (
     <section>
       <h2>¿Dónde debe intervenir primero CORNARE, y con qué portafolio?</h2>
@@ -127,10 +127,11 @@ function Overview({ raw, analysis }) {
           </article>
         ))}
       </div>
-      <CorridorMap
+      <DimensionPicker dimensions={raw.interventions.dimensions} dimensionId={dimensionId} onChange={setDimensionId} />
+      <DecisionMap
         boundaries={raw.boundaries}
         colors={colors}
-        label="Color de biodiversidad según la clase de vulnerabilidad."
+        shadingLabel={`Color municipal de vulnerabilidad en ${dimensionName(dimensionId)}. No es una superficie continua ni un sitio de obra.`}
       />
       <ol className="finding-list">
         {analysis.findings.map((finding) => (
@@ -162,12 +163,12 @@ function highlights(municipalityId, metrics) {
 }
 
 function Diagnosis({ raw, dataset, metric, setMetric, cellNote, setCellNote }) {
+  const [dimensionId, setDimensionId] = useState('biodiversity');
+  const [selectedId, setSelectedId] = useState(null);
   const municipalities = raw.profiles.municipalities;
   const dimensions = raw.interventions.dimensions;
-  const colors = Object.fromEntries(municipalities.map((municipality) => {
-    const cell = cellFor(raw.metrics.metrics, municipality.id, 'biodiversity', 'vulnerability');
-    return [municipality.id, CLASS_COLOR[cell?.classification] ?? CLASS_COLOR.missing];
-  }));
+  const activeDimension = cellNote?.dimension.id ?? dimensionId;
+  const colors = colorsFor(raw, activeDimension, metric);
   return (
     <section>
       <h2>Diagnóstico territorial</h2>
@@ -200,7 +201,11 @@ function Diagnosis({ raw, dataset, metric, setMetric, cellNote, setCellNote }) {
                         type="button"
                         className="heat-cell"
                         style={{ background: CLASS_COLOR[classification] ?? CLASS_COLOR.missing }}
-                        onClick={() => setCellNote({ municipality, dimension, rows })}
+                        onClick={() => {
+                          setDimensionId(dimension.id);
+                          setSelectedId(municipality.id);
+                          setCellNote({ municipality, dimension, rows });
+                        }}
                       >
                         {cell ? (cell.classification_label || formatValue(cell)) : 'Sin dato'}
                       </button>
@@ -227,7 +232,13 @@ function Diagnosis({ raw, dataset, metric, setMetric, cellNote, setCellNote }) {
           )}
         </aside>
       )}
-      <CorridorMap boundaries={raw.boundaries} colors={colors} label="El mapa usa la clase de vulnerabilidad en biodiversidad. No localiza predios." />
+      <DecisionMap
+        boundaries={raw.boundaries}
+        colors={colors}
+        selectedIds={selectedId ? [selectedId] : []}
+        onMunicipality={setSelectedId}
+        shadingLabel={`Color municipal de ${metricLabel(metric).toLowerCase()} en ${dimensionName(activeDimension)}. El dato sigue siendo municipal.`}
+      />
       <p className="fine">Cobertura del reporte de adaptación: {dataset.history.coverage.map((row) => `${nameOf(raw, row.municipality_id)} ${row.records}`).join(' · ')} registros. Marinilla no se interpreta como adaptación cero.</p>
     </section>
   );
@@ -269,11 +280,24 @@ function Prioritize({ analysis }) {
   );
 }
 
-function Portfolio({ analysis, openWhy, setOpenWhy }) {
+function Portfolio({ analysis, openWhy, setOpenWhy, raw }) {
+  const [focusId, setFocusId] = useState(analysis.portfolio.measures[0]?.id ?? null);
+  const selected = analysis.portfolio.measures.find((measure) => measure.id === focusId) ?? null;
+  const focus = selected ? focusForMeasure(selected) : null;
+  const colors = colorsFor(raw, 'biodiversity', 'vulnerability');
   return (
     <section>
       <h2>Portafolio institucional</h2>
       <BudgetBar analysis={analysis} />
+      {focus && (
+        <DecisionMap
+          boundaries={raw.boundaries}
+          colors={colors}
+          selectedIds={focus.municipalityIds}
+          focus={focus}
+          shadingLabel="El resalte es el ámbito de la medida. La ubicación exacta de la obra sigue por definir."
+        />
+      )}
       <div className="measure-list" data-testid="portfolio-list">
         {analysis.portfolio.measures.map((measure) => (
           <article key={measure.id} className="measure-card" data-testid={`measure-${measure.id}`}>
@@ -289,6 +313,7 @@ function Portfolio({ analysis, openWhy, setOpenWhy }) {
               <div><dt>Actores</dt><dd>{measure.actors.map((actor) => actor.name).join(', ')}</dd></div>
               <div><dt>Aporte al puntaje</dt><dd>{measure.part.contribution.toFixed(3)}</dd></div>
             </dl>
+            <button type="button" data-testid={`map-focus-${measure.id}`} onClick={() => setFocusId(measure.id)}>Ver en el mapa</button>
             <button type="button" onClick={() => setOpenWhy(openWhy === measure.id ? null : measure.id)}>
               {openWhy === measure.id ? 'Ocultar' : 'Por qué esta medida'}
             </button>
@@ -487,4 +512,23 @@ function sameSet(left, right) {
 
 function rankPriority(priority) {
   return { alta: 0, media: 1, baja: 2 }[priority] ?? 3;
+}
+
+function DimensionPicker({ dimensions, dimensionId, onChange }) {
+  return (
+    <div className="segmented" role="group" aria-label="Dimensión del mapa">
+      {dimensions.map((dimension) => (
+        <button key={dimension.id} type="button" className={dimensionId === dimension.id ? 'is-active' : ''} onClick={() => onChange(dimension.id)}>
+          {dimension.short_name}
+        </button>
+      ))}
+    </div>
+  );
+}
+
+function colorsFor(raw, dimensionId, metric) {
+  return Object.fromEntries(raw.profiles.municipalities.map((municipality) => {
+    const cell = cellFor(raw.metrics.metrics, municipality.id, dimensionId, metric);
+    return [municipality.id, CLASS_COLOR[cell?.classification] ?? CLASS_COLOR.missing];
+  }));
 }
