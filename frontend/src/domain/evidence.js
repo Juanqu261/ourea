@@ -3,6 +3,7 @@ export const EVIDENCE_LABELS = Object.freeze({
   team_inference: 'Inferencia del equipo',
   assumption: 'Supuesto',
   missing: 'Información faltante',
+  exploratory: 'Exploratorio',
 });
 
 export const NBS_LABELS = Object.freeze({

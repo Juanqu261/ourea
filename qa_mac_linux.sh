@@ -15,13 +15,16 @@ fi
 
 cd "$ROOT"
 echo "== Python syntax =="
-python -m compileall -q scripts
+python -m compileall -q scripts decision_engine
 
 echo "== Python unit tests =="
 python -m unittest discover -s tests -p "test_*.py" -v
 
 echo "== CORNARE input validation =="
 python scripts/climaterisk/validate_inputs.py
+
+echo "== Decision engine outputs =="
+python -m decision_engine.build --check
 
 echo "== Reproducibility manifest =="
 python scripts/make_manifest.py

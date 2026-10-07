@@ -17,7 +17,7 @@ if exist "node_modules\.bin\vite.cmd" (
 
 cd ..
 echo == Python syntax ==
-python -m compileall -q scripts
+python -m compileall -q scripts decision_engine
 if errorlevel 1 exit /b 1
 
 echo == Python unit tests ==
@@ -26,6 +26,10 @@ if errorlevel 1 exit /b 1
 
 echo == CORNARE input validation ==
 python scripts\climaterisk\validate_inputs.py
+if errorlevel 1 exit /b 1
+
+echo == Decision engine outputs ==
+python -m decision_engine.build --check
 if errorlevel 1 exit /b 1
 
 echo == Reproducibility manifest ==

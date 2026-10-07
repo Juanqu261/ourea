@@ -8,6 +8,7 @@ import { DecisionMap } from './cornare/map/DecisionMap.jsx';
 import { focusForMeasure } from './cornare/map/focus.js';
 import { downloadDecisionJson, downloadPitchPdf } from './cornare/exportDecision.js';
 import { loadCornareData } from './cornare/loadData.js';
+import { EngineAnnex, GapRanking, LeverGrid, RobustnessStep } from './cornare/EnginePanels.jsx';
 import guardrails from './config/scientificGuardrails.json';
 
 const METRICS = [
@@ -48,7 +49,9 @@ export default function App() {
     return <main className="boot"><p>Cargando la decisión del corredor…</p></main>;
   }
 
-  const stepIndex = STEPS.findIndex((item) => item.id === step);
+  // The robustness step needs the precomputed engine output; without it the step is hidden.
+  const steps = STEPS.filter((item) => item.id !== 'robustness' || raw.engine.robustness);
+  const stepIndex = steps.findIndex((item) => item.id === step);
 
   return (
     <div className="cornare-app">
@@ -63,7 +66,7 @@ export default function App() {
       </header>
       <p className="corridor-line">Rionegro · Guarne · Marinilla · Valles de San Nicolás · CORNARE</p>
       <nav className="step-nav" aria-label="Recorrido de la decisión">
-        {STEPS.map((item, index) => (
+        {steps.map((item, index) => (
           <button
             key={item.id}
             type="button"
@@ -94,14 +97,15 @@ export default function App() {
           <Portfolio analysis={analysis} openWhy={openWhy} setOpenWhy={setOpenWhy} raw={raw} />
         )}
         {step === 'stress' && <Stress analysis={analysis} />}
-        {step === 'residual' && <Residual analysis={analysis} />}
+        {step === 'robustness' && <RobustnessStep engine={raw.engine} analysis={analysis} />}
+        {step === 'residual' && <Residual analysis={analysis} voi={raw.engine.voi} />}
         {step === 'monitoring' && <Monitoring analysis={analysis} />}
-        {step === 'export' && <Export analysis={analysis} />}
+        {step === 'export' && <Export analysis={analysis} engine={raw.engine} />}
       </main>
       <footer className="cornare-footer">
-        <button type="button" disabled={stepIndex === 0} onClick={() => setStep(STEPS[stepIndex - 1].id)}>Atrás</button>
-        <p>{STEPS[stepIndex].title}</p>
-        <button type="button" disabled={stepIndex === STEPS.length - 1} onClick={() => setStep(STEPS[stepIndex + 1].id)}>Continuar</button>
+        <button type="button" disabled={stepIndex === 0} onClick={() => setStep(steps[stepIndex - 1].id)}>Atrás</button>
+        <p>{steps[stepIndex].title}</p>
+        <button type="button" disabled={stepIndex === steps.length - 1} onClick={() => setStep(steps[stepIndex + 1].id)}>Continuar</button>
       </footer>
     </div>
   );
@@ -240,6 +244,7 @@ function Diagnosis({ raw, dataset, metric, setMetric, cellNote, setCellNote }) {
         shadingLabel={`Color municipal de ${metricLabel(metric).toLowerCase()} en ${dimensionName(activeDimension)}. El dato sigue siendo municipal.`}
       />
       <p className="fine">Cobertura del reporte de adaptación: {dataset.history.coverage.map((row) => `${nameOf(raw, row.municipality_id)} ${row.records}`).join(' · ')} registros. Marinilla no se interpreta como adaptación cero.</p>
+      <LeverGrid levers={raw.engine.levers} municipalities={municipalities} dimensions={dimensions} />
     </section>
   );
 }
@@ -370,7 +375,7 @@ function Stress({ analysis }) {
   );
 }
 
-function Residual({ analysis }) {
+function Residual({ analysis, voi }) {
   const gaps = [...analysis.gaps].sort((left, right) => rankPriority(left.priority) - rankPriority(right.priority));
   return (
     <section>
@@ -388,6 +393,7 @@ function Residual({ analysis }) {
           </li>
         ))}
       </ul>
+      <GapRanking voi={voi} prepared={analysis.prepared} />
       <h3>Registro de información faltante</h3>
       <div className="measure-list">
         {gaps.map((gap) => (
@@ -435,7 +441,7 @@ function Monitoring({ analysis }) {
   );
 }
 
-function Export({ analysis }) {
+function Export({ analysis, engine }) {
   return (
     <section>
       <h2>Síntesis</h2>
@@ -451,6 +457,7 @@ function Export({ analysis }) {
         {guardrails.items.map((item) => <li key={item}>{item}</li>)}
       </ul>
       <p className="fine">Huella de reproducibilidad: {analysis.fingerprint}</p>
+      <EngineAnnex engine={engine} />
       <div className="export-actions">
         <button type="button" data-testid="export-json" onClick={() => downloadDecisionJson(analysis)}>Descargar JSON</button>
         <button type="button" data-testid="export-pdf" onClick={() => downloadPitchPdf(analysis)}>Descargar PDF</button>

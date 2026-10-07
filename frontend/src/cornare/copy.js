@@ -4,6 +4,7 @@ export const STEPS = [
   { id: 'prioritize', label: 'Priorizar', title: 'Cómo se comparan las opciones' },
   { id: 'portfolio', label: 'Portafolio', title: 'Medidas dentro del fondo' },
   { id: 'stress', label: 'SSP3-7.0', title: 'Prueba hacia 2060' },
+  { id: 'robustness', label: 'Robustez', title: 'Mundos probados' },
   { id: 'residual', label: 'Riesgo residual', title: 'Lo que queda sin resolver' },
   { id: 'monitoring', label: 'MEA', title: 'Cómo saber si funcionó' },
   { id: 'export', label: 'Exportar', title: 'Síntesis para el pitch' },

@@ -121,10 +121,11 @@ test('information gaps stay explicit and the flow is in Spanish', () => {
     'prioritize',
     'portfolio',
     'stress',
+    'robustness',
     'residual',
     'monitoring',
     'export',
   ]);
   assert.equal(STEPS[0].label, 'Panorama');
-  assert.equal(STEPS[6].label, 'MEA');
+  assert.equal(STEPS[7].label, 'MEA');
 });

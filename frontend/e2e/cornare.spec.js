@@ -1,6 +1,6 @@
 import { expect, test } from '@playwright/test';
 
-const steps = ['overview', 'diagnosis', 'prioritize', 'portfolio', 'stress', 'residual', 'monitoring', 'export'];
+const steps = ['overview', 'diagnosis', 'prioritize', 'portfolio', 'stress', 'robustness', 'residual', 'monitoring', 'export'];
 
 test('the corridor decision is usable on a laptop and a phone', async ({ page }) => {
   await page.setViewportSize({ width: 1280, height: 800 });
@@ -43,6 +43,15 @@ test('the corridor decision is usable on a laptop and a phone', async ({ page })
   await expect(page.locator('.decision-map figcaption')).toContainText('riesgo');
   await page.getByTestId('nav-stress').click();
   await expect(page.getByTestId('stress-status')).toContainText('Mayormente robusta');
+  await page.getByTestId('nav-robustness').click();
+  const nearBest = page.getByTestId('near-best-sentence');
+  await expect(nearBest).toContainText(/Casi óptimo en \d+% de los 4\.000 mundos probados/);
+  await expect(nearBest).not.toContainText('probabilidad');
+  await expect(page.getByTestId('inclusion-bars').locator('li')).toHaveCount(15);
+  await page.getByTestId('nav-diagnosis').click();
+  await expect(page.getByTestId('lever-grid')).toContainText('Sin desagregar');
+  await page.getByTestId('nav-residual').click();
+  await expect(page.getByTestId('gap-ranking')).toContainText('gap-company-water');
 
   await page.setViewportSize({ width: 390, height: 844 });
   await page.getByTestId('nav-overview').click();

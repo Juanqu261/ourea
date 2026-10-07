@@ -1,0 +1,249 @@
+{
+  "schema": "ourea.cornare.breaking_points",
+  "seed": 20261007,
+  "n_worlds": 4000,
+  "fingerprint": "ourea-cc546f34",
+  "numpy": "2.5.3",
+  "evidence_labels": {
+    "institutional": "Dato institucional",
+    "team_inference": "Inferencia del equipo",
+    "assumption": "Supuesto",
+    "missing": "Información faltante",
+    "exploratory": "Exploratorio"
+  },
+  "field_evidence": {
+    "decision_residual_risk": "team_inference",
+    "decision_residual_risk.boxes": "exploratory",
+    "residual_vulnerability": "institutional"
+  },
+  "wording_rules": [
+    "Se dice «casi óptimo en X% de los N mundos probados». Nunca «probabilidad».",
+    "Los parámetros exploratorios no se reportan como hallazgos: solo aparecen en puntos de quiebre y señales, rotulados.",
+    "El puntaje es un puntaje de prioridad. No hay «% de vulnerabilidad reducida» ni pérdidas evitadas.",
+    "«Sin desagregar» es información faltante, nunca «baja»."
+  ],
+  "s_star": [
+    "bio_pa",
+    "bio_psa",
+    "bio_restore",
+    "risk_knowledge",
+    "water_eff"
+  ],
+  "primary": "regret_10",
+  "decision_residual_risk": {
+    "regret_10": {
+      "threshold": 0.1,
+      "failure_share": 0.6378,
+      "failure_share_by_scenario": {
+        "reference": 0.627,
+        "ssp3_7_0": 0.6485
+      },
+      "boxes": [
+        {
+          "conditions": [
+            {
+              "parameter": "dim_w[biodiversity]",
+              "low": null,
+              "high": 0.7582,
+              "text": "el peso relativo de biodiversidad es menor que 0,76",
+              "evidence": "assumption",
+              "evidence_label": "Supuesto",
+              "gaps": [],
+              "watch": "Prioridad declarada de CORNARE entre dimensiones."
+            }
+          ],
+          "coverage": 0.401,
+          "density": 0.9913,
+          "support": 0.258,
+          "gaps": [],
+          "exploratory": false,
+          "sentence": "s* deja de ser casi óptima (arrepentimiento > 10%) cuando el peso relativo de biodiversidad es menor que 0,76. Cubre 40% de esos mundos; dentro de la caja ocurre en 99%."
+        },
+        {
+          "conditions": [
+            {
+              "parameter": "dim_w[biodiversity]",
+              "low": null,
+              "high": 1.8158,
+              "text": "el peso relativo de biodiversidad es menor que 1,82",
+              "evidence": "assumption",
+              "evidence_label": "Supuesto",
+              "gaps": [],
+              "watch": "Prioridad declarada de CORNARE entre dimensiones."
+            },
+            {
+              "parameter": "gamma",
+              "low": null,
+              "high": 1.9573,
+              "text": "la curvatura de la escala de clases es menor que 1,96",
+              "evidence": "assumption",
+              "evidence_label": "Supuesto",
+              "gaps": [],
+              "watch": "Cómo se lee la distancia entre clases (Alta frente a Muy alta)."
+            },
+            {
+              "parameter": "dim_emphasis",
+              "low": 0.0,
+              "high": 0.0,
+              "text": "sin énfasis regional en biodiversidad y agua",
+              "evidence": "assumption",
+              "evidence_label": "Supuesto",
+              "gaps": [],
+              "watch": "Prioridad declarada de CORNARE entre dimensiones."
+            }
+          ],
+          "coverage": 0.2038,
+          "density": 0.8799,
+          "support": 0.1477,
+          "gaps": [],
+          "exploratory": false,
+          "sentence": "s* deja de ser casi óptima (arrepentimiento > 10%) cuando el peso relativo de biodiversidad es menor que 1,82 y la curvatura de la escala de clases es menor que 1,96 y sin énfasis regional en biodiversidad y agua. Cubre 20% de esos mundos; dentro de la caja ocurre en 88%."
+        },
+        {
+          "conditions": [
+            {
+              "parameter": "dim_w[biodiversity]",
+              "low": null,
+              "high": 2.2094,
+              "text": "el peso relativo de biodiversidad es menor que 2,21",
+              "evidence": "assumption",
+              "evidence_label": "Supuesto",
+              "gaps": [],
+              "watch": "Prioridad declarada de CORNARE entre dimensiones."
+            },
+            {
+              "parameter": "eff[bio_restore]",
+              "low": null,
+              "high": 1.4505,
+              "text": "la efectividad relativa de «Restauración de ecosistemas estratégicos» es menor que 1,45",
+              "evidence": "exploratory",
+              "evidence_label": "Exploratorio",
+              "gaps": [
+                "gap-effectiveness"
+              ],
+              "watch": "Indicador MEA de resultado outcome-bio_restore: hoy sin línea base y con meta por definir."
+            }
+          ],
+          "coverage": 0.3093,
+          "density": 0.5866,
+          "support": 0.3362,
+          "gaps": [
+            "gap-effectiveness"
+          ],
+          "exploratory": true,
+          "sentence": "s* deja de ser casi óptima (arrepentimiento > 10%) cuando el peso relativo de biodiversidad es menor que 2,21 y la efectividad relativa de «Restauración de ecosistemas estratégicos» es menor que 1,45 (gap-effectiveness). Cubre 31% de esos mundos; dentro de la caja ocurre en 59%. Incluye parámetros exploratorios: es una señal a vigilar, no un hallazgo."
+        }
+      ]
+    },
+    "regret_5": {
+      "threshold": 0.05,
+      "failure_share": 0.7748,
+      "failure_share_by_scenario": {
+        "reference": 0.7585,
+        "ssp3_7_0": 0.791
+      },
+      "boxes": [
+        {
+          "conditions": [
+            {
+              "parameter": "dim_w[biodiversity]",
+              "low": null,
+              "high": 1.0291,
+              "text": "el peso relativo de biodiversidad es menor que 1,03",
+              "evidence": "assumption",
+              "evidence_label": "Supuesto",
+              "gaps": [],
+              "watch": "Prioridad declarada de CORNARE entre dimensiones."
+            }
+          ],
+          "coverage": 0.4176,
+          "density": 0.9985,
+          "support": 0.324,
+          "gaps": [],
+          "exploratory": false,
+          "sentence": "s* deja de ser casi óptima (arrepentimiento > 5%) cuando el peso relativo de biodiversidad es menor que 1,03. Cubre 42% de esos mundos; dentro de la caja ocurre en 100%."
+        },
+        {
+          "conditions": [
+            {
+              "parameter": "dim_w[biodiversity]",
+              "low": null,
+              "high": 1.9647,
+              "text": "el peso relativo de biodiversidad es menor que 1,96",
+              "evidence": "assumption",
+              "evidence_label": "Supuesto",
+              "gaps": [],
+              "watch": "Prioridad declarada de CORNARE entre dimensiones."
+            },
+            {
+              "parameter": "gamma",
+              "low": null,
+              "high": 1.3878,
+              "text": "la curvatura de la escala de clases es menor que 1,39",
+              "evidence": "assumption",
+              "evidence_label": "Supuesto",
+              "gaps": [],
+              "watch": "Cómo se lee la distancia entre clases (Alta frente a Muy alta)."
+            }
+          ],
+          "coverage": 0.2711,
+          "density": 0.9221,
+          "support": 0.2278,
+          "gaps": [],
+          "exploratory": false,
+          "sentence": "s* deja de ser casi óptima (arrepentimiento > 5%) cuando el peso relativo de biodiversidad es menor que 1,96 y la curvatura de la escala de clases es menor que 1,39. Cubre 27% de esos mundos; dentro de la caja ocurre en 92%."
+        },
+        {
+          "conditions": [
+            {
+              "parameter": "dim_w[biodiversity]",
+              "low": null,
+              "high": 2.7215,
+              "text": "el peso relativo de biodiversidad es menor que 2,72",
+              "evidence": "assumption",
+              "evidence_label": "Supuesto",
+              "gaps": [],
+              "watch": "Prioridad declarada de CORNARE entre dimensiones."
+            },
+            {
+              "parameter": "eff[water_eff]",
+              "low": null,
+              "high": 1.2403,
+              "text": "la efectividad relativa de «Uso intersectorial eficiente del recurso hídrico» es menor que 1,24",
+              "evidence": "exploratory",
+              "evidence_label": "Exploratorio",
+              "gaps": [
+                "gap-effectiveness"
+              ],
+              "watch": "Indicador MEA de resultado outcome-water_eff: hoy sin línea base y con meta por definir."
+            }
+          ],
+          "coverage": 0.2191,
+          "density": 0.7044,
+          "support": 0.241,
+          "gaps": [
+            "gap-effectiveness"
+          ],
+          "exploratory": true,
+          "sentence": "s* deja de ser casi óptima (arrepentimiento > 5%) cuando el peso relativo de biodiversidad es menor que 2,72 y la efectividad relativa de «Uso intersectorial eficiente del recurso hídrico» es menor que 1,24 (gap-effectiveness). Cubre 22% de esos mundos; dentro de la caja ocurre en 70%. Incluye parámetros exploratorios: es una señal a vigilar, no un hallazgo."
+        }
+      ]
+    }
+  },
+  "residual_vulnerability": [
+    {
+      "municipality_id": "guarne",
+      "dimension_id": "infrastructure",
+      "classification": "alta",
+      "text": "Infraestructura en Guarne (clase alta) queda sin medida en s*."
+    }
+  ],
+  "method": {
+    "algorithm": "PRIM (peeling)",
+    "alpha": 0.05,
+    "min_support": 0.05,
+    "max_restricted": 3,
+    "max_boxes": 3,
+    "box_rule": "En la trayectoria, la caja de mayor densidad que restringe como máximo 3 parámetros."
+  }
+}

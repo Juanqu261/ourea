@@ -1,0 +1,904 @@
+{
+  "schema": "ourea.cornare.uncertainty_ranges",
+  "seed": 20261007,
+  "n_worlds": 4000,
+  "sampling": "Hipercubo latino con semilla (numpy PCG64), 2.000 mundos por escenario.",
+  "dirichlet_note": "Los 7 pesos de dimensión suman 7 (media 1). La mitad de los mundos usa la variante de énfasis regional: biodiversidad y agua reciben los dos pesos más altos.",
+  "ssp_note": "En los mundos SSP3-7.0, riesgo de desastres en Rionegro sube una clase siempre. Cada una de las otras 20 celdas sube en una fracción p_shift de los mundos SSP (exploratorio).",
+  "thresholds": {
+    "near_best": [
+      0.01,
+      0.02,
+      0.05
+    ],
+    "near_best_primary": 0.05,
+    "near_best_primary_evidence": "assumption",
+    "failure_regret": 0.1,
+    "failure_regret_alt": 0.05,
+    "core_share": 0.8,
+    "rare_share": 0.2,
+    "site_change_share": 0.2,
+    "delay_cost_share": 0.01,
+    "delay_cost_evidence": "assumption"
+  },
+  "evidence_labels": {
+    "institutional": "Dato institucional",
+    "team_inference": "Inferencia del equipo",
+    "assumption": "Supuesto",
+    "missing": "Información faltante",
+    "exploratory": "Exploratorio"
+  },
+  "parameters": [
+    {
+      "name": "scenario",
+      "group": "scenario",
+      "sampling": "bernoulli",
+      "low": 0,
+      "high": 1,
+      "world0": 0,
+      "evidence": "institutional",
+      "phrase": "el escenario SSP3-7.0 a 2060",
+      "gaps": [
+        "gap-ssp-cube"
+      ],
+      "watch": "Publicación del cubo municipio × dimensión × escenario del Observatorio Ambiental.",
+      "measure_id": null,
+      "binary": true,
+      "evidence_label": "Dato institucional"
+    },
+    {
+      "name": "w_vuln",
+      "group": "weights",
+      "sampling": "uniform",
+      "low": 0.55,
+      "high": 0.85,
+      "world0": 0.7,
+      "evidence": "assumption",
+      "phrase": "el peso de la vulnerabilidad",
+      "gaps": [
+        "gap-workshops"
+      ],
+      "watch": "Cómo reparte CORNARE el 70/15/15 cuando los talleres puedan calificarse.",
+      "measure_id": null,
+      "binary": false,
+      "evidence_label": "Supuesto"
+    },
+    {
+      "name": "w_rec",
+      "group": "weights",
+      "sampling": "uniform",
+      "low": 0.05,
+      "high": 0.25,
+      "world0": 0.15,
+      "evidence": "assumption",
+      "phrase": "el peso de la recurrencia documentada",
+      "gaps": [
+        "gap-workshops",
+        "gap-marinilla-coverage"
+      ],
+      "watch": "Conteos de talleres y cobertura completa del reporte de Marinilla.",
+      "measure_id": null,
+      "binary": false,
+      "evidence_label": "Supuesto"
+    },
+    {
+      "name": "gamma",
+      "group": "scale",
+      "sampling": "log_uniform",
+      "low": 0.5,
+      "high": 2.5,
+      "world0": 1.0,
+      "evidence": "assumption",
+      "phrase": "la curvatura de la escala de clases",
+      "gaps": [],
+      "watch": "Cómo se lee la distancia entre clases (Alta frente a Muy alta).",
+      "measure_id": null,
+      "binary": false,
+      "evidence_label": "Supuesto"
+    },
+    {
+      "name": "dim_penalty",
+      "group": "scale",
+      "sampling": "uniform",
+      "low": 0.1,
+      "high": 0.6,
+      "world0": 0.35,
+      "evidence": "assumption",
+      "phrase": "el valor de una segunda medida en la misma dimensión",
+      "gaps": [],
+      "watch": "Si CORNARE prefiere profundidad en una dimensión o cobertura de varias.",
+      "measure_id": null,
+      "binary": false,
+      "evidence_label": "Supuesto"
+    },
+    {
+      "name": "cobenefit_w",
+      "group": "scale",
+      "sampling": "uniform",
+      "low": 0.0,
+      "high": 0.1,
+      "world0": 0.05,
+      "evidence": "assumption",
+      "phrase": "el peso del cobeneficio",
+      "gaps": [],
+      "watch": "Evidencia de cobeneficios entre dimensiones en el seguimiento MEA.",
+      "measure_id": null,
+      "binary": false,
+      "evidence_label": "Supuesto"
+    },
+    {
+      "name": "lever_mismatch",
+      "group": "lever",
+      "sampling": "uniform",
+      "low": 0.5,
+      "high": 1.0,
+      "world0": 1.0,
+      "evidence": "assumption",
+      "phrase": "el descuento por palanca equivocada (S frente a CA)",
+      "gaps": [
+        "gap-ssp-cube"
+      ],
+      "watch": "Sensibilidad y capacidad adaptativa publicadas por celda municipio × dimensión.",
+      "measure_id": null,
+      "binary": false,
+      "evidence_label": "Supuesto"
+    },
+    {
+      "name": "p_shift",
+      "group": "ssp",
+      "sampling": "uniform",
+      "low": 0.0,
+      "high": 0.5,
+      "world0": 0.0,
+      "evidence": "exploratory",
+      "phrase": "la frecuencia con que otras celdas suben de clase bajo SSP3-7.0",
+      "gaps": [
+        "gap-ssp-cube"
+      ],
+      "watch": "El cubo de escenarios del Observatorio Ambiental.",
+      "measure_id": null,
+      "binary": false,
+      "evidence_label": "Exploratorio"
+    },
+    {
+      "name": "dim_emphasis",
+      "group": "dimension_weights",
+      "sampling": "bernoulli",
+      "low": 0,
+      "high": 1,
+      "world0": 0,
+      "evidence": "assumption",
+      "phrase": "el énfasis regional en biodiversidad y agua",
+      "gaps": [],
+      "watch": "Prioridad declarada de CORNARE entre dimensiones.",
+      "measure_id": null,
+      "binary": true,
+      "evidence_label": "Supuesto"
+    },
+    {
+      "name": "dim_w[biodiversity]",
+      "group": "dimension_weights",
+      "sampling": "dirichlet",
+      "low": null,
+      "high": null,
+      "world0": 1.0,
+      "evidence": "assumption",
+      "phrase": "el peso relativo de biodiversidad",
+      "gaps": [],
+      "watch": "Prioridad declarada de CORNARE entre dimensiones.",
+      "measure_id": null,
+      "binary": false,
+      "evidence_label": "Supuesto"
+    },
+    {
+      "name": "dim_w[water]",
+      "group": "dimension_weights",
+      "sampling": "dirichlet",
+      "low": null,
+      "high": null,
+      "world0": 1.0,
+      "evidence": "assumption",
+      "phrase": "el peso relativo de recurso hídrico",
+      "gaps": [],
+      "watch": "Prioridad declarada de CORNARE entre dimensiones.",
+      "measure_id": null,
+      "binary": false,
+      "evidence_label": "Supuesto"
+    },
+    {
+      "name": "dim_w[disaster]",
+      "group": "dimension_weights",
+      "sampling": "dirichlet",
+      "low": null,
+      "high": null,
+      "world0": 1.0,
+      "evidence": "assumption",
+      "phrase": "el peso relativo de riesgo de desastres",
+      "gaps": [],
+      "watch": "Prioridad declarada de CORNARE entre dimensiones.",
+      "measure_id": null,
+      "binary": false,
+      "evidence_label": "Supuesto"
+    },
+    {
+      "name": "dim_w[health]",
+      "group": "dimension_weights",
+      "sampling": "dirichlet",
+      "low": null,
+      "high": null,
+      "world0": 1.0,
+      "evidence": "assumption",
+      "phrase": "el peso relativo de salud",
+      "gaps": [],
+      "watch": "Prioridad declarada de CORNARE entre dimensiones.",
+      "measure_id": null,
+      "binary": false,
+      "evidence_label": "Supuesto"
+    },
+    {
+      "name": "dim_w[infrastructure]",
+      "group": "dimension_weights",
+      "sampling": "dirichlet",
+      "low": null,
+      "high": null,
+      "world0": 1.0,
+      "evidence": "assumption",
+      "phrase": "el peso relativo de infraestructura",
+      "gaps": [],
+      "watch": "Prioridad declarada de CORNARE entre dimensiones.",
+      "measure_id": null,
+      "binary": false,
+      "evidence_label": "Supuesto"
+    },
+    {
+      "name": "dim_w[habitat]",
+      "group": "dimension_weights",
+      "sampling": "dirichlet",
+      "low": null,
+      "high": null,
+      "world0": 1.0,
+      "evidence": "assumption",
+      "phrase": "el peso relativo de hábitat",
+      "gaps": [],
+      "watch": "Prioridad declarada de CORNARE entre dimensiones.",
+      "measure_id": null,
+      "binary": false,
+      "evidence_label": "Supuesto"
+    },
+    {
+      "name": "dim_w[food]",
+      "group": "dimension_weights",
+      "sampling": "dirichlet",
+      "low": null,
+      "high": null,
+      "world0": 1.0,
+      "evidence": "assumption",
+      "phrase": "el peso relativo de seguridad alimentaria",
+      "gaps": [],
+      "watch": "Prioridad declarada de CORNARE entre dimensiones.",
+      "measure_id": null,
+      "binary": false,
+      "evidence_label": "Supuesto"
+    },
+    {
+      "name": "eff[bio_psa]",
+      "group": "effectiveness",
+      "sampling": "uniform",
+      "low": 0.5,
+      "high": 1.5,
+      "world0": 1.0,
+      "evidence": "exploratory",
+      "phrase": "la efectividad relativa de «Instrumentos de compensación y Pago por Servicios Ambientales – PSA»",
+      "gaps": [
+        "gap-effectiveness"
+      ],
+      "watch": "Indicador MEA de resultado outcome-bio_psa: hoy sin línea base y con meta por definir.",
+      "measure_id": "bio_psa",
+      "binary": false,
+      "evidence_label": "Exploratorio"
+    },
+    {
+      "name": "eff[bio_restore]",
+      "group": "effectiveness",
+      "sampling": "uniform",
+      "low": 0.5,
+      "high": 1.5,
+      "world0": 1.0,
+      "evidence": "exploratory",
+      "phrase": "la efectividad relativa de «Restauración de ecosistemas estratégicos»",
+      "gaps": [
+        "gap-effectiveness"
+      ],
+      "watch": "Indicador MEA de resultado outcome-bio_restore: hoy sin línea base y con meta por definir.",
+      "measure_id": "bio_restore",
+      "binary": false,
+      "evidence_label": "Exploratorio"
+    },
+    {
+      "name": "eff[bio_pa]",
+      "group": "effectiveness",
+      "sampling": "uniform",
+      "low": 0.5,
+      "high": 1.5,
+      "world0": 1.0,
+      "evidence": "exploratory",
+      "phrase": "la efectividad relativa de «Fortalecimiento de sistemas de áreas protegidas»",
+      "gaps": [
+        "gap-effectiveness"
+      ],
+      "watch": "Indicador MEA de resultado outcome-bio_pa: hoy sin línea base y con meta por definir.",
+      "measure_id": "bio_pa",
+      "binary": false,
+      "evidence_label": "Exploratorio"
+    },
+    {
+      "name": "eff[water_eff]",
+      "group": "effectiveness",
+      "sampling": "uniform",
+      "low": 0.5,
+      "high": 1.5,
+      "world0": 1.0,
+      "evidence": "exploratory",
+      "phrase": "la efectividad relativa de «Uso intersectorial eficiente del recurso hídrico»",
+      "gaps": [
+        "gap-effectiveness"
+      ],
+      "watch": "Indicador MEA de resultado outcome-water_eff: hoy sin línea base y con meta por definir.",
+      "measure_id": "water_eff",
+      "binary": false,
+      "evidence_label": "Exploratorio"
+    },
+    {
+      "name": "eff[water_riparian]",
+      "group": "effectiveness",
+      "sampling": "uniform",
+      "low": 0.5,
+      "high": 1.5,
+      "world0": 1.0,
+      "evidence": "exploratory",
+      "phrase": "la efectividad relativa de «Protección y recuperación de rondas hídricas»",
+      "gaps": [
+        "gap-effectiveness"
+      ],
+      "watch": "Indicador MEA de resultado outcome-water_riparian: hoy sin línea base y con meta por definir.",
+      "measure_id": "water_riparian",
+      "binary": false,
+      "evidence_label": "Exploratorio"
+    },
+    {
+      "name": "eff[water_head]",
+      "group": "effectiveness",
+      "sampling": "uniform",
+      "low": 0.5,
+      "high": 1.5,
+      "world0": 1.0,
+      "evidence": "exploratory",
+      "phrase": "la efectividad relativa de «Protección de cabeceras de cuenca y ecosistemas abastecedores»",
+      "gaps": [
+        "gap-effectiveness"
+      ],
+      "watch": "Indicador MEA de resultado outcome-water_head: hoy sin línea base y con meta por definir.",
+      "measure_id": "water_head",
+      "binary": false,
+      "evidence_label": "Exploratorio"
+    },
+    {
+      "name": "eff[food_soil]",
+      "group": "effectiveness",
+      "sampling": "uniform",
+      "low": 0.5,
+      "high": 1.5,
+      "world0": 1.0,
+      "evidence": "exploratory",
+      "phrase": "la efectividad relativa de «Protección y reconversión de suelos agrícolas estratégicos»",
+      "gaps": [
+        "gap-effectiveness"
+      ],
+      "watch": "Indicador MEA de resultado outcome-food_soil: hoy sin línea base y con meta por definir.",
+      "measure_id": "food_soil",
+      "binary": false,
+      "evidence_label": "Exploratorio"
+    },
+    {
+      "name": "eff[food_agro]",
+      "group": "effectiveness",
+      "sampling": "uniform",
+      "low": 0.5,
+      "high": 1.5,
+      "world0": 1.0,
+      "evidence": "exploratory",
+      "phrase": "la efectividad relativa de «Producción agroecológica y economía rural resiliente»",
+      "gaps": [
+        "gap-effectiveness"
+      ],
+      "watch": "Indicador MEA de resultado outcome-food_agro: hoy sin línea base y con meta por definir.",
+      "measure_id": "food_agro",
+      "binary": false,
+      "evidence_label": "Exploratorio"
+    },
+    {
+      "name": "eff[hab_green]",
+      "group": "effectiveness",
+      "sampling": "uniform",
+      "low": 0.5,
+      "high": 1.5,
+      "world0": 1.0,
+      "evidence": "exploratory",
+      "phrase": "la efectividad relativa de «Espacios verdes urbanos»",
+      "gaps": [
+        "gap-effectiveness"
+      ],
+      "watch": "Indicador MEA de resultado outcome-hab_green: hoy sin línea base y con meta por definir.",
+      "measure_id": "hab_green",
+      "binary": false,
+      "evidence_label": "Exploratorio"
+    },
+    {
+      "name": "eff[hab_suds]",
+      "group": "effectiveness",
+      "sampling": "uniform",
+      "low": 0.5,
+      "high": 1.5,
+      "world0": 1.0,
+      "evidence": "exploratory",
+      "phrase": "la efectividad relativa de «Sistemas Urbanos de Drenaje Sostenible – SUDS»",
+      "gaps": [
+        "gap-effectiveness"
+      ],
+      "watch": "Indicador MEA de resultado outcome-hab_suds: hoy sin línea base y con meta por definir.",
+      "measure_id": "hab_suds",
+      "binary": false,
+      "evidence_label": "Exploratorio"
+    },
+    {
+      "name": "eff[infra_resilient]",
+      "group": "effectiveness",
+      "sampling": "uniform",
+      "low": 0.5,
+      "high": 1.5,
+      "world0": 1.0,
+      "evidence": "exploratory",
+      "phrase": "la efectividad relativa de «Infraestructura resiliente al cambio climático»",
+      "gaps": [
+        "gap-effectiveness"
+      ],
+      "watch": "Indicador MEA de resultado outcome-infra_resilient: hoy sin línea base y con meta por definir.",
+      "measure_id": "infra_resilient",
+      "binary": false,
+      "evidence_label": "Exploratorio"
+    },
+    {
+      "name": "eff[infra_services]",
+      "group": "effectiveness",
+      "sampling": "uniform",
+      "low": 0.5,
+      "high": 1.5,
+      "world0": 1.0,
+      "evidence": "exploratory",
+      "phrase": "la efectividad relativa de «Fortalecimiento de infraestructura resiliente y servicios públicos»",
+      "gaps": [
+        "gap-effectiveness"
+      ],
+      "watch": "Indicador MEA de resultado outcome-infra_services: hoy sin línea base y con meta por definir.",
+      "measure_id": "infra_services",
+      "binary": false,
+      "evidence_label": "Exploratorio"
+    },
+    {
+      "name": "eff[risk_sat]",
+      "group": "effectiveness",
+      "sampling": "uniform",
+      "low": 0.5,
+      "high": 1.5,
+      "world0": 1.0,
+      "evidence": "exploratory",
+      "phrase": "la efectividad relativa de «Fortalecimiento de Sistemas de Alerta Temprana – SAT»",
+      "gaps": [
+        "gap-effectiveness"
+      ],
+      "watch": "Indicador MEA de resultado outcome-risk_sat: hoy sin línea base y con meta por definir.",
+      "measure_id": "risk_sat",
+      "binary": false,
+      "evidence_label": "Exploratorio"
+    },
+    {
+      "name": "eff[risk_knowledge]",
+      "group": "effectiveness",
+      "sampling": "uniform",
+      "low": 0.5,
+      "high": 1.5,
+      "world0": 1.0,
+      "evidence": "exploratory",
+      "phrase": "la efectividad relativa de «Conocimiento y comunicación sobre amenazas, vulnerabilidad y riesgo climático»",
+      "gaps": [
+        "gap-effectiveness"
+      ],
+      "watch": "Indicador MEA de resultado outcome-risk_knowledge: hoy sin línea base y con meta por definir.",
+      "measure_id": "risk_knowledge",
+      "binary": false,
+      "evidence_label": "Exploratorio"
+    },
+    {
+      "name": "eff[health]",
+      "group": "effectiveness",
+      "sampling": "uniform",
+      "low": 0.5,
+      "high": 1.5,
+      "world0": 1.0,
+      "evidence": "exploratory",
+      "phrase": "la efectividad relativa de «Sistema de salud y entornos saludables resilientes al clima»",
+      "gaps": [
+        "gap-effectiveness"
+      ],
+      "watch": "Indicador MEA de resultado outcome-health: hoy sin línea base y con meta por definir.",
+      "measure_id": "health",
+      "binary": false,
+      "evidence_label": "Exploratorio"
+    },
+    {
+      "name": "ssp_shift[rionegro,biodiversity]",
+      "group": "ssp",
+      "sampling": "shift",
+      "low": 0,
+      "high": 1,
+      "world0": 0,
+      "evidence": "exploratory",
+      "phrase": "biodiversidad en Rionegro sube una clase bajo SSP3-7.0",
+      "gaps": [
+        "gap-ssp-cube"
+      ],
+      "watch": "Clase SSP3-7.0 de biodiversidad en Rionegro en el cubo de escenarios.",
+      "measure_id": null,
+      "binary": true,
+      "evidence_label": "Exploratorio"
+    },
+    {
+      "name": "ssp_shift[rionegro,water]",
+      "group": "ssp",
+      "sampling": "shift",
+      "low": 0,
+      "high": 1,
+      "world0": 0,
+      "evidence": "exploratory",
+      "phrase": "recurso hídrico en Rionegro sube una clase bajo SSP3-7.0",
+      "gaps": [
+        "gap-ssp-cube"
+      ],
+      "watch": "Clase SSP3-7.0 de recurso hídrico en Rionegro en el cubo de escenarios.",
+      "measure_id": null,
+      "binary": true,
+      "evidence_label": "Exploratorio"
+    },
+    {
+      "name": "ssp_shift[rionegro,disaster]",
+      "group": "ssp",
+      "sampling": "fixed_ssp",
+      "low": 0,
+      "high": 1,
+      "world0": 0,
+      "evidence": "team_inference",
+      "phrase": "riesgo de desastres en Rionegro sube una clase bajo SSP3-7.0",
+      "gaps": [
+        "gap-ssp-cube"
+      ],
+      "watch": "Único cambio de escenario cuantificado en el reto (riesgo 0,28 → 0,32).",
+      "measure_id": null,
+      "binary": true,
+      "evidence_label": "Inferencia del equipo"
+    },
+    {
+      "name": "ssp_shift[rionegro,health]",
+      "group": "ssp",
+      "sampling": "shift",
+      "low": 0,
+      "high": 1,
+      "world0": 0,
+      "evidence": "exploratory",
+      "phrase": "salud en Rionegro sube una clase bajo SSP3-7.0",
+      "gaps": [
+        "gap-ssp-cube"
+      ],
+      "watch": "Clase SSP3-7.0 de salud en Rionegro en el cubo de escenarios.",
+      "measure_id": null,
+      "binary": true,
+      "evidence_label": "Exploratorio"
+    },
+    {
+      "name": "ssp_shift[rionegro,infrastructure]",
+      "group": "ssp",
+      "sampling": "shift",
+      "low": 0,
+      "high": 1,
+      "world0": 0,
+      "evidence": "exploratory",
+      "phrase": "infraestructura en Rionegro sube una clase bajo SSP3-7.0",
+      "gaps": [
+        "gap-ssp-cube"
+      ],
+      "watch": "Clase SSP3-7.0 de infraestructura en Rionegro en el cubo de escenarios.",
+      "measure_id": null,
+      "binary": true,
+      "evidence_label": "Exploratorio"
+    },
+    {
+      "name": "ssp_shift[rionegro,habitat]",
+      "group": "ssp",
+      "sampling": "shift",
+      "low": 0,
+      "high": 1,
+      "world0": 0,
+      "evidence": "exploratory",
+      "phrase": "hábitat en Rionegro sube una clase bajo SSP3-7.0",
+      "gaps": [
+        "gap-ssp-cube"
+      ],
+      "watch": "Clase SSP3-7.0 de hábitat en Rionegro en el cubo de escenarios.",
+      "measure_id": null,
+      "binary": true,
+      "evidence_label": "Exploratorio"
+    },
+    {
+      "name": "ssp_shift[rionegro,food]",
+      "group": "ssp",
+      "sampling": "shift",
+      "low": 0,
+      "high": 1,
+      "world0": 0,
+      "evidence": "exploratory",
+      "phrase": "seguridad alimentaria en Rionegro sube una clase bajo SSP3-7.0",
+      "gaps": [
+        "gap-ssp-cube"
+      ],
+      "watch": "Clase SSP3-7.0 de seguridad alimentaria en Rionegro en el cubo de escenarios.",
+      "measure_id": null,
+      "binary": true,
+      "evidence_label": "Exploratorio"
+    },
+    {
+      "name": "ssp_shift[guarne,biodiversity]",
+      "group": "ssp",
+      "sampling": "shift",
+      "low": 0,
+      "high": 1,
+      "world0": 0,
+      "evidence": "exploratory",
+      "phrase": "biodiversidad en Guarne sube una clase bajo SSP3-7.0",
+      "gaps": [
+        "gap-ssp-cube"
+      ],
+      "watch": "Clase SSP3-7.0 de biodiversidad en Guarne en el cubo de escenarios.",
+      "measure_id": null,
+      "binary": true,
+      "evidence_label": "Exploratorio"
+    },
+    {
+      "name": "ssp_shift[guarne,water]",
+      "group": "ssp",
+      "sampling": "shift",
+      "low": 0,
+      "high": 1,
+      "world0": 0,
+      "evidence": "exploratory",
+      "phrase": "recurso hídrico en Guarne sube una clase bajo SSP3-7.0",
+      "gaps": [
+        "gap-ssp-cube"
+      ],
+      "watch": "Clase SSP3-7.0 de recurso hídrico en Guarne en el cubo de escenarios.",
+      "measure_id": null,
+      "binary": true,
+      "evidence_label": "Exploratorio"
+    },
+    {
+      "name": "ssp_shift[guarne,disaster]",
+      "group": "ssp",
+      "sampling": "shift",
+      "low": 0,
+      "high": 1,
+      "world0": 0,
+      "evidence": "exploratory",
+      "phrase": "riesgo de desastres en Guarne sube una clase bajo SSP3-7.0",
+      "gaps": [
+        "gap-ssp-cube"
+      ],
+      "watch": "Clase SSP3-7.0 de riesgo de desastres en Guarne en el cubo de escenarios.",
+      "measure_id": null,
+      "binary": true,
+      "evidence_label": "Exploratorio"
+    },
+    {
+      "name": "ssp_shift[guarne,health]",
+      "group": "ssp",
+      "sampling": "shift",
+      "low": 0,
+      "high": 1,
+      "world0": 0,
+      "evidence": "exploratory",
+      "phrase": "salud en Guarne sube una clase bajo SSP3-7.0",
+      "gaps": [
+        "gap-ssp-cube"
+      ],
+      "watch": "Clase SSP3-7.0 de salud en Guarne en el cubo de escenarios.",
+      "measure_id": null,
+      "binary": true,
+      "evidence_label": "Exploratorio"
+    },
+    {
+      "name": "ssp_shift[guarne,infrastructure]",
+      "group": "ssp",
+      "sampling": "shift",
+      "low": 0,
+      "high": 1,
+      "world0": 0,
+      "evidence": "exploratory",
+      "phrase": "infraestructura en Guarne sube una clase bajo SSP3-7.0",
+      "gaps": [
+        "gap-ssp-cube"
+      ],
+      "watch": "Clase SSP3-7.0 de infraestructura en Guarne en el cubo de escenarios.",
+      "measure_id": null,
+      "binary": true,
+      "evidence_label": "Exploratorio"
+    },
+    {
+      "name": "ssp_shift[guarne,habitat]",
+      "group": "ssp",
+      "sampling": "shift",
+      "low": 0,
+      "high": 1,
+      "world0": 0,
+      "evidence": "exploratory",
+      "phrase": "hábitat en Guarne sube una clase bajo SSP3-7.0",
+      "gaps": [
+        "gap-ssp-cube"
+      ],
+      "watch": "Clase SSP3-7.0 de hábitat en Guarne en el cubo de escenarios.",
+      "measure_id": null,
+      "binary": true,
+      "evidence_label": "Exploratorio"
+    },
+    {
+      "name": "ssp_shift[guarne,food]",
+      "group": "ssp",
+      "sampling": "shift",
+      "low": 0,
+      "high": 1,
+      "world0": 0,
+      "evidence": "exploratory",
+      "phrase": "seguridad alimentaria en Guarne sube una clase bajo SSP3-7.0",
+      "gaps": [
+        "gap-ssp-cube"
+      ],
+      "watch": "Clase SSP3-7.0 de seguridad alimentaria en Guarne en el cubo de escenarios.",
+      "measure_id": null,
+      "binary": true,
+      "evidence_label": "Exploratorio"
+    },
+    {
+      "name": "ssp_shift[marinilla,biodiversity]",
+      "group": "ssp",
+      "sampling": "shift",
+      "low": 0,
+      "high": 1,
+      "world0": 0,
+      "evidence": "exploratory",
+      "phrase": "biodiversidad en Marinilla sube una clase bajo SSP3-7.0",
+      "gaps": [
+        "gap-ssp-cube"
+      ],
+      "watch": "Clase SSP3-7.0 de biodiversidad en Marinilla en el cubo de escenarios.",
+      "measure_id": null,
+      "binary": true,
+      "evidence_label": "Exploratorio"
+    },
+    {
+      "name": "ssp_shift[marinilla,water]",
+      "group": "ssp",
+      "sampling": "shift",
+      "low": 0,
+      "high": 1,
+      "world0": 0,
+      "evidence": "exploratory",
+      "phrase": "recurso hídrico en Marinilla sube una clase bajo SSP3-7.0",
+      "gaps": [
+        "gap-ssp-cube"
+      ],
+      "watch": "Clase SSP3-7.0 de recurso hídrico en Marinilla en el cubo de escenarios.",
+      "measure_id": null,
+      "binary": true,
+      "evidence_label": "Exploratorio"
+    },
+    {
+      "name": "ssp_shift[marinilla,disaster]",
+      "group": "ssp",
+      "sampling": "shift",
+      "low": 0,
+      "high": 1,
+      "world0": 0,
+      "evidence": "exploratory",
+      "phrase": "riesgo de desastres en Marinilla sube una clase bajo SSP3-7.0",
+      "gaps": [
+        "gap-ssp-cube"
+      ],
+      "watch": "Clase SSP3-7.0 de riesgo de desastres en Marinilla en el cubo de escenarios.",
+      "measure_id": null,
+      "binary": true,
+      "evidence_label": "Exploratorio"
+    },
+    {
+      "name": "ssp_shift[marinilla,health]",
+      "group": "ssp",
+      "sampling": "shift",
+      "low": 0,
+      "high": 1,
+      "world0": 0,
+      "evidence": "exploratory",
+      "phrase": "salud en Marinilla sube una clase bajo SSP3-7.0",
+      "gaps": [
+        "gap-ssp-cube"
+      ],
+      "watch": "Clase SSP3-7.0 de salud en Marinilla en el cubo de escenarios.",
+      "measure_id": null,
+      "binary": true,
+      "evidence_label": "Exploratorio"
+    },
+    {
+      "name": "ssp_shift[marinilla,infrastructure]",
+      "group": "ssp",
+      "sampling": "shift",
+      "low": 0,
+      "high": 1,
+      "world0": 0,
+      "evidence": "exploratory",
+      "phrase": "infraestructura en Marinilla sube una clase bajo SSP3-7.0",
+      "gaps": [
+        "gap-ssp-cube"
+      ],
+      "watch": "Clase SSP3-7.0 de infraestructura en Marinilla en el cubo de escenarios.",
+      "measure_id": null,
+      "binary": true,
+      "evidence_label": "Exploratorio"
+    },
+    {
+      "name": "ssp_shift[marinilla,habitat]",
+      "group": "ssp",
+      "sampling": "shift",
+      "low": 0,
+      "high": 1,
+      "world0": 0,
+      "evidence": "exploratory",
+      "phrase": "hábitat en Marinilla sube una clase bajo SSP3-7.0",
+      "gaps": [
+        "gap-ssp-cube"
+      ],
+      "watch": "Clase SSP3-7.0 de hábitat en Marinilla en el cubo de escenarios.",
+      "measure_id": null,
+      "binary": true,
+      "evidence_label": "Exploratorio"
+    },
+    {
+      "name": "ssp_shift[marinilla,food]",
+      "group": "ssp",
+      "sampling": "shift",
+      "low": 0,
+      "high": 1,
+      "world0": 0,
+      "evidence": "exploratory",
+      "phrase": "seguridad alimentaria en Marinilla sube una clase bajo SSP3-7.0",
+      "gaps": [
+        "gap-ssp-cube"
+      ],
+      "watch": "Clase SSP3-7.0 de seguridad alimentaria en Marinilla en el cubo de escenarios.",
+      "measure_id": null,
+      "binary": true,
+      "evidence_label": "Exploratorio"
+    }
+  ],
+  "lenses": {
+    "institucional": "Mundo 0: los valores del modelo institucional.",
+    "multidimensional": "Mundo 0 con dim_penalty = 0.15.",
+    "naturaleza": "Regla de desempate, no un punto del espacio de mundos. Se compara con compare_portfolios.",
+    "bajo_arrepentimiento": "Cambia el objetivo a puntaje/costo. No es un punto del espacio de mundos."
+  },
+  "fingerprint": "ourea-cc546f34",
+  "numpy": "2.5.3"
+}
