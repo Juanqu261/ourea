@@ -16,8 +16,8 @@
     },
     {
       "path": ".github/workflows/ourea.yml",
-      "bytes": 8527,
-      "sha256": "ace495d903f768326360009ed24a9c9a20a4223142d90ad8b8c813119c38164e"
+      "bytes": 8531,
+      "sha256": "8bd25c27e236ceb5c4f847d9aa8acc446fe119382b43792bd1257243b069f160"
     },
     {
       "path": ".gitignore",
