@@ -1,0 +1,27 @@
+{
+  "case_id": "nanjing_xianlin_portability",
+  "city": "Nanjing",
+  "focus_area": "Xianlin / Qixia",
+  "case_role": "portability_demonstration",
+  "sandbox_bbox_wgs84": [
+    118.88,
+    32.075,
+    118.97,
+    32.145
+  ],
+  "bbox_status": "initial reproducible screening bbox; not an official administrative boundary",
+  "planning_cells": 80,
+  "exposure_units": 80,
+  "roads_segments": 0,
+  "hazard_polygons": 80,
+  "population_estimate": 51360.6,
+  "population_label": "WorldPop 2026 population estimate",
+  "median_slope_deg": 3.41,
+  "mean_built_up_fraction": 0.4462,
+  "building_metric": "worldcover_built_up_proxy",
+  "land_cover_source": "ESA WorldCover 2021 v200",
+  "osm_building_counts_used": false,
+  "equity_layer": null,
+  "worldcover_used": true,
+  "note": "Adaptation screening for monsoon urban drainage / stormwater context. Terrain-derived drainage-stress and land-cover-derived runoff indicators are screening proxies, not inundation maps or calibrated runoff coefficients. Population figures are WorldPop estimates, not census counts."
+}

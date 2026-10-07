@@ -1,0 +1,65 @@
+[
+  {
+    "cell_id": 35,
+    "type": "drainage",
+    "selectedByPolicies": 4,
+    "policyShare": 1,
+    "consensusAllNamedPolicies": true
+  },
+  {
+    "cell_id": 35,
+    "type": "rwh",
+    "selectedByPolicies": 4,
+    "policyShare": 1,
+    "consensusAllNamedPolicies": true
+  },
+  {
+    "cell_id": 1,
+    "type": "rwh",
+    "selectedByPolicies": 3,
+    "policyShare": 0.75,
+    "consensusAllNamedPolicies": false
+  },
+  {
+    "cell_id": 2,
+    "type": "drainage",
+    "selectedByPolicies": 3,
+    "policyShare": 0.75,
+    "consensusAllNamedPolicies": false
+  },
+  {
+    "cell_id": 1,
+    "type": "drainage",
+    "selectedByPolicies": 2,
+    "policyShare": 0.5,
+    "consensusAllNamedPolicies": false
+  },
+  {
+    "cell_id": 28,
+    "type": "rwh",
+    "selectedByPolicies": 2,
+    "policyShare": 0.5,
+    "consensusAllNamedPolicies": false
+  },
+  {
+    "cell_id": 36,
+    "type": "rwh",
+    "selectedByPolicies": 2,
+    "policyShare": 0.5,
+    "consensusAllNamedPolicies": false
+  },
+  {
+    "cell_id": 2,
+    "type": "rwh",
+    "selectedByPolicies": 1,
+    "policyShare": 0.25,
+    "consensusAllNamedPolicies": false
+  },
+  {
+    "cell_id": 29,
+    "type": "rwh",
+    "selectedByPolicies": 1,
+    "policyShare": 0.25,
+    "consensusAllNamedPolicies": false
+  }
+]

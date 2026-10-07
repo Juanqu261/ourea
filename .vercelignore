@@ -1,0 +1,10 @@
+/frontend
+/data
+/docs
+/tests
+/scripts
+/.cache
+/.github
+*.md
+MANIFEST.json
+SHA256SUMS.txt

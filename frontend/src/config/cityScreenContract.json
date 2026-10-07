@@ -1,0 +1,12 @@
+{
+  "schema": "ourea-city-screen-contract",
+  "schema_version": 1,
+  "official_urban_records": 249,
+  "safe_population_matches": 248,
+  "spatial_polygons": 271,
+  "rankable_population_match_values": [
+    "exact",
+    "fuzzy_name_variant"
+  ],
+  "unmatched_population_match_value": "unmatched_or_nonresidential"
+}

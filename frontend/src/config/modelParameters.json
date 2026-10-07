@@ -1,0 +1,141 @@
+{
+    "status": "planning-priors-explicit",
+  "stress": {
+    "threshold": 0.75,
+    "hazardScores": {
+      "Baja": 0.25,
+      "Media": 0.55,
+      "Alta": 0.85
+    },
+    "spatialWeights": {
+      "hazard": 0.72,
+      "slope": 0.28
+    },
+    "slopeNormalizationDegrees": 50,
+    "rainNormalization": {
+      "offsetMm": 30,
+      "spanMm": 150
+    },
+    "climateWeights": {
+      "base": 0.52,
+      "rain": 0.3,
+      "antecedentWetness": 0.18
+    }
+  },
+  "interventions": {
+    "rwh": {
+      "label": "Rainwater harvesting",
+      "short": "RWH",
+      "costCredits": 1,
+      "effectRange": [
+        0.03,
+        0.12
+      ],
+      "opportunityField": "rwh_opportunity",
+      "maturityYears": 0
+    },
+    "drainage": {
+      "label": "Drainage upgrade",
+      "short": "Drainage",
+      "costCredits": 3,
+      "effectRange": [
+        0.08,
+        0.25
+      ],
+      "opportunityField": "drainage_corridor_proxy",
+      "maturityYears": 0
+    },
+    "restoration": {
+      "label": "Restoration / bioengineering",
+      "short": "Restoration",
+      "costCredits": 2,
+      "effectRange": [
+        0.03,
+        0.18
+      ],
+      "opportunityField": "restoration_opportunity",
+      "maturityYears": 3
+    }
+  },
+  "rwh": {
+    "runoffCoefficient": 0.8,
+    "storageM3PerParticipatingBuilding": 1.5,
+    "participationShare": 0.25
+  },
+  "optimizer": {
+    "maxLocalReduction": 0.45,
+    "monteCarloRuns": 220,
+    "optimizerSamples": 80,
+    "maxProjectsPerCell": 2,
+    "minOpportunity": 0.08,
+    "accessNormalizationMeters": 350,
+    "pedestrianAccessWeight": 0.6,
+    "frontierBudgets": [
+      4,
+      8,
+      12,
+      16,
+      20
+    ],
+    "frontierMonteCarloRuns": 120,
+    "frontierScenarioSamples": 60,
+    "stabilityRuns": 12,
+    "stabilityScenarioSamples": 60,
+    "checkpointMonteCarloRuns": 500,
+    "objectiveProfiles": {
+      "balanced": {
+        "label": "Balanced",
+        "description": "Balances robust exposure reduction with modest equity and access weighting.",
+        "equityWeight": 0.25,
+        "accessWeight": 0.1,
+        "downsidePenalty": 0.55
+      },
+      "equity": {
+        "label": "Equity-first",
+        "description": "Places substantially more decision weight on cells with high stratum-1 exposure.",
+        "equityWeight": 1.2,
+        "accessWeight": 0.05,
+        "downsidePenalty": 0.55
+      },
+      "access": {
+        "label": "Access-first",
+        "description": "Places substantially more decision weight on cells supporting mapped hillside access.",
+        "equityWeight": 0.1,
+        "accessWeight": 1.2,
+        "downsidePenalty": 0.55
+      },
+      "low_regret": {
+        "label": "Low-regret",
+        "description": "Penalizes lower-tail uncertainty strongly, favoring fewer projects whose marginal benefit remains defensible in adverse uncertainty-ensemble draws.",
+        "equityWeight": 0.25,
+        "accessWeight": 0.1,
+        "downsidePenalty": 1.5
+      }
+    },
+    "paretoGrid": {
+      "equityWeights": [
+        0.0,
+        0.6,
+        1.2
+      ],
+      "accessWeights": [
+        0.0,
+        0.6,
+        1.2
+      ],
+      "downsidePenalty": 0.55,
+      "optimizerScenarioSamples": 50,
+      "monteCarloRuns": 80
+    }
+  },
+  "scenarioUncertainty": {
+    "rainMultiplier": [
+      0.88,
+      1.12
+    ],
+    "antecedentWetnessHalfRange": 0.12,
+    "baseSeed": 20260818,
+    "monteCarloSeed": 1009,
+    "comparisonSeed": 7301
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "schema": "ourea-nanjing-overview-screening",
+  "schema_version": 2,
+  "generated_at": "2026-09-13T05:05:08Z",
+  "bbox": [
+    118.88,
+    32.075,
+    118.97,
+    32.145
+  ],
+  "overview_polygon_count": 38,
+  "osm_named_count": 24,
+  "derived_sector_count": 14,
+  "planning_cells_unchanged": true,
+  "planning_cell_count": 80,
+  "cells_assigned": 80,
+  "coverage": {
+    "aoi_area_deg2": 0.006300000000000265,
+    "aoi_area_m2": 66127987.74714548,
+    "covered_area_deg2": 0.006300000000000264,
+    "covered_area_m2": 66127987.747145474,
+    "uncovered_area_deg2": 8.673617379884035e-19,
+    "uncovered_area_m2": 7.450580596923828e-09,
+    "coverage_ratio": 0.9999999999999999,
+    "coverage_pct": 100.0
+  },
+  "coverage_threshold": 0.99,
+  "aggregation": {
+    "population_proxy": "sum of member-cell population_proxy (centroid membership)",
+    "drainage_stress_proxy": "population-weighted mean of member cells",
+    "built_up_fraction": "population-weighted mean of member cells",
+    "runoff_pressure_proxy": "population-weighted mean of member cells",
+    "priority_choropleth_fields": "minmax normalized within Nanjing overview set to [0,1]",
+    "optimizer_units": "frontend/public/data/nanjing/planning_cells.geojson (unchanged)"
+  },
+  "provenance": {
+    "osm": "OpenStreetMap via api.openstreetmap.org map API tiles; ODbL",
+    "derived_sectors": "AOI remainder after OSM named polygons, split by major roads/waterways; not administrative"
+  },
+  "map_fill_policy": "all overview polygons including derived sectors",
+  "note": "Step-1 overview only. Portfolio optimization continues on the 80 planning cells. Priority fill colors use city-relative [0,1] normalization, not Medellín thresholds."
+}

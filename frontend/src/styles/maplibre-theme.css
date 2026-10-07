@@ -1,0 +1,27 @@
+.maplibregl-ctrl-group {
+  overflow: hidden;
+  border: 1px solid rgb(255 255 255 / 12%) !important;
+  background: rgb(22 28 31 / 92%) !important;
+  box-shadow: var(--shadow) !important;
+}
+
+.maplibregl-ctrl-group button + button {
+  border-top: 1px solid rgb(255 255 255 / 10%) !important;
+}
+
+.maplibregl-ctrl-group button:hover {
+  background-color: rgb(200 167 94 / 14%) !important;
+}
+
+.maplibregl-ctrl button .maplibregl-ctrl-icon {
+  filter: invert(0.92) sepia(0.18) saturate(0.55) hue-rotate(8deg);
+}
+
+.maplibregl-ctrl-attrib {
+  background: rgb(22 28 31 / 78%) !important;
+  color: var(--text-muted);
+}
+
+.maplibregl-ctrl-attrib a {
+  color: var(--accent-soft);
+}

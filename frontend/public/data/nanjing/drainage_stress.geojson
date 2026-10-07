@@ -1,0 +1,2892 @@
+{
+  "type": "FeatureCollection",
+  "name": "nanjing_drainage_stress_proxy",
+  "crs": {
+    "type": "name",
+    "properties": {
+      "name": "urn:ogc:def:crs:OGC:1.3:CRS84"
+    }
+  },
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "hazard_class": "Baja",
+        "label": "terrain-derived drainage-stress screening proxy",
+        "drainage_stress_proxy": 0.2228,
+        "not": "inundation map / flood probability"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              118.88,
+              32.075
+            ],
+            [
+              118.89,
+              32.075
+            ],
+            [
+              118.89,
+              32.085
+            ],
+            [
+              118.88,
+              32.085
+            ],
+            [
+              118.88,
+              32.075
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "hazard_class": "Media",
+        "label": "terrain-derived drainage-stress screening proxy",
+        "drainage_stress_proxy": 0.496,
+        "not": "inundation map / flood probability"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              118.89,
+              32.075
+            ],
+            [
+              118.9,
+              32.075
+            ],
+            [
+              118.9,
+              32.085
+            ],
+            [
+              118.89,
+              32.085
+            ],
+            [
+              118.89,
+              32.075
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "hazard_class": "Media",
+        "label": "terrain-derived drainage-stress screening proxy",
+        "drainage_stress_proxy": 0.4738,
+        "not": "inundation map / flood probability"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              118.9,
+              32.075
+            ],
+            [
+              118.91000000000001,
+              32.075
+            ],
+            [
+              118.91000000000001,
+              32.085
+            ],
+            [
+              118.9,
+              32.085
+            ],
+            [
+              118.9,
+              32.075
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "hazard_class": "Baja",
+        "label": "terrain-derived drainage-stress screening proxy",
+        "drainage_stress_proxy": 0.3118,
+        "not": "inundation map / flood probability"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              118.91000000000001,
+              32.075
+            ],
+            [
+              118.92000000000002,
+              32.075
+            ],
+            [
+              118.92000000000002,
+              32.085
+            ],
+            [
+              118.91000000000001,
+              32.085
+            ],
+            [
+              118.91000000000001,
+              32.075
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "hazard_class": "Media",
+        "label": "terrain-derived drainage-stress screening proxy",
+        "drainage_stress_proxy": 0.4696,
+        "not": "inundation map / flood probability"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              118.92000000000002,
+              32.075
+            ],
+            [
+              118.93000000000002,
+              32.075
+            ],
+            [
+              118.93000000000002,
+              32.085
+            ],
+            [
+              118.92000000000002,
+              32.085
+            ],
+            [
+              118.92000000000002,
+              32.075
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "hazard_class": "Media",
+        "label": "terrain-derived drainage-stress screening proxy",
+        "drainage_stress_proxy": 0.4781,
+        "not": "inundation map / flood probability"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              118.93000000000002,
+              32.075
+            ],
+            [
+              118.94000000000003,
+              32.075
+            ],
+            [
+              118.94000000000003,
+              32.085
+            ],
+            [
+              118.93000000000002,
+              32.085
+            ],
+            [
+              118.93000000000002,
+              32.075
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "hazard_class": "Media",
+        "label": "terrain-derived drainage-stress screening proxy",
+        "drainage_stress_proxy": 0.6168,
+        "not": "inundation map / flood probability"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              118.94000000000003,
+              32.075
+            ],
+            [
+              118.95000000000003,
+              32.075
+            ],
+            [
+              118.95000000000003,
+              32.085
+            ],
+            [
+              118.94000000000003,
+              32.085
+            ],
+            [
+              118.94000000000003,
+              32.075
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "hazard_class": "Media",
+        "label": "terrain-derived drainage-stress screening proxy",
+        "drainage_stress_proxy": 0.4128,
+        "not": "inundation map / flood probability"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              118.95000000000003,
+              32.075
+            ],
+            [
+              118.96000000000004,
+              32.075
+            ],
+            [
+              118.96000000000004,
+              32.085
+            ],
+            [
+              118.95000000000003,
+              32.085
+            ],
+            [
+              118.95000000000003,
+              32.075
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "hazard_class": "Baja",
+        "label": "terrain-derived drainage-stress screening proxy",
+        "drainage_stress_proxy": 0.2027,
+        "not": "inundation map / flood probability"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              118.96000000000004,
+              32.075
+            ],
+            [
+              118.97000000000004,
+              32.075
+            ],
+            [
+              118.97000000000004,
+              32.085
+            ],
+            [
+              118.96000000000004,
+              32.085
+            ],
+            [
+              118.96000000000004,
+              32.075
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "hazard_class": "Baja",
+        "label": "terrain-derived drainage-stress screening proxy",
+        "drainage_stress_proxy": 0.1803,
+        "not": "inundation map / flood probability"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              118.97000000000004,
+              32.075
+            ],
+            [
+              118.98000000000005,
+              32.075
+            ],
+            [
+              118.98000000000005,
+              32.085
+            ],
+            [
+              118.97000000000004,
+              32.085
+            ],
+            [
+              118.97000000000004,
+              32.075
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "hazard_class": "Media",
+        "label": "terrain-derived drainage-stress screening proxy",
+        "drainage_stress_proxy": 0.4011,
+        "not": "inundation map / flood probability"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              118.88,
+              32.085
+            ],
+            [
+              118.89,
+              32.085
+            ],
+            [
+              118.89,
+              32.095
+            ],
+            [
+              118.88,
+              32.095
+            ],
+            [
+              118.88,
+              32.085
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "hazard_class": "Media",
+        "label": "terrain-derived drainage-stress screening proxy",
+        "drainage_stress_proxy": 0.4671,
+        "not": "inundation map / flood probability"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              118.89,
+              32.085
+            ],
+            [
+              118.9,
+              32.085
+            ],
+            [
+              118.9,
+              32.095
+            ],
+            [
+              118.89,
+              32.095
+            ],
+            [
+              118.89,
+              32.085
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "hazard_class": "Media",
+        "label": "terrain-derived drainage-stress screening proxy",
+        "drainage_stress_proxy": 0.4376,
+        "not": "inundation map / flood probability"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              118.9,
+              32.085
+            ],
+            [
+              118.91000000000001,
+              32.085
+            ],
+            [
+              118.91000000000001,
+              32.095
+            ],
+            [
+              118.9,
+              32.095
+            ],
+            [
+              118.9,
+              32.085
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "hazard_class": "Media",
+        "label": "terrain-derived drainage-stress screening proxy",
+        "drainage_stress_proxy": 0.5187,
+        "not": "inundation map / flood probability"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              118.91000000000001,
+              32.085
+            ],
+            [
+              118.92000000000002,
+              32.085
+            ],
+            [
+              118.92000000000002,
+              32.095
+            ],
+            [
+              118.91000000000001,
+              32.095
+            ],
+            [
+              118.91000000000001,
+              32.085
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "hazard_class": "Media",
+        "label": "terrain-derived drainage-stress screening proxy",
+        "drainage_stress_proxy": 0.4513,
+        "not": "inundation map / flood probability"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              118.92000000000002,
+              32.085
+            ],
+            [
+              118.93000000000002,
+              32.085
+            ],
+            [
+              118.93000000000002,
+              32.095
+            ],
+            [
+              118.92000000000002,
+              32.095
+            ],
+            [
+              118.92000000000002,
+              32.085
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "hazard_class": "Baja",
+        "label": "terrain-derived drainage-stress screening proxy",
+        "drainage_stress_proxy": 0.1589,
+        "not": "inundation map / flood probability"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              118.93000000000002,
+              32.085
+            ],
+            [
+              118.94000000000003,
+              32.085
+            ],
+            [
+              118.94000000000003,
+              32.095
+            ],
+            [
+              118.93000000000002,
+              32.095
+            ],
+            [
+              118.93000000000002,
+              32.085
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "hazard_class": "Baja",
+        "label": "terrain-derived drainage-stress screening proxy",
+        "drainage_stress_proxy": 0.2602,
+        "not": "inundation map / flood probability"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              118.94000000000003,
+              32.085
+            ],
+            [
+              118.95000000000003,
+              32.085
+            ],
+            [
+              118.95000000000003,
+              32.095
+            ],
+            [
+              118.94000000000003,
+              32.095
+            ],
+            [
+              118.94000000000003,
+              32.085
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "hazard_class": "Media",
+        "label": "terrain-derived drainage-stress screening proxy",
+        "drainage_stress_proxy": 0.5128,
+        "not": "inundation map / flood probability"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              118.95000000000003,
+              32.085
+            ],
+            [
+              118.96000000000004,
+              32.085
+            ],
+            [
+              118.96000000000004,
+              32.095
+            ],
+            [
+              118.95000000000003,
+              32.095
+            ],
+            [
+              118.95000000000003,
+              32.085
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "hazard_class": "Baja",
+        "label": "terrain-derived drainage-stress screening proxy",
+        "drainage_stress_proxy": 0.3934,
+        "not": "inundation map / flood probability"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              118.96000000000004,
+              32.085
+            ],
+            [
+              118.97000000000004,
+              32.085
+            ],
+            [
+              118.97000000000004,
+              32.095
+            ],
+            [
+              118.96000000000004,
+              32.095
+            ],
+            [
+              118.96000000000004,
+              32.085
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "hazard_class": "Baja",
+        "label": "terrain-derived drainage-stress screening proxy",
+        "drainage_stress_proxy": 0.1912,
+        "not": "inundation map / flood probability"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              118.97000000000004,
+              32.085
+            ],
+            [
+              118.98000000000005,
+              32.085
+            ],
+            [
+              118.98000000000005,
+              32.095
+            ],
+            [
+              118.97000000000004,
+              32.095
+            ],
+            [
+              118.97000000000004,
+              32.085
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "hazard_class": "Baja",
+        "label": "terrain-derived drainage-stress screening proxy",
+        "drainage_stress_proxy": 0.279,
+        "not": "inundation map / flood probability"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              118.88,
+              32.095
+            ],
+            [
+              118.89,
+              32.095
+            ],
+            [
+              118.89,
+              32.105
+            ],
+            [
+              118.88,
+              32.105
+            ],
+            [
+              118.88,
+              32.095
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "hazard_class": "Media",
+        "label": "terrain-derived drainage-stress screening proxy",
+        "drainage_stress_proxy": 0.4506,
+        "not": "inundation map / flood probability"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              118.89,
+              32.095
+            ],
+            [
+              118.9,
+              32.095
+            ],
+            [
+              118.9,
+              32.105
+            ],
+            [
+              118.89,
+              32.105
+            ],
+            [
+              118.89,
+              32.095
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "hazard_class": "Media",
+        "label": "terrain-derived drainage-stress screening proxy",
+        "drainage_stress_proxy": 0.5215,
+        "not": "inundation map / flood probability"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              118.9,
+              32.095
+            ],
+            [
+              118.91000000000001,
+              32.095
+            ],
+            [
+              118.91000000000001,
+              32.105
+            ],
+            [
+              118.9,
+              32.105
+            ],
+            [
+              118.9,
+              32.095
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "hazard_class": "Media",
+        "label": "terrain-derived drainage-stress screening proxy",
+        "drainage_stress_proxy": 0.5845,
+        "not": "inundation map / flood probability"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              118.91000000000001,
+              32.095
+            ],
+            [
+              118.92000000000002,
+              32.095
+            ],
+            [
+              118.92000000000002,
+              32.105
+            ],
+            [
+              118.91000000000001,
+              32.105
+            ],
+            [
+              118.91000000000001,
+              32.095
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "hazard_class": "Media",
+        "label": "terrain-derived drainage-stress screening proxy",
+        "drainage_stress_proxy": 0.5544,
+        "not": "inundation map / flood probability"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              118.92000000000002,
+              32.095
+            ],
+            [
+              118.93000000000002,
+              32.095
+            ],
+            [
+              118.93000000000002,
+              32.105
+            ],
+            [
+              118.92000000000002,
+              32.105
+            ],
+            [
+              118.92000000000002,
+              32.095
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "hazard_class": "Media",
+        "label": "terrain-derived drainage-stress screening proxy",
+        "drainage_stress_proxy": 0.6038,
+        "not": "inundation map / flood probability"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              118.93000000000002,
+              32.095
+            ],
+            [
+              118.94000000000003,
+              32.095
+            ],
+            [
+              118.94000000000003,
+              32.105
+            ],
+            [
+              118.93000000000002,
+              32.105
+            ],
+            [
+              118.93000000000002,
+              32.095
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "hazard_class": "Baja",
+        "label": "terrain-derived drainage-stress screening proxy",
+        "drainage_stress_proxy": 0.1446,
+        "not": "inundation map / flood probability"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              118.94000000000003,
+              32.095
+            ],
+            [
+              118.95000000000003,
+              32.095
+            ],
+            [
+              118.95000000000003,
+              32.105
+            ],
+            [
+              118.94000000000003,
+              32.105
+            ],
+            [
+              118.94000000000003,
+              32.095
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "hazard_class": "Baja",
+        "label": "terrain-derived drainage-stress screening proxy",
+        "drainage_stress_proxy": 0.3536,
+        "not": "inundation map / flood probability"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              118.95000000000003,
+              32.095
+            ],
+            [
+              118.96000000000004,
+              32.095
+            ],
+            [
+              118.96000000000004,
+              32.105
+            ],
+            [
+              118.95000000000003,
+              32.105
+            ],
+            [
+              118.95000000000003,
+              32.095
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "hazard_class": "Baja",
+        "label": "terrain-derived drainage-stress screening proxy",
+        "drainage_stress_proxy": 0.2305,
+        "not": "inundation map / flood probability"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              118.96000000000004,
+              32.095
+            ],
+            [
+              118.97000000000004,
+              32.095
+            ],
+            [
+              118.97000000000004,
+              32.105
+            ],
+            [
+              118.96000000000004,
+              32.105
+            ],
+            [
+              118.96000000000004,
+              32.095
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "hazard_class": "Baja",
+        "label": "terrain-derived drainage-stress screening proxy",
+        "drainage_stress_proxy": 0.3047,
+        "not": "inundation map / flood probability"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              118.97000000000004,
+              32.095
+            ],
+            [
+              118.98000000000005,
+              32.095
+            ],
+            [
+              118.98000000000005,
+              32.105
+            ],
+            [
+              118.97000000000004,
+              32.105
+            ],
+            [
+              118.97000000000004,
+              32.095
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "hazard_class": "Media",
+        "label": "terrain-derived drainage-stress screening proxy",
+        "drainage_stress_proxy": 0.4094,
+        "not": "inundation map / flood probability"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              118.88,
+              32.105
+            ],
+            [
+              118.89,
+              32.105
+            ],
+            [
+              118.89,
+              32.114999999999995
+            ],
+            [
+              118.88,
+              32.114999999999995
+            ],
+            [
+              118.88,
+              32.105
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "hazard_class": "Baja",
+        "label": "terrain-derived drainage-stress screening proxy",
+        "drainage_stress_proxy": 0.2967,
+        "not": "inundation map / flood probability"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              118.89,
+              32.105
+            ],
+            [
+              118.9,
+              32.105
+            ],
+            [
+              118.9,
+              32.114999999999995
+            ],
+            [
+              118.89,
+              32.114999999999995
+            ],
+            [
+              118.89,
+              32.105
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "hazard_class": "Baja",
+        "label": "terrain-derived drainage-stress screening proxy",
+        "drainage_stress_proxy": 0.2007,
+        "not": "inundation map / flood probability"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              118.9,
+              32.105
+            ],
+            [
+              118.91000000000001,
+              32.105
+            ],
+            [
+              118.91000000000001,
+              32.114999999999995
+            ],
+            [
+              118.9,
+              32.114999999999995
+            ],
+            [
+              118.9,
+              32.105
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "hazard_class": "Media",
+        "label": "terrain-derived drainage-stress screening proxy",
+        "drainage_stress_proxy": 0.4881,
+        "not": "inundation map / flood probability"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              118.91000000000001,
+              32.105
+            ],
+            [
+              118.92000000000002,
+              32.105
+            ],
+            [
+              118.92000000000002,
+              32.114999999999995
+            ],
+            [
+              118.91000000000001,
+              32.114999999999995
+            ],
+            [
+              118.91000000000001,
+              32.105
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "hazard_class": "Media",
+        "label": "terrain-derived drainage-stress screening proxy",
+        "drainage_stress_proxy": 0.6039,
+        "not": "inundation map / flood probability"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              118.92000000000002,
+              32.105
+            ],
+            [
+              118.93000000000002,
+              32.105
+            ],
+            [
+              118.93000000000002,
+              32.114999999999995
+            ],
+            [
+              118.92000000000002,
+              32.114999999999995
+            ],
+            [
+              118.92000000000002,
+              32.105
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "hazard_class": "Baja",
+        "label": "terrain-derived drainage-stress screening proxy",
+        "drainage_stress_proxy": 0.2812,
+        "not": "inundation map / flood probability"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              118.93000000000002,
+              32.105
+            ],
+            [
+              118.94000000000003,
+              32.105
+            ],
+            [
+              118.94000000000003,
+              32.114999999999995
+            ],
+            [
+              118.93000000000002,
+              32.114999999999995
+            ],
+            [
+              118.93000000000002,
+              32.105
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "hazard_class": "Media",
+        "label": "terrain-derived drainage-stress screening proxy",
+        "drainage_stress_proxy": 0.5455,
+        "not": "inundation map / flood probability"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              118.94000000000003,
+              32.105
+            ],
+            [
+              118.95000000000003,
+              32.105
+            ],
+            [
+              118.95000000000003,
+              32.114999999999995
+            ],
+            [
+              118.94000000000003,
+              32.114999999999995
+            ],
+            [
+              118.94000000000003,
+              32.105
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "hazard_class": "Media",
+        "label": "terrain-derived drainage-stress screening proxy",
+        "drainage_stress_proxy": 0.6386,
+        "not": "inundation map / flood probability"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              118.95000000000003,
+              32.105
+            ],
+            [
+              118.96000000000004,
+              32.105
+            ],
+            [
+              118.96000000000004,
+              32.114999999999995
+            ],
+            [
+              118.95000000000003,
+              32.114999999999995
+            ],
+            [
+              118.95000000000003,
+              32.105
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "hazard_class": "Baja",
+        "label": "terrain-derived drainage-stress screening proxy",
+        "drainage_stress_proxy": 0.1573,
+        "not": "inundation map / flood probability"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              118.96000000000004,
+              32.105
+            ],
+            [
+              118.97000000000004,
+              32.105
+            ],
+            [
+              118.97000000000004,
+              32.114999999999995
+            ],
+            [
+              118.96000000000004,
+              32.114999999999995
+            ],
+            [
+              118.96000000000004,
+              32.105
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "hazard_class": "Baja",
+        "label": "terrain-derived drainage-stress screening proxy",
+        "drainage_stress_proxy": 0.0936,
+        "not": "inundation map / flood probability"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              118.97000000000004,
+              32.105
+            ],
+            [
+              118.98000000000005,
+              32.105
+            ],
+            [
+              118.98000000000005,
+              32.114999999999995
+            ],
+            [
+              118.97000000000004,
+              32.114999999999995
+            ],
+            [
+              118.97000000000004,
+              32.105
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "hazard_class": "Media",
+        "label": "terrain-derived drainage-stress screening proxy",
+        "drainage_stress_proxy": 0.5365,
+        "not": "inundation map / flood probability"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              118.88,
+              32.114999999999995
+            ],
+            [
+              118.89,
+              32.114999999999995
+            ],
+            [
+              118.89,
+              32.12499999999999
+            ],
+            [
+              118.88,
+              32.12499999999999
+            ],
+            [
+              118.88,
+              32.114999999999995
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "hazard_class": "Baja",
+        "label": "terrain-derived drainage-stress screening proxy",
+        "drainage_stress_proxy": 0.359,
+        "not": "inundation map / flood probability"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              118.89,
+              32.114999999999995
+            ],
+            [
+              118.9,
+              32.114999999999995
+            ],
+            [
+              118.9,
+              32.12499999999999
+            ],
+            [
+              118.89,
+              32.12499999999999
+            ],
+            [
+              118.89,
+              32.114999999999995
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "hazard_class": "Baja",
+        "label": "terrain-derived drainage-stress screening proxy",
+        "drainage_stress_proxy": 0.3525,
+        "not": "inundation map / flood probability"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              118.9,
+              32.114999999999995
+            ],
+            [
+              118.91000000000001,
+              32.114999999999995
+            ],
+            [
+              118.91000000000001,
+              32.12499999999999
+            ],
+            [
+              118.9,
+              32.12499999999999
+            ],
+            [
+              118.9,
+              32.114999999999995
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "hazard_class": "Baja",
+        "label": "terrain-derived drainage-stress screening proxy",
+        "drainage_stress_proxy": 0.3365,
+        "not": "inundation map / flood probability"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              118.91000000000001,
+              32.114999999999995
+            ],
+            [
+              118.92000000000002,
+              32.114999999999995
+            ],
+            [
+              118.92000000000002,
+              32.12499999999999
+            ],
+            [
+              118.91000000000001,
+              32.12499999999999
+            ],
+            [
+              118.91000000000001,
+              32.114999999999995
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "hazard_class": "Media",
+        "label": "terrain-derived drainage-stress screening proxy",
+        "drainage_stress_proxy": 0.5138,
+        "not": "inundation map / flood probability"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              118.92000000000002,
+              32.114999999999995
+            ],
+            [
+              118.93000000000002,
+              32.114999999999995
+            ],
+            [
+              118.93000000000002,
+              32.12499999999999
+            ],
+            [
+              118.92000000000002,
+              32.12499999999999
+            ],
+            [
+              118.92000000000002,
+              32.114999999999995
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "hazard_class": "Media",
+        "label": "terrain-derived drainage-stress screening proxy",
+        "drainage_stress_proxy": 0.4474,
+        "not": "inundation map / flood probability"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              118.93000000000002,
+              32.114999999999995
+            ],
+            [
+              118.94000000000003,
+              32.114999999999995
+            ],
+            [
+              118.94000000000003,
+              32.12499999999999
+            ],
+            [
+              118.93000000000002,
+              32.12499999999999
+            ],
+            [
+              118.93000000000002,
+              32.114999999999995
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "hazard_class": "Media",
+        "label": "terrain-derived drainage-stress screening proxy",
+        "drainage_stress_proxy": 0.5333,
+        "not": "inundation map / flood probability"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              118.94000000000003,
+              32.114999999999995
+            ],
+            [
+              118.95000000000003,
+              32.114999999999995
+            ],
+            [
+              118.95000000000003,
+              32.12499999999999
+            ],
+            [
+              118.94000000000003,
+              32.12499999999999
+            ],
+            [
+              118.94000000000003,
+              32.114999999999995
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "hazard_class": "Media",
+        "label": "terrain-derived drainage-stress screening proxy",
+        "drainage_stress_proxy": 0.5017,
+        "not": "inundation map / flood probability"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              118.95000000000003,
+              32.114999999999995
+            ],
+            [
+              118.96000000000004,
+              32.114999999999995
+            ],
+            [
+              118.96000000000004,
+              32.12499999999999
+            ],
+            [
+              118.95000000000003,
+              32.12499999999999
+            ],
+            [
+              118.95000000000003,
+              32.114999999999995
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "hazard_class": "Media",
+        "label": "terrain-derived drainage-stress screening proxy",
+        "drainage_stress_proxy": 0.4258,
+        "not": "inundation map / flood probability"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              118.96000000000004,
+              32.114999999999995
+            ],
+            [
+              118.97000000000004,
+              32.114999999999995
+            ],
+            [
+              118.97000000000004,
+              32.12499999999999
+            ],
+            [
+              118.96000000000004,
+              32.12499999999999
+            ],
+            [
+              118.96000000000004,
+              32.114999999999995
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "hazard_class": "Baja",
+        "label": "terrain-derived drainage-stress screening proxy",
+        "drainage_stress_proxy": 0.3328,
+        "not": "inundation map / flood probability"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              118.97000000000004,
+              32.114999999999995
+            ],
+            [
+              118.98000000000005,
+              32.114999999999995
+            ],
+            [
+              118.98000000000005,
+              32.12499999999999
+            ],
+            [
+              118.97000000000004,
+              32.12499999999999
+            ],
+            [
+              118.97000000000004,
+              32.114999999999995
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "hazard_class": "Media",
+        "label": "terrain-derived drainage-stress screening proxy",
+        "drainage_stress_proxy": 0.4105,
+        "not": "inundation map / flood probability"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              118.88,
+              32.12499999999999
+            ],
+            [
+              118.89,
+              32.12499999999999
+            ],
+            [
+              118.89,
+              32.13499999999999
+            ],
+            [
+              118.88,
+              32.13499999999999
+            ],
+            [
+              118.88,
+              32.12499999999999
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "hazard_class": "Baja",
+        "label": "terrain-derived drainage-stress screening proxy",
+        "drainage_stress_proxy": 0.3759,
+        "not": "inundation map / flood probability"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              118.89,
+              32.12499999999999
+            ],
+            [
+              118.9,
+              32.12499999999999
+            ],
+            [
+              118.9,
+              32.13499999999999
+            ],
+            [
+              118.89,
+              32.13499999999999
+            ],
+            [
+              118.89,
+              32.12499999999999
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "hazard_class": "Media",
+        "label": "terrain-derived drainage-stress screening proxy",
+        "drainage_stress_proxy": 0.5058,
+        "not": "inundation map / flood probability"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              118.9,
+              32.12499999999999
+            ],
+            [
+              118.91000000000001,
+              32.12499999999999
+            ],
+            [
+              118.91000000000001,
+              32.13499999999999
+            ],
+            [
+              118.9,
+              32.13499999999999
+            ],
+            [
+              118.9,
+              32.12499999999999
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "hazard_class": "Baja",
+        "label": "terrain-derived drainage-stress screening proxy",
+        "drainage_stress_proxy": 0.222,
+        "not": "inundation map / flood probability"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              118.91000000000001,
+              32.12499999999999
+            ],
+            [
+              118.92000000000002,
+              32.12499999999999
+            ],
+            [
+              118.92000000000002,
+              32.13499999999999
+            ],
+            [
+              118.91000000000001,
+              32.13499999999999
+            ],
+            [
+              118.91000000000001,
+              32.12499999999999
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "hazard_class": "Baja",
+        "label": "terrain-derived drainage-stress screening proxy",
+        "drainage_stress_proxy": 0.2735,
+        "not": "inundation map / flood probability"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              118.92000000000002,
+              32.12499999999999
+            ],
+            [
+              118.93000000000002,
+              32.12499999999999
+            ],
+            [
+              118.93000000000002,
+              32.13499999999999
+            ],
+            [
+              118.92000000000002,
+              32.13499999999999
+            ],
+            [
+              118.92000000000002,
+              32.12499999999999
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "hazard_class": "Media",
+        "label": "terrain-derived drainage-stress screening proxy",
+        "drainage_stress_proxy": 0.5541,
+        "not": "inundation map / flood probability"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              118.93000000000002,
+              32.12499999999999
+            ],
+            [
+              118.94000000000003,
+              32.12499999999999
+            ],
+            [
+              118.94000000000003,
+              32.13499999999999
+            ],
+            [
+              118.93000000000002,
+              32.13499999999999
+            ],
+            [
+              118.93000000000002,
+              32.12499999999999
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "hazard_class": "Baja",
+        "label": "terrain-derived drainage-stress screening proxy",
+        "drainage_stress_proxy": 0.3621,
+        "not": "inundation map / flood probability"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              118.94000000000003,
+              32.12499999999999
+            ],
+            [
+              118.95000000000003,
+              32.12499999999999
+            ],
+            [
+              118.95000000000003,
+              32.13499999999999
+            ],
+            [
+              118.94000000000003,
+              32.13499999999999
+            ],
+            [
+              118.94000000000003,
+              32.12499999999999
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "hazard_class": "Media",
+        "label": "terrain-derived drainage-stress screening proxy",
+        "drainage_stress_proxy": 0.4069,
+        "not": "inundation map / flood probability"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              118.95000000000003,
+              32.12499999999999
+            ],
+            [
+              118.96000000000004,
+              32.12499999999999
+            ],
+            [
+              118.96000000000004,
+              32.13499999999999
+            ],
+            [
+              118.95000000000003,
+              32.13499999999999
+            ],
+            [
+              118.95000000000003,
+              32.12499999999999
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "hazard_class": "Baja",
+        "label": "terrain-derived drainage-stress screening proxy",
+        "drainage_stress_proxy": 0.3032,
+        "not": "inundation map / flood probability"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              118.96000000000004,
+              32.12499999999999
+            ],
+            [
+              118.97000000000004,
+              32.12499999999999
+            ],
+            [
+              118.97000000000004,
+              32.13499999999999
+            ],
+            [
+              118.96000000000004,
+              32.13499999999999
+            ],
+            [
+              118.96000000000004,
+              32.12499999999999
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "hazard_class": "Media",
+        "label": "terrain-derived drainage-stress screening proxy",
+        "drainage_stress_proxy": 0.5533,
+        "not": "inundation map / flood probability"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              118.97000000000004,
+              32.12499999999999
+            ],
+            [
+              118.98000000000005,
+              32.12499999999999
+            ],
+            [
+              118.98000000000005,
+              32.13499999999999
+            ],
+            [
+              118.97000000000004,
+              32.13499999999999
+            ],
+            [
+              118.97000000000004,
+              32.12499999999999
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "hazard_class": "Media",
+        "label": "terrain-derived drainage-stress screening proxy",
+        "drainage_stress_proxy": 0.4155,
+        "not": "inundation map / flood probability"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              118.88,
+              32.13499999999999
+            ],
+            [
+              118.89,
+              32.13499999999999
+            ],
+            [
+              118.89,
+              32.14499999999999
+            ],
+            [
+              118.88,
+              32.14499999999999
+            ],
+            [
+              118.88,
+              32.13499999999999
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "hazard_class": "Media",
+        "label": "terrain-derived drainage-stress screening proxy",
+        "drainage_stress_proxy": 0.5404,
+        "not": "inundation map / flood probability"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              118.89,
+              32.13499999999999
+            ],
+            [
+              118.9,
+              32.13499999999999
+            ],
+            [
+              118.9,
+              32.14499999999999
+            ],
+            [
+              118.89,
+              32.14499999999999
+            ],
+            [
+              118.89,
+              32.13499999999999
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "hazard_class": "Media",
+        "label": "terrain-derived drainage-stress screening proxy",
+        "drainage_stress_proxy": 0.4589,
+        "not": "inundation map / flood probability"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              118.9,
+              32.13499999999999
+            ],
+            [
+              118.91000000000001,
+              32.13499999999999
+            ],
+            [
+              118.91000000000001,
+              32.14499999999999
+            ],
+            [
+              118.9,
+              32.14499999999999
+            ],
+            [
+              118.9,
+              32.13499999999999
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "hazard_class": "Media",
+        "label": "terrain-derived drainage-stress screening proxy",
+        "drainage_stress_proxy": 0.4569,
+        "not": "inundation map / flood probability"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              118.91000000000001,
+              32.13499999999999
+            ],
+            [
+              118.92000000000002,
+              32.13499999999999
+            ],
+            [
+              118.92000000000002,
+              32.14499999999999
+            ],
+            [
+              118.91000000000001,
+              32.14499999999999
+            ],
+            [
+              118.91000000000001,
+              32.13499999999999
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "hazard_class": "Media",
+        "label": "terrain-derived drainage-stress screening proxy",
+        "drainage_stress_proxy": 0.4441,
+        "not": "inundation map / flood probability"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              118.92000000000002,
+              32.13499999999999
+            ],
+            [
+              118.93000000000002,
+              32.13499999999999
+            ],
+            [
+              118.93000000000002,
+              32.14499999999999
+            ],
+            [
+              118.92000000000002,
+              32.14499999999999
+            ],
+            [
+              118.92000000000002,
+              32.13499999999999
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "hazard_class": "Baja",
+        "label": "terrain-derived drainage-stress screening proxy",
+        "drainage_stress_proxy": 0.1771,
+        "not": "inundation map / flood probability"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              118.93000000000002,
+              32.13499999999999
+            ],
+            [
+              118.94000000000003,
+              32.13499999999999
+            ],
+            [
+              118.94000000000003,
+              32.14499999999999
+            ],
+            [
+              118.93000000000002,
+              32.14499999999999
+            ],
+            [
+              118.93000000000002,
+              32.13499999999999
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "hazard_class": "Media",
+        "label": "terrain-derived drainage-stress screening proxy",
+        "drainage_stress_proxy": 0.6345,
+        "not": "inundation map / flood probability"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              118.94000000000003,
+              32.13499999999999
+            ],
+            [
+              118.95000000000003,
+              32.13499999999999
+            ],
+            [
+              118.95000000000003,
+              32.14499999999999
+            ],
+            [
+              118.94000000000003,
+              32.14499999999999
+            ],
+            [
+              118.94000000000003,
+              32.13499999999999
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "hazard_class": "Baja",
+        "label": "terrain-derived drainage-stress screening proxy",
+        "drainage_stress_proxy": 0.2213,
+        "not": "inundation map / flood probability"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              118.95000000000003,
+              32.13499999999999
+            ],
+            [
+              118.96000000000004,
+              32.13499999999999
+            ],
+            [
+              118.96000000000004,
+              32.14499999999999
+            ],
+            [
+              118.95000000000003,
+              32.14499999999999
+            ],
+            [
+              118.95000000000003,
+              32.13499999999999
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "hazard_class": "Media",
+        "label": "terrain-derived drainage-stress screening proxy",
+        "drainage_stress_proxy": 0.4465,
+        "not": "inundation map / flood probability"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              118.96000000000004,
+              32.13499999999999
+            ],
+            [
+              118.97000000000004,
+              32.13499999999999
+            ],
+            [
+              118.97000000000004,
+              32.14499999999999
+            ],
+            [
+              118.96000000000004,
+              32.14499999999999
+            ],
+            [
+              118.96000000000004,
+              32.13499999999999
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "hazard_class": "Baja",
+        "label": "terrain-derived drainage-stress screening proxy",
+        "drainage_stress_proxy": 0.2669,
+        "not": "inundation map / flood probability"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              118.97000000000004,
+              32.13499999999999
+            ],
+            [
+              118.98000000000005,
+              32.13499999999999
+            ],
+            [
+              118.98000000000005,
+              32.14499999999999
+            ],
+            [
+              118.97000000000004,
+              32.14499999999999
+            ],
+            [
+              118.97000000000004,
+              32.13499999999999
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "hazard_class": "Media",
+        "label": "terrain-derived drainage-stress screening proxy",
+        "drainage_stress_proxy": 0.4062,
+        "not": "inundation map / flood probability"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              118.88,
+              32.14499999999999
+            ],
+            [
+              118.89,
+              32.14499999999999
+            ],
+            [
+              118.89,
+              32.15499999999999
+            ],
+            [
+              118.88,
+              32.15499999999999
+            ],
+            [
+              118.88,
+              32.14499999999999
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "hazard_class": "Media",
+        "label": "terrain-derived drainage-stress screening proxy",
+        "drainage_stress_proxy": 0.4824,
+        "not": "inundation map / flood probability"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              118.89,
+              32.14499999999999
+            ],
+            [
+              118.9,
+              32.14499999999999
+            ],
+            [
+              118.9,
+              32.15499999999999
+            ],
+            [
+              118.89,
+              32.15499999999999
+            ],
+            [
+              118.89,
+              32.14499999999999
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "hazard_class": "Media",
+        "label": "terrain-derived drainage-stress screening proxy",
+        "drainage_stress_proxy": 0.4242,
+        "not": "inundation map / flood probability"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              118.9,
+              32.14499999999999
+            ],
+            [
+              118.91000000000001,
+              32.14499999999999
+            ],
+            [
+              118.91000000000001,
+              32.15499999999999
+            ],
+            [
+              118.9,
+              32.15499999999999
+            ],
+            [
+              118.9,
+              32.14499999999999
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "hazard_class": "Media",
+        "label": "terrain-derived drainage-stress screening proxy",
+        "drainage_stress_proxy": 0.5277,
+        "not": "inundation map / flood probability"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              118.91000000000001,
+              32.14499999999999
+            ],
+            [
+              118.92000000000002,
+              32.14499999999999
+            ],
+            [
+              118.92000000000002,
+              32.15499999999999
+            ],
+            [
+              118.91000000000001,
+              32.15499999999999
+            ],
+            [
+              118.91000000000001,
+              32.14499999999999
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "hazard_class": "Media",
+        "label": "terrain-derived drainage-stress screening proxy",
+        "drainage_stress_proxy": 0.4954,
+        "not": "inundation map / flood probability"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              118.92000000000002,
+              32.14499999999999
+            ],
+            [
+              118.93000000000002,
+              32.14499999999999
+            ],
+            [
+              118.93000000000002,
+              32.15499999999999
+            ],
+            [
+              118.92000000000002,
+              32.15499999999999
+            ],
+            [
+              118.92000000000002,
+              32.14499999999999
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "hazard_class": "Baja",
+        "label": "terrain-derived drainage-stress screening proxy",
+        "drainage_stress_proxy": 0.2781,
+        "not": "inundation map / flood probability"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              118.93000000000002,
+              32.14499999999999
+            ],
+            [
+              118.94000000000003,
+              32.14499999999999
+            ],
+            [
+              118.94000000000003,
+              32.15499999999999
+            ],
+            [
+              118.93000000000002,
+              32.15499999999999
+            ],
+            [
+              118.93000000000002,
+              32.14499999999999
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "hazard_class": "Media",
+        "label": "terrain-derived drainage-stress screening proxy",
+        "drainage_stress_proxy": 0.6019,
+        "not": "inundation map / flood probability"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              118.94000000000003,
+              32.14499999999999
+            ],
+            [
+              118.95000000000003,
+              32.14499999999999
+            ],
+            [
+              118.95000000000003,
+              32.15499999999999
+            ],
+            [
+              118.94000000000003,
+              32.15499999999999
+            ],
+            [
+              118.94000000000003,
+              32.14499999999999
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "hazard_class": "Baja",
+        "label": "terrain-derived drainage-stress screening proxy",
+        "drainage_stress_proxy": 0.1727,
+        "not": "inundation map / flood probability"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              118.95000000000003,
+              32.14499999999999
+            ],
+            [
+              118.96000000000004,
+              32.14499999999999
+            ],
+            [
+              118.96000000000004,
+              32.15499999999999
+            ],
+            [
+              118.95000000000003,
+              32.15499999999999
+            ],
+            [
+              118.95000000000003,
+              32.14499999999999
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "hazard_class": "Baja",
+        "label": "terrain-derived drainage-stress screening proxy",
+        "drainage_stress_proxy": 0.1982,
+        "not": "inundation map / flood probability"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              118.96000000000004,
+              32.14499999999999
+            ],
+            [
+              118.97000000000004,
+              32.14499999999999
+            ],
+            [
+              118.97000000000004,
+              32.15499999999999
+            ],
+            [
+              118.96000000000004,
+              32.15499999999999
+            ],
+            [
+              118.96000000000004,
+              32.14499999999999
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "hazard_class": "Baja",
+        "label": "terrain-derived drainage-stress screening proxy",
+        "drainage_stress_proxy": 0.2345,
+        "not": "inundation map / flood probability"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              118.97000000000004,
+              32.14499999999999
+            ],
+            [
+              118.98000000000005,
+              32.14499999999999
+            ],
+            [
+              118.98000000000005,
+              32.15499999999999
+            ],
+            [
+              118.97000000000004,
+              32.15499999999999
+            ],
+            [
+              118.97000000000004,
+              32.14499999999999
+            ]
+          ]
+        ]
+      }
+    }
+  ]
+}

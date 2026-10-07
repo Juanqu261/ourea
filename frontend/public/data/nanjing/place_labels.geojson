@@ -1,0 +1,498 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          118.8826462,
+          32.0765902
+        ]
+      },
+      "properties": {
+        "kind": "place",
+        "place": "suburb",
+        "name": "马群街道",
+        "name_en": "Maqun",
+        "name_zh": "马群街道",
+        "source": "OpenStreetMap",
+        "osm_id": "8185758180"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          118.9041623,
+          32.0985432
+        ]
+      },
+      "properties": {
+        "kind": "place",
+        "place": "city",
+        "name": "栖霞区",
+        "name_en": "Qixia",
+        "name_zh": "栖霞区",
+        "source": "OpenStreetMap",
+        "osm_id": "244084412"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          118.9226928,
+          32.1065007
+        ]
+      },
+      "properties": {
+        "kind": "place",
+        "place": "quarter",
+        "name": "仙林大学城",
+        "name_en": "Xianlin University City",
+        "name_zh": "仙林大学城",
+        "source": "OpenStreetMap",
+        "osm_id": "4752597256"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          118.915932,
+          32.100738
+        ]
+      },
+      "properties": {
+        "kind": "place",
+        "place": "suburb",
+        "name": "仙林街道",
+        "name_en": "Xianlin",
+        "name_zh": "仙林街道",
+        "source": "OpenStreetMap",
+        "osm_id": "8185758175"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          118.9696874,
+          32.0937765
+        ]
+      },
+      "properties": {
+        "kind": "place",
+        "place": "village",
+        "name": "袁家边",
+        "name_en": null,
+        "name_zh": "袁家边",
+        "source": "OpenStreetMap",
+        "osm_id": "8878567271"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          118.9550554,
+          32.0823021
+        ]
+      },
+      "properties": {
+        "kind": "place",
+        "place": "village",
+        "name": "东流",
+        "name_en": null,
+        "name_zh": "东流",
+        "source": "OpenStreetMap",
+        "osm_id": "8878567272"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          118.9276656,
+          32.1171007
+        ]
+      },
+      "properties": {
+        "kind": "place",
+        "place": "square",
+        "name": "战邮广场",
+        "name_en": null,
+        "name_zh": "战邮广场",
+        "source": "OpenStreetMap",
+        "osm_id": "10899412245"
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "kind": "overview_label",
+        "name": "Nanjing University (Xianlin Campus) (南京大学(仙林校区))",
+        "source": "OpenStreetMap"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          118.95092774516976,
+          32.11973895
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "kind": "overview_label",
+        "name": "Yangshan Park (羊山公园)",
+        "source": "OpenStreetMap"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          118.93692408896084,
+          32.111875100000006
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "kind": "overview_label",
+        "name": "Nanjing University of Posts and Telecommunications (Xianlin Campus) (南京邮电大学（仙林校区）)",
+        "source": "OpenStreetMap"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          118.92595660043565,
+          32.11527165
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "kind": "overview_label",
+        "name": "Nanjing University of Chinese Medicine (Xianlin Campus) (南京中医药大学仙林校区)",
+        "source": "OpenStreetMap"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          118.9388673701782,
+          32.10300215
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "kind": "overview_label",
+        "name": "Nanjing University of Industry Technology (南京工业职业技术大学)",
+        "source": "OpenStreetMap"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          118.93474211919163,
+          32.1228688
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "kind": "overview_label",
+        "name": "紫东国际创意园",
+        "source": "OpenStreetMap"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          118.90644005845382,
+          32.08147385
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "kind": "overview_label",
+        "name": "Nanjing Vocational College of Information Technology (南京信息职业技术学院)",
+        "source": "OpenStreetMap"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          118.93635418257446,
+          32.1306689
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "kind": "overview_label",
+        "name": "Nanjing Sport Institute (Xianlin Campus) (南京体育学院仙林校区)",
+        "source": "OpenStreetMap"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          118.96319897365565,
+          32.11785105
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "kind": "overview_label",
+        "name": "江苏生命科技创新园",
+        "source": "OpenStreetMap"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          118.95351665255558,
+          32.1337185
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "kind": "overview_label",
+        "name": "Nanjing University of Science and Technology Zijin College (南京理工大学紫金学院)",
+        "source": "OpenStreetMap"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          118.92933309155443,
+          32.1283781
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "kind": "overview_label",
+        "name": "南大和园",
+        "source": "OpenStreetMap"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          118.95555043710803,
+          32.1075807
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "kind": "overview_label",
+        "name": "Yingtian Vocational and Technical College (南京审计大学金审学院)",
+        "source": "OpenStreetMap"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          118.91191419950411,
+          32.0896195
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "kind": "overview_label",
+        "name": "九乡河生态公园",
+        "source": "OpenStreetMap"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          118.94604508459133,
+          32.1155111
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "kind": "overview_label",
+        "name": "Nanjing Police University (Xianlin Campus) (南京警察学院(仙林校区))",
+        "source": "OpenStreetMap"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          118.9130768027139,
+          32.1098712
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "kind": "overview_label",
+        "name": "九乡河生态公园",
+        "source": "OpenStreetMap"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          118.9503522697614,
+          32.1051739
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "kind": "overview_label",
+        "name": "陆军工程大学玄武大道校区",
+        "source": "OpenStreetMap"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          118.89564810298019,
+          32.1100475
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "kind": "overview_label",
+        "name": "依云溪谷",
+        "source": "OpenStreetMap"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          118.91738158803253,
+          32.09161495
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "kind": "overview_label",
+        "name": "亚东城",
+        "source": "OpenStreetMap"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          118.9084149825651,
+          32.09310565
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "kind": "overview_label",
+        "name": "Nanjing Technician College (南京技师学院)",
+        "source": "OpenStreetMap"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          118.91306051030406,
+          32.12336165
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "kind": "overview_label",
+        "name": "保利·紫晶山",
+        "source": "OpenStreetMap"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          118.90345451566242,
+          32.0851446
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "kind": "overview_label",
+        "name": "苏宁易购总部",
+        "source": "OpenStreetMap"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          118.88771862683981,
+          32.0895848
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "kind": "overview_label",
+        "name": "诚品城",
+        "source": "OpenStreetMap"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          118.92263956705028,
+          32.12668805
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "kind": "overview_label",
+        "name": "龟山公园",
+        "source": "OpenStreetMap"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          118.89754690133807,
+          32.093768999999995
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "kind": "overview_label",
+        "name": "南京外国语学校仙林分校",
+        "source": "OpenStreetMap"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          118.93251298658026,
+          32.102075049999996
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "schema": "ourea-community-evidence",
+  "schema_version": 1,
+  "status": "absent",
+  "template": false,
+  "note": "This demonstration ships with no preloaded community records. Every selected project is not assessed until a documented deliberation is recorded.",
+  "records": []
+}

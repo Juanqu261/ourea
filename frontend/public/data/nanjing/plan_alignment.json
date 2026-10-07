@@ -1,0 +1,14 @@
+{
+  "schema": "ourea-plan-alignment",
+  "case_id": "nanjing_xianlin_portability",
+  "title": "Nanjing drainage / waterlogging policy context",
+  "summary": "Municipal waterlogging and stormwater management is an active Nanjing policy theme. Official projects listed under retrospective validation were not used to train or constrain the optimizer.",
+  "items": [
+    {
+      "id": "nanjing_water_plan_2026_2030",
+      "label": "Municipal water / waterlogging plan context",
+      "url": "https://www.nanjing.gov.cn/zdgk/202608/t20260807_5890796.html",
+      "optimizer_input": false
+    }
+  ]
+}

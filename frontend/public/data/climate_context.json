@@ -1,0 +1,285 @@
+{
+  "schema": "ourea-climate-context",
+  "schema_version": 1,
+  "generated_at": "2026-08-28T02:02:00Z",
+  "source_name": "CHIRPS v3.0 Final",
+  "source_version": "v3.0",
+  "source_product": "pentads/latam (Final)",
+  "source_urls": [
+    "https://www.chc.ucsb.edu/data/chirps",
+    "https://data.chc.ucsb.edu/products/CHIRPS/v3.0/",
+    "https://data.chc.ucsb.edu/products/CHIRPS/v3.0/README-CHIRPSv3.0.txt",
+    "https://www.nature.com/articles/s41597-026-07096-4",
+    "https://data.chc.ucsb.edu/products/CHIRPS/v3.0/pentads/latam/tifs/"
+  ],
+  "doi": "https://doi.org/10.1038/s41597-026-07096-4",
+  "accessed_at": "2026-08-28T02:02:00Z",
+  "spatial_resolution": "0.05 degrees (~5.5 km at the equator)",
+  "temporal_resolution": "Native pentads (Final); daily series allocated uniformly within each pentad",
+  "area": "Llanaditas / upper Comuna 8, Medellín. One CHIRPS 0.05° cell containing the proving-ground centroid.",
+  "coordinates": {
+    "lon": -75.53887,
+    "lat": 6.25265,
+    "epsg": 4326
+  },
+  "bounds": {
+    "proving_ground": [
+      -75.541116,
+      6.250378,
+      -75.53662,
+      6.25492
+    ],
+    "extracted_cell": [
+      -75.55,
+      6.25,
+      -75.5,
+      6.3
+    ]
+  },
+  "climatology_period": {
+    "start": "1991-01-01",
+    "end": "2020-12-31",
+    "label": "1991-2020"
+  },
+  "available_period": {
+    "start": "1981-01-01",
+    "end": "2024-12-31",
+    "label": "1981-2024"
+  },
+  "daily_percentiles": {
+    "p50": 5.08,
+    "p75": 8.451,
+    "p90": 11.899,
+    "p95": 13.989,
+    "p99": 18.196
+  },
+  "rolling_accumulation_percentiles": {
+    "3": {
+      "window_days": 3,
+      "percentiles": {
+        "p50": 15.617,
+        "p75": 25.04,
+        "p90": 34.514,
+        "p95": 39.817,
+        "p99": 52.184
+      },
+      "valid_windows": 10782,
+      "observed_maxima": {
+        "value_mm": 72.561,
+        "date": "2008-02-18"
+      }
+    },
+    "7": {
+      "window_days": 7,
+      "percentiles": {
+        "p50": 37.657,
+        "p75": 57.516,
+        "p90": 76.161,
+        "p95": 86.993,
+        "p99": 111.078
+      },
+      "valid_windows": 10738,
+      "observed_maxima": {
+        "value_mm": 152.004,
+        "date": "1999-12-17"
+      }
+    },
+    "15": {
+      "window_days": 15,
+      "percentiles": {
+        "p50": 84.142,
+        "p75": 118.788,
+        "p90": 149.796,
+        "p95": 167.069,
+        "p99": 207.776
+      },
+      "valid_windows": 10650,
+      "observed_maxima": {
+        "value_mm": 270.343,
+        "date": "2011-04-25"
+      }
+    },
+    "30": {
+      "window_days": 30,
+      "percentiles": {
+        "p50": 172.29,
+        "p75": 233.958,
+        "p90": 278.188,
+        "p95": 305.511,
+        "p99": 372.65
+      },
+      "valid_windows": 10485,
+      "observed_maxima": {
+        "value_mm": 495.621,
+        "date": "2011-04-30"
+      }
+    }
+  },
+  "observed_maxima": {
+    "climatology_1991_2020": {
+      "daily": {
+        "value_mm": 24.187,
+        "date": "2008-02-16"
+      },
+      "rolling_3d": {
+        "value_mm": 72.561,
+        "date": "2008-02-18"
+      },
+      "rolling_7d": {
+        "value_mm": 152.004,
+        "date": "1999-12-17"
+      },
+      "rolling_15d": {
+        "value_mm": 270.343,
+        "date": "2011-04-25"
+      },
+      "rolling_30d": {
+        "value_mm": 495.621,
+        "date": "2011-04-30"
+      }
+    },
+    "available_1981_2024": {
+      "daily": {
+        "value_mm": 24.187,
+        "date": "2008-02-16"
+      },
+      "rolling_3d": {
+        "value_mm": 72.561,
+        "date": "2008-02-18"
+      },
+      "rolling_7d": {
+        "value_mm": 152.004,
+        "date": "1999-12-17"
+      },
+      "rolling_15d": {
+        "value_mm": 270.343,
+        "date": "2011-04-25"
+      },
+      "rolling_30d": {
+        "value_mm": 495.621,
+        "date": "2011-04-30"
+      }
+    }
+  },
+  "scenario_presets": [
+    {
+      "id": "typical_wet",
+      "label": "Typical wet conditions",
+      "accumulation_window_days": 15,
+      "precipitation_mm": 118.788,
+      "percentile": 75,
+      "antecedent_window_days": 30,
+      "antecedent_rainfall_percentile": 0.5,
+      "climatology_period": "1991-2020",
+      "source_name": "CHIRPS v3.0 Final",
+      "source_product": "pentads/latam (Final)"
+    },
+    {
+      "id": "high_rainfall",
+      "label": "High rainfall context",
+      "accumulation_window_days": 15,
+      "precipitation_mm": 149.796,
+      "percentile": 90,
+      "antecedent_window_days": 30,
+      "antecedent_rainfall_percentile": 0.75,
+      "climatology_period": "1991-2020",
+      "source_name": "CHIRPS v3.0 Final",
+      "source_product": "pentads/latam (Final)"
+    },
+    {
+      "id": "extreme_observed",
+      "label": "Extreme observed context",
+      "accumulation_window_days": 15,
+      "precipitation_mm": 207.776,
+      "percentile": 99,
+      "antecedent_window_days": 30,
+      "antecedent_rainfall_percentile": 0.9,
+      "climatology_period": "1991-2020",
+      "source_name": "CHIRPS v3.0 Final",
+      "source_product": "pentads/latam (Final)"
+    }
+  ],
+  "available_record_summary": {
+    "daily_percentiles": {
+      "p50": 5.187,
+      "p75": 8.513,
+      "p90": 11.842,
+      "p95": 13.776,
+      "p99": 17.682
+    },
+    "daily_valid_days": 15912,
+    "coverage": {
+      "start": "1981-01-01",
+      "end": "2024-12-31",
+      "calendar_days": 16071,
+      "valid_days": 15912,
+      "missing_or_nodata_days": 159,
+      "first_valid": "1981-01-01",
+      "last_valid": "2024-12-31",
+      "leap_days_in_calendar": 11,
+      "leap_days_valid": 11
+    },
+    "valid_pentads": 3137,
+    "calendar_pentads": 3168
+  },
+  "climatology_coverage": {
+    "start": "1991-01-01",
+    "end": "2020-12-31",
+    "calendar_days": 10958,
+    "valid_days": 10804,
+    "missing_or_nodata_days": 154,
+    "first_valid": "1991-01-01",
+    "last_valid": "2020-12-31",
+    "leap_days_in_calendar": 8,
+    "leap_days_valid": 8
+  },
+  "method": {
+    "product": "CHIRPS v3.0 Final pentads, Latin America GeoTIFF subset.",
+    "extract": "Windowed GeoTIFF read of the single 0.05° cell containing the Llanaditas / upper Comuna 8 centroid. Colombia-wide rasters are not stored.",
+    "daily_allocation": "Each pentad total is divided equally across its calendar days (1–5, 6–10, 11–15, 16–20, 21–25, 26–end of month). This preserves pentad mass, so 15- and 30-day accumulations match the native product. Intra-pentad timing is not independently observed.",
+    "climatology": "WMO-style 1991–2020 reference period on valid daily-allocated values.",
+    "percentiles": "Empirical Hyndman-Fan type 7 (linear) percentiles on valid observations.",
+    "rolling": "Trailing inclusive accumulations of 3, 7, 15 and 30 days; incomplete windows excluded.",
+    "nodata": "CHIRPS nodata (-9999), NaN and negative values are excluded.",
+    "leap_years": "29 February is retained in leap years and counted in coverage.",
+    "preset_mapping": "Typical / high / extreme planning presets use 15-day accumulation percentiles P75 / P90 / P99 and an antecedent rainfall percentile, not soil moisture."
+  },
+  "appropriate_uses": [
+    "Anchor hypothetical planning rainfall contexts in an observed gridded climatology.",
+    "Compare portfolio performance across typical, high and extreme observed rainfall contexts.",
+    "Document source, period, window and percentile for every climate figure shown in Ourea."
+  ],
+  "limitations": [
+    "CHIRPS is a 0.05° gridded estimate, not rain-gauge intensity at a hillside station.",
+    "Daily values are pentad totals allocated uniformly inside each pentad; they are not station daily gauges and not the ERA5-ratio rnl partition.",
+    "Ourea evaluates portfolio performance across observed and stress-tested rainfall contexts. It supports planning decisions; it does not issue real-time forecasts.",
+    "These values are not landslide probability, failure chance, or a calibrated warning threshold."
+  ],
+  "input_provenance": {
+    "tif_root": "https://data.chc.ucsb.edu/products/CHIRPS/v3.0/pentads/latam/tifs",
+    "filename_pattern": "chirps-v3.0.{YYYY}.{MM}.{pentad}.tif",
+    "sample": {
+      "url": "https://data.chc.ucsb.edu/products/CHIRPS/v3.0/pentads/latam/tifs/chirps-v3.0.1981.01.1.tif",
+      "crs": "EPSG:4326",
+      "row": 574,
+      "col": 889,
+      "width": 1720,
+      "height": 1900,
+      "cell_center": {
+        "lon": -75.525,
+        "lat": 6.275
+      },
+      "cell_bounds": [
+        -75.55,
+        6.25,
+        -75.5,
+        6.3
+      ],
+      "from_versioned_csv": true
+    },
+    "versioned_csv": "data/derived/climate/llanaditas_chirps_v3_pentads.csv",
+    "csv_sha256": "bf82ec3ad1044a05f649b72e0969ffc45c782868038d5f2e4e3667512cdd0aa5",
+    "snapshot_at": "2026-08-28T02:02:00Z",
+    "nodata_value": -9999.0
+  }
+}

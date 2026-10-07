@@ -1,0 +1,34 @@
+{
+  "status": "versioned evidence registry; numerical model parameters live only in src/config/modelParameters.json",
+  "parameter_source": "frontend/src/config/modelParameters.json",
+  "interventions": {
+    "rainwater_harvesting": {
+      "label": "Rainwater harvesting",
+      "mechanism": "Capture roof runoff before it reaches hillside streets or uncontrolled drainage paths.",
+      "model_role": "Physical opportunity uses roof footprint; hazard-weighted exposure enters separately in the decision objective.",
+      "confidence": "medium for first-principles captured-volume accounting; low for translation to slope-risk benefit",
+      "pilot_localization_requirements": "Local tank sizes, unit/project costs, participation assumptions, and locally appropriate runoff-to-risk effect ranges."
+    },
+    "drainage_upgrade": {
+      "label": "Drainage / water management",
+      "mechanism": "Increase controlled conveyance and reduce uncontrolled surface-water concentration.",
+      "model_role": "Current opportunity proxy uses mapped access-corridor length only. It is not a drainage-capacity map.",
+      "confidence": "explicit planning prior until asset-level drainage data and engineering assumptions are supplied locally",
+      "pilot_localization_requirements": "Define concrete intervention typologies and local cost/effect distributions."
+    },
+    "restoration_bioengineering": {
+      "label": "Restoration / soil bioengineering",
+      "mechanism": "Vegetation and soil-bioengineering can reduce erosion and add root reinforcement; hydrological effects are site-specific.",
+      "model_role": "Opportunity uses open-space and slope proxies; hazard-weighted exposure enters separately.",
+      "confidence": "explicit planning prior for effect size; maturity and site dependence remain explicit",
+      "pilot_localization_requirements": "Locally appropriate techniques/species, maturity assumptions, and uncertainty distributions."
+    }
+  },
+  "optimizer": {
+    "budget_unit": "planning credit, NOT COP",
+    "reason": "Avoid false cost precision until local evidence can be decomposed into comparable intervention cost distributions.",
+    "candidate_cell_size_m": 80,
+    "browser_method": "Marginal robust greedy selection across climate and intervention-effect uncertainty.",
+    "formal_checkpoint": "Binary MILP over linearized robust-benefit coefficients; stacked effects must be re-evaluated in the nonlinear scenario engine."
+  }
+}

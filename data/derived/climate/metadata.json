@@ -1,0 +1,36 @@
+{
+  "source_name": "CHIRPS v3.0 Final",
+  "source_version": "v3.0",
+  "source_product": "pentads/latam (Final)",
+  "tif_root": "https://data.chc.ucsb.edu/products/CHIRPS/v3.0/pentads/latam/tifs",
+  "filename_pattern": "chirps-v3.0.{YYYY}.{MM}.{pentad}.tif",
+  "query_coordinates": {
+    "lon": -75.53887,
+    "lat": 6.25265,
+    "epsg": 4326
+  },
+  "cell_center": {
+    "lon": -75.525,
+    "lat": 6.275
+  },
+  "cell_bounds": [
+    -75.55,
+    6.25,
+    -75.5,
+    6.3
+  ],
+  "crs": "EPSG:4326",
+  "row": 574,
+  "col": 889,
+  "width": 1720,
+  "height": 1900,
+  "nodata": -9999.0,
+  "period": {
+    "start": "1981-01-01",
+    "end": "2024-12-31"
+  },
+  "snapshot_at": "2026-08-28T02:02:00Z",
+  "csv": "data/derived/climate/llanaditas_chirps_v3_pentads.csv",
+  "csv_sha256": "bf82ec3ad1044a05f649b72e0969ffc45c782868038d5f2e4e3667512cdd0aa5",
+  "extract_method": "Windowed GeoTIFF read of the single 0.05° Latin America pentad cell containing the Llanaditas / upper Comuna 8 centroid. Rasters are not stored."
+}

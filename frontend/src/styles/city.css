@@ -1,0 +1,241 @@
+.screening-list {
+  display: flex;
+  flex-direction: column;
+  margin-top: 4px;
+  border-top: 1px solid var(--border);
+}
+
+.screening-row {
+  display: grid;
+  grid-template-columns: 36px minmax(0, 1fr) auto;
+  align-items: start;
+  gap: 10px;
+  width: 100%;
+  padding: 10px 2px;
+  border: 0;
+  border-bottom: 1px solid var(--border);
+  border-radius: 0;
+  background: transparent;
+  color: var(--text-secondary);
+  text-align: left;
+}
+
+.screening-row:hover,
+.screening-row.active {
+  background: rgb(255 255 255 / 3%);
+}
+
+.screening-row.active {
+  box-shadow: inset 2px 0 0 var(--accent);
+}
+
+.screening-row b {
+  color: var(--accent-soft);
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+  padding-top: 2px;
+}
+
+.screening-row-main {
+  min-width: 0;
+  display: grid;
+  gap: 3px;
+}
+
+.screening-row-name {
+  display: -webkit-box;
+  overflow: hidden;
+  color: var(--text-primary);
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.3;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.screening-row-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  color: var(--text-muted);
+  font-size: 11px;
+  font-style: normal;
+  line-height: 1.3;
+}
+
+.screening-row-stat {
+  display: grid;
+  justify-items: end;
+  gap: 2px;
+  min-width: 72px;
+  padding-top: 1px;
+}
+
+.screening-row-stat strong {
+  color: var(--text-secondary);
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+}
+
+.screening-row-stat em {
+  color: var(--text-faint);
+  font-size: 10px;
+  font-style: normal;
+  text-align: right;
+}
+
+.place-chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 1px 5px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: rgb(255 255 255 / 3%);
+  color: var(--text-faint);
+  font-size: 9px;
+  font-style: normal;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+}
+
+.place-chip-derived {
+  border-color: #3a4550;
+  color: #9bb0bf;
+}
+
+.place-chip-campus,
+.place-chip-osm,
+.place-chip-barrio {
+  border-color: #3d3a2f;
+  color: var(--accent-soft);
+}
+
+.place-chip-park {
+  border-color: #2f4638;
+  color: var(--vegetation-soft);
+}
+
+.citycta {
+  width: 100%;
+  margin-top: 10px;
+  padding: 11px;
+  border: 0;
+  border-radius: 8px;
+  font-size: 13px;
+}
+
+.city-barrio-card,
+.proving-ground-card,
+.cellcard,
+.portfolio-list,
+.portfolio-empty,
+.uncertainty-card,
+.frontier-chart-wrap,
+.pareto-chart-wrap,
+.policy-consensus,
+.climate-facts span,
+.method-disclosure,
+.evidence-item {
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--surface);
+}
+
+.city-barrio-card,
+.proving-ground-card {
+  margin-top: 12px;
+  padding: 12px;
+}
+
+.proving-ground-card > span {
+  color: var(--accent);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.proving-ground-card b {
+  display: block;
+  margin: 4px 0 6px;
+  font-size: 15px;
+}
+
+.proving-ground-card p {
+  margin: 0 0 10px;
+  color: var(--text-muted);
+  font-size: 12px;
+  line-height: 1.45;
+}
+
+.city-barrio-title {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.city-barrio-title b,
+.city-barrio-title span {
+  display: block;
+}
+
+.city-barrio-title b {
+  font-size: 14px;
+}
+
+.city-barrio-title span {
+  margin-top: 3px;
+  color: var(--text-muted);
+  font-size: 11px;
+}
+
+.city-barrio-title strong {
+  color: var(--accent-soft);
+  font-size: 22px;
+  letter-spacing: -0.04em;
+}
+
+.city-detail-grid,
+.fact-strip {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+  margin-top: 10px;
+}
+
+.city-detail-grid > span,
+.fact-strip > span {
+  min-width: 0;
+  padding: 8px;
+  border-radius: 6px;
+  background: var(--surface-raised);
+}
+
+.city-detail-grid small,
+.city-detail-grid b,
+.fact-strip small,
+.fact-strip b {
+  display: block;
+}
+
+.city-detail-grid small,
+.fact-strip small {
+  color: var(--text-faint);
+  font-size: 10px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.city-detail-grid b,
+.fact-strip b {
+  margin-top: 4px;
+  overflow-wrap: anywhere;
+  color: var(--text-secondary);
+  font-size: 12px;
+  line-height: 1.3;
+}
+
+.proving-ground-strip {
+  margin-top: 18px;
+}

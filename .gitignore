@@ -1,0 +1,44 @@
+# Dependencies and build output
+node_modules/
+dist/
+.vite/
+*.tsbuildinfo
+
+# Environment and secrets
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+credentials.json
+secrets.json
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+
+# Playwright
+playwright-report/
+test-results/
+blob-report/
+playwright/.cache/
+
+# Local climate-extract cache (CHIRPS rasters/series; never commit)
+.cache/
+
+# OS and editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+.cursor/
+*.log
+npm-debug.log*
+
+# Serverless
+.vercel/
+

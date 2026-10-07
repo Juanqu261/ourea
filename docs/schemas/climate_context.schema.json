@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "ourea-climate-context",
+  "title": "Ourea climate context",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "generated_at",
+    "source_name",
+    "source_version",
+    "source_urls",
+    "doi",
+    "accessed_at",
+    "spatial_resolution",
+    "temporal_resolution",
+    "area",
+    "coordinates",
+    "climatology_period",
+    "available_period",
+    "daily_percentiles",
+    "rolling_accumulation_percentiles",
+    "observed_maxima",
+    "scenario_presets",
+    "method",
+    "appropriate_uses",
+    "limitations",
+    "input_provenance"
+  ]
+}

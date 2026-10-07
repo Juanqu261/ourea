@@ -1,0 +1,407 @@
+{
+  "generated_at": "2026-09-13T03:37:58.134Z",
+  "budgetSweep": [
+    {
+      "city": "medellin",
+      "budget": 6,
+      "trials": 100,
+      "robust_mean_p10": 43.66976847790173,
+      "deterministic_mean_p10": 39.40547568327297,
+      "greedy_mean_p10": 36.4416228797927,
+      "delta_mean": 4.26429279462875,
+      "delta_ci95": [
+        4.12640680229952,
+        4.4130556136949375
+      ],
+      "relative": 0.10821574211928335,
+      "relative_unsafe": false,
+      "winEqualLoss": {
+        "win": 100,
+        "equal": 0,
+        "loss": 0,
+        "n": 100,
+        "winRate": 1,
+        "lossRate": 0,
+        "equalRate": 0
+      },
+      "robust_typeCounts": {
+        "rwh": 3,
+        "drainage": 1
+      },
+      "deterministic_typeCounts": {
+        "drainage": 1,
+        "rwh": 3
+      },
+      "random_mean_p10": 8.937707136007248,
+      "hazard_mean_p10": 33.753669013144645
+    },
+    {
+      "city": "medellin",
+      "budget": 8,
+      "trials": 100,
+      "robust_mean_p10": 57.04070061775386,
+      "deterministic_mean_p10": 53.90004637884248,
+      "greedy_mean_p10": 44.08762992707807,
+      "delta_mean": 3.1406542389113428,
+      "delta_ci95": [
+        2.8262232927531796,
+        3.4681486273147812
+      ],
+      "relative": 0.05826811756036243,
+      "relative_unsafe": false,
+      "winEqualLoss": {
+        "win": 97,
+        "equal": 0,
+        "loss": 3,
+        "n": 100,
+        "winRate": 0.97,
+        "lossRate": 0.03,
+        "equalRate": 0
+      },
+      "robust_typeCounts": {
+        "rwh": 2,
+        "drainage": 2
+      },
+      "deterministic_typeCounts": {
+        "drainage": 2,
+        "rwh": 2
+      },
+      "random_mean_p10": 11.721357951401842,
+      "hazard_mean_p10": 41.497474953621804
+    },
+    {
+      "city": "medellin",
+      "budget": 10,
+      "trials": 100,
+      "robust_mean_p10": 69.35319405478482,
+      "deterministic_mean_p10": 66.61678780265039,
+      "greedy_mean_p10": 49.78227030507696,
+      "delta_mean": 2.7364062521344206,
+      "delta_ci95": [
+        2.440832169974515,
+        3.04529336382745
+      ],
+      "relative": 0.04107682676386206,
+      "relative_unsafe": false,
+      "winEqualLoss": {
+        "win": 99,
+        "equal": 0,
+        "loss": 1,
+        "n": 100,
+        "winRate": 0.99,
+        "lossRate": 0.01,
+        "equalRate": 0
+      },
+      "robust_typeCounts": {
+        "rwh": 4,
+        "drainage": 2
+      },
+      "deterministic_typeCounts": {
+        "drainage": 3,
+        "rwh": 1
+      },
+      "random_mean_p10": 12.635588360768452,
+      "hazard_mean_p10": 58.65081970168785
+    },
+    {
+      "city": "medellin",
+      "budget": 12,
+      "trials": 100,
+      "robust_mean_p10": 84.01123108855231,
+      "deterministic_mean_p10": 79.14911149668937,
+      "greedy_mean_p10": 57.73492730572434,
+      "delta_mean": 4.862119591862925,
+      "delta_ci95": [
+        4.531073013593973,
+        5.220237912446518
+      ],
+      "relative": 0.06142986951996684,
+      "relative_unsafe": false,
+      "winEqualLoss": {
+        "win": 100,
+        "equal": 0,
+        "loss": 0,
+        "n": 100,
+        "winRate": 1,
+        "lossRate": 0,
+        "equalRate": 0
+      },
+      "robust_typeCounts": {
+        "rwh": 3,
+        "drainage": 3
+      },
+      "deterministic_typeCounts": {
+        "drainage": 3,
+        "rwh": 3
+      },
+      "random_mean_p10": 13.372561713458708,
+      "hazard_mean_p10": 65.97883579275413
+    },
+    {
+      "city": "medellin",
+      "budget": 15,
+      "trials": 100,
+      "robust_mean_p10": 103.45400672504924,
+      "deterministic_mean_p10": 100.38503189194033,
+      "greedy_mean_p10": 69.21363072499435,
+      "delta_mean": 3.0689748331089506,
+      "delta_ci95": [
+        2.768094933151979,
+        3.3714359174175206
+      ],
+      "relative": 0.03057203624154361,
+      "relative_unsafe": false,
+      "winEqualLoss": {
+        "win": 99,
+        "equal": 0,
+        "loss": 1,
+        "n": 100,
+        "winRate": 0.99,
+        "lossRate": 0.01,
+        "equalRate": 0
+      },
+      "robust_typeCounts": {
+        "rwh": 3,
+        "drainage": 4
+      },
+      "deterministic_typeCounts": {
+        "drainage": 3,
+        "rwh": 6
+      },
+      "random_mean_p10": 24.216498740697716,
+      "hazard_mean_p10": 95.12993059062
+    },
+    {
+      "city": "medellin",
+      "budget": 20,
+      "trials": 100,
+      "robust_mean_p10": 131.3207418334021,
+      "deterministic_mean_p10": 121.33996147704654,
+      "greedy_mean_p10": 71.41663203748385,
+      "delta_mean": 9.98078035635558,
+      "delta_ci95": [
+        9.643603341933245,
+        10.336827545789811
+      ],
+      "relative": 0.08225468538856917,
+      "relative_unsafe": false,
+      "winEqualLoss": {
+        "win": 100,
+        "equal": 0,
+        "loss": 0,
+        "n": 100,
+        "winRate": 1,
+        "lossRate": 0,
+        "equalRate": 0
+      },
+      "robust_typeCounts": {
+        "rwh": 5,
+        "drainage": 5
+      },
+      "deterministic_typeCounts": {
+        "drainage": 4,
+        "rwh": 8
+      },
+      "random_mean_p10": 39.73318881835712,
+      "hazard_mean_p10": 116.23791106066119
+    },
+    {
+      "city": "nanjing_xianlin",
+      "budget": 6,
+      "trials": 100,
+      "robust_mean_p10": 218.0659334630651,
+      "deterministic_mean_p10": 188.96803512164198,
+      "greedy_mean_p10": 101.53543881253972,
+      "delta_mean": 29.09789834142306,
+      "delta_ci95": [
+        28.371156621563294,
+        29.799578139562072
+      ],
+      "relative": 0.15398317669277936,
+      "relative_unsafe": false,
+      "winEqualLoss": {
+        "win": 100,
+        "equal": 0,
+        "loss": 0,
+        "n": 100,
+        "winRate": 1,
+        "lossRate": 0,
+        "equalRate": 0
+      },
+      "robust_typeCounts": {
+        "rwh": 6
+      },
+      "deterministic_typeCounts": {
+        "rwh": 6
+      },
+      "random_mean_p10": 41.28710045390835,
+      "hazard_mean_p10": 174.05197881373897
+    },
+    {
+      "city": "nanjing_xianlin",
+      "budget": 8,
+      "trials": 100,
+      "robust_mean_p10": 274.0439583408117,
+      "deterministic_mean_p10": 274.0439583408117,
+      "greedy_mean_p10": 135.17767668753004,
+      "delta_mean": 0,
+      "delta_ci95": [
+        0,
+        0
+      ],
+      "relative": 0,
+      "relative_unsafe": false,
+      "winEqualLoss": {
+        "win": 0,
+        "equal": 100,
+        "loss": 0,
+        "n": 100,
+        "winRate": 0,
+        "lossRate": 0,
+        "equalRate": 1
+      },
+      "robust_typeCounts": {
+        "rwh": 8
+      },
+      "deterministic_typeCounts": {
+        "rwh": 8
+      },
+      "random_mean_p10": 42.213516733978395,
+      "hazard_mean_p10": 190.90469635959016
+    },
+    {
+      "city": "nanjing_xianlin",
+      "budget": 10,
+      "trials": 100,
+      "robust_mean_p10": 326.6273767142962,
+      "deterministic_mean_p10": 293.979772869632,
+      "greedy_mean_p10": 183.36140597795384,
+      "delta_mean": 32.64760384466426,
+      "delta_ci95": [
+        31.611163529396762,
+        33.651286321062365
+      ],
+      "relative": 0.1110539120633381,
+      "relative_unsafe": false,
+      "winEqualLoss": {
+        "win": 100,
+        "equal": 0,
+        "loss": 0,
+        "n": 100,
+        "winRate": 1,
+        "lossRate": 0,
+        "equalRate": 0
+      },
+      "robust_typeCounts": {
+        "rwh": 10
+      },
+      "deterministic_typeCounts": {
+        "rwh": 7,
+        "drainage": 1
+      },
+      "random_mean_p10": 42.36046723380059,
+      "hazard_mean_p10": 272.12117165311065
+    },
+    {
+      "city": "nanjing_xianlin",
+      "budget": 12,
+      "trials": 100,
+      "robust_mean_p10": 378.48819745676394,
+      "deterministic_mean_p10": 369.0553653746954,
+      "greedy_mean_p10": 199.5997475367476,
+      "delta_mean": 9.432832082068543,
+      "delta_ci95": [
+        8.471781559432074,
+        10.377414393651215
+      ],
+      "relative": 0.02555939560041776,
+      "relative_unsafe": false,
+      "winEqualLoss": {
+        "win": 98,
+        "equal": 0,
+        "loss": 2,
+        "n": 100,
+        "winRate": 0.98,
+        "lossRate": 0.02,
+        "equalRate": 0
+      },
+      "robust_typeCounts": {
+        "rwh": 12
+      },
+      "deterministic_typeCounts": {
+        "rwh": 9,
+        "drainage": 1
+      },
+      "random_mean_p10": 46.228269325636575,
+      "hazard_mean_p10": 274.3032426231075
+    },
+    {
+      "city": "nanjing_xianlin",
+      "budget": 15,
+      "trials": 100,
+      "robust_mean_p10": 447.01927673003394,
+      "deterministic_mean_p10": 433.1995826981363,
+      "greedy_mean_p10": 285.6745329477508,
+      "delta_mean": 13.819694031897653,
+      "delta_ci95": [
+        13.055116358431842,
+        14.549858656649267
+      ],
+      "relative": 0.03190144816350745,
+      "relative_unsafe": false,
+      "winEqualLoss": {
+        "win": 100,
+        "equal": 0,
+        "loss": 0,
+        "n": 100,
+        "winRate": 1,
+        "lossRate": 0,
+        "equalRate": 0
+      },
+      "robust_typeCounts": {
+        "rwh": 12,
+        "drainage": 1
+      },
+      "deterministic_typeCounts": {
+        "rwh": 12,
+        "drainage": 1
+      },
+      "random_mean_p10": 48.81053364307263,
+      "hazard_mean_p10": 316.7995355934527
+    },
+    {
+      "city": "nanjing_xianlin",
+      "budget": 20,
+      "trials": 100,
+      "robust_mean_p10": 541.3520415603946,
+      "deterministic_mean_p10": 519.0244074920789,
+      "greedy_mean_p10": 346.86818709432555,
+      "delta_mean": 22.32763406831582,
+      "delta_ci95": [
+        21.187902050232005,
+        23.426188914286012
+      ],
+      "relative": 0.04301846646519492,
+      "relative_unsafe": false,
+      "winEqualLoss": {
+        "win": 100,
+        "equal": 0,
+        "loss": 0,
+        "n": 100,
+        "winRate": 1,
+        "lossRate": 0,
+        "equalRate": 0
+      },
+      "robust_typeCounts": {
+        "rwh": 14,
+        "drainage": 2
+      },
+      "deterministic_typeCounts": {
+        "rwh": 14,
+        "drainage": 2
+      },
+      "random_mean_p10": 57.44176430441621,
+      "hazard_mean_p10": 450.0788193729986
+    }
+  ]
+}

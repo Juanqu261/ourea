@@ -1,0 +1,114 @@
+name: Ourea QA
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ourea-qa-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  qa:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version: '20.19.0'
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install Node dependencies
+        working-directory: frontend
+        run: npm ci
+
+      - name: JavaScript tests, source validation and data validation
+        working-directory: frontend
+        run: npm test
+
+      - name: Decision-readiness API tests
+        working-directory: services/decision-readiness
+        run: npm ci && npm test
+
+      - name: Production build
+        working-directory: frontend
+        run: npm run build
+
+      - name: Scan production bundle for OpenAI secrets
+        working-directory: frontend
+        run: node tests/sourceValidation.mjs
+
+      - name: Confirm MapLibre remains a deferred chunk
+        working-directory: frontend
+        run: node -e "const fs=require('fs'); const files=fs.readdirSync('dist/assets'); if(!files.some(f=>f.startsWith('maplibre-')&&f.endsWith('.js'))) throw new Error('MapLibre chunk missing'); const app=files.filter(f=>f.endsWith('.js')&&!f.startsWith('maplibre-')); const initial=app.map(f=>'dist/assets/'+f).map(p=>fs.statSync(p).size); if(Math.max(...initial)>500000) throw new Error('Initial JS exceeded 500 kB'); console.log(files.join('\\n'));"
+
+      - name: Install Python QA dependencies
+        run: python -m pip install --upgrade pip && pip install -r requirements.txt
+
+      - name: Compile Python
+        run: python -m compileall -q scripts tests
+
+      - name: Python unit tests
+        run: |
+          python -m unittest discover -s tests -p "test_*.py" -v
+          python -m unittest discover -s scripts -p "test_*.py" -v
+
+      - name: Offline climate context
+        run: python scripts/validate_climate_context.py
+
+      - name: Browser optimizer checkpoint
+        run: node frontend/scripts/generateCheckpoint.mjs
+
+      - name: Formal MILP optimizer
+        run: python scripts/optimizer_milp.py
+
+      - name: Project validation
+        run: python scripts/validate_project.py
+
+      - name: Install poppler and qpdf for PDF inspection
+        run: sudo apt-get update && sudo apt-get install -y poppler-utils qpdf
+
+      - name: Inspect decision-brief PDFs
+        run: python scripts/inspect_brief_pdfs.py
+
+      - name: Manifest and checksums
+        run: |
+          python scripts/make_manifest.py
+          git diff --exit-code -- MANIFEST.json SHA256SUMS.txt
+
+      - name: Install Playwright Chromium
+        working-directory: frontend
+        run: npx playwright install --with-deps chromium
+
+      - name: End-to-end
+        working-directory: frontend
+        run: npx playwright test
+
+      - name: Live AI endpoint smoke
+        if: ${{ vars.OUREA_AI_API_URL != '' }}
+        working-directory: services/decision-readiness
+        env:
+          OUREA_AI_API_URL: ${{ vars.OUREA_AI_API_URL }}
+          SMOKE_ORIGIN: https://ybedoyab.github.io
+        run: node scripts/liveSmoke.mjs
+
+      - name: Playwright artifacts
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-report
+          path: |
+            frontend/playwright-report
+            frontend/test-results
+          if-no-files-found: ignore

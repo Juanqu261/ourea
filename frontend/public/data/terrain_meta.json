@@ -1,0 +1,13 @@
+{
+  "encoding": "mapbox",
+  "tileSize": 256,
+  "minzoom": 15,
+  "maxzoom": 18,
+  "bounds": [
+    -75.541116,
+    6.250378,
+    -75.53662,
+    6.25492
+  ],
+  "note": "Generated locally from Medellin 2024 1 m DEM; Terrain-RGB encoding."
+}

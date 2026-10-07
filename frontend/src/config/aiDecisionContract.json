@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "snapshot_max_bytes": 12288,
+  "default_model": "gpt-5.6-terra",
+  "timeout_ms": 20000,
+  "max_retries": 1,
+  "client_cooldown_ms": 8000,
+  "instance_rate_limit": {
+    "window_ms": 900000,
+    "max_requests": 30,
+    "note": "In-memory per instance only; not a global serverless guarantee."
+  },
+  "pricing": {
+    "model": "gpt-5.6-terra",
+    "source_url": "https://developers.openai.com/api/docs/pricing",
+    "as_of": "2026-08-28",
+    "input_usd_per_million": 2.0,
+    "output_usd_per_million": 12.0,
+    "context": "short-context standard"
+  },
+  "token_budget": {
+    "max_output_tokens": 1600,
+    "estimated_input_tokens": 1800,
+    "estimated_output_tokens": 900
+  },
+  "owners": [
+    "Ourea team",
+    "Community representatives",
+    "Municipal planning",
+    "Engineering team"
+  ],
+  "limits": {
+    "headline": 160,
+    "portfolio_rationale": { "max": 4, "item": 220 },
+    "gate_explanations": { "max": 4, "explanation": 180, "evidence_needed": 140 },
+    "field_visit_questions": { "max": 5, "item": 160 },
+    "next_actions": { "max": 5, "action": 160, "timing": 80 },
+    "cannot_conclude": { "max": 5, "item": 180 },
+    "cost_field": 180,
+    "robustness_field": 180
+  }
+}

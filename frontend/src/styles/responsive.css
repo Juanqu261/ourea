@@ -1,0 +1,82 @@
+@media (max-width: 1366px) {
+  :root {
+    --panel-width: 440px;
+  }
+
+  .panel h1,
+  .step-title {
+    font-size: 26px;
+  }
+}
+
+@media (max-width: 1280px) {
+  :root {
+    --panel-width: 420px;
+  }
+
+  .topbar {
+    gap: 6px 8px;
+  }
+}
+
+@media (max-width: 1100px) {
+  .sub {
+    display: none;
+  }
+}
+
+@media (max-width: 920px) {
+  .scenario-presets {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 620px) {
+  .climate-facts,
+  .scenario-presets {
+    grid-template-columns: 1fr;
+  }
+
+  .topbar {
+    left: 8px;
+    right: 8px;
+    flex-wrap: wrap;
+  }
+
+  .brand-group {
+    width: auto;
+  }
+
+  .panel h1,
+  .step-title {
+    font-size: 22px;
+  }
+
+  .metrics,
+  .compare,
+  .metric-group-grid,
+  .alternative-grid,
+  .city-detail-grid,
+  .fact-strip {
+    grid-template-columns: 1fr;
+  }
+
+  .benchmark-header {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .benchmark-recompute {
+    width: 100%;
+  }
+
+  .frontier-row,
+  .pareto-row {
+    grid-template-columns: 48px 1fr 1fr;
+  }
+
+  .frontier-row span:last-child,
+  .pareto-row span:last-child {
+    display: none;
+  }
+}

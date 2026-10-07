@@ -1,0 +1,105 @@
+{
+  "schema": "ourea-evidence-registry",
+  "schema_version": 1,
+  "guardrail_source": "frontend/src/config/scientificGuardrails.json",
+  "generated_date": "2026-08-18",
+  "layers": [
+    {
+      "id": "city_priority_screen",
+      "label": "City priority screen",
+      "status": "derived-screening-proxy",
+      "confidence": "medium-for-shortlisting",
+      "basis": "Official hazard + 2026 barrio population + 2023 comuna IMCV combined under explicit policy lenses",
+      "use": "Transparent shortlist for deeper analysis; not a climate forecast or investment recommendation"
+    },
+    {
+      "id": "city_imcv_2023",
+      "label": "City socioeconomic vulnerability",
+      "status": "official-social-index",
+      "confidence": "medium-for-barrio-screening",
+      "basis": "Official 2023 IMCV/AMPI-AMPI at comuna/corregimiento level",
+      "use": "Relative socioeconomic vulnerability component; coarse within each comuna"
+    },
+    {
+      "id": "city_population_2026",
+      "label": "City population projection",
+      "status": "official-projection",
+      "confidence": "high-at-barrio-total-level",
+      "basis": "Official Medellín/DANE barrio projections, 2018–2030; Ourea uses 2026 totals",
+      "use": "City-scale exposure screening; not within-barrio spatial distribution"
+    },
+    {
+      "id": "terrain",
+      "label": "Terrain",
+      "status": "observed-official",
+      "confidence": "high",
+      "basis": "Medellín 2024 municipal 1 m DEM",
+      "use": "Elevation, local slope, 3D terrain"
+    },
+    {
+      "id": "hazard",
+      "label": "Mass-movement hazard",
+      "status": "official-derived-layer",
+      "confidence": "high-for-screening",
+      "basis": "Official Medellín hazard polygons",
+      "use": "Spatial susceptibility baseline; not event probability"
+    },
+    {
+      "id": "buildings",
+      "label": "Buildings",
+      "status": "official-cadastral",
+      "confidence": "high",
+      "basis": "Medellín cadastral construction geometries and floors",
+      "use": "Physical exposure and 3D extrusion"
+    },
+    {
+      "id": "population",
+      "label": "Population",
+      "status": "census-based-proxy",
+      "confidence": "medium",
+      "basis": "DANE 2018 census-block population allocated to buildings by constructed-area share",
+      "use": "Planning exposure proxy only"
+    },
+    {
+      "id": "socioeconomic",
+      "label": "Socioeconomic stratum",
+      "status": "official-spatial-proxy",
+      "confidence": "medium-high",
+      "basis": "Official Medellín stratum/manzana layer",
+      "use": "Climate-equity decision weighting"
+    },
+    {
+      "id": "access",
+      "label": "Critical access",
+      "status": "official-network-proxy",
+      "confidence": "medium",
+      "basis": "Official Medellín road/pedestrian/service-access network",
+      "use": "Access-resilience weighting; not route evacuation simulation"
+    },
+    {
+      "id": "climate",
+      "label": "Observed rainfall context",
+      "status": "observed-gridded-climatology",
+      "confidence": "appropriate-for-planning-scenarios",
+      "basis": "CHIRPS v3.0 Final pentad extract for the Llanaditas / upper Comuna 8 0.05° cell; 1991–2020 climatology; daily series allocated uniformly within each pentad",
+      "use": "Anchor typical, high and extreme planning rainfall contexts; not station intensity and not landslide probability"
+    },
+    {
+      "id": "intervention_effects",
+      "label": "Intervention effects",
+      "status": "explicit-planning-priors",
+      "confidence": "transparent-ranges",
+      "basis": "Published effect ranges used as uncertainty bounds, not locally calibrated slope-performance coefficients",
+      "use": "Stress-test portfolios under effect uncertainty"
+    },
+    {
+      "id": "cost",
+      "label": "Intervention costs",
+      "status": "pre-feasibility-usd-envelope",
+      "confidence": "credits-internal-usd-brief",
+      "basis": "Versioned TRM, DANE IPC and local procurement/public-works comparators; optimizer remains on planning credits",
+      "use": "Decision-brief implementation envelope; not an offer, contract or engineering estimate"
+    }
+  ]
+}
+

@@ -1,0 +1,140 @@
+{
+  "schema": "ourea-plan-alignment",
+  "schema_version": 2,
+  "status": "documentary-alignment-not-community-support",
+  "geographic_scope": "Comuna 8 / Villa Hermosa, Medellín. Current proving ground remains Llanaditas / upper Comuna 8. Moravia is a learning case, not a target of this registry.",
+  "guardrail": "This layer traces published local planning and research. It is documentary alignment, not community endorsement, not a numeric local calibration, and not a substitute for co-design.",
+  "entries": [
+    {
+      "id": "rwh-household-capture",
+      "intervention_type": "rwh",
+      "plan_action": "Household and neighborhood rainwater capture as a water-management / hillside-load reduction measure already present in Comuna 8 adaptation practice.",
+      "source_title": "How one Medellín neighbourhood changed how a whole city plans for climate change",
+      "source_url": "https://www.hw.ac.uk/news/2026/how-one-medellin-neighbourhood-changed-how-a-whole-city-plans-for-climate-change",
+      "publisher": "Heriot-Watt University",
+      "published_at": "2026",
+      "source_type": "institutional news / documentary",
+      "geographic_scope": "Comuna 8 / Villa Hermosa",
+      "evidence_status": "documentary",
+      "supports": [
+        "Rainwater capture is a documented local adaptation practice in Comuna 8"
+      ],
+      "does_not_establish": [
+        "A calibrated slope-load reduction coefficient for Llanaditas",
+        "Community endorsement of a specific Ourea portfolio",
+        "Confirmed unit costs in COP"
+      ],
+      "prerequisites": [
+        "Roof access and storage specification agreed with residents",
+        "Maintenance and training arrangements before treating capture as durable"
+      ],
+      "maintenance_responsible": null,
+      "evidence_gap": "No transferable Comuna 8 unit cost or locally calibrated slope-benefit coefficient is encoded in the optimizer."
+    },
+    {
+      "id": "drainage-water-management",
+      "intervention_type": "drainage",
+      "plan_action": "Surface-water management and drainage works as part of neighborhood climate-risk reduction, not as a standalone early-warning product.",
+      "source_title": "La comuna Villa Hermosa es ejemplo en Medellín en gestión frente al cambio climático",
+      "source_url": "https://www.medellin.gov.co/es/sala-de-prensa/noticias/la-comuna-villa-hermosa-es-ejemplo-en-medellin-en-gestion-frente-al-cambio-climatico/",
+      "publisher": "Alcaldía de Medellín",
+      "published_at": "2024",
+      "source_type": "municipal press note",
+      "geographic_scope": "Comuna 8 / Villa Hermosa",
+      "evidence_status": "documentary",
+      "supports": [
+        "Drainage and surface-water management appear in published Comuna 8 climate-risk practice"
+      ],
+      "does_not_establish": [
+        "Hydraulic capacity of mapped drainage corridors",
+        "An implemented Ourea drainage package",
+        "Community validation of siting"
+      ],
+      "prerequisites": [
+        "Corridor and outlet conditions confirmed in the field",
+        "Everyday access and care routes reviewed before construction"
+      ],
+      "maintenance_responsible": null,
+      "evidence_gap": "Mapped drainage-corridor proxy is not drainage capacity. Hydraulic design remains an engineering follow-up."
+    },
+    {
+      "id": "nbs-restoration",
+      "intervention_type": "restoration",
+      "plan_action": "Nature-based / bioengineering slope work aligned with published informal-area climate-resilience guidance.",
+      "source_title": "Strategy paper on nature-based solutions to build climate resilience in informal areas",
+      "source_url": "https://unhabitat.org/strategy-paper-on-nature-based-solutions-to-build-climate-resilience-in-informal-areas",
+      "publisher": "UN-Habitat",
+      "published_at": "2022",
+      "source_type": "international guidance",
+      "geographic_scope": "Informal and marginalized hillside settlements, applied here only as documentary typology alignment",
+      "evidence_status": "documentary",
+      "supports": [
+        "Nature-based slope work is a recognized intervention family for informal hillside settlements"
+      ],
+      "does_not_establish": [
+        "A Medellín species list",
+        "A locally calibrated restoration effect range",
+        "Community agreement on tenure or maintenance"
+      ],
+      "prerequisites": [
+        "Species, tenure and maintenance capacity agreed locally",
+        "Maturity delay acknowledged; year-1 effect is not full prior effect"
+      ],
+      "maintenance_responsible": null,
+      "evidence_gap": "UN-Habitat guidance is not a Medellín species list or a calibrated restoration effect range."
+    },
+    {
+      "id": "community-organization-evolution",
+      "intervention_type": null,
+      "plan_action": "Community organization in Comuna 8 has a documented path from protest to proposal; Ourea treats that as a participation-design lesson, not as a completed consultation record.",
+      "source_title": "From protesting to proposing: the evolution of community organization in Comuna 8, Medellín",
+      "source_url": "https://researchportal.hw.ac.uk/en/publications/from-protesting-to-proposing-the-evolution-of-community-organizat/",
+      "publisher": "Heriot-Watt University research portal",
+      "published_at": "2024",
+      "source_type": "research record",
+      "geographic_scope": "Comuna 8",
+      "evidence_status": "research",
+      "supports": [
+        "Comuna 8 has a documented history of organized proposal-making"
+      ],
+      "does_not_establish": [
+        "That any named organization is an Ourea partner",
+        "Community review of a generated portfolio",
+        "Consent for a specific cell-level intervention"
+      ],
+      "prerequisites": [
+        "Legitimate representatives identified in the pilot",
+        "Veto criteria recorded without converting them into hidden optimizer weights"
+      ],
+      "maintenance_responsible": null,
+      "evidence_gap": "No organization is named as a confirmed Ourea partner. The shipped community_evidence.json has no records, so every project is not assessed."
+    },
+    {
+      "id": "granizal-2025-mechanism",
+      "intervention_type": null,
+      "plan_action": "Metropolitan evidence that socio-natural hazard exposure is concentrated among urban poor, without being exclusive to them.",
+      "source_title": "Urban poor are the most endangered by socio-natural hazards, but not exclusively: the 2025 Granizal Landslide case",
+      "source_url": "https://doi.org/10.1007/s10346-025-02680-y",
+      "publisher": "Landslides (Springer)",
+      "published_at": "2025",
+      "source_type": "peer-reviewed article",
+      "geographic_scope": "Granizal, Medellín metropolitan area — mechanism evidence, not Llanaditas calibration",
+      "evidence_status": "observational-research",
+      "supports": [
+        "Unequal exposure to socio-natural hazards in the Medellín metropolitan area",
+        "Why equity weighting belongs in portfolio comparison"
+      ],
+      "does_not_establish": [
+        "Local failure probability in Llanaditas",
+        "Parcel-level calibration of Ourea",
+        "Community endorsement of an Ourea portfolio",
+        "A transferable runout or triggering threshold for Comuna 8"
+      ],
+      "prerequisites": [
+        "Keep Granizal as metropolitan mechanism evidence, not as a substitute proving ground"
+      ],
+      "maintenance_responsible": null,
+      "evidence_gap": "The paper does not calibrate Ourea's planning-credit model or community-safeguard records."
+    }
+  ]
+}

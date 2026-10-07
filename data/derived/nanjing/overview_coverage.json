@@ -1,0 +1,15 @@
+{
+  "aoi_area_deg2": 0.006300000000000265,
+  "aoi_area_m2": 66127987.74714548,
+  "covered_area_deg2": 0.006300000000000264,
+  "covered_area_m2": 66127987.747145474,
+  "uncovered_area_deg2": 8.673617379884035e-19,
+  "uncovered_area_m2": 7.450580596923828e-09,
+  "coverage_ratio": 0.9999999999999999,
+  "coverage_pct": 100.0,
+  "osm_named_count": 24,
+  "derived_sector_count": 14,
+  "overview_polygon_count": 38,
+  "coverage_threshold": 0.99,
+  "generated_at": "2026-09-13T05:05:08Z"
+}

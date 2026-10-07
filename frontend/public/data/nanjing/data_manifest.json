@@ -1,0 +1,155 @@
+{
+  "schema": "ourea-data-manifest",
+  "schema_version": 1,
+  "case_id": "nanjing_xianlin_portability",
+  "generated_at": "2026-09-13T03:02:27Z",
+  "working_bbox": [
+    118.88,
+    32.075,
+    118.97,
+    32.145
+  ],
+  "working_bbox_status": "initial reproducible screening bbox; not an official Xianlin administrative boundary",
+  "artifacts": {
+    "planning_cells": "frontend/public/data/nanjing/planning_cells.geojson",
+    "cell_feature_table": "data/derived/nanjing/planning_cell_features.json",
+    "spatial_qa": "data/derived/nanjing/spatial_alignment_qa.json",
+    "buildings": "frontend/public/data/nanjing/buildings.geojson",
+    "drainage_stress": "frontend/public/data/nanjing/drainage_stress.geojson",
+    "screening": "frontend/public/data/nanjing/screening.geojson",
+    "climate_context": "frontend/public/data/nanjing/climate_context.json",
+    "retrospective_validation": "frontend/public/data/nanjing/retrospective_validation.json"
+  },
+  "datasets": [
+    {
+      "provider": "Mapzen / Linux Foundation via AWS Open Data",
+      "dataset_product": "Skadi / SRTM-style elevation tiles",
+      "original_url": "https://s3.amazonaws.com/elevation-tiles-prod/skadi/N32/N32E118.hgt.gz",
+      "access_retrieval_date": "2026-09-13T03:02:25Z",
+      "dataset_year": "SRTM-era global terrain stack",
+      "native_resolution": "~30 m (1 arc-second)",
+      "crs": "EPSG:4326",
+      "transformation": "gunzip HGT; crop to AOI windows during cell sampling",
+      "output_resolution": "~30 m source samples aggregated to ~1 km planning cells",
+      "license": "AWS Open Data / Mapzen terrain tiles terms",
+      "checksum_sha256": "11d60481906f5a523f7d30372ba3f981debf39eb044058f9cd34022f40f5954f",
+      "evidence_classification": "observed-remote-sensing",
+      "limitations": "Screening elevation/slope only; not engineering-grade drainage design.",
+      "status": "cache-hit",
+      "tile_id": "N32E118"
+    },
+    {
+      "provider": "NASA POWER",
+      "dataset_product": "Daily surface meteorology (PRECTOTCORR)",
+      "original_url": "https://power.larc.nasa.gov/api/temporal/daily/point",
+      "access_retrieval_date": "2026-09-13T03:02:25Z",
+      "dataset_year": "2001–2020 extract",
+      "native_resolution": "coarse meteorological grid (not neighborhood scale)",
+      "crs": "EPSG:4326 point extract",
+      "transformation": "daily totals → percentiles and rolling accumulations",
+      "output_resolution": "point climate context for AOI centroid",
+      "license": "NASA POWER open data",
+      "evidence_classification": "observed-remote-sensing",
+      "limitations": "Climate context only. Not street-scale flood hazard. POWER is the documented credential-free fallback when IMERG auth is unavailable. Do not silently mix with IMERG.",
+      "source_name": "NASA POWER Daily",
+      "imerg_status": "not_used_in_this_build",
+      "status": "cache-hit",
+      "checksum_sha256": "101bdd2064deb9898cefb21735d4f92060b7a06463e0345ed3f9165831537b31"
+    },
+    {
+      "original_url": "https://data.worldpop.org/GIS/Population/Global_2015_2030/R2025A/2026/CHN/v1/100m/constrained/chn_pop_2026_CN_100m_R2025A_v1.tif",
+      "access_retrieval_date": "2026-09-13T03:02:25Z",
+      "crs": "EPSG:4326",
+      "transformation": "windowed read + AOI crop",
+      "local_cache": "C:\\Users\\ADMIN\\OneDrive\\Escritorio\\ourea\\.cache\\nanjing\\population\\chn_pop_2026_CN_100m_R2025A_v1.tif",
+      "status": "windowed-read",
+      "native_resolution": "(0.00083333333, 0.00083333333)",
+      "driver": "GTiff",
+      "nodata": -99999.0,
+      "read_from": "C:\\Users\\ADMIN\\OneDrive\\Escritorio\\ourea\\.cache\\nanjing\\population\\chn_pop_2026_CN_100m_R2025A_v1.tif",
+      "provider": "WorldPop",
+      "dataset_product": "China 2026 constrained ~100 m (R2025A)",
+      "dataset_year": 2026,
+      "license": "CC BY 4.0 / source-specific ODbL conditions where applicable",
+      "evidence_classification": "population-estimate",
+      "limitations": "Population estimate only — not census counts or exact households."
+    },
+    {
+      "provider": "ESA WorldCover",
+      "dataset_product": "WorldCover 2021 v200",
+      "dataset_year": 2021,
+      "native_resolution": "10 m",
+      "crs": "EPSG:4326",
+      "license": "CC BY 4.0",
+      "bucket": "s3://esa-worldcover/",
+      "access_mode": "anonymous UNSIGNED boto3",
+      "discovery_method": "AOI ∩ official 3° WorldCover tile grid + S3 HeadObject",
+      "working_bbox": [
+        118.88,
+        32.075,
+        118.97,
+        32.145
+      ],
+      "tiles": [
+        {
+          "tile_id": "N30E117",
+          "s3_uri": "s3://esa-worldcover/v200/2021/map/ESA_WorldCover_10m_2021_v200_N30E117_Map.tif",
+          "s3_key": "v200/2021/map/ESA_WorldCover_10m_2021_v200_N30E117_Map.tif",
+          "content_length": 136218188,
+          "etag": "\"5bfc5a6403f336504a42c0a41bd2b646-17\"",
+          "local_path": "C:\\Users\\ADMIN\\OneDrive\\Escritorio\\ourea\\.cache\\nanjing\\worldcover\\ESA_WorldCover_10m_2021_v200_N30E117_Map.tif",
+          "status": "cache-hit",
+          "checksum_sha256": "2ecba0b373296bd1f2641503065648e80d2adc33cdea1b8d2e8247e77fa97426",
+          "access_retrieval_date": "2026-09-13T03:02:27Z"
+        }
+      ],
+      "local_paths": [
+        "C:\\Users\\ADMIN\\OneDrive\\Escritorio\\ourea\\.cache\\nanjing\\worldcover\\ESA_WorldCover_10m_2021_v200_N30E117_Map.tif"
+      ],
+      "evidence_classification": "observed-remote-sensing",
+      "limitations": "Land-cover classes are not measured imperviousness or calibrated runoff. Any runoff weights derived from classes are explicit planning assumptions.",
+      "status": "windowed-read",
+      "window": {
+        "crs": "EPSG:4326",
+        "transform": [
+          8.333333333333333e-05,
+          0.0,
+          118.88,
+          0.0,
+          -8.333333333333333e-05,
+          32.145
+        ],
+        "shape": [
+          840,
+          1080
+        ],
+        "res": [
+          8.333333333333333e-05,
+          8.333333333333333e-05
+        ],
+        "nodata": 0.0,
+        "dtype": "uint8"
+      },
+      "crop_bounds": [
+        118.88,
+        32.075,
+        118.97,
+        32.145
+      ],
+      "aoi_crop_path": "C:\\Users\\ADMIN\\OneDrive\\Escritorio\\ourea\\.cache\\nanjing\\worldcover\\nanjing_aoi_worldcover_crop.tif",
+      "aoi_crop_bytes": 118829
+    }
+  ],
+  "retrospective_only": [
+    "qixia_official_topography",
+    "xianlin_yuanhua_xianyin_2026",
+    "hengyang_jiuxiang_storage",
+    "nanjing_water_plan_2026_2030"
+  ],
+  "forbidden_as_optimizer_inputs": [
+    "qixia_official_topography",
+    "xianlin_yuanhua_xianyin_2026",
+    "hengyang_jiuxiang_storage",
+    "nanjing_water_plan_2026_2030"
+  ]
+}

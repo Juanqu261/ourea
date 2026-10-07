@@ -1,0 +1,191 @@
+{
+  "schema": "ourea-climate-context",
+  "schema_version": 1,
+  "generated_at": "2026-09-13T03:02:25Z",
+  "source_name": "NASA POWER Daily",
+  "source_version": "POWER Daily API",
+  "source_product": "PRECTOTCORR",
+  "source_urls": [
+    "https://power.larc.nasa.gov/docs/services/api/temporal/daily/",
+    "https://gpm.nasa.gov/data/imerg"
+  ],
+  "doi": "https://doi.org/10.5067/POWER/",
+  "accessed_at": "2026-09-13T03:02:25Z",
+  "spatial_resolution": "coarse meteorological grid (not neighborhood scale)",
+  "temporal_resolution": "Daily",
+  "area": "Xianlin / Qixia screening AOI centroid, Nanjing (not street-scale).",
+  "coordinates": {
+    "lon": 118.925,
+    "lat": 32.11,
+    "epsg": 4326
+  },
+  "bounds": {
+    "proving_ground": [
+      118.88,
+      32.075,
+      118.97,
+      32.145
+    ],
+    "extracted_cell": [
+      118.88,
+      32.075,
+      118.97,
+      32.145
+    ]
+  },
+  "climatology_period": {
+    "start": "2001-01-01",
+    "end": "2020-12-31",
+    "label": "2001-2020"
+  },
+  "available_period": {
+    "start": "2001-01-01",
+    "end": "2020-12-31",
+    "label": "2001-2020"
+  },
+  "daily_percentiles": {
+    "p50": 0.05,
+    "p75": 2.2,
+    "p90": 10.106000000000003,
+    "p95": 17.697999999999958,
+    "p99": 42.33360000000002
+  },
+  "rolling_accumulation_percentiles": {
+    "3": {
+      "window_days": 3,
+      "percentiles": {
+        "p50": 2.15,
+        "p75": 12.265,
+        "p90": 27.956000000000003,
+        "p95": 41.70699999999999,
+        "p99": 93.6205999999998
+      },
+      "valid_windows": 7303,
+      "observed_maxima": {
+        "value_mm": 202.52999999999997,
+        "date": "20150628"
+      }
+    },
+    "7": {
+      "window_days": 7,
+      "percentiles": {
+        "p50": 12.739999999999998,
+        "p75": 29.955,
+        "p90": 56.098,
+        "p95": 81.07699999999997,
+        "p99": 156.71859999999978
+      },
+      "valid_windows": 7299,
+      "observed_maxima": {
+        "value_mm": 353.21,
+        "date": "20160707"
+      }
+    },
+    "15": {
+      "window_days": 15,
+      "percentiles": {
+        "p50": 35.379999999999995,
+        "p75": 63.585,
+        "p90": 104.39000000000001,
+        "p95": 155.61499999999998,
+        "p99": 269.8920000000003
+      },
+      "valid_windows": 7291,
+      "observed_maxima": {
+        "value_mm": 476.08,
+        "date": "20160704"
+      }
+    },
+    "30": {
+      "window_days": 30,
+      "percentiles": {
+        "p50": 75.75,
+        "p75": 121.7125,
+        "p90": 204.76,
+        "p95": 266.8075,
+        "p99": 475.9699999999999
+      },
+      "valid_windows": 7276,
+      "observed_maxima": {
+        "value_mm": 619.46,
+        "date": "20160718"
+      }
+    }
+  },
+  "observed_maxima": {
+    "climatology_2001_2020": {
+      "daily": {
+        "value_mm": 155.02,
+        "date": "20170610"
+      }
+    }
+  },
+  "scenario_presets": [
+    {
+      "id": "typical_wet",
+      "label": "Typical wet conditions",
+      "accumulation_window_days": 15,
+      "precipitation_mm": 63.585,
+      "percentile": 75,
+      "antecedent_window_days": 30,
+      "antecedent_rainfall_percentile": 0.5,
+      "climatology_period": "2001-2020",
+      "source_name": "NASA POWER Daily",
+      "source_product": "PRECTOTCORR"
+    },
+    {
+      "id": "high_rainfall",
+      "label": "High rainfall context",
+      "accumulation_window_days": 15,
+      "precipitation_mm": 104.39000000000001,
+      "percentile": 90,
+      "antecedent_window_days": 30,
+      "antecedent_rainfall_percentile": 0.75,
+      "climatology_period": "2001-2020",
+      "source_name": "NASA POWER Daily",
+      "source_product": "PRECTOTCORR"
+    },
+    {
+      "id": "extreme_observed",
+      "label": "Extreme observed / high-percentile context",
+      "accumulation_window_days": 15,
+      "precipitation_mm": 269.8920000000003,
+      "percentile": 99,
+      "antecedent_window_days": 30,
+      "antecedent_rainfall_percentile": 0.9,
+      "climatology_period": "2001-2020",
+      "source_name": "NASA POWER Daily",
+      "source_product": "PRECTOTCORR"
+    }
+  ],
+  "method": "NASA POWER Daily PRECTOTCORR at AOI centroid; rolling windows for presets. IMERG V07 Final is preferred when credentials allow but was not required for this build.",
+  "appropriate_uses": [
+    "Observed climate context / rainfall presets for adaptation screening",
+    "Portability demonstration under monsoon rainfall context"
+  ],
+  "limitations": [
+    "Not a hydraulic flood model",
+    "Not street-level inundation depth or flood probability",
+    "Coarse meteorological resolution — do not downscale to fake neighborhood hazard",
+    "Live POWER series used"
+  ],
+  "input_provenance": {
+    "provider": "NASA POWER",
+    "dataset_product": "Daily surface meteorology (PRECTOTCORR)",
+    "original_url": "https://power.larc.nasa.gov/api/temporal/daily/point",
+    "access_retrieval_date": "2026-09-13T03:02:25Z",
+    "dataset_year": "2001–2020 extract",
+    "native_resolution": "coarse meteorological grid (not neighborhood scale)",
+    "crs": "EPSG:4326 point extract",
+    "transformation": "daily totals → percentiles and rolling accumulations",
+    "output_resolution": "point climate context for AOI centroid",
+    "license": "NASA POWER open data",
+    "evidence_classification": "observed-remote-sensing",
+    "limitations": "Climate context only. Not street-scale flood hazard. POWER is the documented credential-free fallback when IMERG auth is unavailable. Do not silently mix with IMERG.",
+    "source_name": "NASA POWER Daily",
+    "imerg_status": "not_used_in_this_build",
+    "status": "cache-hit",
+    "checksum_sha256": "101bdd2064deb9898cefb21735d4f92060b7a06463e0345ed3f9165831537b31"
+  },
+  "case_id": "nanjing_xianlin_portability"
+}

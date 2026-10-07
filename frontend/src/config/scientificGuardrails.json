@@ -1,0 +1,20 @@
+{
+  "schema": "ourea-scientific-guardrails",
+  "schema_version": 1,
+  "items": [
+    "Climate Stress is not landslide probability.",
+    "CHIRPS v3 Final is a 0.05° gridded climatology used to anchor planning rainfall contexts, not station intensity and not a real-time forecast.",
+    "The city screen is a prioritization proxy, not a dynamic climate forecast or investment recommendation.",
+    "The city hazard-exposure proxy assumes projected population is uniformly distributed inside each barrio.",
+    "The 2023 IMCV/AMPI socioeconomic component is comuna-level and therefore coarse within individual barrios.",
+    "Detailed-sandbox population is a census-based planning proxy, not a current household count.",
+    "Planning credits are not COP.",
+    "USD figures in the decision brief are a pre-feasibility implementation envelope, not an offer, contract or engineering estimate.",
+    "Benefit, equity and access metrics are planning proxies, not people saved/protected or avoided losses.",
+    "Policy-objective weights are transparent development settings and require stakeholder co-design.",
+    "The sampled non-dominated set is not an exhaustive mathematical Pareto frontier.",
+    "Community evidence is not a prediction of social acceptance.",
+    "Technically robust does not mean community-validated.",
+    "Absence of community records means not assessed, never support, opposition or low risk."
+  ]
+}

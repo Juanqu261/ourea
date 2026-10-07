@@ -1,0 +1,66 @@
+{
+  "schema": "ourea-cicsic-evidence-freeze",
+  "schema_version": 1,
+  "frozen_at": "2026-09-13T04:14:48.454Z",
+  "evidence_snapshot_sha": "296fd9d113cb3216d5bbf2e73703f688400a796e",
+  "freeze_tag": "cicsic-evidence-freeze",
+  "note": "evidence_snapshot_sha is the immutable scientific snapshot commit (Commit A). freeze_tag points at the annotated tag on the freeze metadata commit (Commit B).",
+  "protocol": {
+    "rootSeed": 20260912,
+    "trials": 500,
+    "budgetCredits": 10,
+    "uncertaintyRegime": "base",
+    "bootstrapSeed": 424242,
+    "primaryMetric": "mean_p10",
+    "primaryBaseline": "deterministic_central"
+  },
+  "headline": {
+    "medellin": {
+      "robust_mean_p10": 69.43,
+      "deterministic_mean_p10": 66.61,
+      "absolute_delta": 2.81,
+      "relative_delta": 0.0423,
+      "ci95": [
+        2.65,
+        2.97
+      ],
+      "win_equal_loss": [
+        0.934,
+        0,
+        0.066
+      ]
+    },
+    "nanjing_xianlin": {
+      "robust_mean_p10": 326.51,
+      "deterministic_mean_p10": 293.15,
+      "absolute_delta": 33.36,
+      "relative_delta": 0.1138,
+      "ci95": [
+        32.92,
+        33.81
+      ],
+      "win_equal_loss": [
+        1,
+        0,
+        0
+      ]
+    }
+  },
+  "canonical_parameters": "frontend/src/config/modelParameters.json",
+  "artifacts": {
+    "frontend/src/config/modelParameters.json": "f7ae7e8215a2a9ff14ec391ece08fcc2aa500cabb7c6ef08833a5905b8003403",
+    "frontend/src/config/nanjingLandCoverAssumptions.json": "d49ad406b4e87846276f6ef2747a996f1337aa3cd9d1a51fc92ce73d9e3657c7",
+    "frontend/src/config/nanjingScientificGuardrails.json": "bb3a13e53723d7365cdc3f66ccae8e8a6ae82db3dfc33107c58b9a72edc7ed06",
+    "data/derived/cicsic_redteam_benchmark.json": "09cd80210a3f2594b7fe1d0d68454fc113f2ae3b148783f6845e294bbcaf06b2",
+    "data/derived/cicsic_redteam_trials.csv": "ba1de7b0178ff52ec3b5a848ed6ddc576574e14468502f5ae4d4b815dd64549e",
+    "data/derived/cicsic_budget_sweep.json": "026a8e557539f59031dba50f6121bf3fd7687ef910b582097be97fe9b14ba31e",
+    "data/derived/cicsic_uncertainty_sweep.json": "6a01da9b594c51c190292cd54ffff1111047197c78b439f134a834dd11059580",
+    "data/derived/cicsic_sensitivity_interventions.json": "b96ecbd0c7fe37cd561e3ea704617b98db2d84da6cdd4427014378f8b1d85e54",
+    "data/derived/nanjing/planning_cell_features.json": "66173434a244f80d1ac2c5a4bbf87acb19f5f3f773732c1942662c3bfb890bfc",
+    "docs/cicsic/benchmark-protocol.md": "93393531612c88edf0db2d8cf7018a6af194d825b557c06f9e84ba6aef471826",
+    "docs/cicsic/headline-metrics.md": "957d6cd5b708fbf7bc764764dd9fa16b91564674dcf05229fd47959d7ceb3de1",
+    "docs/cicsic/red-team-findings.md": "527fe4b17a1ddb1a96f98a295c7b509f7e02fa54b5c4a9e60a428c086abf90b8",
+    "docs/cicsic/competition-claims-register.md": "65e17f3ec7ddb69cd171e1431bd8b4f459ea3f078c60e13f124b6728b1de75f0"
+  },
+  "statement": "After this evidence freeze, model assumptions and benchmark protocol must not be modified for presentation optimization unless correcting a documented bug. Any such correction requires rerunning the full benchmark suite and updating the freeze."
+}

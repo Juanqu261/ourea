@@ -1,0 +1,134 @@
+{
+  "case_id": "nanjing_xianlin_portability",
+  "city": "Nanjing",
+  "district": "Qixia",
+  "focus_area": "Xianlin",
+  "country": "China",
+  "crs": "EPSG:4326",
+  "working_bbox": [118.88, 32.075, 118.97, 32.145],
+  "working_bbox_status": "initial reproducible screening bbox; not an official administrative boundary",
+  "purpose": "CICSIC 2026 portability demonstration for Ourea; adaptation screening only",
+  "datasets": [
+    {
+      "id": "terrain_mapzen_skadi",
+      "role": ["elevation", "slope", "relative_relief", "screening_hydrology"],
+      "provider": "Mapzen / Linux Foundation via AWS Open Data",
+      "resolution": "~30 m source around Nanjing (SRTM-based global terrain stack)",
+      "access": "https://registry.opendata.aws/terrain-tiles/",
+      "endpoint_template": "https://s3.amazonaws.com/elevation-tiles-prod/skadi/{LAT_DIR}/{TILE}.hgt.gz",
+      "notes": "Use offline preprocessing. Screening only; not engineering-grade drainage design."
+    },
+    {
+      "id": "nasadem_optional",
+      "role": ["elevation_reference"],
+      "provider": "NASA LP DAAC / JPL / SRTM",
+      "resolution": "1 arc-second",
+      "access": "https://data.nasa.gov/dataset/nasadem-merged-dem-global-1-arc-second-v001",
+      "doi": "10.5067/MEASURES/NASADEM/NASADEM_HGT.001",
+      "notes": "Optional reference; may require Earthdata access workflow."
+    },
+    {
+      "id": "imerg_v07_final",
+      "role": ["observed_climate_context", "rainfall_presets"],
+      "provider": "NASA GPM",
+      "resolution": "0.1 degree (~10 km)",
+      "access": "https://gpm.nasa.gov/data/directory",
+      "notes": "Never use as street-scale flood-hazard evidence."
+    },
+    {
+      "id": "nasa_power_fallback",
+      "role": ["credential_free_climate_context"],
+      "provider": "NASA POWER",
+      "resolution": "coarse meteorological grid",
+      "access": "https://power.larc.nasa.gov/docs/services/api/temporal/daily/",
+      "notes": "Fallback for reproducible build; climate context only."
+    },
+    {
+      "id": "worldpop_chn_2026",
+      "role": ["population_exposure"],
+      "provider": "WorldPop",
+      "resolution": "~100 m",
+      "year": 2026,
+      "access": "https://hub.worldpop.org/geodata/summary?id=72928",
+      "direct_geotiff": "https://data.worldpop.org/GIS/Population/Global_2015_2030/R2025A/2026/CHN/v1/100m/constrained/chn_pop_2026_CN_100m_R2025A_v1.tif",
+      "license": "CC BY 4.0 / source-specific ODbL conditions where applicable",
+      "notes": "R2025A alpha product. Crop locally; do not commit national raster."
+    },
+    {
+      "id": "esa_worldcover_2021",
+      "role": ["land_cover", "built_up_proxy", "green_space_proxy"],
+      "provider": "ESA WorldCover",
+      "resolution": "10 m",
+      "year": 2021,
+      "access": "https://esa-worldcover.org/en/data-access",
+      "license": "CC BY 4.0",
+      "notes": "Derivatives are screening proxies, not measured hydrologic coefficients."
+    },
+    {
+      "id": "emc_built_2022_optional",
+      "role": ["built_up_surface_fallback"],
+      "provider": "European Commission JRC / GHSL",
+      "resolution": "10 m available",
+      "year": 2022,
+      "access": "https://human-settlement.emergency.copernicus.eu/emc_built_s.php",
+      "notes": "Use when OSM building completeness is insufficient; do not infer exact building counts."
+    },
+    {
+      "id": "osm_geofabrik_china",
+      "role": ["roads", "waterways", "buildings_optional", "pois_optional"],
+      "provider": "OpenStreetMap / Geofabrik",
+      "access": "https://download.geofabrik.de/asia/china.html",
+      "license": "ODbL",
+      "notes": "Crop offline to AOI. Assess completeness before building-count claims."
+    }
+  ],
+  "retrospective_validation_evidence": [
+    {
+      "id": "qixia_official_topography",
+      "source": "Qixia District Government",
+      "url": "https://www.njqxq.gov.cn/sjb2018/ssqx/qxgk/index.html",
+      "claim": "Southern Qixia is hilly/upland, commonly 50–300 m; northern Yangtze plain/islands are generally below 10 m.",
+      "optimizer_input": false
+    },
+    {
+      "id": "xianlin_yuanhua_xianyin_2026",
+      "source": "Nanjing Public Resources Trading Center",
+      "url": "https://njggzy.nanjing.gov.cn/njweb/jtsw/069005/069005001/20260306/f9f67762-9758-45d8-a898-d801ed8720f7.html",
+      "claim": "Official 2026 waterlogging-remediation works in Xianlin, including new stormwater pipe and cleaning/repair works.",
+      "optimizer_input": false
+    },
+    {
+      "id": "hengyang_jiuxiang_storage",
+      "source": "Nanjing Water Affairs Bureau",
+      "url": "https://shuiwu.nanjing.gov.cn/njsswj/202501/t20250122_5063584.html",
+      "claim": "Official 9,000 m3 detention/storage project intended in part to reduce Xianlin/Jiuxianghe-area waterlogging risk.",
+      "optimizer_input": false
+    },
+    {
+      "id": "nanjing_water_plan_2026_2030",
+      "source": "Nanjing Municipal Government",
+      "url": "https://www.nanjing.gov.cn/zdgk/202608/t20260807_5890796.html",
+      "claim": "Municipal plan calls for continued urban waterlogging remediation and drainage/flood-control upgrades, including Qixia areas.",
+      "optimizer_input": false
+    }
+  ],
+  "guardrails": {
+    "allowed_phrases": [
+      "adaptation screening",
+      "portability demonstration",
+      "derived screening proxy",
+      "retrospective qualitative validation",
+      "population estimate"
+    ],
+    "forbidden_claims": [
+      "hydraulic flood model",
+      "flood probability",
+      "street-level inundation depth",
+      "people protected or saved",
+      "avoided losses",
+      "exact drainage capacity inferred from remote sensing",
+      "municipal endorsement",
+      "validated for all Chinese cities"
+    ]
+  }
+}
