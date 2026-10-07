@@ -1,7 +1,7 @@
 import { BRIEF_FILENAME, composeDecisionBrief } from './decisionBrief.js';
 
-export function downloadPitchPdf(analysis) {
-  const blob = composeDecisionBrief(analysis).toBlob();
+export async function downloadPitchPdf(analysis) {
+  const blob = (await composeDecisionBrief(analysis)).toBlob();
   const url = URL.createObjectURL(blob);
   const link = document.createElement('a');
   link.href = url;

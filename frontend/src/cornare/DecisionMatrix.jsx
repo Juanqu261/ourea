@@ -8,8 +8,8 @@ const DECISION_LABEL = {
 };
 
 const EVIDENCE_LABEL = {
-  verified: 'Verificada',
-  partial: 'Parcialmente integrada',
+  verified: 'Verificado',
+  partial: 'Parcial',
   to_integrate: 'Por integrar',
 };
 
@@ -17,6 +17,16 @@ const MARK = {
   SELECTED: 'selected',
   'CLOSE ALTERNATIVE': 'close',
   'NOT SELECTED': 'out',
+};
+
+const SHORT_DIMENSION = {
+  biodiversity: 'Biodiversidad',
+  water: 'Agua',
+  disaster: 'Desastres',
+  health: 'Salud',
+  infrastructure: 'Infraestructura',
+  habitat: 'Hábitat',
+  food: 'Alimentos',
 };
 
 function recurrenceLabel(row) {
@@ -47,6 +57,19 @@ function gapLabel(row) {
   return formatGap(row.bestContainingPortfolioGap);
 }
 
+function compactScope(scope) {
+  if (String(scope).startsWith('Corredor')) return 'Corredor';
+  return scope;
+}
+
+function StatusPill({ decision }) {
+  return <span className={`status-pill ${MARK[decision]}`}>{DECISION_LABEL[decision]}</span>;
+}
+
+function EvidencePill({ evidence }) {
+  return <span className={`evidence-pill evidence-${evidence}`}>{EVIDENCE_LABEL[evidence] ?? evidence}</span>;
+}
+
 export function DecisionMatrix({ rows, compact = false }) {
   const [filter, setFilter] = useState(compact ? 'short' : 'all');
   const [openId, setOpenId] = useState(null);
@@ -56,70 +79,73 @@ export function DecisionMatrix({ rows, compact = false }) {
     return true;
   });
 
-  if (compact) {
-    return (
-      <div className="matrix-wrap" data-testid="matrix-compact">
-        <p className="matrix-legend">Verificado es el aporte de la medida sola: vulnerabilidad más recurrencia observada. No incluye el componente participativo ni el cobeneficio.</p>
-        <table className="compact-scores">
-          <thead>
-            <tr>
-              <th>Medida</th>
-              <th>Verificado</th>
-            </tr>
-          </thead>
-          <tbody>
-            {visible.map((row) => (
-              <tr key={row.id} data-testid={`matrix-${row.id}`} className={`mark-${MARK[row.decision]}`}>
-                <th scope="row">{row.name}</th>
-                <td>
-                  <span className="compact-score">{formatTerm(row.standaloneVerifiedScore)}</span>
-                  {row.portfolioMarginalScore != null && Math.abs(row.portfolioMarginalScore - row.standaloneVerifiedScore) > 1e-6 && (
-                    <span className="fine">Aporte en portafolio {formatTerm(row.portfolioMarginalScore)}</span>
-                  )}
-                  <span className="compact-decision">{DECISION_LABEL[row.decision]}</span>
-                  <span className="fine">COP {row.cost.toLocaleString('es-CO')} M</span>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-    );
-  }
-
   return (
-    <div className="matrix-wrap" data-testid="matrix-full">
+    <div className="matrix-wrap" data-testid={compact ? 'matrix-compact' : 'matrix-full'}>
       {!compact && (
         <div className="pill-row" role="group" aria-label="Filtro de la matriz">
           <button type="button" className={filter === 'all' ? 'is-active' : ''} onClick={() => setFilter('all')}>Todas</button>
           <button type="button" className={filter === 'selected' ? 'is-active' : ''} onClick={() => setFilter('selected')}>Seleccionadas</button>
-          <button type="button" className={filter === 'short' ? 'is-active' : ''} onClick={() => setFilter('short')}>Más cercanas</button>
+          <button type="button" className={filter === 'short' ? 'is-active' : ''} onClick={() => setFilter('short')}>Selección y cercanas</button>
         </div>
       )}
-      <p className="matrix-legend">Verificado es el aporte de la medida sola: vulnerabilidad más recurrencia observada. No incluye el componente participativo ni el cobeneficio. La marca no dice si la medida es científicamente buena.</p>
+      {!compact && (
+        <p className="matrix-legend">
+          El puntaje verificado es la medida sola: vulnerabilidad más recurrencia observada.
+          No incluye el componente participativo ni el cobeneficio.
+        </p>
+      )}
       <div className="matrix-scroll">
-        <table>
+        <table className={compact ? 'decision-table is-compact' : 'decision-table'}>
+          {compact && (
+            <colgroup>
+              <col style={{ width: '26%' }} />
+              <col style={{ width: '12%' }} />
+              <col style={{ width: '18%' }} />
+              <col style={{ width: '16%' }} />
+              <col style={{ width: '16%' }} />
+              <col style={{ width: '12%' }} />
+            </colgroup>
+          )}
           <thead>
             <tr>
               <th>Medida</th>
-              {!compact && <th>Dimensión</th>}
-              {!compact && <th>Ámbito</th>}
-              {!compact && <th>Clase</th>}
-              {!compact && <th>70%</th>}
-              {!compact && <th>Recurrencia observada</th>}
-              {!compact && <th>Participativo</th>}
-              <th>COP M</th>
-              {!compact && <th>NbS</th>}
-              <th>Verificado</th>
-              {!compact && <th>Aporte en portafolio</th>}
-              {!compact && <th>Brecha más cercana</th>}
-              {!compact && <th>Escenario</th>}
-              <th>Decisión</th>
+              {compact ? (
+                <>
+                  <th className="num" title="Vulnerabilidad más recurrencia observada. Sin componente participativo ni cobeneficio.">Puntaje verificado</th>
+                  <th>Estado</th>
+                  <th>Dimensión</th>
+                  <th>Ámbito</th>
+                  <th>Clase</th>
+                </>
+              ) : (
+                <>
+                  <th>Dimensión</th>
+                  <th>Ámbito</th>
+                  <th>Clase</th>
+                  <th>70%</th>
+                  <th>Recurrencia</th>
+                  <th>Participativo</th>
+                  <th className="num">COP M</th>
+                  <th>NbS</th>
+                  <th className="num" title="Vulnerabilidad más recurrencia observada. Sin componente participativo ni cobeneficio.">Puntaje verificado</th>
+                  <th className="num">Aporte</th>
+                  <th className="num">Brecha</th>
+                  <th>Escenario</th>
+                  <th>Estado</th>
+                </>
+              )}
             </tr>
           </thead>
           <tbody>
-            {visible.map((row) => (
-              <FragmentRow key={row.id} row={row} compact={compact} open={openId === row.id} onToggle={() => setOpenId(openId === row.id ? null : row.id)} />
+            {visible.map((row, index) => (
+              <MatrixRows
+                key={row.id}
+                row={row}
+                compact={compact}
+                stripe={index % 2 === 1}
+                open={openId === row.id}
+                onToggle={() => setOpenId(openId === row.id ? null : row.id)}
+              />
             ))}
           </tbody>
         </table>
@@ -128,40 +154,55 @@ export function DecisionMatrix({ rows, compact = false }) {
   );
 }
 
-function FragmentRow({ row, compact, open, onToggle }) {
-  const span = compact ? 4 : 14;
+function MatrixRows({ row, compact, stripe, open, onToggle }) {
+  const span = compact ? 6 : 14;
+  const rowClass = `matrix-data mark-${MARK[row.decision]}${stripe ? ' is-stripe' : ''}`;
   return (
     <>
-      <tr data-testid={`matrix-${row.id}`} className={`mark-${MARK[row.decision]}`}>
-        <th scope="row">{row.name}</th>
-        {!compact && <td>{row.dimension}</td>}
-        {!compact && <td>{row.scope}</td>}
-        {!compact && <td>{row.vulnerabilityClass}</td>}
-        {!compact && <td>{formatTerm(row.vulnerabilityComponent)}</td>}
-        {!compact && <td>{recurrenceLabel(row)}</td>}
-        {!compact && <td>{row.workshop.display}</td>}
-        <td>{row.cost.toLocaleString('es-CO')}</td>
-        {!compact && <td>{NBS_LABELS[row.nbsClass]}</td>}
-        <td>{formatTerm(row.standaloneVerifiedScore)}</td>
-        {!compact && <td>{marginalLabel(row)}</td>}
-        {!compact && <td>{gapLabel(row)}</td>}
-        {!compact && <td>{row.scenario}</td>}
-        <td className={`decision-cell mark-${MARK[row.decision]}`}>
-          <span className="decision-label">{DECISION_LABEL[row.decision]}</span>
-          {!compact && <span className={`evidence-label evidence-${row.evidence}`}>{EVIDENCE_LABEL[row.evidence]}</span>}
-        </td>
+      <tr data-testid={`matrix-${row.id}`} className={rowClass}>
+        <th scope="row">
+          <span className="measure-name">{row.name}</span>
+          {!compact && (
+            <button type="button" className="text-button" onClick={onToggle}>{open ? 'Ocultar' : 'Por qué'}</button>
+          )}
+        </th>
+        {compact ? (
+          <>
+            <td className="num">{formatTerm(row.standaloneVerifiedScore)}</td>
+            <td className="decision-cell"><StatusPill decision={row.decision} /></td>
+            <td>{SHORT_DIMENSION[row.dimensionId] ?? row.dimension}</td>
+            <td>{compactScope(row.scope)}</td>
+            <td>{row.vulnerabilityClass}</td>
+          </>
+        ) : (
+          <>
+            <td>{SHORT_DIMENSION[row.dimensionId] ?? row.dimension}</td>
+            <td>{row.scope}</td>
+            <td>{row.vulnerabilityClass}</td>
+            <td className="num">{formatTerm(row.vulnerabilityComponent)}</td>
+            <td>{recurrenceLabel(row)}</td>
+            <td>{row.workshop.display}</td>
+            <td className="num">{row.cost.toLocaleString('es-CO')}</td>
+            <td>{NBS_LABELS[row.nbsClass]}</td>
+            <td className="num">{formatTerm(row.standaloneVerifiedScore)}</td>
+            <td className="num">{marginalLabel(row)}</td>
+            <td className="num">{gapLabel(row)}</td>
+            <td>{row.scenario}</td>
+            <td className="decision-cell">
+              <StatusPill decision={row.decision} />
+              <EvidencePill evidence={row.evidence} />
+            </td>
+          </>
+        )}
       </tr>
-      {!compact && (
-        <tr>
+      {!compact && open && (
+        <tr className="matrix-detail">
           <td colSpan={span}>
-            <button type="button" onClick={onToggle}>{open ? 'Ocultar' : 'Por qué'}</button>
-            {open && (
-              <div data-testid={`matrix-why-${row.id}`}>
-                <ul>{row.explanation.map((line) => <li key={line}>{line}</li>)}</ul>
-                <p>Cobeneficio {row.cobenefit.term > 0 ? formatTerm(row.cobenefit.term) : 'no nombrado'}. No entra al puntaje institucional.</p>
-                <p>{row.qualitative.evidence}. {row.qualitative.indicator ?? 'Seguimiento requerido'}.</p>
-              </div>
-            )}
+            <div data-testid={`matrix-why-${row.id}`}>
+              <ul>{row.explanation.map((line) => <li key={line}>{line}</li>)}</ul>
+              <p>Cobeneficio {row.cobenefit.term > 0 ? formatTerm(row.cobenefit.term) : 'no nombrado'}. No entra al puntaje institucional.</p>
+              <p>{row.qualitative.evidence}. {row.qualitative.indicator ?? 'Seguimiento requerido'}.</p>
+            </div>
           </td>
         </tr>
       )}

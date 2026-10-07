@@ -70,6 +70,11 @@ test('seven steps share one map on a projector, a laptop and a small desktop', a
     await page.getByTestId('step-back').click();
   }
   await expect(page.getByTestId('matrix-compact').locator('tbody tr')).toHaveCount(9);
+  await page.getByTestId('open-calc').click();
+  await expect(page.getByTestId('calc-equation')).toContainText('0,70');
+  await page.getByTestId('calc-tab-path').click();
+  await expect(page.getByTestId('calc-path-facts')).toContainText('32.768');
+  await page.getByTestId('drawer-close').click();
   await expect(page.getByTestId('matrix-hab_green')).toContainText('0,280');
   await page.screenshot({ path: '../docs/climaterisk/figures/priority-matrix-1920.png' });
   await page.getByTestId('open-matrix').click();
@@ -91,7 +96,9 @@ test('seven steps share one map on a projector, a laptop and a small desktop', a
     await page.getByTestId('step-back').click();
   }
   await page.getByRole('button', { name: 'Riesgo', exact: true }).click();
-  await expect(page.locator('.decision-map figcaption')).toContainText('riesgo');
+  await page.getByTestId('map-readout-toggle').click();
+  await expect(page.getByTestId('map-readout')).toContainText('riesgo');
+  await page.getByTestId('map-readout-toggle').click();
   while (await page.getByTestId('step-horizon').count() === 0) {
     await page.getByTestId('step-next').click();
   }
@@ -105,7 +112,9 @@ test('seven steps share one map on a projector, a laptop and a small desktop', a
   await expect(page.getByTestId('decision-hinge')).toContainText('rango total posible del componente participativo');
   await expect(page.locator('body')).not.toContainText('6 / 6');
   await expect(page.locator('body')).not.toContainText('Portafolio óptimo');
-  await expect(page.locator('.decision-map figcaption')).toContainText('2060');
+  await page.getByTestId('map-readout-toggle').click();
+  await expect(page.getByTestId('map-readout')).toContainText('2060');
+  await page.getByTestId('map-readout-toggle').click();
   await page.getByTestId('decision-hinge').scrollIntoViewIfNeeded();
   await page.screenshot({ path: '../docs/climaterisk/figures/robustness-1920.png' });
   await page.screenshot({ path: '../docs/climaterisk/figures/decision-hinge-1920.png' });
