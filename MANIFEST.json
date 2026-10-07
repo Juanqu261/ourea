@@ -1291,8 +1291,8 @@
     },
     {
       "path": "vercel.json",
-      "bytes": 386,
-      "sha256": "7e39e58a537cd8ec34311279b139856b3f13a0ab97a4d4076fbe696de546bb5d"
+      "bytes": 482,
+      "sha256": "4dbfa09141cbe4126f0b8c80d097d5139f719114c0e8c128a1eb39eaf8afe01d"
     }
   ]
 }
