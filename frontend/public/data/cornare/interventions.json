@@ -1,0 +1,723 @@
+{
+  "schema": "ourea.cornare.interventions",
+  "budget_million_cop": 5000,
+  "catalogue_total_million_cop": 18900,
+  "costs_are_exercise_assumptions": true,
+  "costs_indivisible": true,
+  "source": {
+    "id": "reto-brief-2026",
+    "title": "Reto Climate Risk Hackathon for Cities propuesto por CORNARE",
+    "file": "CLIMATERISK/RETO CLIMATE WEEK HACKATHON.pdf",
+    "page": "Catálogo de medidas y costos de referencia"
+  },
+  "dimensions": [
+    {
+      "id": "biodiversity",
+      "name": "Biodiversidad y servicios ecosistémicos",
+      "short_name": "Biodiversidad"
+    },
+    {
+      "id": "water",
+      "name": "Recurso hídrico",
+      "short_name": "Recurso hídrico"
+    },
+    {
+      "id": "disaster",
+      "name": "Riesgo de desastres",
+      "short_name": "Riesgo de desastres"
+    },
+    {
+      "id": "health",
+      "name": "Salud humana",
+      "short_name": "Salud"
+    },
+    {
+      "id": "infrastructure",
+      "name": "Infraestructura",
+      "short_name": "Infraestructura"
+    },
+    {
+      "id": "habitat",
+      "name": "Hábitat humano",
+      "short_name": "Hábitat"
+    },
+    {
+      "id": "food",
+      "name": "Seguridad alimentaria",
+      "short_name": "Seguridad alimentaria"
+    }
+  ],
+  "interventions": [
+    {
+      "id": "bio_psa",
+      "name": "Instrumentos de compensación y Pago por Servicios Ambientales – PSA",
+      "dimension_id": "biodiversity",
+      "cost_million_cop": 1200,
+      "functional_unit": "Programa territorial de conservación/restauración de áreas estratégicas durante 3 años",
+      "type": "economic_instrument",
+      "nbs_class": "NBS_DIRECT",
+      "scope": "municipality",
+      "sensitivity_factors_addressed": [
+        "Pérdida y deterioro de ecosistemas estratégicos"
+      ],
+      "adaptive_capacity_factors_strengthened": [
+        "Acuerdos de conservación e incentivos a beneficiarios"
+      ],
+      "cobenefit_dimension_ids": [],
+      "cobenefit_note": null,
+      "actors": [
+        {
+          "name": "CORNARE",
+          "level": "autoridad ambiental"
+        },
+        {
+          "name": "Gobiernos municipales",
+          "level": "municipal"
+        },
+        {
+          "name": "Comunidades locales",
+          "level": "comunitario"
+        },
+        {
+          "name": "Productores",
+          "level": "productivo"
+        }
+      ],
+      "limitations": [
+        "El costo es un supuesto homogéneo del reto, no un presupuesto contractual.",
+        "Contar beneficiarios no mide la reducción de vulnerabilidad.",
+        "No hay predios ni polígonos de implementación en el paquete."
+      ],
+      "nbs_reason": "La unidad funcional del reto es un programa de conservación y restauración. El pago es el instrumento, no el ecosistema. No se afirma que cumpla los ocho criterios IUCN.",
+      "evidence": {
+        "cost": "assumption",
+        "name_and_unit": "institutional",
+        "nbs_class": "team_inference",
+        "actors": "team_inference"
+      },
+      "source_id": "reto-brief-2026"
+    },
+    {
+      "id": "bio_restore",
+      "name": "Restauración de ecosistemas estratégicos",
+      "dimension_id": "biodiversity",
+      "cost_million_cop": 1500,
+      "functional_unit": "Intervención integral aproximada de 100 ha, incluyendo establecimiento, mantenimiento inicial y seguimiento",
+      "type": "ecosystem_restoration",
+      "nbs_class": "NBS_DIRECT",
+      "scope": "municipality",
+      "sensitivity_factors_addressed": [
+        "Cobertura y condición de ecosistemas estratégicos"
+      ],
+      "adaptive_capacity_factors_strengthened": [
+        "Seguimiento y mantenimiento inicial de áreas restauradas"
+      ],
+      "cobenefit_dimension_ids": [],
+      "cobenefit_note": null,
+      "actors": [
+        {
+          "name": "CORNARE",
+          "level": "autoridad ambiental"
+        },
+        {
+          "name": "Administradores de áreas protegidas",
+          "level": "áreas protegidas"
+        },
+        {
+          "name": "Comunidades locales",
+          "level": "comunitario"
+        }
+      ],
+      "limitations": [
+        "100 ha es la unidad del ejercicio, no un área priorizada con cartografía en este paquete.",
+        "No hay un porcentaje de efectividad de restauración."
+      ],
+      "nbs_reason": "El mecanismo principal es restaurar ecosistemas. Es una acción de base ecosistémica. La verificación IUCN del proyecto concreto queda pendiente.",
+      "evidence": {
+        "cost": "assumption",
+        "name_and_unit": "institutional",
+        "nbs_class": "team_inference",
+        "actors": "team_inference"
+      },
+      "source_id": "reto-brief-2026"
+    },
+    {
+      "id": "bio_pa",
+      "name": "Fortalecimiento de sistemas de áreas protegidas",
+      "dimension_id": "biodiversity",
+      "cost_million_cop": 700,
+      "functional_unit": "Identificación, gestión, acuerdos, conectividad y fortalecimiento de áreas estratégicas en el corredor",
+      "type": "protected_areas",
+      "nbs_class": "NBS_DIRECT",
+      "scope": "corridor",
+      "sensitivity_factors_addressed": [
+        "Fragmentación y debilidad de gestión de áreas estratégicas"
+      ],
+      "adaptive_capacity_factors_strengthened": [
+        "Acuerdos y gestión del sistema de áreas protegidas"
+      ],
+      "cobenefit_dimension_ids": [],
+      "cobenefit_note": "El texto dice conectividad, pero no hay una capa de conectividad en el paquete. No se dibujan corredores ecológicos.",
+      "actors": [
+        {
+          "name": "CORNARE",
+          "level": "autoridad ambiental"
+        },
+        {
+          "name": "Administradores de áreas protegidas",
+          "level": "áreas protegidas"
+        },
+        {
+          "name": "Gobiernos municipales",
+          "level": "municipal"
+        }
+      ],
+      "limitations": [
+        "La conectividad se menciona como propósito de la unidad funcional, no como un vínculo espacial demostrado."
+      ],
+      "nbs_reason": "Protege y gestiona ecosistemas. La mención de conectividad no autoriza un mapa de enlaces ecológicos.",
+      "evidence": {
+        "cost": "assumption",
+        "name_and_unit": "institutional",
+        "nbs_class": "team_inference",
+        "actors": "team_inference"
+      },
+      "source_id": "reto-brief-2026"
+    },
+    {
+      "id": "water_eff",
+      "name": "Uso intersectorial eficiente del recurso hídrico",
+      "dimension_id": "water",
+      "cost_million_cop": 900,
+      "functional_unit": "Programa para grandes usuarios, empresas, sector público y/o productivo: diagnóstico, medición, eficiencia, reúso y seguimiento",
+      "type": "demand_management",
+      "nbs_class": "ENABLING",
+      "scope": "municipality",
+      "sensitivity_factors_addressed": [
+        "Presión de uso sobre la oferta hídrica"
+      ],
+      "adaptive_capacity_factors_strengthened": [
+        "Medición, eficiencia y seguimiento de usuarios"
+      ],
+      "cobenefit_dimension_ids": [],
+      "cobenefit_note": null,
+      "actors": [
+        {
+          "name": "CORNARE",
+          "level": "autoridad ambiental"
+        },
+        {
+          "name": "Empresas de servicios públicos y acueductos",
+          "level": "agua"
+        },
+        {
+          "name": "Sectores productivos",
+          "level": "productivo"
+        },
+        {
+          "name": "Gobiernos municipales",
+          "level": "municipal"
+        }
+      ],
+      "limitations": [
+        "No identifica qué empresa depende de cuál fuente. Esa dependencia es una brecha.",
+        "Eficiencia hídrica no es una solución basada en la naturaleza."
+      ],
+      "nbs_reason": "El mecanismo es gestión de la demanda y medición. Habilita la adaptación hídrica sin intervenir el ecosistema como acción principal.",
+      "evidence": {
+        "cost": "assumption",
+        "name_and_unit": "institutional",
+        "nbs_class": "team_inference",
+        "actors": "team_inference"
+      },
+      "source_id": "reto-brief-2026"
+    },
+    {
+      "id": "water_riparian",
+      "name": "Protección y recuperación de rondas hídricas",
+      "dimension_id": "water",
+      "cost_million_cop": 1300,
+      "functional_unit": "Intervención integral de corredores ribereños priorizados: restauración, aislamiento, recuperación y seguimiento",
+      "type": "riparian_restoration",
+      "nbs_class": "NBS_DIRECT",
+      "scope": "municipality",
+      "sensitivity_factors_addressed": [
+        "Deterioro de rondas y corredores ribereños"
+      ],
+      "adaptive_capacity_factors_strengthened": [
+        "Planes de manejo y seguimiento de rondas"
+      ],
+      "cobenefit_dimension_ids": [],
+      "cobenefit_note": "La restauración ribereña puede apoyar biodiversidad, pero la unidad funcional no nombra esa dimensión. No se suma un cobeneficio numérico.",
+      "actors": [
+        {
+          "name": "CORNARE",
+          "level": "autoridad ambiental"
+        },
+        {
+          "name": "Gobiernos municipales",
+          "level": "municipal"
+        },
+        {
+          "name": "Comunidades locales",
+          "level": "comunitario"
+        }
+      ],
+      "limitations": [
+        "No hay quebradas priorizadas dentro de Rionegro, Guarne o Marinilla en el catálogo del reto."
+      ],
+      "nbs_reason": "Restaura y aísla ecosistemas ribereños. Es de base ecosistémica. Los tramos exactos no están en la fuente.",
+      "evidence": {
+        "cost": "assumption",
+        "name_and_unit": "institutional",
+        "nbs_class": "team_inference",
+        "actors": "team_inference"
+      },
+      "source_id": "reto-brief-2026"
+    },
+    {
+      "id": "water_head",
+      "name": "Protección de cabeceras de cuenca y ecosistemas abastecedores",
+      "dimension_id": "water",
+      "cost_million_cop": 1600,
+      "functional_unit": "Intervención de una microcuenca o sistema abastecedor estratégico",
+      "type": "headwater_protection",
+      "nbs_class": "NBS_DIRECT",
+      "scope": "municipality",
+      "sensitivity_factors_addressed": [
+        "Presión sobre cabeceras y ecosistemas que abastecen agua"
+      ],
+      "adaptive_capacity_factors_strengthened": [
+        "Protección de un sistema abastecedor"
+      ],
+      "cobenefit_dimension_ids": [
+        "biodiversity"
+      ],
+      "cobenefit_note": "El nombre oficial incluye ecosistemas abastecedores, así que se reconoce un cobeneficio hacia biodiversidad. No es un porcentaje de efectividad.",
+      "actors": [
+        {
+          "name": "CORNARE",
+          "level": "autoridad ambiental"
+        },
+        {
+          "name": "Empresas de servicios públicos y acueductos",
+          "level": "agua"
+        },
+        {
+          "name": "Comunidades locales",
+          "level": "comunitario"
+        }
+      ],
+      "limitations": [
+        "La microcuenca no está nombrada. No se asigna una bocatoma a una empresa."
+      ],
+      "nbs_reason": "Protege ecosistemas de cabecera. La microcuenca concreta es una brecha de localización.",
+      "evidence": {
+        "cost": "assumption",
+        "name_and_unit": "institutional",
+        "nbs_class": "team_inference",
+        "actors": "team_inference"
+      },
+      "source_id": "reto-brief-2026"
+    },
+    {
+      "id": "food_soil",
+      "name": "Protección y reconversión de suelos agrícolas estratégicos",
+      "dimension_id": "food",
+      "cost_million_cop": 1000,
+      "functional_unit": "Programa territorial con productores: asistencia, reconversión, conservación de suelo y agua",
+      "type": "soil_reconversion",
+      "nbs_class": "NBS_DIRECT",
+      "scope": "municipality",
+      "sensitivity_factors_addressed": [
+        "Degradación de suelos agrícolas estratégicos"
+      ],
+      "adaptive_capacity_factors_strengthened": [
+        "Asistencia y reconversión productiva"
+      ],
+      "cobenefit_dimension_ids": [
+        "water"
+      ],
+      "cobenefit_note": "La unidad funcional nombra conservación de suelo y agua.",
+      "actors": [
+        {
+          "name": "Productores agropecuarios",
+          "level": "productivo"
+        },
+        {
+          "name": "Gobiernos municipales",
+          "level": "municipal"
+        },
+        {
+          "name": "CORNARE",
+          "level": "autoridad ambiental"
+        }
+      ],
+      "limitations": [
+        "No se identifican predios ni cultivos específicos del corredor."
+      ],
+      "nbs_reason": "La reconversión y la conservación de suelo actúan sobre el ecosistema productivo. No se verificó el estándar IUCN en campo.",
+      "evidence": {
+        "cost": "assumption",
+        "name_and_unit": "institutional",
+        "nbs_class": "team_inference",
+        "actors": "team_inference"
+      },
+      "source_id": "reto-brief-2026"
+    },
+    {
+      "id": "food_agro",
+      "name": "Producción agroecológica y economía rural resiliente",
+      "dimension_id": "food",
+      "cost_million_cop": 800,
+      "functional_unit": "Programa de asistencia técnica, manejo de suelo, agua, asociatividad y adaptación productiva",
+      "type": "agroecology",
+      "nbs_class": "NBS_DIRECT",
+      "scope": "municipality",
+      "sensitivity_factors_addressed": [
+        "Sensibilidad de la producción rural al clima"
+      ],
+      "adaptive_capacity_factors_strengthened": [
+        "Asistencia técnica, asociatividad y manejo de suelo y agua"
+      ],
+      "cobenefit_dimension_ids": [
+        "water"
+      ],
+      "cobenefit_note": "La unidad funcional nombra manejo de agua.",
+      "actors": [
+        {
+          "name": "Productores agropecuarios",
+          "level": "productivo"
+        },
+        {
+          "name": "Gobiernos municipales",
+          "level": "municipal"
+        },
+        {
+          "name": "CORNARE",
+          "level": "autoridad ambiental"
+        }
+      ],
+      "limitations": [
+        "Los registros históricos miden capacitaciones, familias o asistencias, no vulnerabilidad reducida."
+      ],
+      "nbs_reason": "El manejo agroecológico de suelo y agua es una práctica de base ecosistémica. La asociatividad es habilitadora y va dentro de la misma unidad.",
+      "evidence": {
+        "cost": "assumption",
+        "name_and_unit": "institutional",
+        "nbs_class": "team_inference",
+        "actors": "team_inference"
+      },
+      "source_id": "reto-brief-2026"
+    },
+    {
+      "id": "hab_green",
+      "name": "Espacios verdes urbanos",
+      "dimension_id": "habitat",
+      "cost_million_cop": 1000,
+      "functional_unit": "Corredor o área verde multifuncional con arborización, conectividad y regulación térmica e hídrica",
+      "type": "urban_green",
+      "nbs_class": "NBS_DIRECT",
+      "scope": "municipality",
+      "sensitivity_factors_addressed": [
+        "Déficit de regulación térmica e hídrica en el hábitat urbano"
+      ],
+      "adaptive_capacity_factors_strengthened": [
+        "Área verde pública multifuncional"
+      ],
+      "cobenefit_dimension_ids": [
+        "water"
+      ],
+      "cobenefit_note": "La unidad funcional nombra regulación hídrica. La conectividad urbana no se cartografía.",
+      "actors": [
+        {
+          "name": "Gobiernos municipales",
+          "level": "municipal"
+        },
+        {
+          "name": "Comunidades locales",
+          "level": "comunitario"
+        },
+        {
+          "name": "CORNARE",
+          "level": "autoridad ambiental"
+        }
+      ],
+      "limitations": [
+        "No hay un barrio ni un predio designado."
+      ],
+      "nbs_reason": "Arborización y área verde son el mecanismo principal. Sigue siendo una clasificación de tamiz, no una certificación IUCN.",
+      "evidence": {
+        "cost": "assumption",
+        "name_and_unit": "institutional",
+        "nbs_class": "team_inference",
+        "actors": "team_inference"
+      },
+      "source_id": "reto-brief-2026"
+    },
+    {
+      "id": "hab_suds",
+      "name": "Sistemas Urbanos de Drenaje Sostenible – SUDS",
+      "dimension_id": "habitat",
+      "cost_million_cop": 1800,
+      "functional_unit": "Intervención piloto de escala municipal: jardines de lluvia, zonas de infiltración, pavimentos permeables y almacenamiento",
+      "type": "suds",
+      "nbs_class": "NBS_HYBRID",
+      "scope": "municipality",
+      "sensitivity_factors_addressed": [
+        "Escorrentía y drenaje urbano insuficiente"
+      ],
+      "adaptive_capacity_factors_strengthened": [
+        "Piloto de infiltración y almacenamiento"
+      ],
+      "cobenefit_dimension_ids": [],
+      "cobenefit_note": "El drenaje toca el agua urbana, pero la ficha del reto ubica la medida en hábitat y no nombra otra dimensión del estudio. No se suma cobeneficio numérico.",
+      "actors": [
+        {
+          "name": "Gobiernos municipales",
+          "level": "municipal"
+        },
+        {
+          "name": "CORNARE",
+          "level": "autoridad ambiental"
+        },
+        {
+          "name": "Empresas de servicios públicos",
+          "level": "servicios"
+        }
+      ],
+      "limitations": [
+        "Mezcla elementos verdes y obras. No se afirma una reducción de profundidad de inundación."
+      ],
+      "nbs_reason": "Combina procesos de infiltración y vegetación con pavimentos y almacenamiento. Por eso es híbrida, no una solución basada en la naturaleza pura ni una obra gris.",
+      "evidence": {
+        "cost": "assumption",
+        "name_and_unit": "institutional",
+        "nbs_class": "team_inference",
+        "actors": "team_inference"
+      },
+      "source_id": "reto-brief-2026"
+    },
+    {
+      "id": "infra_resilient",
+      "name": "Infraestructura resiliente al cambio climático",
+      "dimension_id": "infrastructure",
+      "cost_million_cop": 2500,
+      "functional_unit": "Adecuación de un punto crítico de infraestructura, vía o servicio priorizado",
+      "type": "grey_infrastructure",
+      "nbs_class": "GREY_INFRASTRUCTURE",
+      "scope": "municipality",
+      "sensitivity_factors_addressed": [
+        "Exposición de un punto crítico de infraestructura"
+      ],
+      "adaptive_capacity_factors_strengthened": [
+        "Adecuación de ese punto"
+      ],
+      "cobenefit_dimension_ids": [],
+      "cobenefit_note": null,
+      "actors": [
+        {
+          "name": "Gobiernos municipales",
+          "level": "municipal"
+        },
+        {
+          "name": "Entidades de gestión del riesgo",
+          "level": "riesgo"
+        },
+        {
+          "name": "CORNARE",
+          "level": "autoridad ambiental"
+        }
+      ],
+      "limitations": [
+        "No se nombra la vía ni el punto crítico.",
+        "Una obra vial histórica en Guarne no se trata como esta medida."
+      ],
+      "nbs_reason": "El mecanismo es adecuar infraestructura. Es infraestructura gris.",
+      "evidence": {
+        "cost": "assumption",
+        "name_and_unit": "institutional",
+        "nbs_class": "team_inference",
+        "actors": "team_inference"
+      },
+      "source_id": "reto-brief-2026"
+    },
+    {
+      "id": "infra_services",
+      "name": "Fortalecimiento de infraestructura resiliente y servicios públicos",
+      "dimension_id": "infrastructure",
+      "cost_million_cop": 2000,
+      "functional_unit": "Intervención focalizada de infraestructura o servicio esencial",
+      "type": "grey_infrastructure",
+      "nbs_class": "GREY_INFRASTRUCTURE",
+      "scope": "municipality",
+      "sensitivity_factors_addressed": [
+        "Fragilidad de un servicio esencial"
+      ],
+      "adaptive_capacity_factors_strengthened": [
+        "Continuidad del servicio intervenido"
+      ],
+      "cobenefit_dimension_ids": [],
+      "cobenefit_note": null,
+      "actors": [
+        {
+          "name": "Gobiernos municipales",
+          "level": "municipal"
+        },
+        {
+          "name": "Empresas de servicios públicos",
+          "level": "servicios"
+        },
+        {
+          "name": "CORNARE",
+          "level": "autoridad ambiental"
+        }
+      ],
+      "limitations": [
+        "El servicio esencial no está identificado. No se infieren dependencias de empresas."
+      ],
+      "nbs_reason": "Obra o servicio esencial como mecanismo principal. Infraestructura gris.",
+      "evidence": {
+        "cost": "assumption",
+        "name_and_unit": "institutional",
+        "nbs_class": "team_inference",
+        "actors": "team_inference"
+      },
+      "source_id": "reto-brief-2026"
+    },
+    {
+      "id": "risk_sat",
+      "name": "Fortalecimiento de Sistemas de Alerta Temprana – SAT",
+      "dimension_id": "disaster",
+      "cost_million_cop": 1200,
+      "functional_unit": "Sistema interoperable para puntos críticos del corredor: instrumentación, comunicaciones y protocolos",
+      "type": "early_warning",
+      "nbs_class": "ENABLING",
+      "scope": "corridor",
+      "sensitivity_factors_addressed": [],
+      "adaptive_capacity_factors_strengthened": [
+        "Alerta, comunicación y protocolos ante eventos"
+      ],
+      "cobenefit_dimension_ids": [],
+      "cobenefit_note": "El SAT fortalece capacidad de respuesta. No reduce la amenaza ni la sensibilidad biofísica por sí solo.",
+      "actors": [
+        {
+          "name": "Entidades de gestión del riesgo",
+          "level": "riesgo"
+        },
+        {
+          "name": "CORNARE",
+          "level": "autoridad ambiental"
+        },
+        {
+          "name": "Gobiernos municipales",
+          "level": "municipal"
+        },
+        {
+          "name": "Comunidades locales",
+          "level": "comunitario"
+        }
+      ],
+      "limitations": [
+        "No es una solución basada en la naturaleza.",
+        "Los puntos críticos del corredor no están listados."
+      ],
+      "nbs_reason": "Instrumentación y protocolos. Medida habilitadora de la capacidad adaptativa.",
+      "evidence": {
+        "cost": "assumption",
+        "name_and_unit": "institutional",
+        "nbs_class": "team_inference",
+        "actors": "team_inference"
+      },
+      "source_id": "reto-brief-2026"
+    },
+    {
+      "id": "risk_knowledge",
+      "name": "Conocimiento y comunicación sobre amenazas, vulnerabilidad y riesgo climático",
+      "dimension_id": "disaster",
+      "cost_million_cop": 600,
+      "functional_unit": "Estudios, modelación, instrumentación básica, protocolos y plataforma de información",
+      "type": "risk_knowledge",
+      "nbs_class": "ENABLING",
+      "scope": "corridor",
+      "sensitivity_factors_addressed": [],
+      "adaptive_capacity_factors_strengthened": [
+        "Información, protocolos y comunicación del riesgo"
+      ],
+      "cobenefit_dimension_ids": [],
+      "cobenefit_note": null,
+      "actors": [
+        {
+          "name": "CORNARE",
+          "level": "autoridad ambiental"
+        },
+        {
+          "name": "Academia",
+          "level": "conocimiento"
+        },
+        {
+          "name": "Gobiernos municipales",
+          "level": "municipal"
+        },
+        {
+          "name": "Comunidades locales",
+          "level": "comunitario"
+        }
+      ],
+      "limitations": [
+        "Produce información. No sustituye la reducción de sensibilidad en campo."
+      ],
+      "nbs_reason": "Conocimiento y comunicación. Medida habilitadora.",
+      "evidence": {
+        "cost": "assumption",
+        "name_and_unit": "institutional",
+        "nbs_class": "team_inference",
+        "actors": "team_inference"
+      },
+      "source_id": "reto-brief-2026"
+    },
+    {
+      "id": "health",
+      "name": "Sistema de salud y entornos saludables resilientes al clima",
+      "dimension_id": "health",
+      "cost_million_cop": 800,
+      "functional_unit": "Vigilancia climato-sensible, capacidades institucionales, prevención y respuesta",
+      "type": "health_system",
+      "nbs_class": "ENABLING",
+      "scope": "municipality",
+      "sensitivity_factors_addressed": [
+        "Exposición de la salud a condiciones climáticas"
+      ],
+      "adaptive_capacity_factors_strengthened": [
+        "Vigilancia, prevención y respuesta institucional"
+      ],
+      "cobenefit_dimension_ids": [],
+      "cobenefit_note": null,
+      "actors": [
+        {
+          "name": "Instituciones de salud",
+          "level": "salud"
+        },
+        {
+          "name": "Gobiernos municipales",
+          "level": "municipal"
+        },
+        {
+          "name": "CORNARE",
+          "level": "autoridad ambiental"
+        }
+      ],
+      "limitations": [
+        "No hay una línea base de morbilidad climática en el paquete."
+      ],
+      "nbs_reason": "Capacidad del sistema de salud. No es una intervención ecosistémica.",
+      "evidence": {
+        "cost": "assumption",
+        "name_and_unit": "institutional",
+        "nbs_class": "team_inference",
+        "actors": "team_inference"
+      },
+      "source_id": "reto-brief-2026"
+    }
+  ]
+}

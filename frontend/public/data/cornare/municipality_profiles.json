@@ -1,0 +1,30 @@
+{
+  "schema": "ourea.cornare.municipality_profiles",
+  "region": "Valles de San Nicolás",
+  "authority": "CORNARE",
+  "department": "Antioquia",
+  "country": "Colombia",
+  "municipalities": [
+    {
+      "id": "rionegro",
+      "name": "Rionegro",
+      "divipola": "05615",
+      "department": "Antioquia",
+      "subregion": "Valles de San Nicolás"
+    },
+    {
+      "id": "guarne",
+      "name": "Guarne",
+      "divipola": "05318",
+      "department": "Antioquia",
+      "subregion": "Valles de San Nicolás"
+    },
+    {
+      "id": "marinilla",
+      "name": "Marinilla",
+      "divipola": "05440",
+      "department": "Antioquia",
+      "subregion": "Valles de San Nicolás"
+    }
+  ]
+}

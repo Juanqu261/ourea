@@ -1,0 +1,23 @@
+{
+  "schema": "ourea.cornare.scenario_metrics",
+  "note": "Solo se incluye el cambio de escenario que el reto cuantifica. El resto no se simula.",
+  "metrics": [
+    {
+      "id": "rio-disaster-risk-2060",
+      "municipality_id": "rionegro",
+      "dimension_id": "disaster",
+      "metric": "risk",
+      "scenario": "ssp3_7_0",
+      "year": 2060,
+      "value": 0.32,
+      "value_min": null,
+      "value_max": null,
+      "classification": "media",
+      "classification_label": "Medio",
+      "provenance": "institutional",
+      "source_id": "reto-brief-2026",
+      "note": "Hacia 2060 el riesgo pasa de 0,28 a 0,32, de Bajo a Medio. Es el único cambio de escenario cuantificado en el reto.",
+      "geography": "municipality"
+    }
+  ]
+}

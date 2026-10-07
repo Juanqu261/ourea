@@ -1,448 +1,490 @@
-import { useCallback, useEffect, useMemo, useReducer, useRef, useState } from 'react';
-import { MapLegend } from './components/MapLegend.jsx';
-import { MapLayersControl } from './components/MapLayersControl.jsx';
-import { TopBar } from './components/TopBar.jsx';
-import { CaseSelector } from './components/CaseSelector.jsx';
-import { DemoGuide } from './components/DemoGuide.jsx';
+import { useEffect, useMemo, useState } from 'react';
 import { OureaLogo } from './components/OureaLogo.jsx';
-import { BRAND } from './config/brand.js';
-import { CASE_IDS, getCase, medellinCase } from './config/cases/index.js';
-import { buildDecisionPackage } from './domain/decisionPackage.js';
-import { buildDecisionBrief } from './domain/decisionBrief.js';
-import { buildDecisionBriefPdf, downloadBlob, renderSitePlate } from './domain/decisionBriefPdf.js';
-import { jpegFromDataUrl, jpegSofSize } from './domain/pdfDocument.js';
-import { topScreening, lensConfig } from './domain/cityScreen.js';
-import {
-  clearSessionHash,
-  clearStoredSession,
-  parseSessionHash,
-  readStoredSession,
-  simulatorBaseUrl,
-  writeSessionHash,
-  writeStoredSession,
-} from './domain/sessionLink.js';
-import { DecisionFlow } from './flow/DecisionFlow.jsx';
-import { flowReducer, initialFlowState } from './flow/flowReducer.js';
-import { mapScopeForFlow } from './flow/flowGuards.js';
-import { useOureaData } from './hooks/useOureaData.js';
-import { useOureaMap } from './hooks/useOureaMap.js';
-import { usePortfolioWorkspace } from './hooks/usePortfolioWorkspace.js';
-import { featureLngLat } from './domain/placeLinks.js';
+import { analyzeCorridor, bundleDataset } from './domain/cornareDecision.js';
+import { EVIDENCE_LABELS, NBS_LABELS, STRESS_LABELS } from './domain/evidence.js';
+import { vulnerabilityClass } from './domain/cornareModel.js';
+import { dimensionName, stressNarrative } from './domain/explanations.js';
+import { CLASS_COLOR, STEPS, copMillions } from './cornare/copy.js';
+import { CorridorMap } from './cornare/CorridorMap.jsx';
+import { downloadDecisionJson, downloadPitchPdf } from './cornare/exportDecision.js';
+import { loadCornareData } from './cornare/loadData.js';
+import guardrails from './config/scientificGuardrails.json';
 
-function resolveInitialCaseId() {
-  if (typeof window === 'undefined') return CASE_IDS.MEDELLIN;
-  try {
-    const params = new URLSearchParams(window.location.search);
-    const fromQuery = params.get('case');
-    if (fromQuery === 'nanjing' || fromQuery === CASE_IDS.NANJING) return CASE_IDS.NANJING;
-    if (fromQuery === 'medellin' || fromQuery === CASE_IDS.MEDELLIN) return CASE_IDS.MEDELLIN;
-  } catch {
-    // Ignore malformed query strings.
-  }
-  return CASE_IDS.MEDELLIN;
-}
-
-function findProvingGroundFeature(data, caseConfig, cityLens) {
-  const features = data?.screening?.features;
-  if (!features?.length) return null;
-  if (caseConfig?.id === CASE_IDS.MEDELLIN || caseConfig?.screeningMode === 'barrio') {
-    return (
-      features.find((feature) =>
-        String(feature.properties.BARRIO ?? '').toUpperCase().includes('LLANADITAS'),
-      ) ?? null
-    );
-  }
-  const focusMarked = features.find((feature) => feature.properties?.is_focus_area);
-  if (focusMarked) return focusMarked;
-  const top = topScreening(data.screening, cityLens ?? 'balanced', 1, caseConfig?.cityLenses);
-  return top[0] ?? features[0] ?? null;
-}
+const METRICS = [
+  { id: 'vulnerability', label: 'Vulnerabilidad' },
+  { id: 'sensitivity', label: 'Sensibilidad' },
+  { id: 'adaptive_capacity', label: 'Capacidad adaptativa' },
+  { id: 'risk', label: 'Riesgo' },
+];
 
 export default function App() {
-  const [selectedCaseId, setSelectedCaseId] = useState(resolveInitialCaseId);
-  const [changingCity, setChangingCity] = useState(false);
-  const caseConfig = useMemo(
-    () => (selectedCaseId ? getCase(selectedCaseId) : null),
-    [selectedCaseId],
-  );
-  const { data, loadError } = useOureaData(caseConfig ?? medellinCase);
-  const [flow, dispatch] = useReducer(flowReducer, initialFlowState);
-  const [selectedBarrio, setSelectedBarrio] = useState(null);
-  const [selectedCellId, setSelectedCellId] = useState(null);
-  const [selectedType, setSelectedType] = useState('rwh');
-  const [layerState, setLayerState] = useState({
-    hazard: true,
-    cells: true,
-    roads: true,
-  });
+  const [raw, setRaw] = useState(null);
+  const [error, setError] = useState(null);
+  const [step, setStep] = useState('overview');
+  const [metric, setMetric] = useState('vulnerability');
+  const [openWhy, setOpenWhy] = useState(null);
+  const [cellNote, setCellNote] = useState(null);
 
   useEffect(() => {
-    // Nanjing drainage-stress layer is cell-shaped; keep it off by default so the
-    // detailed grid reads as an analytical overlay on roads/terrain, not a solid block.
-    setLayerState((current) => ({
-      ...current,
-      hazard: caseConfig?.id !== CASE_IDS.NANJING,
-      roads: true,
-      cells: true,
-    }));
-  }, [caseConfig?.id]);
+    loadCornareData().then(setRaw).catch((cause) => setError(cause.message));
+  }, []);
 
-  const cityLens = flow.cityLens;
-  const scope = mapScopeForFlow(flow);
-  const workspaceRef = useRef(null);
-  const hydratedRef = useRef(false);
-  const areaId = caseConfig?.areaId ?? 'llanaditas';
+  const dataset = useMemo(() => (raw ? bundleDataset({
+    interventions: raw.interventions,
+    metrics: raw.metrics,
+    history: raw.history,
+    parameters: raw.parameters,
+    gaps: raw.gaps,
+    mea: raw.mea,
+    profiles: raw.profiles,
+  }) : null), [raw]);
 
-  const onSelectCell = useCallback((cellId) => {
-    setSelectedCellId(cellId);
-    writeSessionHash({
-      areaId,
-      cellId,
-      plan: workspaceRef.current?.activePlan,
-    });
-  }, [areaId]);
-  const onSelectBarrio = useCallback(setSelectedBarrio, []);
+  const analysis = useMemo(() => (dataset ? analyzeCorridor(dataset) : null), [dataset]);
 
-  const workspace = usePortfolioWorkspace({
-    data,
-    selectedCellId,
-    selectedType,
-  });
-  workspaceRef.current = workspace;
-
-  const { mapNode, mapStatus, mapError, captureMapImage } = useOureaMap({
-    data,
-    context: workspace.context,
-    scope,
-    cityLens,
-    flowStep: flow.step,
-    flowMode: flow.mode,
-    selectedBarrio,
-    selectedCellId,
-    layerState,
-    activePlan: workspace.activePlan,
-    scenario: workspace.scenario,
-    onSelectCell,
-    onSelectBarrio,
-  });
-
-  const selectedCell = useMemo(() => {
-    const feature = data?.cells?.features?.find(
-      (item) => Number(item.properties.cell_id) === Number(selectedCellId),
-    );
-    if (!feature) return null;
-    const centroid = featureLngLat(feature);
-    return {
-      ...feature.properties,
-      lat: centroid?.[1] ?? null,
-      lng: centroid?.[0] ?? null,
-    };
-  }, [data, selectedCellId]);
-
-  const provingGroundFeature = useMemo(
-    () => findProvingGroundFeature(data, caseConfig, cityLens),
-    [data, caseConfig, cityLens],
-  );
-  // Backward-compatible alias for Medellín e2e / DecisionFlow props.
-  const llanaditas = provingGroundFeature;
-
-  const areaLabel = flow.areaId === areaId || scope === 'sandbox'
-    ? (caseConfig?.focusArea ?? BRAND.provingGround)
-    : (caseConfig?.city ?? 'Medellín');
-
-  useEffect(() => {
-    hydratedRef.current = false;
-  }, [selectedCaseId]);
-
-  useEffect(() => {
-    if (!data || !caseConfig || hydratedRef.current) return;
-    if (data.climateContext && !workspace.scenario?.climate) return;
-    const fromHash = parseSessionHash(window.location.hash);
-    if (!fromHash.areaId && fromHash.cellId == null && !fromHash.plan.length) {
-      hydratedRef.current = true;
-      return;
-    }
-    hydratedRef.current = true;
-    const stored = readStoredSession();
-    const plan = fromHash.plan.length ? fromHash.plan : stored?.plan;
-    const cellId = fromHash.cellId ?? stored?.cellId ?? plan?.[0]?.cell_id ?? null;
-    const sessionAreaId = fromHash.areaId === caseConfig.areaId
-      ? fromHash.areaId
-      : caseConfig.areaId;
-    if (provingGroundFeature) setSelectedBarrio(provingGroundFeature.properties);
-    if (plan?.length) {
-      workspaceRef.current?.restoreSession({
-        plan,
-        view: stored?.view === 'user' && !fromHash.plan.length ? 'user' : 'ai',
-        budgetCredits: stored?.budgetCredits,
-        scenario: stored?.scenario,
-        profileId: stored?.profileId,
-      });
-      dispatch({
-        type: 'HYDRATE_SESSION',
-        areaId: sessionAreaId,
-        profileId: stored?.profileId,
-        portfolioMode: stored?.view === 'user' && !fromHash.plan.length ? 'manual' : 'recommended',
-        step: fromHash.plan.length ? 'safeguards' : (stored?.step ?? 'safeguards'),
-      });
-    } else {
-      dispatch({ type: 'SELECT_AREA', areaId: sessionAreaId });
-    }
-    if (cellId != null) setSelectedCellId(cellId);
-  }, [data, caseConfig, provingGroundFeature, workspace.scenario?.climate]);
-
-  useEffect(() => {
-    function onHashChange() {
-      const fromHash = parseSessionHash(window.location.hash);
-      if (fromHash.plan.length) {
-        workspaceRef.current?.restoreSession({ plan: fromHash.plan, view: 'ai' });
-        dispatch({
-          type: 'HYDRATE_SESSION',
-          areaId: fromHash.areaId ?? caseConfig?.areaId ?? 'llanaditas',
-        });
-      }
-      if (fromHash.cellId != null) setSelectedCellId(fromHash.cellId);
-    }
-    window.addEventListener('hashchange', onHashChange);
-    return () => window.removeEventListener('hashchange', onHashChange);
-  }, [caseConfig?.areaId]);
-
-  async function exportDecisionPackage(extras = {}) {
-    if (!data || !workspace.metrics || !workspace.baseline || !caseConfig) return;
-    const payload = buildDecisionPackage({
-      scenario: workspace.scenario,
-      budgetCredits: workspace.budgetCredits,
-      view: workspace.view,
-      cityLens,
-      selectedAiProfileId: workspace.selectedAiProfileId,
-      projects: workspace.activePlan,
-      metrics: workspace.metrics,
-      baseline: workspace.baseline,
-      monteCarlo: workspace.monteCarlo,
-      frontier: workspace.frontier,
-      aiDiagnostics: workspace.view === 'ai' ? workspace.aiDiagnostics : null,
-      alternatives: workspace.alternatives,
-      stability: workspace.stability,
-      pareto: workspace.pareto,
-      summary: data.summary,
-      evidence: data.evidence,
-      community: workspace.communityAssessment,
-      benchmark: workspace.benchmark,
-      breakage: workspace.breakage,
-      planAlignment: data.planAlignment,
-      climateContext: data.climateContext,
-      cells: data.cells,
-      city: caseConfig.city,
-      country: caseConfig.country,
-      caseRole: caseConfig.hierarchyLabel,
-      provingGround: caseConfig.focusArea,
-      caseId: caseConfig.id,
-    });
-    let mapImage = null;
-    let captured = null;
-    try {
-      captured = captureMapImage();
-    } catch {
-      captured = null;
-    }
-    if (captured?.dataUrl) {
-      const bytes = jpegFromDataUrl(captured.dataUrl);
-      const size = bytes ? jpegSofSize(bytes) : null;
-      if (bytes && size?.width && size.height) mapImage = { bytes, width: size.width, height: size.height };
-    }
-    const brief = buildDecisionBrief(payload, {
-      areaLabel,
-      mapImage,
-      cells: data.cells,
-      costContext: data.costContext,
-      simulatorUrl: simulatorBaseUrl(),
-      aiReview: extras.aiReview ?? null,
-      city: caseConfig.city,
-      bbox: caseConfig.boundingArea?.sandboxBbox,
-      aerialImageUrl: caseConfig.aerialImage ?? null,
-    });
-    const session = {
-      plan: workspace.activePlan,
-      view: workspace.view,
-      budgetCredits: workspace.budgetCredits,
-      scenario: workspace.scenario,
-      profileId: workspace.selectedAiProfileId,
-      cellId: selectedCellId ?? workspace.activePlan[0]?.cell_id ?? null,
-      step: flow.step,
-      caseId: caseConfig.id,
-    };
-    writeStoredSession(session);
-    writeSessionHash({
-      areaId: caseConfig.areaId,
-      cellId: session.cellId,
-      plan: workspace.activePlan,
-    });
-    const pdfName = `ourea_decision_brief_${caseConfig.id}.pdf`;
-    try {
-      brief.siteImage = await renderSitePlate(brief);
-      downloadBlob(buildDecisionBriefPdf(brief), pdfName);
-    } catch (error) {
-      console.warn('Decision brief PDF could not be generated', error);
-      try {
-        downloadBlob(buildDecisionBriefPdf({ ...brief, siteImage: null }), pdfName);
-      } catch (fallbackError) {
-        console.warn('Text-only PDF also failed', fallbackError);
-      }
-    }
+  if (error) {
+    return <main className="fatal-error"><h1>No se pudieron cargar los datos de CORNARE.</h1><p>{error}</p></main>;
+  }
+  if (!analysis) {
+    return <main className="boot"><p>Cargando la decisión del corredor…</p></main>;
   }
 
-  function resetWithinCase() {
-    workspace.resetWorkspace();
-    setSelectedBarrio(null);
-    setSelectedCellId(null);
-    setSelectedType('rwh');
-    clearSessionHash();
-    clearStoredSession();
-    dispatch({ type: 'RESET' });
-  }
-
-  function startOver() {
-    resetWithinCase();
-  }
-
-  function openChangeCity() {
-    dispatch({ type: 'CLOSE_MENU' });
-    setChangingCity(true);
-  }
-
-  function selectCase(caseId) {
-    if (caseId === selectedCaseId) {
-      setChangingCity(false);
-      return;
-    }
-    resetWithinCase();
-    setSelectedCaseId(caseId);
-    setChangingCity(false);
-  }
-
-  if (loadError) throw loadError;
-
-  const showCaseSelector = selectedCaseId == null || changingCity;
-  const loadingLabel = caseConfig
-    ? `Preparing the ${caseConfig.shortName} decision model…`
-    : 'Preparing the decision model…';
+  const stepIndex = STEPS.findIndex((item) => item.id === step);
 
   return (
-    <div className={`app app-${flow.mode} app-step-${flow.step}`}>
-      <div className="map">
-        <div ref={mapNode} className="map-canvas" data-testid="map-canvas" />
-        {mapStatus === 'unavailable' && (
-          <div className="map-fallback" role="status" data-testid="map-fallback">
-            <b>3D map unavailable in this browser</b>
-            <p>
-              The decision workflow remains available. Enable WebGL2 or use a compatible
-              browser to view the spatial layers.
-            </p>
-            {mapError ? <small>{mapError}</small> : null}
-          </div>
-        )}
-        {scope === 'sandbox' && (
-          <MapLayersControl
-            open={flow.layersOpen}
-            layerState={layerState}
-            onToggleOpen={() => dispatch({ type: 'TOGGLE_LAYERS' })}
-            onToggleLayer={(key) =>
-              setLayerState((current) => ({
-                ...current,
-                [key]: !current[key],
-              }))
-            }
+    <div className="cornare-app">
+      <header className="cornare-top">
+        <OureaLogo compact />
+        <div>
+          <p className="eyebrow">Soporte a la decisión de adaptación territorial</p>
+          <h1 data-testid="app-title">Ourea</h1>
+        </div>
+        <p className="budget-pill" data-testid="budget-pill">{copMillions(analysis.parameters.budget_million_cop)}</p>
+      </header>
+      <p className="corridor-line">Rionegro · Guarne · Marinilla · Valles de San Nicolás · CORNARE</p>
+      <nav className="step-nav" aria-label="Recorrido de la decisión">
+        {STEPS.map((item, index) => (
+          <button
+            key={item.id}
+            type="button"
+            className={item.id === step ? 'is-active' : ''}
+            data-testid={`nav-${item.id}`}
+            onClick={() => setStep(item.id)}
+          >
+            <span>{index + 1}</span>
+            {item.label}
+          </button>
+        ))}
+      </nav>
+      <main className="cornare-main" data-testid={`step-${step}`}>
+        {step === 'overview' && <Overview raw={raw} analysis={analysis} />}
+        {step === 'diagnosis' && (
+          <Diagnosis
+            raw={raw}
+            dataset={dataset}
+            metric={metric}
+            setMetric={setMetric}
+            cellNote={cellNote}
+            setCellNote={setCellNote}
           />
         )}
-      </div>
-
-      {!data && !showCaseSelector && (
-        <div className="loading">
-          <OureaLogo />
-          <b>{BRAND.name}</b>
-          <span>{loadingLabel}</span>
-        </div>
-      )}
-
-      {showCaseSelector && (
-        <CaseSelector
-          overlay={Boolean(selectedCaseId)}
-          selectedCaseId={selectedCaseId}
-          onSelect={selectCase}
-          onCancel={selectedCaseId ? () => setChangingCity(false) : null}
-        />
-      )}
-
-      <TopBar
-        areaLabel={areaLabel}
-        caseRole={caseConfig?.hierarchyLabel}
-        mode={flow.mode}
-        menuOpen={flow.menuOpen}
-        onToggleMenu={() => dispatch({ type: 'TOGGLE_MENU' })}
-        onCloseMenu={() => dispatch({ type: 'CLOSE_MENU' })}
-        onHelp={() => dispatch({ type: 'OPEN_DRAWER', drawer: 'help' })}
-        onAbout={() => dispatch({ type: 'OPEN_DRAWER', drawer: 'about' })}
-        onStartOver={startOver}
-        onChangeCity={openChangeCity}
-        onToggleExplore={() =>
-          dispatch({
-            type: flow.mode === 'explore' ? 'RETURN_TO_GUIDED_MODE' : 'ENTER_EXPLORE_MODE',
-          })
-        }
-        onLoadExample={() => {
-          dispatch({ type: 'CLOSE_MENU' });
-          if (provingGroundFeature) setSelectedBarrio(provingGroundFeature.properties);
-          dispatch({ type: 'SET_AREA', areaId });
-          dispatch({ type: 'SET_LENS', cityLens: 'balanced' });
-          dispatch({ type: 'GENERATION_STARTED', kind: 'example' });
-          workspace.runGuidedDemo();
-        }}
-      />
-
-      <div className="map-chrome-bottom-left" data-testid="map-bottom-left">
-        <MapLegend
-          scope={scope}
-          cityLens={cityLens}
-          cityLenses={caseConfig?.cityLenses}
-          focusLabel={caseConfig?.focusArea}
-          legendCityTitle={caseConfig?.legendCityTitle ?? null}
-          legendCityNote={caseConfig?.legendCityNote}
-          legendSandboxTitle={
-            caseConfig?.id === CASE_IDS.NANJING
-              ? (workspace.activePlan?.length
-                ? (caseConfig.legendSandboxResidualNote ?? 'After plan')
-                : (caseConfig.legendSandboxBaselineNote ?? 'Baseline'))
-              : caseConfig?.legendSandboxTitle
-          }
-          legendSandboxNote={caseConfig?.legendSandboxNote}
-          collapsed={flow.legendCollapsed}
-          onToggle={() => dispatch({ type: 'TOGGLE_LEGEND' })}
-        />
-      </div>
-
-      {data && caseConfig && !showCaseSelector ? (
-        <DemoGuide step={flow.step} visible={flow.mode === 'guided'} />
-      ) : null}
-
-      {data && caseConfig && !showCaseSelector && (
-        <DecisionFlow
-          state={flow}
-          dispatch={dispatch}
-          data={data}
-          workspace={workspace}
-          caseConfig={caseConfig}
-          selectedBarrio={selectedBarrio}
-          llanaditas={llanaditas}
-          provingGroundFeature={provingGroundFeature}
-          selectedType={selectedType}
-          selectedCell={selectedCell}
-          selectedCellId={selectedCellId}
-          onSelectType={setSelectedType}
-          onSelectCell={onSelectCell}
-          onSelectBarrio={setSelectedBarrio}
-          onExport={exportDecisionPackage}
-        />
-      )}
+        {step === 'prioritize' && <Prioritize analysis={analysis} />}
+        {step === 'portfolio' && (
+          <Portfolio analysis={analysis} openWhy={openWhy} setOpenWhy={setOpenWhy} />
+        )}
+        {step === 'stress' && <Stress analysis={analysis} />}
+        {step === 'residual' && <Residual analysis={analysis} />}
+        {step === 'monitoring' && <Monitoring analysis={analysis} />}
+        {step === 'export' && <Export analysis={analysis} />}
+      </main>
+      <footer className="cornare-footer">
+        <button type="button" disabled={stepIndex === 0} onClick={() => setStep(STEPS[stepIndex - 1].id)}>Atrás</button>
+        <p>{STEPS[stepIndex].title}</p>
+        <button type="button" disabled={stepIndex === STEPS.length - 1} onClick={() => setStep(STEPS[stepIndex + 1].id)}>Continuar</button>
+      </footer>
     </div>
   );
+}
+
+function Overview({ raw, analysis }) {
+  const colors = Object.fromEntries(raw.profiles.municipalities.map((municipality) => {
+    const classification = vulnerabilityClass(raw.metrics.metrics, municipality.id, 'biodiversity');
+    return [municipality.id, CLASS_COLOR[classification] ?? CLASS_COLOR.missing];
+  }));
+  return (
+    <section>
+      <h2>¿Dónde debe intervenir primero CORNARE, y con qué portafolio?</h2>
+      <p className="lead">
+        El fondo simulado es de {copMillions(5000)}. No alcanza para las 15 medidas del catálogo
+        ({copMillions(raw.interventions.catalogue_total_million_cop)}). La respuesta de Ourea usa el estudio existente.
+      </p>
+      <div className="card-grid">
+        {raw.profiles.municipalities.map((municipality) => (
+          <article key={municipality.id} className="info-card">
+            <h3>{municipality.name}</h3>
+            <ul>
+              {highlights(municipality.id, raw.metrics.metrics).map((line) => <li key={line}>{line}</li>)}
+            </ul>
+          </article>
+        ))}
+      </div>
+      <CorridorMap
+        boundaries={raw.boundaries}
+        colors={colors}
+        label="Color de biodiversidad según la clase de vulnerabilidad."
+      />
+      <ol className="finding-list">
+        {analysis.findings.map((finding) => (
+          <li key={finding.id}>
+            <span className={`tag tag-${finding.provenance}`}>{EVIDENCE_LABELS[finding.provenance]}</span>
+            {finding.text}
+          </li>
+        ))}
+      </ol>
+    </section>
+  );
+}
+
+function highlights(municipalityId, metrics) {
+  const classes = metrics.filter((row) => (
+    row.municipality_id === municipalityId
+    && row.metric === 'vulnerability'
+    && row.scenario === 'reference'
+    && row.value == null
+    && (row.classification === 'alta' || row.classification === 'muy_alta')
+  ));
+  const lines = classes.map((row) => `${dimensionName(row.dimension_id)}: vulnerabilidad ${row.classification_label}`);
+  const numbers = metrics.filter((row) => row.municipality_id === municipalityId && row.value != null).slice(0, 2);
+  numbers.forEach((row) => {
+    const label = row.classification_label ? ` (${row.classification_label})` : '';
+    lines.push(`${metricLabel(row.metric)} en ${dimensionName(row.dimension_id)}: ${formatValue(row)}${label}`);
+  });
+  return lines.slice(0, 4);
+}
+
+function Diagnosis({ raw, dataset, metric, setMetric, cellNote, setCellNote }) {
+  const municipalities = raw.profiles.municipalities;
+  const dimensions = raw.interventions.dimensions;
+  const colors = Object.fromEntries(municipalities.map((municipality) => {
+    const cell = cellFor(raw.metrics.metrics, municipality.id, 'biodiversity', 'vulnerability');
+    return [municipality.id, CLASS_COLOR[cell?.classification] ?? CLASS_COLOR.missing];
+  }));
+  return (
+    <section>
+      <h2>Diagnóstico territorial</h2>
+      <div className="segmented" role="group" aria-label="Métrica">
+        {METRICS.map((item) => (
+          <button key={item.id} type="button" className={metric === item.id ? 'is-active' : ''} onClick={() => { setMetric(item.id); setCellNote(null); }}>
+            {item.label}
+          </button>
+        ))}
+      </div>
+      <div className="table-scroll">
+        <table className="heat" data-testid="heatmap">
+          <thead>
+            <tr>
+              <th>Municipio</th>
+              {dimensions.map((dimension) => <th key={dimension.id}>{dimension.short_name}</th>)}
+            </tr>
+          </thead>
+          <tbody>
+            {municipalities.map((municipality) => (
+              <tr key={municipality.id}>
+                <th>{municipality.name}</th>
+                {dimensions.map((dimension) => {
+                  const rows = rowsFor(raw.metrics.metrics, municipality.id, dimension.id, metric);
+                  const cell = displayCell(rows, metric);
+                  const classification = cell?.classification;
+                  return (
+                    <td key={dimension.id}>
+                      <button
+                        type="button"
+                        className="heat-cell"
+                        style={{ background: CLASS_COLOR[classification] ?? CLASS_COLOR.missing }}
+                        onClick={() => setCellNote({ municipality, dimension, rows })}
+                      >
+                        {cell ? (cell.classification_label || formatValue(cell)) : 'Sin dato'}
+                      </button>
+                    </td>
+                  );
+                })}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      {cellNote && (
+        <aside className="note-card">
+          <h3>{cellNote.municipality.name} · {cellNote.dimension.name}</h3>
+          {cellNote.rows.length ? cellNote.rows.map((row) => (
+            <p key={row.id}>
+              <span className={`tag tag-${row.provenance}`}>{EVIDENCE_LABELS[row.provenance]}</span>
+              {formatValue(row)}
+              {row.classification_label ? ` · ${row.classification_label}` : ''}
+              . {row.note}
+            </p>
+          )) : (
+            <p>CORNARE no entregó este valor en el paquete del reto. No se muestra como cero.</p>
+          )}
+        </aside>
+      )}
+      <CorridorMap boundaries={raw.boundaries} colors={colors} label="El mapa usa la clase de vulnerabilidad en biodiversidad. No localiza predios." />
+      <p className="fine">Cobertura del reporte de adaptación: {dataset.history.coverage.map((row) => `${nameOf(raw, row.municipality_id)} ${row.records}`).join(' · ')} registros. Marinilla no se interpreta como adaptación cero.</p>
+    </section>
+  );
+}
+
+function Prioritize({ analysis }) {
+  const cards = [
+    ['Institucional', analysis.lenses.institucional, 'Decisión que se presenta'],
+    ['Naturaleza positiva', analysis.lenses.naturaleza, sameSet(analysis.lenses.institucional, analysis.lenses.naturaleza) ? 'Mismo conjunto. El desempate por soluciones basadas en la naturaleza no cambió el puntaje.' : 'Conjunto distinto'],
+    ['Multidimensional', analysis.lenses.multidimensional, sameSet(analysis.lenses.institucional, analysis.lenses.multidimensional) ? 'Mismo conjunto. No hay una segunda medida en la misma dimensión que el penal más fuerte expulse.' : 'Conjunto distinto'],
+    ['Bajo arrepentimiento', analysis.lenses.bajo_arrepentimiento, 'Prefiere medidas de clase alta por cada millón.'],
+    ['Máximo número', analysis.baselines.max_count, sameSet(analysis.lenses.institucional, analysis.baselines.max_count) ? 'Coincide con el institucional. El número de medidas no está ganando por encima del puntaje.' : 'Más medidas, menor foco'],
+    ['Infraestructura gris', analysis.baselines.grey, 'Obliga la obra de 2.500 millones y muestra qué se sacrifica.'],
+  ];
+  return (
+    <section>
+      <h2>Regla de prioridad</h2>
+      <p className="lead">
+        Puntaje = 70% clase de vulnerabilidad + 15% recurrencia documentada.
+        El 15% de talleres queda sin calificar. La segunda medida en la misma dimensión conserva 35% del término de vulnerabilidad.
+      </p>
+      <ul className="weight-list">
+        <li>Vulnerabilidad: 70%. Dato de clase institucional, con la lectura de la diapositiva marcada como inferencia.</li>
+        <li>Recurrencia de acciones: 15%. Solo con cobertura de al menos 5 registros.</li>
+        <li>Talleres municipales: 15%. Información faltante. No se imputa.</li>
+      </ul>
+      <div className="card-grid">
+        {cards.map(([title, portfolio, note]) => (
+          <article key={title} className="info-card">
+            <h3>{title}</h3>
+            <p className="score">{portfolio.institucional.objective.toFixed(2)}</p>
+            <p>Puntaje de prioridad · {copMillions(portfolio.cost)} · quedan {copMillions(portfolio.remaining)}</p>
+            <p>{portfolio.ids.length} medidas</p>
+            <p className="fine">{note}</p>
+          </article>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+function Portfolio({ analysis, openWhy, setOpenWhy }) {
+  return (
+    <section>
+      <h2>Portafolio institucional</h2>
+      <BudgetBar analysis={analysis} />
+      <div className="measure-list" data-testid="portfolio-list">
+        {analysis.portfolio.measures.map((measure) => (
+          <article key={measure.id} className="measure-card" data-testid={`measure-${measure.id}`}>
+            <header>
+              <p className="eyebrow">Orden {measure.implementationOrder}</p>
+              <h3>{measure.name}</h3>
+              <p>{measure.place.localization}</p>
+              <p className="measure-cost">{copMillions(measure.cost)}</p>
+            </header>
+            <dl>
+              <div><dt>Problema</dt><dd>Vulnerabilidad {measure.classificationLabel.toLowerCase()} en {dimensionName(measure.dimensionId)}</dd></div>
+              <div><dt>Clase</dt><dd>{NBS_LABELS[measure.nbsClass]}</dd></div>
+              <div><dt>Actores</dt><dd>{measure.actors.map((actor) => actor.name).join(', ')}</dd></div>
+              <div><dt>Aporte al puntaje</dt><dd>{measure.part.contribution.toFixed(3)}</dd></div>
+            </dl>
+            <button type="button" onClick={() => setOpenWhy(openWhy === measure.id ? null : measure.id)}>
+              {openWhy === measure.id ? 'Ocultar' : 'Por qué esta medida'}
+            </button>
+            {openWhy === measure.id && (
+              <ul className="why-list">
+                {analysis.explanations[measure.id].lines.map((line) => <li key={line}>{line}</li>)}
+              </ul>
+            )}
+          </article>
+        ))}
+      </div>
+      <h3>Qué se sacrifica</h3>
+      <div className="card-grid">
+        <article className="info-card">
+          <h3>Infraestructura gris</h3>
+          <p>Puntaje {analysis.baselines.grey.institucional.objective.toFixed(2)} frente a {analysis.portfolio.institucional.objective.toFixed(2)}.</p>
+          <p>Incluir la obra de {copMillions(2500)} saca medidas de otras dimensiones.</p>
+        </article>
+        <article className="info-card">
+          <h3>Bajo arrepentimiento</h3>
+          <p>{analysis.lenses.bajo_arrepentimiento.measures.map((measure) => measure.name).join(' · ')}</p>
+        </article>
+      </div>
+      <h3>Naturaleza, híbrida, habilitadora, gris</h3>
+      <div className="card-grid">
+        {analysis.nbs.map((item) => (
+          <article key={item.nbsClass} className="info-card">
+            <h3>{item.label}</h3>
+            <p>{copMillions(item.investment)}</p>
+            <p>{item.count} medidas</p>
+            <p className="fine">{item.dimensions.map(dimensionName).join(', ') || 'Sin inversión en esta clase'}</p>
+          </article>
+        ))}
+      </div>
+      <p className="fine">La clase Naturaleza no vuelve óptima una medida. Aquí entra porque cubre biodiversidad Muy alta a un costo que deja fondo para otras dimensiones.</p>
+    </section>
+  );
+}
+
+function Stress({ analysis }) {
+  const narrative = stressNarrative(analysis.stress, analysis.prepared);
+  return (
+    <section>
+      <h2>Prueba SSP3-7.0 hacia 2060</h2>
+      <p className={`status status-${analysis.stress.status}`} data-testid="stress-status">{narrative.label}</p>
+      <p>{narrative.shift}</p>
+      <p>{narrative.decision}</p>
+      <p>
+        Rionegro se vuelve más urgente en riesgo de desastres. Las demás dimensiones no tienen serie de escenario en el paquete:
+        quedan como evidencia insuficiente. No hay probabilidades.
+      </p>
+      <p className="fine">{analysis.parameters.ssp.note}</p>
+    </section>
+  );
+}
+
+function Residual({ analysis }) {
+  const gaps = [...analysis.gaps].sort((left, right) => rankPriority(left.priority) - rankPriority(right.priority));
+  return (
+    <section>
+      <h2>Riesgo residual y brechas</h2>
+      <p>{analysis.residual.reminder}</p>
+      <ul className="finding-list">
+        {analysis.residual.rows.map((row) => (
+          <li key={row.dimensionId}>
+            <strong>{dimensionName(row.dimensionId)}</strong>
+            {' · '}
+            {row.addressed ? 'con medida' : 'sin medida'}
+            {' · '}
+            {row.statement}
+            {row.high.length ? ` (${row.high.map((item) => item.municipalityId).join(', ')})` : ''}
+          </li>
+        ))}
+      </ul>
+      <h3>Registro de información faltante</h3>
+      <div className="measure-list">
+        {gaps.map((gap) => (
+          <article key={gap.id} className="measure-card">
+            <header>
+              <p className="eyebrow">{gap.priority}</p>
+              <h3>{gap.missing_information}</h3>
+            </header>
+            <p>{gap.why_it_matters}</p>
+            <p><strong>Podría cambiar: </strong>{gap.which_decision_it_could_change}</p>
+            <p><strong>Cómo levantarla: </strong>{gap.how_to_collect_it}</p>
+            {gap.responsible_actor_if_known && <p><strong>Actor: </strong>{gap.responsible_actor_if_known}</p>}
+            <span className={`tag tag-${gap.provenance}`}>{EVIDENCE_LABELS[gap.provenance]}</span>
+          </article>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+function Monitoring({ analysis }) {
+  return (
+    <section>
+      <h2>Monitoreo, evaluación y aprendizaje</h2>
+      <p>{analysis.mea.regional_context.statement} {analysis.mea.regional_context.use}</p>
+      {analysis.portfolio.measures.map((measure) => {
+        const rows = analysis.mea.indicators.filter((indicator) => indicator.intervention_id === measure.id);
+        return (
+          <article key={measure.id} className="measure-card">
+            <h3>{measure.name}</h3>
+            <ul>
+              {rows.map((indicator) => (
+                <li key={indicator.id}>
+                  <span className={`tag tag-${indicator.provenance}`}>{indicator.indicator_type}</span>
+                  {indicator.name}
+                  {' · '}
+                  {indicator.target_status}
+                </li>
+              ))}
+            </ul>
+          </article>
+        );
+      })}
+    </section>
+  );
+}
+
+function Export({ analysis }) {
+  return (
+    <section>
+      <h2>Síntesis</h2>
+      <BudgetBar analysis={analysis} />
+      <p data-testid="decision-line">
+        Proteger primero la biodiversidad del corredor y el agua en Marinilla, con una medida habilitadora de conocimiento del riesgo,
+        sin comprar la obra gris de {copMillions(2500)}.
+      </p>
+      <ol className="finding-list">
+        {analysis.findings.map((finding) => <li key={finding.id}>{finding.text}</li>)}
+      </ol>
+      <ul>
+        {guardrails.items.map((item) => <li key={item}>{item}</li>)}
+      </ul>
+      <p className="fine">Huella de reproducibilidad: {analysis.fingerprint}</p>
+      <div className="export-actions">
+        <button type="button" data-testid="export-json" onClick={() => downloadDecisionJson(analysis)}>Descargar JSON</button>
+        <button type="button" data-testid="export-pdf" onClick={() => downloadPitchPdf(analysis)}>Descargar PDF</button>
+      </div>
+    </section>
+  );
+}
+
+function BudgetBar({ analysis }) {
+  const used = analysis.portfolio.cost;
+  const budget = analysis.parameters.budget_million_cop;
+  return (
+    <div className="budget-bar" data-testid="budget-used">
+      <div className="budget-fill" style={{ width: `${(used / budget) * 100}%` }} />
+      <p>
+        Usado {copMillions(used)} · Disponible <span data-testid="budget-remaining">{copMillions(analysis.portfolio.remaining)}</span>
+      </p>
+    </div>
+  );
+}
+
+function rowsFor(metrics, municipalityId, dimensionId, metric) {
+  return metrics.filter((row) => (
+    row.municipality_id === municipalityId
+    && row.dimension_id === dimensionId
+    && row.metric === metric
+    && row.scenario === 'reference'
+  ));
+}
+
+function displayCell(rows, metric) {
+  if (metric === 'vulnerability') {
+    return rows.find((row) => row.value == null && row.classification) ?? rows[0] ?? null;
+  }
+  return rows.find((row) => row.value != null || row.value_min != null) ?? null;
+}
+
+function cellFor(metrics, municipalityId, dimensionId, metric) {
+  return displayCell(rowsFor(metrics, municipalityId, dimensionId, metric), metric);
+}
+
+function formatValue(row) {
+  if (row.value != null) return String(row.value).replace('.', ',');
+  if (row.value_min != null) return `${String(row.value_min).replace('.', ',')}–${String(row.value_max).replace('.', ',')}`;
+  return row.classification_label || 'Sin dato';
+}
+
+function metricLabel(metric) {
+  return METRICS.find((item) => item.id === metric)?.label ?? metric;
+}
+
+function nameOf(raw, id) {
+  return raw.profiles.municipalities.find((item) => item.id === id)?.name ?? id;
+}
+
+function sameSet(left, right) {
+  return left.ids.join('|') === right.ids.join('|');
+}
+
+function rankPriority(priority) {
+  return { alta: 0, media: 1, baja: 2 }[priority] ?? 3;
 }

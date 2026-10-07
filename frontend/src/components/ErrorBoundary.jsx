@@ -20,9 +20,9 @@ export class ErrorBoundary extends React.Component {
       return (
         <main className="fatal-error">
           <OureaLogo />
-          <h1>OUREA could not start.</h1>
+          <h1>Ourea no pudo iniciar.</h1>
           <p>{this.state.error.message}</p>
-          <p>Open the browser console for the full diagnostic.</p>
+          <p>El detalle está en la consola del navegador.</p>
         </main>
       );
     }

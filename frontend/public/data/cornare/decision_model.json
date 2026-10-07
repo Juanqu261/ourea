@@ -1,0 +1,89 @@
+{
+  "schema": "ourea.cornare.decision_model",
+  "budget_million_cop": 5000,
+  "currency_display": "COP millones",
+  "costs_indivisible": true,
+  "one_functional_unit_per_measure": true,
+  "weights": {
+    "vulnerability": 0.7,
+    "recurrence": 0.15,
+    "workshops": 0.15
+  },
+  "workshops_scored": false,
+  "workshops_note": "La presentación asigna 15% a la recurrencia en talleres municipales. El paquete no trae esos conteos, así que ese término no se imputa.",
+  "class_scores": {
+    "muy_baja": 0.2,
+    "baja": 0.4,
+    "media": 0.6,
+    "alta": 0.8,
+    "muy_alta": 1.0
+  },
+  "diminishing_second_measure": {
+    "institucional": 0.35,
+    "naturaleza": 0.35,
+    "multidimensional": 0.15,
+    "bajo_arrepentimiento": 0.35
+  },
+  "cobenefit_weight": 0.05,
+  "recurrence_coverage_min_records": 5,
+  "low_regret_full_weight_min_class_score": 0.8,
+  "low_regret_other_factor": 0.5,
+  "ssp": {
+    "scenario": "ssp3_7_0",
+    "year": 2060,
+    "dimension_id": "disaster",
+    "municipality_id": "rionegro",
+    "metric": "risk",
+    "from_class": "baja",
+    "to_class": "media",
+    "from_value": 0.28,
+    "to_value": 0.32,
+    "application": "team_inference",
+    "note": "El cambio Bajo → Medio es institucional. Aplicarlo como un escalón de clase sobre las medidas de riesgo de desastres es una inferencia del equipo, acotada a esa dimensión."
+  },
+  "lenses": [
+    {
+      "id": "institucional",
+      "name": "Institucional",
+      "default": true,
+      "summary": "Prioriza la clase de vulnerabilidad y la recurrencia documentada, con cobertura decreciente dentro de la misma dimensión."
+    },
+    {
+      "id": "naturaleza",
+      "name": "Naturaleza positiva",
+      "default": false,
+      "summary": "Usa el mismo puntaje institucional. La clase de solución basada en la naturaleza solo desempatá portafolios con el mismo puntaje."
+    },
+    {
+      "id": "multidimensional",
+      "name": "Multidimensional robusta",
+      "default": false,
+      "summary": "Penaliza con más fuerza la segunda medida en una dimensión ya cubierta."
+    },
+    {
+      "id": "bajo_arrepentimiento",
+      "name": "Bajo arrepentimiento",
+      "default": false,
+      "summary": "Prefiere medidas de menor costo que atienden clases Alta o Muy alta, para no agotar el fondo en una sola obra."
+    }
+  ],
+  "baselines": [
+    {
+      "id": "max_count",
+      "name": "Máximo número de medidas",
+      "summary": "Elige la mayor cantidad de medidas que cabe en el fondo y, entre esas, el mayor puntaje institucional."
+    },
+    {
+      "id": "grey",
+      "name": "Infraestructura gris primero",
+      "summary": "Incluye infraestructura resiliente al cambio climático y completa el fondo con el mejor puntaje institucional restante."
+    }
+  ],
+  "excluded_from_score": [
+    "emissions_by_scope",
+    "emission_reductions",
+    "mitigation_measures",
+    "production_unit_indicators",
+    "sector_adaptation_actions_without_municipality"
+  ]
+}

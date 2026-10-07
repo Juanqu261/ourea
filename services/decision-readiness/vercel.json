@@ -1,9 +1,0 @@
-{
-  "framework": null,
-  "installCommand": "npm install",
-  "functions": {
-    "api/decision-readiness.js": {
-      "maxDuration": 20
-    }
-  }
-}

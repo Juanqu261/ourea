@@ -1,0 +1,135 @@
+{
+  "schema": "ourea.cornare.information_gaps",
+  "gaps": [
+    {
+      "id": "gap-company-water",
+      "missing_information": "Dependencia de cada organización respecto de una fuente, captación o acueducto",
+      "why_it_matters": "Sin esa relación no se sabe si proteger una cabecera cubre a los usuarios productivos del corredor.",
+      "which_decision_it_could_change": "Podría mover la protección de cabeceras o la eficiencia hídrica entre municipios, o justificar un segundo sistema abastecedor.",
+      "how_to_collect_it": "Cruce, con las empresas de los Acuerdos de Crecimiento Verde y los acueductos, de captaciones autorizadas y usuarios. Solo datos agregados si la información es reservada.",
+      "responsible_actor_if_known": "CORNARE, con acueductos y sectores productivos",
+      "priority": "alta",
+      "provenance": "institutional"
+    },
+    {
+      "id": "gap-company-road",
+      "missing_information": "Dependencia de organizaciones respecto de vías o puntos críticos de acceso",
+      "why_it_matters": "La medida de infraestructura resiliente cuesta 2.500 millones y exige un punto crítico que el paquete no nombra.",
+      "which_decision_it_could_change": "Podría incluir o excluir la infraestructura gris, y definir si el punto está en Guarne o en Rionegro.",
+      "how_to_collect_it": "Inventario municipal de puntos críticos viales ya priorizados por gestión del riesgo, sin inventar la cadena logística de una empresa.",
+      "responsible_actor_if_known": "Gobiernos municipales y entidades de gestión del riesgo",
+      "priority": "alta",
+      "provenance": "institutional"
+    },
+    {
+      "id": "gap-suppliers",
+      "missing_information": "Dependencia entre organizaciones y sus proveedores",
+      "why_it_matters": "Una interrupción puede propagarse fuera del predio intervenido.",
+      "which_decision_it_could_change": "Podría ampliar el alcance de una medida desde un municipio hacia un sistema productivo regional.",
+      "how_to_collect_it": "Encuesta agregada y voluntaria a organizaciones de los Acuerdos de Crecimiento Verde sobre proveedores críticos, sin publicar identidades reservadas.",
+      "responsible_actor_if_known": "CORNARE",
+      "priority": "media",
+      "provenance": "institutional"
+    },
+    {
+      "id": "gap-energy",
+      "missing_information": "Dependencia de redes de energía y de servicios públicos esenciales",
+      "why_it_matters": "La medida de servicios públicos no tiene un servicio nombrado.",
+      "which_decision_it_could_change": "Definiría si los 2.000 millones de servicios públicos entran al portafolio y sobre cuál servicio.",
+      "how_to_collect_it": "Mapa de servicios esenciales ya identificado por los comités municipales de gestión del riesgo.",
+      "responsible_actor_if_known": "Entidades de gestión del riesgo y empresas de servicios públicos",
+      "priority": "alta",
+      "provenance": "institutional"
+    },
+    {
+      "id": "gap-ecosystem-service-sites",
+      "missing_information": "Localización de los servicios ecosistémicos que cada medida usaría",
+      "why_it_matters": "El catálogo opera a escala municipal o de corredor. Un mapa de sitios cambiaría la unidad real a intervenir.",
+      "which_decision_it_could_change": "Podría concentrar restauración, rondas o cabeceras en un municipio distinto al que sugiere la clase de vulnerabilidad.",
+      "how_to_collect_it": "Cruces con determinantes ambientales, POMCAS y áreas protegidas de CORNARE, a escala de microcuenca.",
+      "responsible_actor_if_known": "CORNARE",
+      "priority": "alta",
+      "provenance": "team_inference"
+    },
+    {
+      "id": "gap-workers",
+      "missing_information": "Personas trabajadoras afectadas por interrupciones específicas",
+      "why_it_matters": "El reto pide no inventar efectos sobre la operación empresarial.",
+      "which_decision_it_could_change": "Podría elevar una medida habilitadora o de infraestructura si un grupo de trabajadores queda expuesto.",
+      "how_to_collect_it": "Dato agregado de empleo expuesto, construido con las organizaciones y las alcaldías, sin microdatos reservados.",
+      "responsible_actor_if_known": null,
+      "priority": "media",
+      "provenance": "institutional"
+    },
+    {
+      "id": "gap-sites",
+      "missing_information": "Sitio exacto de cada intervención",
+      "why_it_matters": "Asignar un municipio no es asignar un predio, una quebrada o un punto de obra.",
+      "which_decision_it_could_change": "El orden de implementación y el actor responsable de obra.",
+      "how_to_collect_it": "Priorización espacial con los municipios usando POMCAS, rondas y puntos críticos ya oficiales.",
+      "responsible_actor_if_known": "CORNARE y gobiernos municipales",
+      "priority": "alta",
+      "provenance": "team_inference"
+    },
+    {
+      "id": "gap-effectiveness",
+      "missing_information": "Efectividad de cada medida sobre sensibilidad, capacidad adaptativa o vulnerabilidad",
+      "why_it_matters": "Sin ese coeficiente el puntaje no puede leerse como riesgo evitado.",
+      "which_decision_it_could_change": "Podría reordenar el portafolio si una medida barata rinde poco o una medida costosa rinde mucho.",
+      "how_to_collect_it": "Línea base y seguimiento MEA de resultado, no solo de actividades. La meta regional de −30% a 2035 no se reparte entre medidas.",
+      "responsible_actor_if_known": "CORNARE, módulo MEA",
+      "priority": "alta",
+      "provenance": "team_inference"
+    },
+    {
+      "id": "gap-hydrology",
+      "missing_information": "Respuesta hidrológica local a restauración, rondas, cabeceras o SUDS",
+      "why_it_matters": "No hay un modelo de inundación ni de caudal en este ejercicio.",
+      "which_decision_it_could_change": "La elección entre SUDS, rondas y cabeceras dentro del recurso hídrico y el hábitat.",
+      "how_to_collect_it": "Series de MARCO y estudios de POMCA ya existentes, sin construir un modelo nuevo para el prototipo.",
+      "responsible_actor_if_known": "CORNARE",
+      "priority": "media",
+      "provenance": "team_inference"
+    },
+    {
+      "id": "gap-maintenance",
+      "missing_information": "Capacidad de mantenimiento después del costo inicial",
+      "why_it_matters": "Restauración, SUDS y obras grises fallan si no hay quien las sostenga.",
+      "which_decision_it_could_change": "Podría preferir medidas con actor de mantenimiento claro frente a una obra de 2.500 millones.",
+      "how_to_collect_it": "Pregunta explícita a alcaldías, acueductos y administradores de áreas sobre presupuesto de operación.",
+      "responsible_actor_if_known": "Gobiernos municipales",
+      "priority": "media",
+      "provenance": "team_inference"
+    },
+    {
+      "id": "gap-workshops",
+      "missing_information": "Recurrencia de cada medida en los talleres municipales",
+      "why_it_matters": "La priorización institucional de CORNARE reserva 15% a ese criterio.",
+      "which_decision_it_could_change": "Puede reordenar medidas con vulnerabilidad parecida cuando el 15% se pueda calificar.",
+      "how_to_collect_it": "Conteo por medida y municipio a partir de las memorias de los talleres de la actualización de riesgos.",
+      "responsible_actor_if_known": "CORNARE",
+      "priority": "alta",
+      "provenance": "institutional"
+    },
+    {
+      "id": "gap-ssp-cube",
+      "missing_information": "Serie de amenaza, sensibilidad, capacidad adaptativa, vulnerabilidad y riesgo para cada municipio, dimensión y escenario, incluido SSP3-7.0 a 2060",
+      "why_it_matters": "Solo hay un cambio numérico de escenario: el riesgo de desastres de Rionegro.",
+      "which_decision_it_could_change": "La prueba de robustez completa. Hoy la mayoría de dimensiones queda como evidencia insuficiente.",
+      "how_to_collect_it": "Consulta del Observatorio Ambiental por subregión, índice, año, escenario y dimensión, y publicación de la tabla.",
+      "responsible_actor_if_known": "CORNARE",
+      "priority": "alta",
+      "provenance": "institutional"
+    },
+    {
+      "id": "gap-marinilla-coverage",
+      "missing_information": "Cobertura del reporte de medidas de adaptación en Marinilla",
+      "why_it_matters": "Marinilla tiene un solo registro. Eso no demuestra menor actividad de adaptación.",
+      "which_decision_it_could_change": "El término de recurrencia de cualquier medida localizada en Marinilla.",
+      "how_to_collect_it": "Completar PAI, PICCA y acciones municipales de Marinilla con la misma ficha de los otros municipios.",
+      "responsible_actor_if_known": "CORNARE y municipio de Marinilla",
+      "priority": "alta",
+      "provenance": "team_inference"
+    }
+  ]
+}

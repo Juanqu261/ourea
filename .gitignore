@@ -30,6 +30,11 @@ playwright/.cache/
 # Local climate-extract cache (CHIRPS rasters/series; never commit)
 .cache/
 
+# Official challenge drop at the repo root. The zip exceeds GitHub's file limit.
+# A bare name would also hide docs/climaterisk and scripts/climaterisk.
+# Derived datasets live in frontend/public/data/cornare/.
+/CLIMATERISK/
+
 # OS and editor
 .DS_Store
 Thumbs.db

@@ -1,0 +1,610 @@
+{
+  "schema": "ourea.cornare.adaptation_history",
+  "source_file": "CLIMATERISK/REPORTE MEDIDAS DE ADAPTACIÓN MUNICIPIOS.xlsx",
+  "source_rows": 300,
+  "scoped_rows": 28,
+  "hazard_label_is_not_vulnerability_index": true,
+  "coverage_min_records_for_recurrence": 5,
+  "coverage": [
+    {
+      "municipality_id": "rionegro",
+      "records": 11,
+      "investment_cop_sum": 5458916347.0,
+      "null_investment_rows": 0,
+      "hazard_label_counts": {
+        "Incendios forestales": 2,
+        "No Aplica": 3,
+        "Inundaciones": 4,
+        "Movimiento en masa": 2
+      },
+      "note": "Cobertura suficiente para leer recurrencia documentada, no para afirmar que no hay más acciones."
+    },
+    {
+      "municipality_id": "guarne",
+      "records": 16,
+      "investment_cop_sum": 13471586529.0,
+      "null_investment_rows": 0,
+      "hazard_label_counts": {
+        "No Aplica": 13,
+        "Inundaciones": 1,
+        "Vendavales": 1,
+        "Movimiento en masa": 1
+      },
+      "note": "Cobertura suficiente para leer recurrencia documentada, no para afirmar que no hay más acciones."
+    },
+    {
+      "municipality_id": "marinilla",
+      "records": 1,
+      "investment_cop_sum": 17500000.0,
+      "null_investment_rows": 0,
+      "hazard_label_counts": {
+        "No Aplica": 1
+      },
+      "note": "Pocos registros no significan poca adaptación. La recurrencia no se califica como cero."
+    }
+  ],
+  "matches": [
+    {
+      "intervention_id": "bio_psa",
+      "municipality_id": "rionegro",
+      "count": 1,
+      "years": [
+        2025
+      ],
+      "plans": [
+        "PICCA"
+      ],
+      "indicators": [
+        "# de beneficiarios de la estrategia de PSA anuales."
+      ],
+      "sample_measure": "Instrumentos de compensación y pago por servicios ambientales",
+      "match_provenance": "team_inference",
+      "match_note": "Coincidencia por frase explícita del catálogo del reto. No es una evaluación de efectividad."
+    },
+    {
+      "intervention_id": "bio_restore",
+      "municipality_id": "rionegro",
+      "count": 2,
+      "years": [
+        2023,
+        2025
+      ],
+      "plans": [
+        "PICCA"
+      ],
+      "indicators": [
+        "COP$ invertido en proyectos de restauración."
+      ],
+      "sample_measure": "Restauración de ecosistemas estratégicos",
+      "match_provenance": "team_inference",
+      "match_note": "Coincidencia por frase explícita del catálogo del reto. No es una evaluación de efectividad."
+    },
+    {
+      "intervention_id": "water_riparian",
+      "municipality_id": "rionegro",
+      "count": 1,
+      "years": [
+        2023
+      ],
+      "plans": [
+        "PICCA"
+      ],
+      "indicators": [
+        "# de planes de manejo y monitoreo diseñados e implementados."
+      ],
+      "sample_measure": "Protección y recuperación de rondas hídricas",
+      "match_provenance": "team_inference",
+      "match_note": "Coincidencia por frase explícita del catálogo del reto. No es una evaluación de efectividad."
+    },
+    {
+      "intervention_id": "bio_psa",
+      "municipality_id": "guarne",
+      "count": 3,
+      "years": [
+        2023,
+        2024,
+        2025
+      ],
+      "plans": [
+        "PICCA"
+      ],
+      "indicators": [
+        "# de beneficiarios de la estrategia de PSA anuales."
+      ],
+      "sample_measure": "Instrumentos de compensación y pago por servicios ambientales",
+      "match_provenance": "team_inference",
+      "match_note": "Coincidencia por frase explícita del catálogo del reto. No es una evaluación de efectividad."
+    },
+    {
+      "intervention_id": "bio_restore",
+      "municipality_id": "guarne",
+      "count": 1,
+      "years": [
+        2024
+      ],
+      "plans": [
+        "PICCA"
+      ],
+      "indicators": [
+        "COP$ invertido en proyectos de restauración."
+      ],
+      "sample_measure": "Restauración de ecosistemas estratégicos",
+      "match_provenance": "team_inference",
+      "match_note": "Coincidencia por frase explícita del catálogo del reto. No es una evaluación de efectividad."
+    },
+    {
+      "intervention_id": "food_agro",
+      "municipality_id": "guarne",
+      "count": 4,
+      "years": [
+        2022,
+        2023,
+        2024,
+        2025
+      ],
+      "plans": [
+        "PICCA"
+      ],
+      "indicators": [
+        "# de asistencias técnicas integrales agropecuarias realizadas por las entidades territoriales anualmente",
+        "# de capacitaciones realizadas",
+        "# de familias beneficiadas"
+      ],
+      "sample_measure": "Producción agroecológica y económica campesina",
+      "match_provenance": "team_inference",
+      "match_note": "Coincidencia por frase explícita del catálogo del reto. No es una evaluación de efectividad."
+    }
+  ],
+  "max_adequate_match_count": 4,
+  "records": [
+    {
+      "source_row": 149,
+      "municipality_name": "RIONEGRO",
+      "municipality_id": "rionegro",
+      "in_decision_scope": true,
+      "subregion": "Valles",
+      "year": 2025,
+      "plan": "PICCA",
+      "line": "Ecosistemas y sus servicios",
+      "measure": "Instrumentos de compensación y pago por servicios ambientales",
+      "indicator": "# de beneficiarios de la estrategia de PSA anuales.",
+      "ecosystem": "Bosque Natural",
+      "hazard_label": "Incendios forestales",
+      "investment_cop": 820000000.0,
+      "matched_intervention_id": "bio_psa"
+    },
+    {
+      "source_row": 150,
+      "municipality_name": "RIONEGRO",
+      "municipality_id": "rionegro",
+      "in_decision_scope": true,
+      "subregion": "Valles",
+      "year": 2025,
+      "plan": "PAI",
+      "line": "Autoridad ambiental y gestión integral de los recursos naturales",
+      "measure": "Municipios con Planes de Descontaminación por ruido Formulados, actualizados y en implementación",
+      "indicator": "Numero de planes Formulados y/o actualizados",
+      "ecosystem": "Área Urbana/Ciudad",
+      "hazard_label": "No Aplica",
+      "investment_cop": 279166263.0,
+      "matched_intervention_id": null
+    },
+    {
+      "source_row": 159,
+      "municipality_name": "GUARNE",
+      "municipality_id": "guarne",
+      "in_decision_scope": true,
+      "subregion": "Valles",
+      "year": 2025,
+      "plan": "PAI",
+      "line": "Educación, participación y comunicación",
+      "measure": "Asesorar y/o fortalecer los PRAES de las instituciones educativas en 26 municipios",
+      "indicator": "Numero de municipios asesorados y/o fortalecidos",
+      "ecosystem": "Zona Rural",
+      "hazard_label": "No Aplica",
+      "investment_cop": 72487183.0,
+      "matched_intervention_id": null
+    },
+    {
+      "source_row": 161,
+      "municipality_name": "RIONEGRO",
+      "municipality_id": "rionegro",
+      "in_decision_scope": true,
+      "subregion": "Valles",
+      "year": 2025,
+      "plan": "PAI",
+      "line": "Cambio Climático y Gestión del Riesgo",
+      "measure": "Limpieza, mantenimiento y adecuación de ríos y quebradas en veintiséis (26) corrientes priorizadas de las áreas urbanas y centros poblados",
+      "indicator": "Numero de quebradas intervenidas",
+      "ecosystem": "Ríos",
+      "hazard_label": "Inundaciones",
+      "investment_cop": 475868957.0,
+      "matched_intervention_id": null
+    },
+    {
+      "source_row": 173,
+      "municipality_name": "GUARNE",
+      "municipality_id": "guarne",
+      "in_decision_scope": true,
+      "subregion": "Valles",
+      "year": 2025,
+      "plan": "PICCA",
+      "line": "Desarrollo agropecuario resiliente",
+      "measure": "Producción agroecológica y económica campesina",
+      "indicator": "# de capacitaciones realizadas",
+      "ecosystem": "Zona Rural",
+      "hazard_label": "No Aplica",
+      "investment_cop": 21200000.0,
+      "matched_intervention_id": "food_agro"
+    },
+    {
+      "source_row": 174,
+      "municipality_name": "GUARNE",
+      "municipality_id": "guarne",
+      "in_decision_scope": true,
+      "subregion": "Valles",
+      "year": 2025,
+      "plan": "PICCA",
+      "line": "Energía y transporte resiliente",
+      "measure": "Estufas eficientes",
+      "indicator": "# de entes de financiación y organizaciones asociadas a la iniciativa de estufas eficientes.",
+      "ecosystem": "Zona Rural",
+      "hazard_label": "No Aplica",
+      "investment_cop": 56837160.0,
+      "matched_intervention_id": null
+    },
+    {
+      "source_row": 178,
+      "municipality_name": "GUARNE",
+      "municipality_id": "guarne",
+      "in_decision_scope": true,
+      "subregion": "Valles",
+      "year": 2025,
+      "plan": "PICCA",
+      "line": "Ecosistemas y sus servicios",
+      "measure": "Instrumentos de compensación y pago por servicios ambientales",
+      "indicator": "# de beneficiarios de la estrategia de PSA anuales.",
+      "ecosystem": "Bosque Natural",
+      "hazard_label": "No Aplica",
+      "investment_cop": 142208685.0,
+      "matched_intervention_id": "bio_psa"
+    },
+    {
+      "source_row": 179,
+      "municipality_name": "RIONEGRO",
+      "municipality_id": "rionegro",
+      "in_decision_scope": true,
+      "subregion": "Valles",
+      "year": 2025,
+      "plan": "PICCA",
+      "line": "Ecosistemas y sus servicios",
+      "measure": "Restauración de ecosistemas estratégicos",
+      "indicator": "COP$ invertido en proyectos de restauración.",
+      "ecosystem": "Área Protegida",
+      "hazard_label": "Incendios forestales",
+      "investment_cop": 183169900.0,
+      "matched_intervention_id": "bio_restore"
+    },
+    {
+      "source_row": 182,
+      "municipality_name": "RIONEGRO",
+      "municipality_id": "rionegro",
+      "in_decision_scope": true,
+      "subregion": "Valles",
+      "year": 2025,
+      "plan": "PAI",
+      "line": "Educación, participación y comunicación",
+      "measure": "Acompañamiento y/o apoyo de los 27 Comités Interinstitucionales de Educación Ambiental (CIDEA y CIDEAM)",
+      "indicator": "Número de Comités acompañados y apoyados",
+      "ecosystem": "Área Urbana/Ciudad",
+      "hazard_label": "Inundaciones",
+      "investment_cop": 35044000.0,
+      "matched_intervention_id": null
+    },
+    {
+      "source_row": 184,
+      "municipality_name": "GUARNE",
+      "municipality_id": "guarne",
+      "in_decision_scope": true,
+      "subregion": "Valles",
+      "year": 2024,
+      "plan": "PICCA",
+      "line": "Ecosistemas y sus servicios",
+      "measure": "Instrumentos de compensación y pago por servicios ambientales",
+      "indicator": "# de beneficiarios de la estrategia de PSA anuales.",
+      "ecosystem": "Bosque Natural",
+      "hazard_label": "No Aplica",
+      "investment_cop": 25859901.0,
+      "matched_intervention_id": "bio_psa"
+    },
+    {
+      "source_row": 187,
+      "municipality_name": "RIONEGRO",
+      "municipality_id": "rionegro",
+      "in_decision_scope": true,
+      "subregion": "Valles",
+      "year": 2024,
+      "plan": "PAI",
+      "line": "Educación, participación y comunicación",
+      "measure": "Involucrar a la ciudadanía en la gestión institucional para el fortalecimiento de la participación y el control social",
+      "indicator": "numero de Acciones de participación realizadas (planeación, divulgación, desarrollo, evaluación y acciones de mejora)",
+      "ecosystem": "Zona Rural",
+      "hazard_label": "No Aplica",
+      "investment_cop": 32000000.0,
+      "matched_intervention_id": null
+    },
+    {
+      "source_row": 199,
+      "municipality_name": "GUARNE",
+      "municipality_id": "guarne",
+      "in_decision_scope": true,
+      "subregion": "Valles",
+      "year": 2024,
+      "plan": "PICCA",
+      "line": "Desarrollo agropecuario resiliente",
+      "measure": "Producción agroecológica y económica campesina",
+      "indicator": "# de familias beneficiadas",
+      "ecosystem": "Zona Rural",
+      "hazard_label": "No Aplica",
+      "investment_cop": 40000000.0,
+      "matched_intervention_id": "food_agro"
+    },
+    {
+      "source_row": 204,
+      "municipality_name": "GUARNE",
+      "municipality_id": "guarne",
+      "in_decision_scope": true,
+      "subregion": "Valles",
+      "year": 2024,
+      "plan": "PICCA",
+      "line": "Ecosistemas y sus servicios",
+      "measure": "Restauración de ecosistemas estratégicos",
+      "indicator": "COP$ invertido en proyectos de restauración.",
+      "ecosystem": "Zona Rural",
+      "hazard_label": "Inundaciones",
+      "investment_cop": 830391679.0,
+      "matched_intervention_id": "bio_restore"
+    },
+    {
+      "source_row": 222,
+      "municipality_name": "GUARNE",
+      "municipality_id": "guarne",
+      "in_decision_scope": true,
+      "subregion": "Valles",
+      "year": 2023,
+      "plan": "PICCA",
+      "line": "Desarrollo urbano resiliente",
+      "measure": "Gestión de rellenos sanitarios enfocada a la reducción de emisiones GEI",
+      "indicator": "# Campañas de selección en sitio y reciclaje.",
+      "ecosystem": "Área Urbana/Ciudad",
+      "hazard_label": "No Aplica",
+      "investment_cop": 266204000.0,
+      "matched_intervention_id": null
+    },
+    {
+      "source_row": 226,
+      "municipality_name": "RIONEGRO",
+      "municipality_id": "rionegro",
+      "in_decision_scope": true,
+      "subregion": "Valles",
+      "year": 2023,
+      "plan": "PAI",
+      "line": "Cambio Climático y Gestión del Riesgo",
+      "measure": "Control y mitigación de procesos erosivos a través de obras estructurales, biomecánicas y ecosistémicas en treinta (30) procesos priorizados en la región",
+      "indicator": "Numero de procesos erosivos intervenidos",
+      "ecosystem": "Zona Rural",
+      "hazard_label": "Movimiento en masa",
+      "investment_cop": 1752946885.0,
+      "matched_intervention_id": null
+    },
+    {
+      "source_row": 228,
+      "municipality_name": "GUARNE",
+      "municipality_id": "guarne",
+      "in_decision_scope": true,
+      "subregion": "Valles",
+      "year": 2023,
+      "plan": "PICCA",
+      "line": "Competitividad regional e impulso a nuevas economías",
+      "measure": "Impulsar un sector agropecuario competitivo productivo y resiliente",
+      "indicator": "# de UPA con sistemas de riego implementado.",
+      "ecosystem": "Zona Rural",
+      "hazard_label": "Vendavales",
+      "investment_cop": 54999896.0,
+      "matched_intervention_id": null
+    },
+    {
+      "source_row": 229,
+      "municipality_name": "GUARNE",
+      "municipality_id": "guarne",
+      "in_decision_scope": true,
+      "subregion": "Valles",
+      "year": 2023,
+      "plan": "PICCA",
+      "line": "Ecosistemas y sus servicios",
+      "measure": "Instrumentos de compensación y pago por servicios ambientales",
+      "indicator": "# de beneficiarios de la estrategia de PSA anuales.",
+      "ecosystem": "Bosque Natural",
+      "hazard_label": "No Aplica",
+      "investment_cop": 39547566.0,
+      "matched_intervention_id": "bio_psa"
+    },
+    {
+      "source_row": 233,
+      "municipality_name": "GUARNE",
+      "municipality_id": "guarne",
+      "in_decision_scope": true,
+      "subregion": "Valles",
+      "year": 2023,
+      "plan": "PICCA",
+      "line": "Desarrollo urbano resiliente",
+      "measure": "Gestión de rellenos sanitarios enfocada a la reducción de emisiones GEI",
+      "indicator": "# Campañas de compostaje tanto urbano como rural.",
+      "ecosystem": "Zona Rural",
+      "hazard_label": "No Aplica",
+      "investment_cop": 0.0,
+      "matched_intervention_id": null
+    },
+    {
+      "source_row": 239,
+      "municipality_name": "RIONEGRO",
+      "municipality_id": "rionegro",
+      "in_decision_scope": true,
+      "subregion": "Valles",
+      "year": 2023,
+      "plan": "PICCA",
+      "line": "Ecosistemas y sus servicios",
+      "measure": "Protección y recuperación de rondas hídricas",
+      "indicator": "# de planes de manejo y monitoreo diseñados e implementados.",
+      "ecosystem": "Ríos",
+      "hazard_label": "Inundaciones",
+      "investment_cop": 253512195.0,
+      "matched_intervention_id": "water_riparian"
+    },
+    {
+      "source_row": 241,
+      "municipality_name": "GUARNE",
+      "municipality_id": "guarne",
+      "in_decision_scope": true,
+      "subregion": "Valles",
+      "year": 2023,
+      "plan": "PICCA",
+      "line": "Desarrollo agropecuario resiliente",
+      "measure": "Producción agroecológica y económica campesina",
+      "indicator": "# de asistencias técnicas integrales agropecuarias realizadas por las entidades territoriales anualmente",
+      "ecosystem": "Zona Rural",
+      "hazard_label": "No Aplica",
+      "investment_cop": 90765100.0,
+      "matched_intervention_id": "food_agro"
+    },
+    {
+      "source_row": 246,
+      "municipality_name": "RIONEGRO",
+      "municipality_id": "rionegro",
+      "in_decision_scope": true,
+      "subregion": "Valles",
+      "year": 2023,
+      "plan": "PICCA",
+      "line": "Ecosistemas y sus servicios",
+      "measure": "Restauración de ecosistemas estratégicos",
+      "indicator": "COP$ invertido en proyectos de restauración.",
+      "ecosystem": "Zona Rural",
+      "hazard_label": "Inundaciones",
+      "investment_cop": 269873478.0,
+      "matched_intervention_id": "bio_restore"
+    },
+    {
+      "source_row": 265,
+      "municipality_name": "GUARNE",
+      "municipality_id": "guarne",
+      "in_decision_scope": true,
+      "subregion": "Valles",
+      "year": 2022,
+      "plan": "PICCA",
+      "line": "Desarrollo agropecuario resiliente",
+      "measure": "Producción agroecológica y económica campesina",
+      "indicator": "# de familias beneficiadas",
+      "ecosystem": "Zona Rural",
+      "hazard_label": "No Aplica",
+      "investment_cop": 22050000.0,
+      "matched_intervention_id": "food_agro"
+    },
+    {
+      "source_row": 268,
+      "municipality_name": "RIONEGRO",
+      "municipality_id": "rionegro",
+      "in_decision_scope": true,
+      "subregion": "Valles",
+      "year": 2022,
+      "plan": "PAI",
+      "line": "Crecimiento verde, economía circular e innovación",
+      "measure": "Fomento a la Estrategia Nacional de Económica Circular ENEC para el manejo de los residuos solidos orgánicos en los 26 municipios",
+      "indicator": "Municipios asesorados en la actualización de los PGIRS con lineamientos de economía circular",
+      "ecosystem": "Área Urbana/Ciudad",
+      "hazard_label": "No Aplica",
+      "investment_cop": 772212000.0,
+      "matched_intervention_id": null
+    },
+    {
+      "source_row": 283,
+      "municipality_name": "GUARNE",
+      "municipality_id": "guarne",
+      "in_decision_scope": true,
+      "subregion": "Valles",
+      "year": 2022,
+      "plan": "PICCA",
+      "line": "Desarrollo urbano resiliente",
+      "measure": "Infraestructura para la movilidad sostenible y sistema",
+      "indicator": "# de vías mejoradas.",
+      "ecosystem": "Zona Rural",
+      "hazard_label": "No Aplica",
+      "investment_cop": 9504912958.0,
+      "matched_intervention_id": null
+    },
+    {
+      "source_row": 286,
+      "municipality_name": "GUARNE",
+      "municipality_id": "guarne",
+      "in_decision_scope": true,
+      "subregion": "Valles",
+      "year": 2022,
+      "plan": "PICCA",
+      "line": "Competitividad regional e impulso a nuevas economías",
+      "measure": "Promover un turismo Sostenible",
+      "indicator": "# de personas capacitadas en temas de turismo.",
+      "ecosystem": "Zona Rural",
+      "hazard_label": "No Aplica",
+      "investment_cop": 0.0,
+      "matched_intervention_id": null
+    },
+    {
+      "source_row": 299,
+      "municipality_name": "RIONEGRO",
+      "municipality_id": "rionegro",
+      "in_decision_scope": true,
+      "subregion": "Valles",
+      "year": 2021,
+      "plan": "PAI",
+      "line": "Cambio Climático y Gestión del Riesgo",
+      "measure": "Control y mitigación de procesos erosivos a través de obras estructurales, biomecánicas y ecosistémicas en treinta (30) procesos priorizados en la región",
+      "indicator": "Numero de procesos erosivos intervenidos",
+      "ecosystem": "Zona Rural",
+      "hazard_label": "Movimiento en masa",
+      "investment_cop": 585122669.0,
+      "matched_intervention_id": null
+    },
+    {
+      "source_row": 300,
+      "municipality_name": "MARINILLA",
+      "municipality_id": "marinilla",
+      "in_decision_scope": true,
+      "subregion": "Valles",
+      "year": 2021,
+      "plan": "PICCA",
+      "line": "Desarrollo urbano resiliente",
+      "measure": "Gestión de rellenos sanitarios enfocada a la reducción de emisiones GEI",
+      "indicator": "# Campañas de selección en sitio y reciclaje.",
+      "ecosystem": "Área Urbana/Ciudad",
+      "hazard_label": "No Aplica",
+      "investment_cop": 17500000.0,
+      "matched_intervention_id": null
+    },
+    {
+      "source_row": 301,
+      "municipality_name": "GUARNE",
+      "municipality_id": "guarne",
+      "in_decision_scope": true,
+      "subregion": "Valles",
+      "year": 2020,
+      "plan": "PICCA",
+      "line": "Desarrollo urbano resiliente",
+      "measure": "Infraestructura para la movilidad sostenible y sistema",
+      "indicator": "# de vías mejoradas.",
+      "ecosystem": "Zona Rural",
+      "hazard_label": "Movimiento en masa",
+      "investment_cop": 2304122401.0,
+      "matched_intervention_id": null
+    }
+  ],
+  "out_of_scope_row_count": 272
+}

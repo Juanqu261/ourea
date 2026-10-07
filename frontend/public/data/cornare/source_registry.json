@@ -1,0 +1,102 @@
+{
+  "schema": "ourea.cornare.source_registry",
+  "accessed": "2026-10-07",
+  "sources": [
+    {
+      "id": "reto-brief-2026",
+      "title": "Climate Risk Hackathon for Cities. Reto propuesto por CORNARE",
+      "institution": "CORNARE",
+      "year": 2026,
+      "url": null,
+      "file": "CLIMATERISK/RETO CLIMATE WEEK HACKATHON.pdf",
+      "level": 1,
+      "kind": "official",
+      "claim": "Pregunta del reto, corredor, fondo de 5.000 millones, catálogo, costos y hallazgos numéricos citados.",
+      "accessed": "2026-10-07"
+    },
+    {
+      "id": "hackathon-deck-2026",
+      "title": "Riesgos climáticos en la jurisdicción de CORNARE",
+      "institution": "CORNARE",
+      "year": 2026,
+      "url": null,
+      "file": "CLIMATERISK/HACKATHON RETO CORNARE.pptx",
+      "level": 1,
+      "kind": "official",
+      "claim": "Matriz de clases por municipio y dimensión, pesos 70/15/15, meta regional de 30% a 2035 y arquitectura del MEA.",
+      "accessed": "2026-10-07"
+    },
+    {
+      "id": "adaptacion-municipios",
+      "title": "Reporte de medidas de adaptación por municipio",
+      "institution": "CORNARE",
+      "year": 2026,
+      "url": null,
+      "file": "CLIMATERISK/REPORTE MEDIDAS DE ADAPTACIÓN MUNICIPIOS.xlsx",
+      "level": 1,
+      "kind": "official",
+      "claim": "Historial de medidas, planes, indicadores y montos. La columna Vulnerabilidad es un tipo de amenaza, no el índice.",
+      "accessed": "2026-10-07"
+    },
+    {
+      "id": "observatorio-cornare",
+      "title": "Observatorio Ambiental de CORNARE, cambio climático",
+      "institution": "CORNARE",
+      "year": 2026,
+      "url": "https://observatorioambiental.cornare.gov.co/crecimiento-verde-y-cambio-climatico/cambio-climatico/",
+      "file": null,
+      "level": 2,
+      "kind": "official",
+      "claim": "Fuente pública para consultar amenaza, vulnerabilidad y riesgo. No sustituye las cifras ya dadas en el reto.",
+      "accessed": "2026-10-07"
+    },
+    {
+      "id": "marco-cornare",
+      "title": "MARCO, Monitoreo Ambiental Regional CORNARE",
+      "institution": "CORNARE",
+      "year": 2026,
+      "url": "https://marco.cornare.gov.co/",
+      "file": null,
+      "level": 2,
+      "kind": "official",
+      "claim": "Contexto hidrometeorológico. El enlace está en el reto. La verificación SSL local falló; no se extrajeron series.",
+      "accessed": "2026-10-07"
+    },
+    {
+      "id": "dane-mgn-2025",
+      "title": "Marco Geoestadístico Nacional 2025, capa Municipio",
+      "institution": "DANE",
+      "year": 2025,
+      "url": "https://geoportal.dane.gov.co/mparcgis/rest/services/Divipola/Serv_DIVIPOLA_MGN_2025/FeatureServer/317",
+      "file": "frontend/public/data/cornare/municipalities.geojson",
+      "level": 3,
+      "kind": "official",
+      "claim": "Límites municipales de Guarne (05318), Marinilla (05440) y Rionegro (05615).",
+      "accessed": "2026-10-07"
+    },
+    {
+      "id": "iucn-nbs-2020",
+      "title": "Global Standard for Nature-based Solutions",
+      "institution": "IUCN",
+      "year": 2020,
+      "url": "https://doi.org/10.2305/IUCN.CH.2020.08.en",
+      "file": null,
+      "level": 4,
+      "kind": "official",
+      "claim": "Definición y criterios de soluciones basadas en la naturaleza. Se usa como tamiz conceptual, no como certificación de las medidas.",
+      "accessed": "2026-10-07"
+    },
+    {
+      "id": "ipcc-ar6-wg2",
+      "title": "Climate Change 2022: Impacts, Adaptation and Vulnerability. Working Group II",
+      "institution": "IPCC",
+      "year": 2022,
+      "url": "https://www.ipcc.ch/report/ar6/wg2/",
+      "file": null,
+      "level": 4,
+      "kind": "peer-reviewed",
+      "claim": "La adaptación basada en ecosistemas y las decisiones bajo incertidumbre se evalúan con escenarios. No se importan porcentajes de efectividad.",
+      "accessed": "2026-10-07"
+    }
+  ]
+}
