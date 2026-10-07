@@ -1,0 +1,18 @@
+{
+  "schema": "ourea.decision_ai.synthetic_org",
+  "banner": "SINTÉTICA",
+  "note": "Organización inventada para la demostración. No representa a ninguna empresa real. Sus respuestas nunca entran a un producto.",
+  "org": {
+    "label": "Cultivo de flores sintético del corredor",
+    "synthetic": true,
+    "sector": "floricultura",
+    "municipality_id": "rionegro"
+  },
+  "answers": {
+    "gap-company-water": "Tomamos agua de la quebrada La Pereira y tenemos un reservorio propio; si la quebrada baja, dependemos del acueducto veredal.",
+    "gap-suppliers": "Los esquejes y el material de empaque llegan de proveedores en Rionegro y Medellín.",
+    "gap-workers": "Casi todo el personal vive en Rionegro y Marinilla; no tenemos el porcentaje exacto.",
+    "gap-energy": "No sabemos de qué circuito dependemos.",
+    "gap-company-road": "Sacamos la flor por la vía Rionegro–aeropuerto."
+  }
+}

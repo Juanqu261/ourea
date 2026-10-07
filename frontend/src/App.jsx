@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import {
   Activity, ChevronLeft, ChevronRight, CloudRain, Database, FileDown, Info,
-  Layers, Leaf, Map as MapIcon, ShieldCheck, Target, TriangleAlert,
+  Layers, Leaf, Map as MapIcon, MessageCircle, ShieldCheck, Target, TriangleAlert,
 } from 'lucide-react';
 import { OureaLogo } from './components/OureaLogo.jsx';
 import { analyzeCorridor, bundleDataset } from './domain/cornareDecision.js';
@@ -16,6 +16,11 @@ import { focusForMeasure } from './cornare/map/focus.js';
 import { downloadDecisionJson, downloadPitchPdf } from './cornare/exportDecision.js';
 import { loadCornareData } from './cornare/loadData.js';
 import { EngineAnnex, GapRanking, LeverGrid, RobustnessStep } from './cornare/EnginePanels.jsx';
+import { buildProducts } from './cornare/products.js';
+import { serviceHealth } from './cornare/ai/client.js';
+import { AuditBadge } from './cornare/ai/AuditBadge.jsx';
+import { CopilotDrawer } from './cornare/ai/CopilotDrawer.jsx';
+import { InterviewDemo } from './cornare/ai/InterviewDemo.jsx';
 
 const ICONS = {
   territory: MapIcon,
@@ -49,9 +54,13 @@ export default function App() {
   const [selectedMunicipality, setSelectedMunicipality] = useState(null);
   const [horizon, setHorizon] = useState('reference');
   const [openWhy, setOpenWhy] = useState(null);
+  // The local decision AI service (services/decision_ai). null on Pages or when it does not answer.
+  const [service, setService] = useState(null);
+  const [copilotFocusId, setCopilotFocusId] = useState(null);
 
   useEffect(() => {
     loadCornareData().then(setRaw).catch((cause) => setError(cause.message));
+    serviceHealth().then(setService);
   }, []);
 
   useEffect(() => {
@@ -73,6 +82,7 @@ export default function App() {
     profiles: raw.profiles,
   }) : null), [raw]);
   const analysis = useMemo(() => (dataset ? analyzeCorridor(dataset) : null), [dataset]);
+  const auditProducts = useMemo(() => (analysis && raw ? buildProducts(analysis, raw) : null), [analysis, raw]);
   const [focusId, setFocusId] = useState(null);
 
   if (error) {
@@ -84,7 +94,10 @@ export default function App() {
 
   const activeFocusId = focusId ?? analysis.portfolio.measures[0]?.id;
   const focused = analysis.portfolio.measures.find((measure) => measure.id === activeFocusId) ?? null;
-  const focus = step === 'portfolio' && focused ? focusForMeasure(focused) : null;
+  const copilotMeasure = copilotFocusId ? analysis.byId.get(copilotFocusId) : null;
+  const focus = copilotMeasure
+    ? focusForMeasure(copilotMeasure)
+    : step === 'portfolio' && focused ? focusForMeasure(focused) : null;
   const mapDimension = step === 'horizon' ? 'disaster' : dimensionId;
   const mapMetric = step === 'horizon' ? 'risk' : metric;
   const mapScenario = step === 'horizon' && horizon === '2060' ? 'ssp3_7_0' : 'reference';
@@ -94,6 +107,10 @@ export default function App() {
   const steps = STEPS.filter((item) => item.id !== 'robustness' || raw.engine.robustness);
   const stepIndex = steps.findIndex((item) => item.id === step);
   const StepIcon = ICONS[step];
+  const goTo = (id) => {
+    setCopilotFocusId(null);
+    setStep(id);
+  };
 
   return (
     <div className="shell">
@@ -108,8 +125,11 @@ export default function App() {
         <p className="budget-pill" data-testid="budget-pill">COP 5.000 M</p>
         <div className="shell-actions">
           <button type="button" data-testid="open-sources" aria-label="Fuentes" onClick={() => setDrawer('sources')}><Database size={16} /> <span className="action-label">Fuentes</span></button>
+          {service?.ai_enabled && (
+            <button type="button" data-testid="open-copilot" aria-label="Preguntar" onClick={() => setDrawer('copilot')}><MessageCircle size={16} /> <span className="action-label">Preguntar</span></button>
+          )}
           <button type="button" data-testid="open-method" aria-label="Método" onClick={() => setDrawer('method')}><Info size={16} /> <span className="action-label">Método</span></button>
-          <button type="button" data-testid="export-json" aria-label="Exportar" onClick={() => downloadDecisionJson(analysis)}><FileDown size={16} /> <span className="action-label">Exportar</span></button>
+          <button type="button" data-testid="export-json" aria-label="Exportar" onClick={() => downloadDecisionJson(analysis, auditProducts)}><FileDown size={16} /> <span className="action-label">Exportar</span></button>
         </div>
       </header>
       <div className="shell-body">
@@ -144,7 +164,10 @@ export default function App() {
                 analysis={analysis}
                 raw={raw}
                 focusId={activeFocusId}
-                setFocusId={setFocusId}
+                setFocusId={(id) => {
+                  setCopilotFocusId(null);
+                  setFocusId(id);
+                }}
                 openWhy={openWhy}
                 setOpenWhy={setOpenWhy}
                 onCompare={() => setDrawer('compare')}
@@ -158,14 +181,19 @@ export default function App() {
                 <GapRanking voi={raw.engine.voi} prepared={analysis.prepared} />
               </>
             )}
-            {step === 'residual' && <Residual analysis={analysis} />}
-            {step === 'followup' && <Followup analysis={analysis} engine={raw.engine} />}
+            {step === 'residual' && (
+              <>
+                <Residual analysis={analysis} />
+                {service?.ai_enabled && <InterviewDemo />}
+              </>
+            )}
+            {step === 'followup' && <Followup analysis={analysis} engine={raw.engine} audit={<AuditBadge service={service} bundle={auditProducts} />} />}
           </div>
           <div className="panel-actions">
-            <button type="button" data-testid="step-back" disabled={stepIndex === 0} onClick={() => setStep(steps[stepIndex - 1].id)}>
+            <button type="button" data-testid="step-back" disabled={stepIndex === 0} onClick={() => goTo(steps[stepIndex - 1].id)}>
               <ChevronLeft size={16} /> Atrás
             </button>
-            <button type="button" data-testid="step-next" disabled={stepIndex === steps.length - 1} onClick={() => setStep(steps[stepIndex + 1].id)}>
+            <button type="button" data-testid="step-next" disabled={stepIndex === steps.length - 1} onClick={() => goTo(steps[stepIndex + 1].id)}>
               Continuar <ChevronRight size={16} />
             </button>
           </div>
@@ -179,6 +207,19 @@ export default function App() {
             {drawer === 'method' && <Method />}
             {drawer === 'compare' && <Compare analysis={analysis} />}
             {drawer === 'matrix' && <DecisionMatrix rows={analysis.matrix.rows} />}
+            {drawer === 'copilot' && (
+              <CopilotDrawer
+                gaps={analysis.gaps}
+                onFocus={(id, close) => {
+                  setCopilotFocusId(id);
+                  if (close) setDrawer(null);
+                }}
+                onGap={() => {
+                  setDrawer(null);
+                  goTo('residual');
+                }}
+              />
+            )}
           </div>
         </div>
       )}
@@ -369,7 +410,7 @@ function Residual({ analysis }) {
   );
 }
 
-function Followup({ analysis, engine }) {
+function Followup({ analysis, engine, audit }) {
   return (
     <>
       <p>{analysis.mea.regional_context.statement}</p>
@@ -395,6 +436,7 @@ function Followup({ analysis, engine }) {
       <p data-testid="decision-line">Con la evidencia institucional verificada, Ourea asigna los COP 5.000 M a seis medidas. La selección no cambia ante el cambio SSP3-7.0 cuantificado para Rionegro, pero es sensible al componente participativo aún por integrar.</p>
       <button type="button" data-testid="export-pdf" onClick={() => downloadPitchPdf(analysis)}>Descargar PDF</button>
       <p className="fine">Huella {analysis.fingerprint}</p>
+      {audit}
       <EngineAnnex engine={engine} />
     </>
   );

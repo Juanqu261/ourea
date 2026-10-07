@@ -15,7 +15,7 @@ fi
 
 cd "$ROOT"
 echo "== Python syntax =="
-python -m compileall -q scripts decision_engine
+python -m compileall -q scripts decision_engine services
 
 echo "== Python unit tests =="
 python -m unittest discover -s tests -p "test_*.py" -v

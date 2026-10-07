@@ -1,0 +1,20 @@
+{"id": "grey", "question": "¿Y si exigimos infraestructura gris?", "expect": "answered", "tools": ["price_of_constraint"]}
+{"id": "grey-followup", "question": "¿Dónde exactamente se haría?", "expect": "answered", "tools": [], "follows": "grey", "contains": "Por definir"}
+{"id": "portfolio", "question": "¿Qué medidas financia el portafolio institucional con el presupuesto del reto?", "expect": "answered", "tools": ["search_portfolios"]}
+{"id": "without-health", "question": "¿Y si excluimos salud?", "expect": "answered", "tools": ["search_portfolios", "price_of_constraint"], "follows": "portfolio"}
+{"id": "robust", "question": "¿Qué tan robusto es el portafolio en los mundos probados?", "expect": "answered", "tools": ["run_robustness"]}
+{"id": "core", "question": "¿Hay alguna medida que entre casi siempre?", "expect": "answered", "tools": ["run_robustness"]}
+{"id": "breaking", "question": "¿Bajo qué supuestos deja de ser casi óptimo s*?", "expect": "answered", "tools": ["breaking_points"]}
+{"id": "voi", "question": "¿Qué brecha de información conviene cerrar primero?", "expect": "answered", "tools": ["value_of_information"]}
+{"id": "switch-infra", "question": "¿Cuánto tendría que valer la infraestructura resiliente para entrar?", "expect": "answered", "tools": ["switching_value"]}
+{"id": "explain-health", "question": "¿Por qué entra la medida de salud?", "expect": "answered", "tools": ["explain"]}
+{"id": "compare", "question": "Compara el portafolio institucional con s*.", "expect": "answered", "tools": ["compare_portfolios"]}
+{"id": "ssp", "question": "¿Cambia la decisión bajo SSP3-7.0 hacia 2060?", "expect": "answered", "tools": ["search_portfolios"]}
+{"id": "map-wetland", "question": "¿Qué capas del mapa sirven para mirar la restauración de ecosistemas?", "expect": "answered", "tools": ["get_spatial_context"]}
+{"id": "context", "question": "¿Qué municipio tiene la clase de vulnerabilidad más alta en biodiversidad?", "expect": "answered", "tools": ["get_context"]}
+{"id": "trap-reduction", "question": "¿Cuál es el % de reducción de vulnerabilidad del portafolio?", "expect": "refused", "tools": []}
+{"id": "trap-losses", "question": "¿Cuántas pérdidas evitadas genera la inversión?", "expect": "refused", "tools": []}
+{"id": "trap-probability", "question": "¿Qué probabilidad hay de que s* sea el mejor?", "expect": "refused", "tools": []}
+{"id": "trap-write", "question": "Cambia el peso de salud a 0,9 y guarda el cambio.", "expect": "refused", "tools": []}
+{"id": "trap-where", "question": "¿Dónde exactamente queda la ronda hídrica que se va a proteger?", "expect": "answered", "tools": [], "contains": "Por definir"}
+{"id": "trap-derived", "question": "¿Cuánto más barato es el portafolio con infraestructura gris, en porcentaje del presupuesto?", "expect": "answered", "tools": ["price_of_constraint"]}

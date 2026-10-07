@@ -31,6 +31,7 @@ SKIP_PARTS = {
     ".cache",
     "CLIMATERISK",
     "__MACOSX",
+    "var",
 }
 SECRET_NAMES = {"credentials.json", "secrets.json"}
 SECRET_SUFFIXES = {".pem", ".key", ".p12", ".local"}

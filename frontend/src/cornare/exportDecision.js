@@ -10,7 +10,8 @@ export function downloadPitchPdf(analysis) {
   URL.revokeObjectURL(url);
 }
 
-export function downloadDecisionJson(analysis) {
+// `auditBundle` (products.js) lets QA run `python -m services.decision_ai.audit <export.json>`.
+export function downloadDecisionJson(analysis, auditBundle = null) {
   const payload = {
     fingerprint: analysis.fingerprint,
     budget_million_cop: analysis.parameters.budget_million_cop,
@@ -30,6 +31,7 @@ export function downloadDecisionJson(analysis) {
     stress_status: analysis.stress.status,
     findings: analysis.findings,
     residual: analysis.residual.rows,
+    ...(auditBundle ? { audit_bundle: auditBundle } : {}),
   };
   const blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' });
   const url = URL.createObjectURL(blob);

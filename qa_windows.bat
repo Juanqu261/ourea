@@ -17,7 +17,7 @@ if exist "node_modules\.bin\vite.cmd" (
 
 cd ..
 echo == Python syntax ==
-python -m compileall -q scripts decision_engine
+python -m compileall -q scripts decision_engine services
 if errorlevel 1 exit /b 1
 
 echo == Python unit tests ==

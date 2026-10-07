@@ -1,0 +1,11 @@
+{
+  "products": [
+    {
+      "id": "P2",
+      "claims": [
+        {"text": "El portafolio reduce la vulnerabilidad en 17%.", "numbers": [0.17], "label": "Inferencia del equipo", "fingerprint": "fixture-portfolio"},
+        {"text": "Flores X S.A.S. depende de la vía Rionegro–aeropuerto.", "label": "Supuesto"}
+      ]
+    }
+  ]
+}

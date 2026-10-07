@@ -1,0 +1,13 @@
+# Ourea decision AI service (services/decision_ai). Install on top of requirements.txt.
+# Exact pins, like requirements.txt. Graph tests use a scripted model and need no key.
+langchain==1.4.3
+langchain-core==1.6.7
+langchain-openai==1.6.7
+langgraph==1.2.14
+langgraph-checkpoint==4.2.0
+langgraph-prebuilt==1.1.0
+pydantic==2.13.5
+fastapi==0.142.2
+uvicorn==0.54.0
+httpx==0.28.1
+python-dotenv==1.2.4

@@ -1,0 +1,65 @@
+{
+  "schema": "ourea.decision_ai.forbidden_claims",
+  "note": "One list shared by the copilot verifier and the auditor. Patterns are case-insensitive regular expressions.",
+  "claims": [
+    {
+      "id": "vulnerability_reduction",
+      "pattern": "%\\s*de\\s+reducci[oó]n|reducci[oó]n\\s+(de\\s+(la\\s+)?)?vulnerabilidad\\s+(de|del|en)\\s+\\d|vulnerabilidad\\s+reducida|reduce\\s+(la\\s+)?vulnerabilidad\\s+(en|un)\\s+\\d",
+      "message": "El puntaje es de prioridad. No mide un porcentaje de reducción de vulnerabilidad.",
+      "gap": "gap-effectiveness"
+    },
+    {
+      "id": "avoided_losses",
+      "pattern": "p[eé]rdidas\\s+evitadas|da[ñn]os\\s+evitados|riesgo\\s+evitado|evita(r[aá]|n)?\\s+p[eé]rdidas",
+      "message": "Ourea no estima pérdidas evitadas.",
+      "gap": "gap-effectiveness"
+    },
+    {
+      "id": "probability",
+      "pattern": "probabilidad|\\bprobable\\b|probabilidades",
+      "message": "La fracción de mundos probados no es una probabilidad. Se dice «casi óptimo en X% de los N mundos probados».",
+      "gap": null
+    },
+    {
+      "id": "map_polygon_as_site",
+      "pattern": "(sitio|lugar|ubicaci[oó]n|predio)(\\s+de\\s+(la\\s+)?(obra|intervenci[oó]n|medida))?\\s+(es|ser[aá]|queda|est[aá])\\s+(en\\s+)?(el|la|los|las)\\s+(humedal|ronda|[aá]rea\\s+protegida|quebrada|pol[ií]gono|zona)|se\\s+(implementar[aá]|construir[aá]|ubicar[aá]|har[aá])\\s+en\\s+(el|la)\\s+(humedal|ronda|[aá]rea\\s+protegida|pol[ií]gono)",
+      "message": "Una capa de contexto no es el sitio de intervención. La ubicación exacta está por definir.",
+      "gap": "gap-sites"
+    },
+    {
+      "id": "hazard_as_vulnerability",
+      "pattern": "(movimiento\\s+en\\s+masa|inundaci[oó]n)\\s+(es|como|equivale\\s+a|mide)\\s+(la\\s+|una\\s+)?vulnerabilidad|vulnerabilidad\\s+(clim[aá]tica\\s+)?(por|de)\\s+(movimiento\\s+en\\s+masa|inundaci[oó]n)",
+      "message": "Movimiento en masa e inundación son amenazas. No son la vulnerabilidad climática del reto.",
+      "gap": null
+    },
+    {
+      "id": "pomca_as_risk",
+      "pattern": "(estar|est[aá]n?|ubicad[oa]s?)\\s+(dentro\\s+)?(en|del)\\s+(el\\s+)?pomca[^.]{0,60}(riesgo|puntaje|prioridad|vulnerab)|pomca[^.]{0,30}(puntaje|[ií]ndice)\\s+de\\s+riesgo",
+      "message": "Estar dentro del POMCA no es un puntaje de riesgo.",
+      "gap": null
+    }
+  ],
+  "asks": [
+    {
+      "id": "vulnerability_reduction",
+      "pattern": "(%|porcentaje|cu[aá]nto)[^?]{0,40}reduc|reduc[^?]{0,30}(%|porcentaje)|vulnerabilidad\\s+reducida",
+      "gap": "gap-effectiveness"
+    },
+    {
+      "id": "avoided_losses",
+      "pattern": "p[eé]rdidas\\s+(se\\s+)?evita|evita(mos|r[aá]|n)?\\s+(en\\s+)?p[eé]rdidas|da[ñn]os\\s+evitados|cu[aá]nto\\s+(dinero\\s+)?(se\\s+)?ahorra",
+      "gap": "gap-effectiveness"
+    },
+    {
+      "id": "probability",
+      "pattern": "probabilidad|qu[eé]\\s+tan\\s+probable|\\bprobable\\b",
+      "gap": null
+    }
+  ],
+  "writes": {
+    "pattern": "(cambi[aá]|modific[aá]|edit[aá]|actualiz[aá]|ajust[aá]|sub[ií]|baj[aá]|pon[eé]|fij[aá])(r|lo|la)?\\s+(el|la|los|las)?\\s*(peso|pesos|modelo|presupuesto|dato|datos|clase|par[aá]metro|archivo|json)|guard[aá]\\s+(esto|el\\s+cambio)|edita\\s+el\\s+modelo"
+  },
+  "location": {
+    "pattern": "d[oó]nde\\s+(exactamente|queda|se\\s+(hace|har[aá]|construye|ubica|implementa))|ubicaci[oó]n\\s+exacta|en\\s+qu[eé]\\s+(predio|lugar|sitio)|qu[eé]\\s+predio"
+  }
+}

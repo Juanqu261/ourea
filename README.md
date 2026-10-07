@@ -77,9 +77,24 @@ python -m decision_engine.build --check  # falla si el JSON versionado no coinci
 
 La paridad con el motor JS (2,8125 · 2,38 · 2,9525 · `ourea-42aeaba8`) se prueba en `tests/test_engine_parity.py`. La capa de IA usa `decision_engine/api.py`.
 
+## Capa de IA (`services/decision_ai/`)
+
+Servicio local FastAPI con LangChain y LangGraph. No decide: lee el motor y explica. Detalle en [docs/decision_ai.md](docs/decision_ai.md).
+
+- **Herramientas y auditoría** (`/api/tools/*`, `/api/audit`): deterministas, sin llave ni modelo.
+- **Copiloto** «Pregúntale a la decisión», **entrevista de dependencias** (demo SINTÉTICA) y **auditor** de vocabulario: necesitan `OUREA_AI_ENABLED=1` y una llave.
+- Cada cifra del copiloto se verifica por código contra la salida de una herramienta y su huella. Si no pasa en dos intentos, responde solo con hechos de las herramientas.
+
+```bash
+pip install -r requirements.txt -r requirements-ai.txt
+uvicorn services.decision_ai.app:app --port 8787 --env-file .env
+python -m services.decision_ai.audit export.json                   # QA de la exportación, sin llave
+python -m services.decision_ai.ask "¿Y si exigimos infraestructura gris?"   # necesita llave
+```
+
 ## Arquitectura
 
-Aplicación React y Vite. El cálculo del portafolio corre en el navegador, sin un servicio de inteligencia artificial. El mapa usa MapLibre solo para los tres municipios.
+Aplicación React y Vite. El cálculo del portafolio corre en el navegador. GitHub Pages no usa el servicio de IA: sin `VITE_OUREA_AI_API_URL`, o si `/api/health` no responde, no aparece ningún control de IA. El mapa usa MapLibre solo para los tres municipios.
 
 Recorrido: Panorama, Diagnóstico, Priorizar, Portafolio, SSP3-7.0, Riesgo residual, MEA y Exportar.
 
@@ -104,7 +119,7 @@ npm run build
 Python 3.12:
 
 ```bash
-pip install -r requirements.txt
+pip install -r requirements.txt -r requirements-ai.txt
 python -m unittest discover -s tests -p "test_*.py" -v
 python scripts/climaterisk/validate_inputs.py
 ```

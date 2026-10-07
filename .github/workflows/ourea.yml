@@ -54,13 +54,15 @@ jobs:
         run: node -e "const fs=require('fs'); const files=fs.readdirSync('dist/assets'); if(!files.some(f=>f.startsWith('maplibre-')&&f.endsWith('.js'))) throw new Error('MapLibre chunk missing'); const app=files.filter(f=>f.endsWith('.js')&&!f.startsWith('maplibre-')); const initial=app.map(f=>'dist/assets/'+f).map(p=>fs.statSync(p).size); if(Math.max(...initial)>500000) throw new Error('Initial JS exceeded 500 kB'); console.log(files.join('\n'));"
 
       - name: Install Python QA dependencies
-        run: python -m pip install --upgrade pip && pip install -r requirements.txt
+        run: python -m pip install --upgrade pip && pip install -r requirements.txt -r requirements-ai.txt
 
       - id: python
-        name: Python syntax, unit tests, CORNARE inputs, and decision engine outputs
+        name: Python syntax, unit tests, AI service and audit, CORNARE inputs, and decision engine outputs
         run: |
-          python -m compileall -q scripts tests decision_engine
+          python -m compileall -q scripts tests decision_engine services
           python -m unittest discover -s tests -p "test_*.py" -v
+          node tests/js/audit_bundle.mjs > "$RUNNER_TEMP/audit_bundle.json"
+          python -m services.decision_ai.audit "$RUNNER_TEMP/audit_bundle.json"
           python scripts/climaterisk/validate_inputs.py
           python -m decision_engine.build --check
 
