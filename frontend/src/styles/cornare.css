@@ -59,6 +59,23 @@ body,
   color: var(--text-primary);
 }
 .shell-actions button { display: inline-flex; align-items: center; gap: 6px; padding: 0 12px; }
+/* base.css strips every button. Inside the panel, drawers and map card they look like buttons again;
+   :where keeps this at element specificity, so any component rule with a class still wins. */
+:where(.shell-panel, .drawer, .map-card) button {
+  min-height: 36px;
+  padding: 0 12px;
+  border: 1px solid var(--border-strong);
+  border-radius: 999px;
+  background: var(--surface);
+  color: var(--text-primary);
+}
+:where(.shell-panel, .drawer, .map-card) button:where(:hover:not(:disabled)) { border-color: var(--accent); }
+.primary-action {
+  border-color: var(--accent);
+  background: var(--accent);
+  color: var(--bg-primary);
+  font-weight: 600;
+}
 
 .shell-body {
   display: grid;
@@ -348,7 +365,7 @@ body,
   overflow-wrap: break-word;
   white-space: normal;
 }
-.decision-table.is-compact { width: 100%; min-width: 620px; table-layout: fixed; }
+.decision-table.is-compact { width: 100%; min-width: 480px; table-layout: fixed; }
 .decision-table.is-compact th[scope="row"] { min-width: 0; max-width: none; }
 .decision-table.is-compact .status-pill { white-space: normal; }
 .decision-table .measure-name { display: block; }
@@ -725,3 +742,102 @@ button:focus-visible, a:focus-visible { outline: 2px solid var(--accent-soft); o
 .audit-badge p { margin: 0; display: flex; align-items: center; gap: 6px; }
 .audit-badge.is-off { border-color: var(--border); color: var(--text-muted); }
 .audit-badge.is-blocked { border-color: #a8443f; }
+
+/* Export menu in the header. */
+.export-menu-wrap { position: relative; }
+.export-menu {
+  position: absolute;
+  top: calc(100% + 6px);
+  right: 0;
+  z-index: 30;
+  display: grid;
+  gap: 2px;
+  min-width: 250px;
+  padding: 6px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--bg-secondary);
+  box-shadow: var(--shadow);
+}
+.shell-actions .export-menu button {
+  display: grid;
+  justify-items: start;
+  gap: 2px;
+  width: 100%;
+  min-height: 44px;
+  padding: 8px 12px;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  text-align: left;
+}
+.shell-actions .export-menu button:hover { background: var(--surface-hover); }
+.export-menu span { color: var(--text-muted); font-size: 0.78rem; }
+
+/* Four-question summary of a result. */
+.summary-card {
+  margin: 4px 0 16px;
+  padding: 14px 16px;
+  border: 1px solid var(--accent);
+  border-radius: 12px;
+  background: var(--accent-dim);
+}
+.summary-card .eyebrow { margin: 0 0 8px; color: var(--accent-soft); font-size: 0.72rem; }
+.summary-card dl { display: grid; gap: 2px; margin: 0; }
+.summary-card dt { color: var(--accent-soft); font-size: 0.72rem; font-weight: 650; letter-spacing: 0.06em; text-transform: uppercase; }
+.summary-card dd { margin: 0 0 10px; color: var(--text-primary); line-height: 1.45; }
+.summary-card dd:last-child { margin-bottom: 0; }
+
+.budget-block p { margin: 4px 0; }
+.portfolio-head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px; margin: 12px 0 8px; }
+.portfolio-head .fine { margin: 0; }
+
+/* Score of one measure, term by term. */
+.measure-why h4 { margin: 14px 0 6px; color: var(--text-secondary); font-size: 0.78rem; letter-spacing: 0.06em; text-transform: uppercase; }
+.score-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; line-height: 1.4; }
+.score-table th,
+.score-table td { padding: 6px 8px 6px 0; border-bottom: 1px solid var(--border); text-align: left; vertical-align: top; }
+.score-table tbody th { width: 28%; color: var(--text-secondary); font-weight: 600; }
+.score-table td { color: var(--text-muted); }
+.score-table .num { padding-right: 0; color: var(--text-primary); text-align: right; white-space: nowrap; font-variant-numeric: tabular-nums; }
+.score-table tfoot th,
+.score-table tfoot td { border-bottom: 0; color: var(--text-primary); font-weight: 650; }
+
+/* What could change the decision. */
+.hinge-section { margin-top: 20px; }
+.hinge-section h3 { margin: 0 0 6px; }
+.hinge-head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 6px 10px; }
+.band { padding: 1px 8px; border: 1px solid currentColor; border-radius: 999px; font-size: 0.7rem; font-weight: 650; letter-spacing: 0.04em; text-transform: uppercase; white-space: nowrap; }
+.band-VERY_SENSITIVE { color: var(--risk-medium); }
+.band-SENSITIVE { color: var(--warning); }
+.band-MODERATELY_STABLE { color: var(--text-secondary); }
+.band-STABLE { color: var(--success); }
+
+.panel-section { margin: 18px 0; }
+.panel-section h3 { margin: 14px 0 6px; font-size: 1rem; }
+.panel-section ul { margin: 0; padding-left: 18px; }
+.panel-section li { margin: 0 0 4px; }
+
+.indicator-card { margin: 8px 0; padding: 10px 12px; border: 1px solid var(--border); border-radius: 10px; }
+.indicator-card dl { display: grid; grid-template-columns: minmax(110px, 34%) minmax(0, 1fr); gap: 4px 10px; margin: 8px 0 0; font-size: 0.86rem; }
+.indicator-card dt { color: var(--text-muted); }
+.indicator-card dd { margin: 0; color: var(--text-secondary); }
+
+.close-card { margin: 22px 0 12px; padding: 16px; border: 1px solid var(--accent); border-radius: 12px; background: var(--surface); }
+.close-card h3 { margin: 0 0 8px; }
+.close-card p { line-height: 1.5; }
+.close-actions { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0; }
+
+details.more { margin: 12px 0; }
+details.more > summary { cursor: pointer; color: var(--accent-soft); font-weight: 600; }
+details.more[open] > summary { margin-bottom: 8px; }
+
+.decision-table .matrix-sub { display: block; margin-top: 2px; color: var(--text-muted); font-size: 0.74rem; font-weight: 400; }
+.matrix-legend-after { margin-top: 8px; }
+.compare-diff { color: var(--text-secondary); }
+.compare-measures { margin: 6px 0 0; padding-left: 18px; color: var(--text-muted); font-size: 0.85rem; }
+.map-legend-class { color: var(--text-muted); }
+.decision-table.is-compact thead th { white-space: normal; }
+/* The side panel is at most 680px: engine cards stack instead of squeezing into three columns. */
+.shell-panel .card-grid,
+.shell-panel .card-grid-2 { grid-template-columns: minmax(0, 1fr); }

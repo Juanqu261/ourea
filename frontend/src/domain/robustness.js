@@ -1,4 +1,5 @@
 import { dimensionName } from './explanations.js';
+import { copM, esNumber } from './format.js';
 
 export const ROBUSTNESS_MEANING = 'Mayormente robusta significa que el conjunto permanece estable ante la evidencia de escenario disponible; no significa que todas las dimensiones tengan series SSP3-7.0.';
 
@@ -8,37 +9,43 @@ export function decisionRobustness(analysis) {
   const stable = [];
   const sensitive = [];
   if (analysis.stress.sameSet) {
-    stable.push(`Rionegro, riesgo de desastres: ${shift.from_value} → ${shift.to_value}. El conjunto se mantiene.`);
+    stable.push(`El cambio de riesgo documentado (${esNumber(shift.from_value, 2)} → ${esNumber(shift.to_value, 2)}) no cambia el conjunto.`);
   } else {
     sensitive.push('El conjunto cambia cuando se aplica el único cambio cuantificado de SSP3-7.0.');
   }
-  sensitive.push('Componente participativo: entre 0 y 0,15 por medida. No está observado.');
+  sensitive.push(`La recurrencia en talleres municipales podría sumar entre 0 y ${esNumber(analysis.parameters.weights.workshops, 2)} por medida y no está observada.`);
   if (analysis.sensitivity.status === 'SENSITIVE_TO_MISSING_EVIDENCE') {
-    sensitive.push('Si la evidencia no observada favorece a una alternativa y no al portafolio, el orden puede cambiar.');
+    sensitive.push('Si esa evidencia favorece a una alternativa y no al portafolio, el orden puede cambiar.');
   }
   if (nearest) {
-    sensitive.push(`${nearest.name} queda a ${nearest.gap == null ? 'un costo que no cabe' : nearest.gap.toFixed(3)} del puntaje verificado.`);
+    sensitive.push(nearest.gap == null
+      ? `${nearest.name} no cabe en el fondo.`
+      : `${nearest.name} queda a ${esNumber(nearest.gap, 4)} puntos del portafolio elegido.`);
   }
   const grey = analysis.baselines.grey;
   if (grey) {
-    sensitive.push(`Incluir la obra gris usa ${grey.cost.toLocaleString('es-CO')} millones y baja el puntaje verificado a ${grey.institucional.objective.toFixed(2)}.`);
+    sensitive.push(`Exigir la infraestructura gris arma un portafolio de ${copM(grey.cost)} con puntaje ${esNumber(grey.institucional.objective, 4)}, frente a ${esNumber(analysis.portfolio.institucional.objective, 4)}.`);
   }
   return { stable, sensitive };
 }
 
 export function adaptivePathways(analysis) {
-  const byDimension = new Map(analysis.portfolio.measures.map((measure) => [measure.dimensionId, measure]));
+  // The measure with the largest contribution in each dimension (measures come sorted by contribution).
+  const byDimension = new Map();
+  analysis.portfolio.measures.forEach((measure) => {
+    if (!byDimension.has(measure.dimensionId)) byDimension.set(measure.dimensionId, measure);
+  });
   const rows = analysis.residual.rows
     .filter((row) => !row.addressed || row.high.length)
     .slice(0, 4)
     .map((row) => {
       const current = byDimension.get(row.dimensionId);
-      const indicator = analysis.mea.indicators.find((item) => item.intervention_id === current?.id);
+      const indicator = analysis.mea.indicators.find((item) => item.intervention_id === current?.id && item.indicator_type === 'producto');
       return {
         dimensionId: row.dimensionId,
         dimension: dimensionName(row.dimensionId),
         current: current ? current.name : 'Sin medida en el portafolio',
-        monitor: indicator?.name ?? 'Seguimiento requerido',
+        monitor: indicator?.name ?? 'Indicador por definir',
         next: row.dimensionId === 'disaster'
           ? 'Reevaluar el SAT o la infraestructura resiliente'
           : row.dimensionId === 'infrastructure'

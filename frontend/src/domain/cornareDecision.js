@@ -7,6 +7,7 @@ import { assessMissingEvidence } from './evidenceBounds.js';
 import { screenCatalogueNbs } from './nbsScreen.js';
 import { adaptivePathways, decisionRobustness } from './robustness.js';
 import { decisionHinges } from './decisionHinge.js';
+import { decisionSummary } from './decisionSummary.js';
 import {
   criticalFindings,
   explainRejection,
@@ -63,7 +64,7 @@ export function analyzeCorridor(dataset) {
 
   const portfolio = decorate(search.institucional, prepared, profiles);
   if (portfolio.cost > dataset.parameters.budget_million_cop) {
-    throw new Error('Institutional portfolio exceeds COP 5000 million');
+    throw new Error(`Institutional portfolio exceeds the COP ${dataset.parameters.budget_million_cop} million budget`);
   }
 
   const sensitivity = assessMissingEvidence(prepared, dataset.parameters, portfolio.ids);
@@ -104,7 +105,8 @@ export function analyzeCorridor(dataset) {
       portfolio: decorate(stress.portfolio, prepared, profiles),
     },
     findings: criticalFindings(dataset.metrics, dataset.history),
-    residual: residualView(search.institucional, prepared, dataset.metrics),
+    residual: residualView(search.institucional, prepared, dataset.metrics, profiles),
+    profiles,
     gaps: dataset.gaps,
     mea: dataset.mea,
     nbs: nbsRollup(search.institucional, prepared),
@@ -129,6 +131,7 @@ function attachRobustness(result) {
     ...result,
     robustness: decisionRobustness(result),
     pathways: adaptivePathways(result),
+    summary: decisionSummary(result),
   };
 }
 

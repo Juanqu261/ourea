@@ -52,6 +52,11 @@ test('seven steps share one map on a projector, a laptop and a small desktop', a
   await expect(page.getByTestId('map-focus-card')).toContainText('Área candidata para prefactibilidad', { timeout: 20000 });
   await page.locator('.decision-map').screenshot({ path: '../docs/climaterisk/figures/portfolio-measure.png' });
   await expect(page.getByTestId('budget-remaining')).toHaveText('0');
+  await expect(page.getByTestId('decision-summary')).toContainText('financia 6 de las 15 medidas');
+  await expect(page.getByTestId('decision-hinge')).toContainText('0,0025');
+  await expect(page.getByTestId('decision-hinge')).toContainText('rango total posible del componente participativo');
+  await page.getByTestId('decision-hinge').scrollIntoViewIfNeeded();
+  await page.screenshot({ path: '../docs/climaterisk/figures/decision-hinge-1920.png' });
   await page.getByTestId('why-bio_pa').click();
   await page.locator('.measure-why').scrollIntoViewIfNeeded();
   await expect(page.locator('.measure-why')).toContainText('vulnerabilidad');
@@ -108,16 +113,13 @@ test('seven steps share one map on a projector, a laptop and a small desktop', a
   await expect(page.getByTestId('stress-coverage')).toContainText('1 señal cuantificada');
   await expect(page.getByTestId('stress-coverage')).toContainText('Rionegro');
   await expect(page.getByTestId('stress-meaning')).toContainText('no significa que todas las dimensiones tengan series SSP3-7.0');
-  await expect(page.getByTestId('decision-hinge')).toContainText('0,0025');
-  await expect(page.getByTestId('decision-hinge')).toContainText('rango total posible del componente participativo');
   await expect(page.locator('body')).not.toContainText('6 / 6');
   await expect(page.locator('body')).not.toContainText('Portafolio óptimo');
   await page.getByTestId('map-readout-toggle').click();
   await expect(page.getByTestId('map-readout')).toContainText('2060');
   await page.getByTestId('map-readout-toggle').click();
-  await page.getByTestId('decision-hinge').scrollIntoViewIfNeeded();
+  await page.getByTestId('robustness-panel').scrollIntoViewIfNeeded();
   await page.screenshot({ path: '../docs/climaterisk/figures/robustness-1920.png' });
-  await page.screenshot({ path: '../docs/climaterisk/figures/decision-hinge-1920.png' });
   while (await page.getByTestId('step-robustness').count() === 0) {
     await page.getByTestId('step-next').click();
   }
@@ -126,13 +128,16 @@ test('seven steps share one map on a projector, a laptop and a small desktop', a
   await expect(nearBest).not.toContainText('probabilidad');
   await expect(page.getByTestId('inclusion-bars').locator('li')).toHaveCount(15);
   await expect(page.getByTestId('lever-grid')).toContainText('Sin desagregar');
-  await expect(page.getByTestId('gap-ranking')).toContainText('gap-company-water');
+  await expect(page.getByTestId('robustness-summary')).toContainText('no una probabilidad');
+  await expect(page.getByTestId('gap-ranking')).toContainText('Dependencia de cada organización respecto de una fuente');
+  await expect(page.getByTestId('gap-ranking')).not.toContainText('gap-company-water');
 
   while (await page.getByTestId('step-followup').count() === 0) {
     await page.getByTestId('step-next').click();
   }
   await page.getByTestId('nbs-screen').scrollIntoViewIfNeeded();
-  await expect(page.getByTestId('decision-line')).toContainText('COP 5.000 M a seis medidas');
+  await expect(page.getByTestId('decision-line')).toContainText('financia 6 de las 15 medidas');
+  await expect(page.getByTestId('export-pdf')).toBeVisible();
   await expect(page.getByTestId('nbs-screen')).toContainText('No es una certificación');
   await page.screenshot({ path: '../docs/climaterisk/figures/nbs-screen-1920.png' });
 
@@ -174,12 +179,12 @@ test('seven steps share one map on a projector, a laptop and a small desktop', a
     await expect(page.getByTestId('compare-lens-regret')).toBeVisible();
     await page.screenshot({ path: `../docs/climaterisk/figures/compare-drawer-${width}.png` });
     await page.getByTestId('drawer-close').click();
+    await page.getByTestId('decision-hinge').scrollIntoViewIfNeeded();
+    await page.screenshot({ path: `../docs/climaterisk/figures/decision-hinge-${width}.png` });
     while (await page.getByTestId('step-horizon').count() === 0) {
       await page.getByTestId('step-next').click();
     }
     await page.getByTestId('scenario-2060').click();
-    await page.getByTestId('decision-hinge').scrollIntoViewIfNeeded();
-    await page.screenshot({ path: `../docs/climaterisk/figures/decision-hinge-${width}.png` });
     const fits = await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth + 1);
     expect(fits).toBe(true);
   }

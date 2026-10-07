@@ -2,6 +2,15 @@ function measuresOf(portfolio) {
   return portfolio.measures.map((measure) => measure.name);
 }
 
+// What changes against the recommended portfolio: measures that enter and leave.
+function difference(portfolio, recommended) {
+  const names = new Map([...portfolio.measures, ...recommended.measures].map((measure) => [measure.id, measure.name]));
+  return {
+    enter: portfolio.ids.filter((id) => !recommended.ids.includes(id)).map((id) => names.get(id)),
+    leave: recommended.ids.filter((id) => !portfolio.ids.includes(id)).map((id) => names.get(id)),
+  };
+}
+
 export function comparisonCards(analysis) {
   const recommended = analysis.lenses.institucional;
   const nature = analysis.lenses.naturaleza;
@@ -10,11 +19,12 @@ export function comparisonCards(analysis) {
   return [
     {
       id: 'recommended',
-      title: 'Recomendado con evidencia verificada',
+      title: 'Recomendado: pesos de CORNARE',
       cost: recommended.cost,
       measures: measuresOf(recommended),
       institutional: recommended.institucional.objective,
       lens: null,
+      difference: null,
     },
     {
       id: 'cobenefit',
@@ -27,6 +37,7 @@ export function comparisonCards(analysis) {
         value: nature.withCobenefit.objective,
         note: 'Este objetivo suma el cobeneficio nombrado. No es el puntaje institucional verificado.',
       },
+      difference: difference(nature, recommended),
     },
     {
       id: 'regret',
@@ -39,6 +50,7 @@ export function comparisonCards(analysis) {
         value: regret.regret.objective,
         note: 'Es un índice, no un puntaje de vulnerabilidad.',
       },
+      difference: difference(regret, recommended),
     },
     {
       id: 'grey',
@@ -48,6 +60,7 @@ export function comparisonCards(analysis) {
       institutional: grey.institucional.objective,
       lens: null,
       note: 'Elegido con el mismo puntaje institucional verificado, entre los conjuntos que incluyen la obra gris.',
+      difference: difference(grey, recommended),
     },
   ];
 }

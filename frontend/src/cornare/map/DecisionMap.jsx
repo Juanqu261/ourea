@@ -36,6 +36,7 @@ const GROUPS = [
 export function DecisionMap({
   boundaries,
   colors,
+  legendLabels = null,
   selectedIds = [],
   shadingLabel,
   focus = null,
@@ -415,6 +416,7 @@ export function DecisionMap({
               <li key={feature.properties.id}>
                 <i style={{ background: colors?.[feature.properties.id] ?? '#2a3338' }} />
                 {feature.properties.name}
+                {legendLabels?.[feature.properties.id] && <span className="map-legend-class"> · {legendLabels[feature.properties.id]}</span>}
               </li>
             ))}
           </ul>

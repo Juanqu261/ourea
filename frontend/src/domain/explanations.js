@@ -98,12 +98,22 @@ export function criticalFindings(metrics, history) {
   ];
 }
 
-export function residualView(portfolio, prepared, metrics) {
+const CLASS_TEXT = { alta: 'Alta', muy_alta: 'Muy alta' };
+
+function highText(high, profiles) {
+  const items = high
+    .map((item) => `${profiles.find((profile) => profile.id === item.municipalityId)?.name ?? item.municipalityId} (${CLASS_TEXT[item.classification]})`);
+  return items.length > 1 ? `${items.slice(0, -1).join(', ')} y ${items[items.length - 1]}` : items.join('');
+}
+
+export function residualView(portfolio, prepared, metrics, profiles = []) {
   const selected = new Set(portfolio.ids);
   const dimensionIds = [...new Set(prepared.map((measure) => measure.dimensionId))];
+  const municipalityIds = profiles.length ? profiles.map((profile) => profile.id) : ['rionegro', 'guarne', 'marinilla'];
   const rows = dimensionIds.map((dimensionId) => {
-    const addressed = prepared.some((measure) => selected.has(measure.id) && measure.dimensionId === dimensionId);
-    const high = ['rionegro', 'guarne', 'marinilla'].flatMap((municipalityId) => {
+    const funded = prepared.filter((measure) => selected.has(measure.id) && measure.dimensionId === dimensionId);
+    const addressed = funded.length > 0;
+    const high = municipalityIds.flatMap((municipalityId) => {
       const row = metrics.find((item) => (
         item.municipality_id === municipalityId
         && item.dimension_id === dimensionId
@@ -115,16 +125,18 @@ export function residualView(portfolio, prepared, metrics) {
       if (!row || (row.classification !== 'alta' && row.classification !== 'muy_alta')) return [];
       return [{ municipalityId, classification: row.classification }];
     });
-    return {
-      dimensionId,
-      addressed,
-      high,
-      statement: addressed
-        ? 'El portafolio incluye una medida. La vulnerabilidad de la dimensión no se declara resuelta.'
-        : high.length
-          ? 'Queda al menos una clase Alta o Muy alta sin medida.'
-          : 'No hay clase Alta o Muy alta en el corredor y tampoco hay medida seleccionada.',
-    };
+    let statement;
+    if (addressed) {
+      const count = funded.length === 1 ? 'Una medida financiada' : `${funded.length} medidas financiadas`;
+      statement = high.length
+        ? `${count}. ${highText(high, profiles)} ${high.length > 1 ? 'siguen' : 'sigue'} en esa clase: financiar no la declara resuelta.`
+        : `${count}. La vulnerabilidad de la dimensión no se declara resuelta.`;
+    } else {
+      statement = high.length
+        ? `${highText(high, profiles)} queda sin medida financiada.`
+        : 'Ningún municipio está en clase Alta o Muy alta y no se financia medida.';
+    }
+    return { dimensionId, addressed, high, statement };
   });
   return {
     rows,

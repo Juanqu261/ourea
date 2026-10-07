@@ -3,19 +3,14 @@
 // Every claim with a number cites the fingerprint of the engine output that holds it, or a source_id.
 import { EVIDENCE_LABELS, STRESS_LABELS } from '../domain/evidence.js';
 import { dimensionName } from '../domain/explanations.js';
+import { esNumber } from '../domain/format.js';
+
+export { esNumber };
 
 const INSTITUTIONAL = EVIDENCE_LABELS.institutional;
 const INFERENCE = EVIDENCE_LABELS.team_inference;
 const ASSUMPTION = EVIDENCE_LABELS.assumption;
 const MISSING = 'Información faltante';
-
-// es-CO, always grouped: 5.000 · 2,81
-export function esNumber(value, decimals = 0) {
-  const fixed = Math.abs(value).toFixed(decimals);
-  const [integer, fraction] = fixed.split('.');
-  const grouped = integer.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
-  return `${value < 0 ? '−' : ''}${grouped}${fraction ? `,${fraction}` : ''}`;
-}
 
 export function buildProducts(analysis, raw) {
   const fp = analysis.fingerprint;
@@ -26,8 +21,8 @@ export function buildProducts(analysis, raw) {
 
   const p1 = [
     {
-      text: `Con COP ${esNumber(budget)} millones compiten 15 medidas por el corredor Rionegro–Guarne–Marinilla.`,
-      numbers: [budget, 15],
+      text: `Con COP ${esNumber(budget)} millones compiten ${analysis.prepared.length} medidas por el corredor ${(analysis.profiles ?? []).map((item) => item.name).join('–')}.`,
+      numbers: [budget, analysis.prepared.length],
       label: INSTITUTIONAL,
       source_id: 'reto-brief-2026',
     },

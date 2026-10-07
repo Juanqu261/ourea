@@ -6,8 +6,10 @@ import {
 import { OureaLogo } from './components/OureaLogo.jsx';
 import { analyzeCorridor, bundleDataset } from './domain/cornareDecision.js';
 import { comparisonCards } from './domain/comparison.js';
-import { NBS_LABELS, STRESS_LABELS } from './domain/evidence.js';
+import { CLASS_LABELS, NBS_LABELS, STRESS_LABELS } from './domain/evidence.js';
 import { dimensionName } from './domain/explanations.js';
+import { regionalPressure, scenarioName, scoreBreakdown, stressSentence } from './domain/decisionSummary.js';
+import { copM, esNumber, esPct, joinEs, plural } from './domain/format.js';
 import { ROBUSTNESS_MEANING } from './domain/robustness.js';
 import { CLASS_COLOR, STEPS, copMillions } from './cornare/copy.js';
 import { CalculationGuide } from './cornare/CalculationGuide.jsx';
@@ -45,11 +47,16 @@ const READINESS = {
   food_agro: 'Requiere caracterización local.',
 };
 
+function capitalize(text) {
+  return text ? text[0].toUpperCase() + text.slice(1) : text;
+}
+
 export default function App() {
   const [raw, setRaw] = useState(null);
   const [error, setError] = useState(null);
   const [step, setStep] = useState('territory');
   const [drawer, setDrawer] = useState(null);
+  const [exportOpen, setExportOpen] = useState(false);
   const [dimensionId, setDimensionId] = useState('biodiversity');
   const [metric, setMetric] = useState('vulnerability');
   const [selectedMunicipality, setSelectedMunicipality] = useState(null);
@@ -73,6 +80,22 @@ export default function App() {
     return () => window.removeEventListener('keydown', onKey);
   }, [drawer]);
 
+  useEffect(() => {
+    if (!exportOpen) return undefined;
+    const onKey = (event) => {
+      if (event.key === 'Escape') setExportOpen(false);
+    };
+    const onClick = (event) => {
+      if (!event.target.closest?.('.export-menu-wrap')) setExportOpen(false);
+    };
+    window.addEventListener('keydown', onKey);
+    window.addEventListener('click', onClick);
+    return () => {
+      window.removeEventListener('keydown', onKey);
+      window.removeEventListener('click', onClick);
+    };
+  }, [exportOpen]);
+
   const dataset = useMemo(() => (raw ? bundleDataset({
     interventions: raw.interventions,
     metrics: raw.metrics,
@@ -93,16 +116,19 @@ export default function App() {
     return <main className="boot"><p>Cargando la decisión del corredor…</p></main>;
   }
 
+  const budget = analysis.parameters.budget_million_cop;
   const activeFocusId = focusId ?? analysis.portfolio.measures[0]?.id;
   const focused = analysis.portfolio.measures.find((measure) => measure.id === activeFocusId) ?? null;
   const copilotMeasure = copilotFocusId ? analysis.byId.get(copilotFocusId) : null;
   const focus = copilotMeasure
     ? focusForMeasure(copilotMeasure)
     : step === 'portfolio' && focused ? focusForMeasure(focused) : null;
-  const mapDimension = step === 'horizon' ? 'disaster' : dimensionId;
-  const mapMetric = step === 'horizon' ? 'risk' : metric;
-  const mapScenario = step === 'horizon' && horizon === '2060' ? 'ssp3_7_0' : 'reference';
+  const shift = analysis.parameters.ssp;
+  const mapDimension = step === 'horizon' ? shift.dimension_id : dimensionId;
+  const mapMetric = step === 'horizon' ? shift.metric : metric;
+  const mapScenario = step === 'horizon' && horizon === '2060' ? shift.scenario : 'reference';
   const colors = colorsFor(raw, mapDimension, mapMetric, mapScenario);
+  const legendLabels = legendFor(raw, mapDimension, mapMetric, mapScenario);
   const selectedIds = focus?.municipalityIds ?? (selectedMunicipality ? [selectedMunicipality] : []);
   // The robustness step needs the precomputed engine output; without it the step is hidden.
   const steps = STEPS.filter((item) => item.id !== 'robustness' || raw.engine.robustness);
@@ -112,6 +138,8 @@ export default function App() {
     setCopilotFocusId(null);
     setStep(id);
   };
+  const exportPdf = () => { downloadPitchPdf(analysis).catch(() => {}); };
+  const exportJson = () => downloadDecisionJson(analysis, auditProducts);
 
   return (
     <div className="shell">
@@ -120,17 +148,38 @@ export default function App() {
           <OureaLogo compact />
           <div>
             <h1 data-testid="app-title">Ourea</h1>
-            <p className="shell-place">Rionegro · Guarne · Marinilla</p>
+            <p className="shell-place">{raw.profiles.municipalities.map((item) => item.name).join(' · ')}</p>
           </div>
         </div>
-        <p className="budget-pill" data-testid="budget-pill">COP 5.000 M</p>
+        <p className="budget-pill" data-testid="budget-pill">COP {esNumber(budget)} M</p>
         <div className="shell-actions">
           <button type="button" data-testid="open-sources" aria-label="Fuentes" onClick={() => setDrawer('sources')}><Database size={16} /> <span className="action-label">Fuentes</span></button>
           {service?.ai_enabled && (
             <button type="button" data-testid="open-copilot" aria-label="Preguntar" onClick={() => setDrawer('copilot')}><MessageCircle size={16} /> <span className="action-label">Preguntar</span></button>
           )}
           <button type="button" data-testid="open-method" aria-label="Método" onClick={() => setDrawer('method')}><Info size={16} /> <span className="action-label">Método</span></button>
-          <button type="button" data-testid="export-json" aria-label="Exportar" onClick={() => downloadDecisionJson(analysis, auditProducts)}><FileDown size={16} /> <span className="action-label">Exportar</span></button>
+          <div className="export-menu-wrap">
+            <button
+              type="button"
+              data-testid="open-export"
+              aria-label="Exportar"
+              aria-haspopup="menu"
+              aria-expanded={exportOpen}
+              onClick={() => setExportOpen((open) => !open)}
+            >
+              <FileDown size={16} /> <span className="action-label">Exportar</span>
+            </button>
+            {exportOpen && (
+              <div className="export-menu" role="menu">
+                <button type="button" role="menuitem" data-testid="export-pdf-menu" onClick={() => { setExportOpen(false); exportPdf(); }}>
+                  <strong>Resumen PDF</strong><span>Para presentar la decisión</span>
+                </button>
+                <button type="button" role="menuitem" data-testid="export-json" onClick={() => { setExportOpen(false); exportJson(); }}>
+                  <strong>Datos JSON</strong><span>Decisión, puntajes y auditoría</span>
+                </button>
+              </div>
+            )}
+          </div>
         </div>
       </header>
       <div className="shell-body">
@@ -138,10 +187,11 @@ export default function App() {
           <DecisionMap
             boundaries={raw.boundaries}
             colors={colors}
+            legendLabels={legendLabels}
             selectedIds={selectedIds}
             focus={focus}
             onMunicipality={setSelectedMunicipality}
-            shadingLabel={shadingLabel(step, mapMetric, mapDimension, horizon)}
+            shadingLabel={shadingLabel(step, mapMetric, mapDimension, horizon, analysis)}
           />
         </div>
         <aside className="shell-panel" data-testid={`step-${step}`}>
@@ -151,6 +201,7 @@ export default function App() {
             {step === 'territory' && (
               <Territory
                 raw={raw}
+                analysis={analysis}
                 dimensionId={dimensionId}
                 setDimensionId={setDimensionId}
                 metric={metric}
@@ -179,7 +230,7 @@ export default function App() {
               <>
                 <RobustnessStep engine={raw.engine} analysis={analysis} />
                 <LeverGrid levers={raw.engine.levers} municipalities={raw.profiles.municipalities} dimensions={raw.interventions.dimensions} />
-                <GapRanking voi={raw.engine.voi} prepared={analysis.prepared} />
+                <GapRanking voi={raw.engine.voi} prepared={analysis.prepared} ranges={raw.engine.ranges} gaps={analysis.gaps} />
               </>
             )}
             {step === 'residual' && (
@@ -188,7 +239,15 @@ export default function App() {
                 {service?.ai_enabled && <InterviewDemo />}
               </>
             )}
-            {step === 'followup' && <Followup analysis={analysis} engine={raw.engine} audit={<AuditBadge service={service} bundle={auditProducts} />} />}
+            {step === 'followup' && (
+              <Followup
+                analysis={analysis}
+                engine={raw.engine}
+                onPdf={exportPdf}
+                onJson={exportJson}
+                audit={<AuditBadge service={service} bundle={auditProducts} />}
+              />
+            )}
           </div>
           <div className="panel-actions">
             <button type="button" data-testid="step-back" disabled={stepIndex === 0} onClick={() => goTo(steps[stepIndex - 1].id)}>
@@ -228,11 +287,14 @@ export default function App() {
   );
 }
 
-function Territory({ raw, dimensionId, setDimensionId, metric, setMetric, selectedMunicipality, setSelectedMunicipality }) {
-  const bio = numericPair(raw, 'biodiversity', 'vulnerability');
+function Territory({ raw, analysis, dimensionId, setDimensionId, metric, setMetric, selectedMunicipality, setSelectedMunicipality }) {
+  const pressure = regionalPressure(raw.metrics.metrics, raw.profiles.municipalities, raw.interventions.dimensions);
   return (
     <>
-      <p className="panel-lead">El mapa muestra la clase municipal. El fondo decide qué se financia primero.</p>
+      <p className="panel-lead">
+        El color muestra la clase de {metric === 'risk' ? 'riesgo' : 'vulnerabilidad'} de cada municipio en la dimensión elegida.
+        {' '}La clase de vulnerabilidad del estudio de CORNARE pesa {esPct(analysis.parameters.weights.vulnerability)} en la decisión.
+      </p>
       <div className="pill-row" role="group" aria-label="Métrica">
         {[['vulnerability', 'Vulnerabilidad'], ['risk', 'Riesgo']].map(([id, label]) => (
           <button key={id} type="button" className={metric === id ? 'is-active' : ''} onClick={() => setMetric(id)}>{label}</button>
@@ -245,7 +307,7 @@ function Territory({ raw, dimensionId, setDimensionId, metric, setMetric, select
           </button>
         ))}
       </div>
-        {raw.profiles.municipalities.map((municipality) => {
+      {raw.profiles.municipalities.map((municipality) => {
         const lead = leadClass(raw, municipality.id);
         const brief = raw.context?.municipalities?.find((item) => item.municipality_id === municipality.id)?.brief;
         return (
@@ -256,42 +318,63 @@ function Territory({ raw, dimensionId, setDimensionId, metric, setMetric, select
               onClick={() => setSelectedMunicipality(municipality.id)}
             >
               <MapIcon size={16} />
-              <span><strong>{municipality.name}</strong><span>{lead.label}</span></span>
+              <span><strong>{municipality.name}</strong><span>Clase más alta: {lead.label}</span></span>
             </button>
             {selectedMunicipality === municipality.id && brief && <p className="panel-lead">{brief}</p>}
           </div>
         );
       })}
-      <article className="insight">
-        <Leaf size={16} />
-        <div>
-          <strong>Biodiversidad es la presión común más crítica</strong>
-          <p>Rionegro {formatNumber(bio.rionegro)} · Marinilla {formatNumber(bio.marinilla)}</p>
-        </div>
-      </article>
+      {pressure && (
+        <article className="insight">
+          <Leaf size={16} />
+          <div>
+            <strong>{pressure.title}</strong>
+            <p>{pressure.detail}</p>
+          </div>
+        </article>
+      )}
     </>
   );
 }
 
 function Priority({ analysis, onMatrix, onMethod }) {
-  const budget = analysis.parameters.budget_million_cop;
+  const { parameters } = analysis;
+  const weights = parameters.weights;
+  const budget = parameters.budget_million_cop;
   const candidates = analysis.prepared.length;
   const selected = analysis.portfolio.measures.length;
   return (
     <>
-      <p className="panel-lead">Portafolio recomendado con evidencia verificada. Mejor conjunto bajo la evidencia institucional actualmente integrada.</p>
+      <p className="panel-lead">
+        Cada medida recibe un puntaje con los pesos de CORNARE: {esPct(weights.vulnerability)} vulnerabilidad, {esPct(weights.recurrence)} recurrencia de acciones
+        {' '}y {esPct(weights.workshops)} talleres municipales, este último sin datos. Ourea prueba las {esNumber(2 ** candidates)} combinaciones
+        {' '}y financia la que más suma sin pasar de {copM(budget)}.
+      </p>
       <ul className="summary-chips">
-        <li>{candidates.toLocaleString('es-CO')} medidas</li>
-        <li>COP {budget.toLocaleString('es-CO')} M</li>
-        <li>{(2 ** candidates).toLocaleString('es-CO')} combinaciones</li>
-        <li>{selected.toLocaleString('es-CO')} seleccionadas</li>
+        <li>{esNumber(candidates)} medidas</li>
+        <li>{copM(budget)}</li>
+        <li>{esNumber(2 ** candidates)} combinaciones</li>
+        <li>{esNumber(selected)} seleccionadas</li>
       </ul>
-      <DecisionMatrix rows={analysis.matrix.rows} compact />
+      <DecisionMatrix rows={analysis.matrix.rows} compact secondShare={parameters.diminishing_second_measure.institucional} />
       <div className="priority-actions">
         <button type="button" data-testid="open-matrix" onClick={onMatrix}>Ver matriz completa</button>
         <button type="button" className="text-button" data-testid="open-calc" onClick={onMethod}>¿Cómo se calcula?</button>
       </div>
     </>
+  );
+}
+
+function DecisionSummary({ summary }) {
+  return (
+    <article className="summary-card" data-testid="decision-summary">
+      <dl>
+        <dt>Qué financiamos</dt><dd>{summary.decided}</dd>
+        <dt>Por qué</dt><dd>{summary.why}</dd>
+        <dt>Qué tan estable es</dt><dd>{summary.stable}</dd>
+        <dt>Qué lo cambiaría</dt><dd>{summary.change}</dd>
+      </dl>
+    </article>
   );
 }
 
@@ -301,92 +384,155 @@ function Portfolio({ analysis, raw, focusId, setFocusId, openWhy, setOpenWhy, on
   const fichas = new Map((raw.fichas?.measures ?? []).map((item) => [item.id, item]));
   return (
     <>
-      <p data-testid="budget-used">COP {used.toLocaleString('es-CO')} M / COP {budget.toLocaleString('es-CO')} M</p>
-      <div className="budget-track" aria-hidden="true"><i style={{ width: `${(used / budget) * 100}%` }} /></div>
-      <p><span data-testid="budget-remaining">{analysis.portfolio.remaining.toLocaleString('es-CO')}</span> M disponibles</p>
-      <button type="button" data-testid="open-compare" onClick={onCompare}>Comparar alternativas</button>
-      <div data-testid="portfolio-list">
-        {analysis.portfolio.measures.map((measure) => {
-          const ficha = fichas.get(measure.id);
-          return (
-            <article key={measure.id} className={measure.id === focusId ? 'measure-row is-active' : 'measure-row'} data-testid={`measure-${measure.id}`}>
-              <div className="measure-icon"><Leaf size={16} /></div>
-              <div className="measure-main">
-                <strong>{measure.name}</strong>
-                <p>{measure.place.localization}</p>
-                <p>{copMillions(measure.cost)}</p>
-                <p>{shortDimension(raw, measure.dimensionId)} · {measure.classificationLabel} · {NBS_LABELS[measure.nbsClass]}</p>
-              </div>
-              <div className="measure-actions">
-                <button type="button" data-testid={`map-focus-${measure.id}`} onClick={() => setFocusId(measure.id)}>Mapa</button>
-                <button type="button" data-testid={`why-${measure.id}`} aria-expanded={openWhy === measure.id} onClick={() => setOpenWhy(openWhy === measure.id ? null : measure.id)}>Por qué</button>
-              </div>
-              {openWhy === measure.id && (
-                <div className="measure-why">
-                  <ul>
-                    {analysis.explanations[measure.id].lines.slice(0, 4).map((line) => <li key={line}>{line}</li>)}
-                    <li>{focusForMeasure(measure).exactLocation}. No es un predio seleccionado.</li>
-                    {ficha?.status && <li>Precedente institucional: {ficha.status.slice(0, 180)}</li>}
-                    <li>{READINESS[measure.id] ?? 'Requiere caracterización local.'}</li>
-                  </ul>
-                </div>
-              )}
-            </article>
-          );
-        })}
+      <DecisionSummary summary={analysis.summary} />
+      <div className="budget-block">
+        <p data-testid="budget-used">COP {esNumber(used)} M / COP {esNumber(budget)} M</p>
+        <div className="budget-track" aria-hidden="true"><i style={{ width: `${(used / budget) * 100}%` }} /></div>
+        <p><span data-testid="budget-remaining">{esNumber(analysis.portfolio.remaining)}</span> M disponibles</p>
       </div>
+      <div className="portfolio-head">
+        <p className="fine">Ordenadas por aporte al puntaje del portafolio.</p>
+        <button type="button" data-testid="open-compare" onClick={onCompare}>Comparar alternativas</button>
+      </div>
+      <div data-testid="portfolio-list">
+        {analysis.portfolio.measures.map((measure) => (
+          <article key={measure.id} className={measure.id === focusId ? 'measure-row is-active' : 'measure-row'} data-testid={`measure-${measure.id}`}>
+            <div className="measure-icon"><Leaf size={16} /></div>
+            <div className="measure-main">
+              <strong>{measure.name}</strong>
+              <p>{measure.place.localization} · {copMillions(measure.cost)}</p>
+              <p>{shortDimension(raw, measure.dimensionId)} · {measure.classificationLabel} · {NBS_LABELS[measure.nbsClass]} · aporte {esNumber(measure.part.contribution, 3)}</p>
+            </div>
+            <div className="measure-actions">
+              <button type="button" data-testid={`map-focus-${measure.id}`} onClick={() => setFocusId(measure.id)}>Mapa</button>
+              <button type="button" data-testid={`why-${measure.id}`} aria-expanded={openWhy === measure.id} onClick={() => setOpenWhy(openWhy === measure.id ? null : measure.id)}>Por qué</button>
+            </div>
+            {openWhy === measure.id && <MeasureWhy measure={measure} analysis={analysis} ficha={fichas.get(measure.id)} />}
+          </article>
+        ))}
+      </div>
+      <Hinges hinges={analysis.hinges} range={analysis.parameters.weights.workshops} />
     </>
   );
 }
 
+function MeasureWhy({ measure, analysis, ficha }) {
+  const breakdown = scoreBreakdown(measure, measure.part, analysis.parameters, analysis.profiles);
+  const sensitivity = measure.sensitivity_factors_addressed ?? [];
+  const capacity = measure.adaptive_capacity_factors_strengthened ?? [];
+  return (
+    <div className="measure-why">
+      <h4>Cómo suma al puntaje</h4>
+      <table className="score-table">
+        <tbody>
+          {breakdown.rows.map((row) => (
+            <tr key={row.label}>
+              <th scope="row">{row.label}</th>
+              <td>{row.detail}</td>
+              <td className="num">{row.value == null ? '—' : esNumber(row.value, 3)}</td>
+            </tr>
+          ))}
+        </tbody>
+        <tfoot>
+          <tr>
+            <th scope="row" colSpan={2}>{breakdown.totalLabel}</th>
+            <td className="num">{esNumber(breakdown.total, 3)}</td>
+          </tr>
+        </tfoot>
+      </table>
+      {(sensitivity.length > 0 || capacity.length > 0) && (
+        <>
+          <h4>Qué busca cambiar</h4>
+          <ul>
+            {sensitivity.length > 0 && <li>Reducir sensibilidad: {sensitivity.join('; ')}.</li>}
+            {capacity.length > 0 && <li>Fortalecer capacidad adaptativa: {capacity.join('; ')}.</li>}
+          </ul>
+        </>
+      )}
+      <h4>Dónde y en qué estado</h4>
+      <ul>
+        <li>
+          {measure.place.localization}{measure.scope === 'corridor' ? ` (la dispara ${measure.place.trigger})` : ''}.
+          {' '}{focusForMeasure(measure).exactLocation}. No es un predio seleccionado.
+        </li>
+        {ficha?.status && <li>Precedente institucional: {ficha.status.length > 180 ? `${ficha.status.slice(0, 180)}…` : ficha.status}</li>}
+        <li>{READINESS[measure.id] ?? 'Requiere caracterización local.'}</li>
+      </ul>
+    </div>
+  );
+}
+
+function Hinges({ hinges, range }) {
+  if (!hinges.length) return null;
+  return (
+    <section className="hinge-section" data-testid="decision-hinge">
+      <h3>¿Qué podría cambiar esta decisión?</h3>
+      <p className="fine">
+        Las alternativas más cercanas y cuántos puntos les faltan. La recurrencia en talleres municipales podría sumar
+        {' '}entre 0 y {esNumber(range, 2)} por medida y aún no tiene datos.
+      </p>
+      {hinges.map((hinge) => (
+        <article key={hinge.id} className="hinge-card">
+          <p className="hinge-head">
+            <strong>{hinge.name}</strong>
+            <span className={`band band-${hinge.band}`}>{hinge.label}</span>
+          </p>
+          <p>Queda a {hinge.gapDisplay} puntos del portafolio elegido. {hinge.sentence}</p>
+          <p className="fine">Datos que lo resolverían: {hinge.criteria.map((criterion) => criterion.label.toLowerCase()).join('; ')}.</p>
+        </article>
+      ))}
+      <p className="fine">{hinges[0].thresholds} {hinges[0].assignment}</p>
+    </section>
+  );
+}
+
 function Horizon({ analysis, horizon, setHorizon }) {
-  const shift = analysis.stress.shift;
-  const signalCount = analysis.stress.evidencedDimensions.length;
+  const { stress } = analysis;
+  const scenario = scenarioName(stress.shift);
+  const sentence = stressSentence(stress, analysis.profiles);
+  const signalCount = stress.evidencedDimensions.length;
+  const names = (ids) => joinEs(ids.map((id) => analysis.byId.get(id)?.name ?? id));
   return (
     <>
       <div className="scenario-switch" role="group" aria-label="Escenario">
         <button type="button" className={horizon === 'reference' ? 'is-active' : ''} onClick={() => setHorizon('reference')}>Referencia</button>
-        <button type="button" data-testid="scenario-2060" className={horizon === '2060' ? 'is-active' : ''} onClick={() => setHorizon('2060')}>SSP3-7.0 · 2060</button>
+        <button type="button" data-testid="scenario-2060" className={horizon === '2060' ? 'is-active' : ''} onClick={() => setHorizon('2060')}>{scenario} · {stress.shift.year}</button>
       </div>
-      <p data-testid="stress-status" className={`status status-${analysis.stress.status}`} title={ROBUSTNESS_MEANING}>{STRESS_LABELS[analysis.stress.status]}</p>
+      <p data-testid="stress-status" className={`status status-${stress.status}`} title={ROBUSTNESS_MEANING}>{STRESS_LABELS[stress.status]}</p>
       <p className="fine" data-testid="stress-meaning">{ROBUSTNESS_MEANING}</p>
-      <p data-testid="stress-outcome">{analysis.stress.sameSet ? 'El portafolio no cambia ante el cambio cuantificado' : 'El portafolio cambia ante el cambio cuantificado'}</p>
-      <p>Rionegro, riesgo de desastres: {shift.from_value} → {shift.to_value}. {classLabel(shift.from_class)} → {classLabel(shift.to_class)}.</p>
-      <section data-testid="stress-coverage">
-        <h3>Cobertura del stress test</h3>
-        <p>{signalCount === 1 ? '1 señal cuantificada' : `${signalCount} señales cuantificadas`}</p>
-        <p>Rionegro · {dimensionName(shift.dimension_id)}</p>
-        <p>Otras dimensiones: Integración de escenario requerida</p>
+      <section className="panel-section">
+        <h3>Qué cambia en el escenario</h3>
+        <p>{capitalize(sentence.full)}. Es el único cambio cuantificado para {scenario} en el reto.</p>
+        <p className="fine">
+          Ourea lo aplica como un escalón de clase sobre las medidas de {dimensionName(stress.shift.dimension_id)} y vuelve a resolver el portafolio.
+          {' '}Esa lectura es una inferencia del equipo.
+        </p>
+        <h3>Resultado</h3>
+        <p data-testid="stress-outcome">
+          {stress.sameSet ? 'El portafolio no cambia ante el cambio cuantificado' : 'El portafolio cambia ante el cambio cuantificado'}.
+          {' '}El puntaje pasa de {esNumber(analysis.portfolio.institucional.objective, 4)} a {esNumber(stress.portfolio.institucional.objective, 4)}.
+        </p>
+        {!stress.sameSet && <p>Entran: {names(stress.entered) || 'ninguna'}. Salen: {names(stress.exited) || 'ninguna'}.</p>}
       </section>
-      <section data-testid="robustness-panel">
-        <h3>¿Qué podría cambiar esta decisión?</h3>
-        <div data-testid="decision-hinge">
-          <h3>Umbral de cambio de decisión</h3>
-          {analysis.hinges.map((hinge) => (
-            <article key={hinge.id} className="hinge-card">
-              <p><strong>{hinge.name}</strong></p>
-              <p>Brecha verificada: {hinge.gapDisplay}</p>
-              <p>{hinge.label}</p>
-              <p>{hinge.interpretation}</p>
-              <p>Evidencia que puede cambiar la decisión</p>
-              <ul>{hinge.criteria.map((criterion) => <li key={criterion.id}>{criterion.label}</li>)}</ul>
-              <p>Diferencia ponderada mínima: {hinge.minimumDisplay}</p>
-              <p>{hinge.sentence}</p>
-              <p className="fine">{hinge.assignment}</p>
-            </article>
-          ))}
-          <p className="fine">{analysis.hinges[0]?.thresholds}</p>
-        </div>
-        <p>Estable ante</p>
+      <section className="panel-section" data-testid="stress-coverage">
+        <h3>Cobertura del stress test</h3>
+        <p>{signalCount === 1 ? '1 señal cuantificada' : `${signalCount} señales cuantificadas`}: {sentence.place} · {dimensionName(stress.shift.dimension_id)}.</p>
+        <p>Otras dimensiones: Integración de escenario requerida. Sin esas series el estado no puede pasar de «{STRESS_LABELS.MAYORMENTE_ROBUSTA}».</p>
+      </section>
+      <section className="panel-section" data-testid="robustness-panel">
+        <h3>Estable ante</h3>
         <ul>{analysis.robustness.stable.map((line) => <li key={line}>{line}</li>)}</ul>
-        <p>Sensible a</p>
+        <h3>Sensible a</h3>
         <ul>{analysis.robustness.sensitive.map((line) => <li key={line}>{line}</li>)}</ul>
       </section>
-      <section data-testid="pathway-panel">
-        <h3>Hoy, monitorear, reevaluar</h3>
-        {analysis.pathways.map((path) => (
-          <p key={path.dimensionId}><strong>{path.dimension}</strong> · {path.current} · {path.threshold}</p>
-        ))}
+      <section className="panel-section" data-testid="pathway-panel">
+        <h3>Qué monitorear</h3>
+        <ul>
+          {analysis.pathways.map((path) => (
+            <li key={path.dimensionId}><strong>{capitalize(path.dimension)}</strong>: {path.current}. Indicador: {path.monitor}.</li>
+          ))}
+        </ul>
+        <p className="fine">Los umbrales que dispararían una reevaluación están por acordar con CORNARE.</p>
       </section>
     </>
   );
@@ -397,47 +543,91 @@ function Residual({ analysis }) {
   const open = analysis.residual.rows.filter((row) => !row.addressed);
   return (
     <>
-      <p>{analysis.residual.reminder}</p>
-      <h3>Con medida</h3>
-      <ul>{addressed.map((row) => <li key={row.dimensionId}>{dimensionName(row.dimensionId)}</li>)}</ul>
+      <p className="panel-lead">{analysis.residual.reminder}</p>
       <h3>Sigue sin medida</h3>
-      <ul>{open.map((row) => <li key={row.dimensionId}>{dimensionName(row.dimensionId)}. {row.statement}</li>)}</ul>
-      <h3>Validación de campo</h3>
+      <ul>{open.map((row) => <li key={row.dimensionId}><strong>{capitalize(dimensionName(row.dimensionId))}</strong>: {row.statement}</li>)}</ul>
+      <h3>Con medida, sin declararse resuelta</h3>
+      <ul>{addressed.map((row) => <li key={row.dimensionId}><strong>{capitalize(dimensionName(row.dimensionId))}</strong>: {row.statement}</li>)}</ul>
+      <h3>Datos que faltan para cerrar la decisión</h3>
       <ul>
-        {analysis.gaps.slice(0, 3).map((gap) => <li key={gap.id}>{gap.missing_information}</li>)}
+        {analysis.gaps.slice(0, 3).map((gap) => (
+          <li key={gap.id}>
+            {gap.missing_information}.{gap.responsible_actor_if_known ? ` Responsable: ${gap.responsible_actor_if_known}.` : ''}
+          </li>
+        ))}
       </ul>
     </>
   );
 }
 
-function Followup({ analysis, engine, audit }) {
+function Followup({ analysis, engine, audit, onPdf, onJson }) {
+  const indicators = analysis.mea.indicators ?? [];
+  const context = analysis.mea.regional_context;
   return (
     <>
-      <p>{analysis.mea.regional_context.statement}</p>
-      {analysis.portfolio.measures.slice(0, 4).map((measure) => {
-        const indicator = analysis.mea.indicators.find((item) => item.intervention_id === measure.id);
-        return <p key={measure.id}><strong>{measure.name}</strong> · {indicator?.name ?? 'Seguimiento requerido'}</p>;
-      })}
-      <section data-testid="nbs-screen">
-        <h3>Screening NbS, no es certificación</h3>
-        {analysis.nbsScreen.map((item) => (
-          <div key={item.id}>
-            <p><strong>{item.name}</strong> · {item.criteria.filter((criterion) => criterion.status === 'SUPPORTED').length} criterios con soporte · {item.criteria.filter((criterion) => criterion.status === 'TO VALIDATE').length} por validar</p>
-            <p className="fine">{item.standard}</p>
-            <details>
-              <summary>Criterios y procedencia</summary>
-              {item.criteria.map((criterion) => (
-                <p key={criterion.id}>{criterion.label}: {criterion.statusLabel} · {criterion.source}</p>
-              ))}
-            </details>
-          </div>
-        ))}
+      <p className="panel-lead">{context.statement} {context.use}</p>
+      <section className="panel-section" data-testid="mea-indicators">
+        <h3>Qué medir en cada medida</h3>
+        {analysis.portfolio.measures.map((measure) => {
+          const product = indicators.find((item) => item.intervention_id === measure.id && item.indicator_type === 'producto');
+          const outcome = indicators.find((item) => item.intervention_id === measure.id && item.indicator_type === 'resultado');
+          const sensitivity = measure.sensitivity_factors_addressed ?? [];
+          const capacity = measure.adaptive_capacity_factors_strengthened ?? [];
+          return (
+            <article key={measure.id} className="indicator-card">
+              <strong>{measure.name}</strong>
+              <dl>
+                <dt>Producto</dt><dd>{product?.name ?? 'Indicador por definir'}</dd>
+                <dt>Sensibilidad que debería bajar</dt><dd>{sensitivity.length ? sensitivity.join('; ') : 'No se le atribuye'}</dd>
+                <dt>Capacidad que debería subir</dt><dd>{capacity.length ? capacity.join('; ') : 'No se le atribuye'}</dd>
+                <dt>Línea base y meta</dt><dd>{capitalize((outcome?.target_status ?? 'Por definir').toLowerCase())}</dd>
+              </dl>
+            </article>
+          );
+        })}
+        <p className="fine">
+          Para ver el cambio en vulnerabilidad, CORNARE repite el cálculo de la clase de cada dimensión con la misma ficha
+          {' '}y lo compara con la línea base. Ourea no le atribuye a una medida una cifra de reducción.
+        </p>
       </section>
-      <p data-testid="decision-line">Con la evidencia institucional verificada, Ourea asigna los COP 5.000 M a seis medidas. La selección no cambia ante el cambio SSP3-7.0 cuantificado para Rionegro, pero es sensible al componente participativo aún por integrar.</p>
-      <button type="button" data-testid="export-pdf" onClick={() => { downloadPitchPdf(analysis).catch(() => {}); }}>Descargar PDF</button>
-      <p className="fine">Huella {analysis.fingerprint}</p>
-      {audit}
-      <EngineAnnex engine={engine} />
+      <section className="panel-section" data-testid="nbs-screen">
+        <h3>Screening NbS, no es certificación</h3>
+        {analysis.nbsScreen.map((item) => {
+          const supported = item.criteria.filter((criterion) => criterion.status === 'SUPPORTED').length;
+          const pending = item.criteria.filter((criterion) => criterion.status === 'TO VALIDATE').length;
+          return (
+            <div key={item.id}>
+              <p><strong>{item.name}</strong> · {plural(supported, 'criterio')} con soporte · {esNumber(pending)} por validar</p>
+              <p className="fine">{item.standard}</p>
+              <details>
+                <summary>Criterios y procedencia</summary>
+                {item.criteria.map((criterion) => (
+                  <p key={criterion.id}>{criterion.label}: {criterion.statusLabel} · {criterion.source}</p>
+                ))}
+              </details>
+            </div>
+          );
+        })}
+      </section>
+      <section className="close-card" data-testid="decision-close">
+        <h3>La decisión</h3>
+        <p data-testid="decision-line">{analysis.summary.sentence}</p>
+        <div className="close-actions">
+          <button type="button" className="primary-action" data-testid="export-pdf" onClick={onPdf}>Descargar PDF</button>
+          <button type="button" data-testid="export-json-close" onClick={onJson}>Descargar datos (JSON)</button>
+        </div>
+        <p className="fine">
+          Huella {analysis.fingerprint}: identifica esta decisión (conjunto, costo, presupuesto y pesos).
+          {' '}Si cambia un dato o un peso, cambia la huella.
+        </p>
+        {audit}
+      </section>
+      {engine.robustness && engine.ranges && (
+        <details className="more">
+          <summary>Anexo técnico de la simulación</summary>
+          <EngineAnnex engine={engine} />
+        </details>
+      )}
     </>
   );
 }
@@ -460,22 +650,30 @@ function Compare({ analysis }) {
   return (
     <>
       <h2>Comparar alternativas</h2>
-      <p className="fine">El puntaje institucional verificado es la métrica común. El objetivo de cada lente se muestra aparte y no se compara en la misma columna.</p>
+      <p className="fine">
+        El puntaje institucional verificado (pesos de CORNARE) es la métrica común. El objetivo propio de cada lente se muestra aparte
+        {' '}y no se compara en la misma columna.
+      </p>
       <div className="compare-grid">
         {cards.map((card) => (
           <article key={card.id} data-testid={`compare-${card.id}`}>
             <h3>{card.title}</h3>
-            <p>{copMillions(card.cost)}</p>
-            <p className="compare-metric" data-testid={`compare-institutional-${card.id}`}>Puntaje institucional verificado: {card.institutional.toFixed(3)}</p>
+            <p>{copM(card.cost)} · {plural(card.measures.length, 'medida')}</p>
+            <p className="compare-metric" data-testid={`compare-institutional-${card.id}`}>Puntaje institucional verificado: {esNumber(card.institutional, 4)}</p>
             {card.lens && (
               <p className="compare-lens" data-testid={`compare-lens-${card.id}`}>
-                {card.lens.label}: {card.lens.value.toFixed(3)}
+                {card.lens.label}: {esNumber(card.lens.value, 4)}
                 <span className="fine"> {card.lens.note}</span>
               </p>
             )}
             {card.note && <p className="fine">{card.note}</p>}
-            <p>{card.measures.length} medidas</p>
-            <p>{card.measures.map((name) => shortName(name)).join(' · ')}</p>
+            {card.difference && (
+              <p className="compare-diff">
+                {card.difference.enter.length ? `Entra: ${joinEs(card.difference.enter)}. ` : ''}
+                {card.difference.leave.length ? `Sale: ${joinEs(card.difference.leave)}.` : ''}
+              </p>
+            )}
+            <ul className="compare-measures">{card.measures.map((name) => <li key={name}>{name}</li>)}</ul>
           </article>
         ))}
       </div>
@@ -483,8 +681,12 @@ function Compare({ analysis }) {
   );
 }
 
-function shadingLabel(step, metric, dimensionId, horizon) {
-  if (step === 'horizon' && horizon === '2060') return 'Riesgo de desastres hacia 2060. Solo Rionegro tiene el cambio cuantificado.';
+function shadingLabel(step, metric, dimensionId, horizon, analysis) {
+  const shift = analysis.parameters.ssp;
+  if (step === 'horizon' && horizon === '2060') {
+    const place = analysis.profiles.find((item) => item.id === shift.municipality_id)?.name ?? shift.municipality_id;
+    return `${capitalize(dimensionName(shift.dimension_id))} hacia ${shift.year}. Solo ${place} tiene el cambio cuantificado.`;
+  }
   if (step === 'portfolio') return 'El resalte es el ámbito de la medida. La ubicación de la obra sigue por validar.';
   const metricLabel = metric === 'risk' ? 'riesgo' : 'vulnerabilidad';
   return `Color municipal de ${metricLabel} en ${dimensionName(dimensionId)}. Sigue siendo un dato municipal.`;
@@ -494,6 +696,15 @@ function colorsFor(raw, dimensionId, metric, scenario) {
   return Object.fromEntries(raw.profiles.municipalities.map((municipality) => {
     const cell = cellFor(raw.metrics.metrics, municipality.id, dimensionId, metric, scenario);
     return [municipality.id, CLASS_COLOR[cell?.classification] ?? CLASS_COLOR.missing];
+  }));
+}
+
+// The class each municipality shows on the map, for the legend: "Rionegro · Muy alta".
+function legendFor(raw, dimensionId, metric, scenario) {
+  return Object.fromEntries(raw.profiles.municipalities.map((municipality) => {
+    const cell = cellFor(raw.metrics.metrics, municipality.id, dimensionId, metric, scenario);
+    const label = cell?.classification ? (cell.classification_label ?? CLASS_LABELS[cell.classification]) : 'sin dato';
+    return [municipality.id, label];
   }));
 }
 
@@ -522,25 +733,6 @@ function leadClass(raw, municipalityId) {
   return { label: `${dimension?.short_name ?? best.dimension_id} · ${best.classification_label}` };
 }
 
-function numericPair(raw, dimensionId, metric) {
-  const value = (id) => raw.metrics.metrics.find((row) => (
-    row.municipality_id === id && row.dimension_id === dimensionId && row.metric === metric && row.value != null
-  ))?.value;
-  return { rionegro: value('rionegro'), marinilla: value('marinilla') };
-}
-
-function formatNumber(value) {
-  return value == null ? 'sin serie' : String(value).replace('.', ',');
-}
-
-function classLabel(value) {
-  return { muy_baja: 'Muy bajo', baja: 'Bajo', media: 'Medio', alta: 'Alto', muy_alta: 'Muy alto' }[value] ?? value;
-}
-
 function shortDimension(raw, id) {
   return raw.interventions.dimensions.find((item) => item.id === id)?.short_name ?? dimensionName(id);
-}
-
-function shortName(name) {
-  return name.length > 48 ? `${name.slice(0, 45)}…` : name;
 }

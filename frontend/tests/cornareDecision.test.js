@@ -4,6 +4,7 @@ import test from 'node:test';
 import { analyzeCorridor, bundleDataset } from '../src/domain/cornareDecision.js';
 import { comparisonCards } from '../src/domain/comparison.js';
 import { decisionHinges } from '../src/domain/decisionHinge.js';
+import { scoreBreakdown } from '../src/domain/decisionSummary.js';
 import { EVIDENCE_LABELS } from '../src/domain/evidence.js';
 import { ROBUSTNESS_MEANING } from '../src/domain/robustness.js';
 import { stressStatus } from '../src/domain/stressTest.js';
@@ -253,9 +254,39 @@ test('scenario coverage qualifies robustness and recommendation language stays c
   assert.equal(ROBUSTNESS_MEANING.includes('Mayormente robusta significa que el conjunto permanece estable'), true);
   assert.equal(ROBUSTNESS_MEANING.includes('no significa que todas las dimensiones tengan series SSP3-7.0'), true);
   assert.equal(/Portafolio óptimo/.test(app), false);
-  assert.match(app, /Portafolio recomendado con evidencia verificada/);
-  assert.match(app, /Mejor conjunto bajo la evidencia institucional actualmente integrada/);
-  assert.match(app, /Con la evidencia institucional verificada, Ourea asigna los COP 5\.000 M a seis medidas/);
+  // The closing sentence is generated from the analysis, never typed into the component.
+  assert.match(app, /data-testid="decision-line">\{analysis\.summary\.sentence\}/);
+  const { summary } = analysis;
+  assert.match(summary.decided, /COP 5\.000 M/);
+  assert.match(summary.decided, /financia 6 de las 15 medidas y usa todo el fondo/);
+  assert.match(summary.stable, /no cambia/);
+  assert.match(summary.stable, /0,28 a 0,32 hacia 2060/);
+  assert.match(summary.change, /cambia PSA por Espacios verdes urbanos y queda a 0,0025 puntos/);
+  assert.match(summary.change, /podría invertir el orden/);
+  assert.equal(summary.sentence, [summary.decided, summary.stable, summary.change].join(' '));
+  assert.doesNotMatch(summary.sentence, /probabilidad|óptimo|garantiza/i);
+});
+
+test('each funded measure explains its score term by term', () => {
+  const analysis = analyzeCorridor(dataset());
+  const byId = new Map(analysis.portfolio.measures.map((measure) => [measure.id, measure]));
+  const second = scoreBreakdown(byId.get('bio_pa'), byId.get('bio_pa').part, analysis.parameters, analysis.profiles);
+  assert.ok(Math.abs(second.total - 0.245) < 1e-9);
+  assert.ok(second.rows.some((row) => row.label === 'Segunda medida de la dimensión' && Math.abs(row.value + 0.455) < 1e-9));
+  const sum = second.rows.reduce((total, row) => total + (row.value ?? 0), 0);
+  assert.ok(Math.abs(sum - second.total) < 1e-9);
+  const withheld = scoreBreakdown(byId.get('health'), byId.get('health').part, analysis.parameters, analysis.profiles);
+  const recurrence = withheld.rows.find((row) => row.label === 'Recurrencia de acciones');
+  assert.equal(recurrence.value, null);
+  assert.match(recurrence.detail, /Marinilla tiene 1 registro/);
+  assert.match(recurrence.detail, /No se cuenta como cero/);
+});
+
+test('the residual names the municipality and class left without a measure', () => {
+  const analysis = analyzeCorridor(dataset());
+  const infrastructure = analysis.residual.rows.find((row) => row.dimensionId === 'infrastructure');
+  assert.equal(infrastructure.addressed, false);
+  assert.match(infrastructure.statement, /Guarne \(Alta\) queda sin medida financiada/);
 });
 
 test('the NbS screen stays qualitative and cites each criterion', () => {

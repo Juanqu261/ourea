@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { NBS_LABELS } from '../domain/evidence.js';
+import { esNumber, esPct } from '../domain/format.js';
 
 const DECISION_LABEL = {
   SELECTED: 'Seleccionada',
@@ -37,13 +38,11 @@ function recurrenceLabel(row) {
 
 function formatTerm(value) {
   if (value == null) return 'Por integrar';
-  const [whole, fraction] = value.toFixed(3).split('.');
-  return `${whole},${fraction}`;
+  return esNumber(value, 3);
 }
 
 function formatGap(value) {
-  const [whole, fraction] = value.toFixed(4).split('.');
-  return `${whole},${fraction}`;
+  return esNumber(value, 4);
 }
 
 function marginalLabel(row) {
@@ -55,6 +54,13 @@ function gapLabel(row) {
   if (row.decision === 'SELECTED') return 'En el conjunto';
   if (row.bestContainingPortfolioGap == null) return 'No cabe';
   return formatGap(row.bestContainingPortfolioGap);
+}
+
+// Selected: what the measure adds inside the portfolio. Outside: how much less the best portfolio with it scores.
+function contributionLabel(row) {
+  if (row.decision === 'SELECTED') return formatTerm(row.portfolioMarginalScore);
+  if (row.bestContainingPortfolioGap == null) return 'No cabe';
+  return `−${formatGap(row.bestContainingPortfolioGap)}`;
 }
 
 function compactScope(scope) {
@@ -70,7 +76,7 @@ function EvidencePill({ evidence }) {
   return <span className={`evidence-pill evidence-${evidence}`}>{EVIDENCE_LABEL[evidence] ?? evidence}</span>;
 }
 
-export function DecisionMatrix({ rows, compact = false }) {
+export function DecisionMatrix({ rows, compact = false, secondShare = null }) {
   const [filter, setFilter] = useState(compact ? 'short' : 'all');
   const [openId, setOpenId] = useState(null);
   const visible = rows.filter((row) => {
@@ -98,12 +104,11 @@ export function DecisionMatrix({ rows, compact = false }) {
         <table className={compact ? 'decision-table is-compact' : 'decision-table'}>
           {compact && (
             <colgroup>
-              <col style={{ width: '26%' }} />
-              <col style={{ width: '12%' }} />
-              <col style={{ width: '18%' }} />
-              <col style={{ width: '16%' }} />
-              <col style={{ width: '16%' }} />
-              <col style={{ width: '12%' }} />
+              <col style={{ width: '37%' }} />
+              <col style={{ width: '11%' }} />
+              <col style={{ width: '14%' }} />
+              <col style={{ width: '15%' }} />
+              <col style={{ width: '23%' }} />
             </colgroup>
           )}
           <thead>
@@ -111,11 +116,10 @@ export function DecisionMatrix({ rows, compact = false }) {
               <th>Medida</th>
               {compact ? (
                 <>
-                  <th className="num" title="Vulnerabilidad más recurrencia observada. Sin componente participativo ni cobeneficio.">Puntaje verificado</th>
+                  <th className="num">COP M</th>
+                  <th className="num" title="La medida sola: vulnerabilidad más recurrencia observada.">Puntaje propio</th>
+                  <th className="num" title="Lo que suma dentro del portafolio. En las alternativas, cuánto menos suma el mejor portafolio que la incluye.">Aporte</th>
                   <th>Estado</th>
-                  <th>Dimensión</th>
-                  <th>Ámbito</th>
-                  <th>Clase</th>
                 </>
               ) : (
                 <>
@@ -150,29 +154,40 @@ export function DecisionMatrix({ rows, compact = false }) {
           </tbody>
         </table>
       </div>
+      {compact && (
+        <p className="matrix-legend matrix-legend-after">
+          Puntaje propio: la medida sola (vulnerabilidad más recurrencia). Aporte: lo que suma dentro del portafolio
+          {secondShare != null ? `; una segunda medida de la misma dimensión cuenta su vulnerabilidad al ${esPct(secondShare)}` : ''}.
+          En las alternativas, el número negativo es cuánto menos suma el mejor portafolio que la incluye.
+        </p>
+      )}
     </div>
   );
 }
 
 function MatrixRows({ row, compact, stripe, open, onToggle }) {
-  const span = compact ? 6 : 14;
+  const span = compact ? 5 : 14;
   const rowClass = `matrix-data mark-${MARK[row.decision]}${stripe ? ' is-stripe' : ''}`;
   return (
     <>
       <tr data-testid={`matrix-${row.id}`} className={rowClass}>
         <th scope="row">
           <span className="measure-name">{row.name}</span>
+          {compact && (
+            <span className="matrix-sub">
+              {SHORT_DIMENSION[row.dimensionId] ?? row.dimension} · {row.vulnerabilityClass} · {compactScope(row.scope)}
+            </span>
+          )}
           {!compact && (
             <button type="button" className="text-button" onClick={onToggle}>{open ? 'Ocultar' : 'Por qué'}</button>
           )}
         </th>
         {compact ? (
           <>
+            <td className="num">{esNumber(row.cost)}</td>
             <td className="num">{formatTerm(row.standaloneVerifiedScore)}</td>
-            <td className="decision-cell"><StatusPill decision={row.decision} /></td>
-            <td>{SHORT_DIMENSION[row.dimensionId] ?? row.dimension}</td>
-            <td>{compactScope(row.scope)}</td>
-            <td>{row.vulnerabilityClass}</td>
+            <td className="num">{contributionLabel(row)}</td>
+            <td><div className="decision-cell"><StatusPill decision={row.decision} /></div></td>
           </>
         ) : (
           <>
@@ -188,9 +203,11 @@ function MatrixRows({ row, compact, stripe, open, onToggle }) {
             <td className="num">{marginalLabel(row)}</td>
             <td className="num">{gapLabel(row)}</td>
             <td>{row.scenario}</td>
-            <td className="decision-cell">
-              <StatusPill decision={row.decision} />
-              <EvidencePill evidence={row.evidence} />
+            <td>
+              <div className="decision-cell">
+                <StatusPill decision={row.decision} />
+                <EvidencePill evidence={row.evidence} />
+              </div>
             </td>
           </>
         )}

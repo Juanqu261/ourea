@@ -7,7 +7,7 @@
   "catalogue_measures": 15,
   "catalogue_total_million_cop": 18900,
   "guardrails": 5,
-  "file_count_excluding_manifest": 253,
+  "file_count_excluding_manifest": 255,
   "files": [
     {
       "path": ".env.example",
@@ -496,8 +496,8 @@
     },
     {
       "path": "frontend/e2e/cornare.spec.js",
-      "bytes": 11739,
-      "sha256": "3b8de6fb3b16b689b18fba8d90535338c071cea437c8125c43881ccc8deb5d42"
+      "bytes": 12194,
+      "sha256": "3f4a25c091a13d0e959816d9a907dac4ab9f26999e7a7269f6e30fdf6d3d46bb"
     },
     {
       "path": "frontend/index.html",
@@ -671,8 +671,8 @@
     },
     {
       "path": "frontend/src/App.jsx",
-      "bytes": 26351,
-      "sha256": "0fc7d2671d95d064210ecee4709b3ffed88e03ae5100d8b82f1c1ccef8e18b81"
+      "bytes": 35246,
+      "sha256": "83dd8d539ff13ca1e33a686a645aa92a2ad1361a5387328958bf90c157e9e4b5"
     },
     {
       "path": "frontend/src/components/ErrorBoundary.jsx",
@@ -696,13 +696,13 @@
     },
     {
       "path": "frontend/src/cornare/DecisionMatrix.jsx",
-      "bytes": 7600,
-      "sha256": "1916315415b444306c2ecfd5b66a3b099b6db7b0ab2dd84fde999c89cbd31bb4"
+      "bytes": 8638,
+      "sha256": "fce14666d20e6a23fbd3b6b7294dbec36c7150c2e7446e7b178aa1afa803c403"
     },
     {
       "path": "frontend/src/cornare/EnginePanels.jsx",
-      "bytes": 12731,
-      "sha256": "21dd56e6fe3725702e0d09387fef5b0ef376f11da45b43da2a1d3e17733da716"
+      "bytes": 17890,
+      "sha256": "e19555df4b553c3f7d1095eef3fef615c36f5c75764a05ed4f6104c831839531"
     },
     {
       "path": "frontend/src/cornare/ai/AuditBadge.jsx",
@@ -761,8 +761,8 @@
     },
     {
       "path": "frontend/src/cornare/map/DecisionMap.jsx",
-      "bytes": 26411,
-      "sha256": "c1f65a2d675470bdaa5388e7f6c091f535d6c94fca16afceef4c9097748c04a3"
+      "bytes": 26577,
+      "sha256": "3ca51e5c10f73457ca5ab9e844da2c52969a00c159993f3c49a855c1d88c0fa1"
     },
     {
       "path": "frontend/src/cornare/map/bounds.js",
@@ -776,18 +776,18 @@
     },
     {
       "path": "frontend/src/cornare/products.js",
-      "bytes": 3979,
-      "sha256": "657417cfc610df741fdeced4c9e55171c8f1ad2682aa0839e1c1e587550043a7"
+      "bytes": 3796,
+      "sha256": "a03d05f762d27571408e87841743d7c5bb7df8f8cdf9a15ef612ae83d7142956"
     },
     {
       "path": "frontend/src/domain/comparison.js",
-      "bytes": 1656,
-      "sha256": "485f0bb6d47b9df4c36c8597de099964e5aa2a7d9489edcd26995d43f60008a8"
+      "bytes": 2289,
+      "sha256": "2bb8f275e32f7ecde03e94292068efba40c3410caebeb21224a8a4fabad92edf"
     },
     {
       "path": "frontend/src/domain/cornareDecision.js",
-      "bytes": 5788,
-      "sha256": "e2b03dda2d057a97c25ee81fb0e6590ce0863787a8c79b1523681a62dac881f3"
+      "bytes": 5953,
+      "sha256": "5c90118882ba551e367dc1b8f3c7a4dd3a8adcd69de5a02ad299fb64f1a22dcb"
     },
     {
       "path": "frontend/src/domain/cornareModel.js",
@@ -796,13 +796,18 @@
     },
     {
       "path": "frontend/src/domain/decisionHinge.js",
-      "bytes": 3601,
-      "sha256": "9df8867467cd41286f8412f208073d3c63802787299ff6338224e3e45cacfc15"
+      "bytes": 3603,
+      "sha256": "64b75a1d15973dbf013c8ec1c9f08f451abae3559af8d48deb977fdacab720f0"
     },
     {
       "path": "frontend/src/domain/decisionMatrix.js",
       "bytes": 3823,
       "sha256": "9f19bc8296f5c4ebfaba51de4bc65f084507adc16abdcfc377bfc544a46cf8df"
+    },
+    {
+      "path": "frontend/src/domain/decisionSummary.js",
+      "bytes": 8495,
+      "sha256": "eed577cc3dca76825da0cc14bd55c30e769d9f3a4da127dd3a8cbce589460c5f"
     },
     {
       "path": "frontend/src/domain/evidence.js",
@@ -816,13 +821,18 @@
     },
     {
       "path": "frontend/src/domain/explanations.js",
-      "bytes": 7950,
-      "sha256": "1c3717064d69ab2ca3691c613b3d627b36648a6aaf720c263b6691cc600dd658"
+      "bytes": 8767,
+      "sha256": "6342ba350f76695449257f97ae8c74640f2fac778210309f11b0a6df5a69fece"
     },
     {
       "path": "frontend/src/domain/fingerprint.js",
       "bytes": 694,
       "sha256": "f7b3d6bfc3160d66611dca60e79b0b293c85d5a7ee8bed890c943aa55c059259"
+    },
+    {
+      "path": "frontend/src/domain/format.js",
+      "bytes": 1251,
+      "sha256": "aa809d6ab11e109be464acf793790f4a86c6c262f24c65ce94402a2d1edf35ab"
     },
     {
       "path": "frontend/src/domain/nbsScreen.js",
@@ -841,8 +851,8 @@
     },
     {
       "path": "frontend/src/domain/robustness.js",
-      "bytes": 2499,
-      "sha256": "9f11d7d00c21d3f968ddf8f28201ff0b2e4ab1de7db5cb5f41bba6bb36d90174"
+      "bytes": 2946,
+      "sha256": "275386c590d69974a42bed69851e12c5a8897d4a960af7cfa0c561bf0425582e"
     },
     {
       "path": "frontend/src/domain/stressTest.js",
@@ -861,8 +871,8 @@
     },
     {
       "path": "frontend/src/styles/cornare.css",
-      "bytes": 22710,
-      "sha256": "834abbade6895582a2e7d4aa0f41a72490ae9919ee506a96f0415b13d108b6bc"
+      "bytes": 27987,
+      "sha256": "06fb6c384f8a2307680e75fed6a7dbd22bb3af7781bcc391c39a315e0e59081c"
     },
     {
       "path": "frontend/src/styles/index.css",
@@ -881,8 +891,8 @@
     },
     {
       "path": "frontend/tests/cornareDecision.test.js",
-      "bytes": 13248,
-      "sha256": "84e869736ff096f190617b09d3a18af2cdfc7765149fc5579ddd215ff96ee3d5"
+      "bytes": 15203,
+      "sha256": "cfc167b7029213564c06f8041ce2f54641e86f8c1744affc7561bb5516a53ad3"
     },
     {
       "path": "frontend/tests/dataValidation.mjs",

@@ -5,10 +5,10 @@ export const HINGE_THRESHOLDS = Object.freeze({
 });
 
 const BAND_LABEL = Object.freeze({
-  VERY_SENSITIVE: 'VERY SENSITIVE',
-  SENSITIVE: 'SENSITIVE',
-  MODERATELY_STABLE: 'MODERATELY STABLE',
-  STABLE: 'STABLE',
+  VERY_SENSITIVE: 'Muy sensible',
+  SENSITIVE: 'Sensible',
+  MODERATELY_STABLE: 'Moderadamente estable',
+  STABLE: 'Estable',
 });
 
 const BAND_INTERPRETATION = Object.freeze({
