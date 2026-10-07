@@ -15,18 +15,18 @@ fi
 
 cd "$ROOT"
 echo "== Python syntax =="
-python -m compileall -q scripts decision_engine
+uv run python -m compileall -q scripts decision_engine services
 
 echo "== Python unit tests =="
-python -m unittest discover -s tests -p "test_*.py" -v
+uv run python -m unittest discover -s tests -p "test_*.py" -v
 
 echo "== CORNARE input validation =="
-python scripts/climaterisk/validate_inputs.py
+uv run python scripts/climaterisk/validate_inputs.py
 
 echo "== Decision engine outputs =="
-python -m decision_engine.build --check
+uv run python -m decision_engine.build --check
 
 echo "== Reproducibility manifest =="
-python scripts/make_manifest.py --check
+uv run python scripts/make_manifest.py --check
 
 echo "Ourea QA completed."

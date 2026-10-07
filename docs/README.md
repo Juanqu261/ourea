@@ -6,3 +6,4 @@ La versión actual de Ourea responde el reto de CORNARE para Rionegro, Guarne y 
 - [Registro de fuentes](climaterisk/source_registry.md)
 - [Soluciones basadas en la naturaleza](climaterisk/nature_based_solutions.md)
 - [Metodología de la decisión](climaterisk/decision_methodology.md)
+- [Capa de IA: copiloto, entrevista y auditor](decision_ai.md)

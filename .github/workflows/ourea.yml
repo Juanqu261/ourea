@@ -26,9 +26,13 @@ jobs:
           cache: npm
           cache-dependency-path: frontend/package-lock.json
 
-      - uses: actions/setup-python@v7
+      - uses: astral-sh/setup-uv@v10.2.0
         with:
           python-version: '3.12'
+          activate-environment: true
+          no-project: true
+          enable-cache: true
+          cache-dependency-glob: requirements*.txt
 
       - name: Install Node dependencies
         working-directory: frontend
@@ -41,7 +45,7 @@ jobs:
 
       - id: manifest
         name: Manifest and checksums
-        run: python scripts/make_manifest.py --check
+        run: uv run python scripts/make_manifest.py --check
 
       - id: build
         name: Production build
@@ -54,15 +58,17 @@ jobs:
         run: node -e "const fs=require('fs'); const files=fs.readdirSync('dist/assets'); if(!files.some(f=>f.startsWith('maplibre-')&&f.endsWith('.js'))) throw new Error('MapLibre chunk missing'); const app=files.filter(f=>f.endsWith('.js')&&!f.startsWith('maplibre-')); const initial=app.map(f=>'dist/assets/'+f).map(p=>fs.statSync(p).size); if(Math.max(...initial)>500000) throw new Error('Initial JS exceeded 500 kB'); console.log(files.join('\n'));"
 
       - name: Install Python QA dependencies
-        run: python -m pip install --upgrade pip && pip install -r requirements.txt
+        run: uv pip install -r requirements.txt -r requirements-ai.txt
 
       - id: python
-        name: Python syntax, unit tests, CORNARE inputs, and decision engine outputs
+        name: Python syntax, unit tests, AI service and audit, CORNARE inputs, and decision engine outputs
         run: |
-          python -m compileall -q scripts tests decision_engine
-          python -m unittest discover -s tests -p "test_*.py" -v
-          python scripts/climaterisk/validate_inputs.py
-          python -m decision_engine.build --check
+          uv run python -m compileall -q scripts tests decision_engine services
+          uv run python -m unittest discover -s tests -p "test_*.py" -v
+          node tests/js/audit_bundle.mjs > "$RUNNER_TEMP/audit_bundle.json"
+          uv run python -m services.decision_ai.audit "$RUNNER_TEMP/audit_bundle.json"
+          uv run python scripts/climaterisk/validate_inputs.py
+          uv run python -m decision_engine.build --check
 
       - name: Install Playwright Chromium
         working-directory: frontend

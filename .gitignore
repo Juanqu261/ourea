@@ -27,6 +27,9 @@ test-results/
 blob-report/
 playwright/.cache/
 
+# Decision AI service runtime: call logs, interview records, proposals. Never commit.
+services/decision_ai/var/
+
 # Local climate-extract cache (CHIRPS rasters/series; never commit)
 .cache/
 

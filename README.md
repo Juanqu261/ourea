@@ -56,8 +56,8 @@ Cada valor crítico se marca como dato institucional, inferencia del equipo, sup
 Los archivos crudos de CORNARE permanecen en `CLIMATERISK/` en la máquina local y no se modifican. El preprocesamiento escribe JSON en `frontend/public/data/cornare/`.
 
 ```bash
-python scripts/climaterisk/build_cornare_dataset.py
-python scripts/climaterisk/validate_inputs.py
+uv run python scripts/climaterisk/build_cornare_dataset.py
+uv run python scripts/climaterisk/validate_inputs.py
 ```
 
 La auditoría de hojas, duplicados y límites está en [docs/climaterisk/data_audit.md](docs/climaterisk/data_audit.md). Las fuentes externas usadas, con fecha de acceso, están en [docs/climaterisk/source_registry.md](docs/climaterisk/source_registry.md).
@@ -70,16 +70,33 @@ Paquete Python (solo numpy) que vuelve a calcular el mundo 0 del navegador y lo 
 aceptabilidad de cada portafolio, puntos de quiebre (PRIM), ruta adaptativa y valor de la información. El navegador no simula: lee el JSON precalculado.
 
 ```bash
-pip install -r requirements.txt          # o: uv venv && uv pip install -r requirements.txt
-python -m decision_engine.build          # escribe uncertainty_ranges, lever_profiles, robustness, breaking_points y value_of_information
-python -m decision_engine.build --check  # falla si el JSON versionado no coincide con una corrida nueva
+uv venv .venv --python 3.12
+uv pip install -r requirements.txt
+uv run python -m decision_engine.build          # escribe uncertainty_ranges, lever_profiles, robustness, breaking_points y value_of_information
+uv run python -m decision_engine.build --check  # falla si el JSON versionado no coincide con una corrida nueva
 ```
 
 La paridad con el motor JS (2,8125 · 2,38 · 2,9525 · `ourea-42aeaba8`) se prueba en `tests/test_engine_parity.py`. La capa de IA usa `decision_engine/api.py`.
 
+## Capa de IA (`services/decision_ai/`)
+
+Servicio local FastAPI con LangChain y LangGraph. No decide: lee el motor y explica. Detalle en [docs/decision_ai.md](docs/decision_ai.md).
+
+- **Herramientas y auditoría** (`/api/tools/*`, `/api/audit`): deterministas, sin llave ni modelo.
+- **Copiloto** «Pregúntale a la decisión», **entrevista de dependencias** (demo SINTÉTICA) y **auditor** de vocabulario: necesitan `OUREA_AI_ENABLED=1` y una llave.
+- Cada cifra del copiloto se verifica por código contra la salida de una herramienta y su huella. Si no pasa en dos intentos, responde solo con hechos de las herramientas.
+
+```bash
+uv venv .venv --python 3.12
+uv pip install -r requirements.txt -r requirements-ai.txt          # CI también usa uv
+uv run uvicorn services.decision_ai.app:app --port 8787 --env-file .env
+uv run python -m services.decision_ai.audit export.json             # QA de la exportación, sin llave
+uv run python -m services.decision_ai.ask "¿Y si exigimos infraestructura gris?"   # necesita llave
+```
+
 ## Arquitectura
 
-Aplicación React y Vite. El cálculo del portafolio corre en el navegador, sin un servicio de inteligencia artificial. El mapa usa MapLibre solo para los tres municipios.
+Aplicación React y Vite. El cálculo del portafolio corre en el navegador. GitHub Pages no usa el servicio de IA: sin `VITE_OUREA_AI_API_URL`, o si `/api/health` no responde, no aparece ningún control de IA. El mapa usa MapLibre solo para los tres municipios.
 
 Recorrido: Panorama, Diagnóstico, Priorizar, Portafolio, SSP3-7.0, Riesgo residual, MEA y Exportar.
 
@@ -104,9 +121,9 @@ npm run build
 Python 3.12:
 
 ```bash
-pip install -r requirements.txt
-python -m unittest discover -s tests -p "test_*.py" -v
-python scripts/climaterisk/validate_inputs.py
+uv pip install -r requirements.txt -r requirements-ai.txt
+uv run python -m unittest discover -s tests -p "test_*.py" -v
+uv run python scripts/climaterisk/validate_inputs.py
 ```
 
 En Windows, `qa_windows.bat` recorre esas comprobaciones. En macOS o Linux, `./qa_mac_linux.sh`.
@@ -114,7 +131,7 @@ En Windows, `qa_windows.bat` recorre esas comprobaciones. En macOS o Linux, `./q
 Antes de hacer push, regenera el manifiesto y deja que QA solo lo compruebe:
 
 ```bash
-python scripts/make_manifest.py
+uv run python scripts/make_manifest.py
 ```
 
 El despliegue en GitHub Pages, y el ajuste único de Settings → Pages → Source → GitHub Actions, están en [docs/deployment.md](docs/deployment.md).

@@ -702,3 +702,26 @@ button:focus-visible, a:focus-visible { outline: 2px solid var(--accent-soft); o
   .decision-map-canvas { height: 240px; min-height: 220px; }
   .map-panel { max-height: 46%; }
 }
+
+/* Decision AI (local service only; nothing renders on Pages) */
+.copilot { display: flex; flex-direction: column; gap: 10px; }
+.copilot-turns { display: flex; flex-direction: column; gap: 12px; }
+.copilot-turn { padding: 12px; border: 1px solid var(--border); border-radius: 12px; }
+.copilot-turn p { margin: 0 0 8px; }
+.copilot-question { color: var(--accent-soft); font-weight: 600; }
+.copilot-error { color: #d87549; }
+.copilot-trace { margin: 0; padding-left: 18px; color: var(--text-muted); font-size: 0.85rem; }
+.copilot-gaps { margin: 0 0 8px; padding-left: 18px; }
+.figure-chips { display: flex; flex-wrap: wrap; gap: 6px; margin: 0 0 8px; padding: 0; list-style: none; }
+.figure-chips li { padding: 3px 8px; border: 1px solid var(--border); border-radius: 999px; color: var(--text-muted); font-size: 0.78rem; }
+.figure-chips strong { color: var(--text-primary); }
+.figure-chips code { font-size: 0.72rem; overflow-wrap: anywhere; }
+.copilot-form { display: flex; gap: 6px; position: sticky; bottom: 0; padding-top: 8px; background: #161c1f; }
+.copilot-form input { flex: 1; min-width: 0; padding: 8px 10px; border: 1px solid var(--border); border-radius: 10px; background: transparent; color: var(--text-primary); }
+.interview { margin-top: 16px; padding: 12px; border: 1px dashed #c8a75e; border-radius: 12px; }
+.interview textarea { width: 100%; box-sizing: border-box; padding: 8px; border: 1px solid var(--border); border-radius: 10px; background: transparent; color: var(--text-primary); font: inherit; }
+.synthetic-banner { display: inline-block; margin: 0 0 8px; padding: 2px 8px; border-radius: 6px; background: #c8a75e; color: #161c1f; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.06em; }
+.audit-badge { margin: 8px 0; padding: 8px 10px; border: 1px solid var(--accent); border-radius: 10px; font-size: 0.85rem; }
+.audit-badge p { margin: 0; display: flex; align-items: center; gap: 6px; }
+.audit-badge.is-off { border-color: var(--border); color: var(--text-muted); }
+.audit-badge.is-blocked { border-color: #a8443f; }

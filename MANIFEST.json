@@ -7,22 +7,22 @@
   "catalogue_measures": 15,
   "catalogue_total_million_cop": 18900,
   "guardrails": 5,
-  "file_count_excluding_manifest": 199,
+  "file_count_excluding_manifest": 253,
   "files": [
     {
       "path": ".env.example",
-      "bytes": 389,
-      "sha256": "7b39f0022f4087a41a330484568d1d0034d4ca77c33e4bc893d5cf1edbce0039"
+      "bytes": 933,
+      "sha256": "54617fb5cfd6223101e11ebd62ba3a6a19ab76827b9e3484a919404812d0e611"
     },
     {
       "path": ".github/workflows/ourea.yml",
-      "bytes": 8168,
-      "sha256": "858003eb5f3c60f021c1ad18f2f584eecb83e5c2b0c47d649496c5e6ef6ea671"
+      "bytes": 8531,
+      "sha256": "8bd25c27e236ceb5c4f847d9aa8acc446fe119382b43792bd1257243b069f160"
     },
     {
       "path": ".gitignore",
-      "bytes": 808,
-      "sha256": "9c8828c6b37ce8579ea2913461dfa5f8236e3ea25239bfd0ea04825b3740857d"
+      "bytes": 921,
+      "sha256": "0d1b1ef59f6f920811917348f548a7c0bbc86fe79cd9586abae1e20300b383df"
     },
     {
       "path": ".vercelignore",
@@ -36,8 +36,8 @@
     },
     {
       "path": "README.md",
-      "bytes": 5965,
-      "sha256": "ab2560731745c2fe47bb68acce03b5dc6d89f9b420860f9c84ca4a0ee6b1198d"
+      "bytes": 7132,
+      "sha256": "559584d9d2f615b67103da8ad358ed99aed41ec07a0ca2dca76e07922d91f8b2"
     },
     {
       "path": "decision_engine/__init__.py",
@@ -126,8 +126,8 @@
     },
     {
       "path": "docs/README.md",
-      "bytes": 366,
-      "sha256": "54200fee9fe10aa8b5aef76d5768f9c158686e737f03a6ff63a7d86c0a7e2aef"
+      "bytes": 429,
+      "sha256": "01679cb33341c347aee18a571bee8b34eb524d6e769705f6e9c7451d0d42707c"
     },
     {
       "path": "docs/climaterisk/data_audit.md",
@@ -480,9 +480,19 @@
       "sha256": "af68a08df749c863643f146aae8ecaf0b7a5104e17fd34a8ab67dbf7e965ca4a"
     },
     {
+      "path": "docs/decision_ai.md",
+      "bytes": 7015,
+      "sha256": "cef04be8b237dc5108dae1b7a938a6e7bd1443220093bc016e97aed724ec380f"
+    },
+    {
       "path": "docs/deployment.md",
       "bytes": 2555,
       "sha256": "bd58b6e12334418c93cd223e706984d4792f7f26136a8687e719498759b02500"
+    },
+    {
+      "path": "frontend/e2e/copilot.spec.js",
+      "bytes": 3830,
+      "sha256": "418a66e8c0a4be946fa98e0b059efac37b9f0b13d3c9cf06e61619224f400f30"
     },
     {
       "path": "frontend/e2e/cornare.spec.js",
@@ -508,6 +518,11 @@
       "path": "frontend/playwright.config.js",
       "bytes": 982,
       "sha256": "e7c7b3d30ae2c2625084325f346288b1284a8e6cab57d524fb235a74cf46e282"
+    },
+    {
+      "path": "frontend/public/data/cornare/actor_competencies.json",
+      "bytes": 3610,
+      "sha256": "ae818323eb2355d4101d3327b94239a7a658606c32b841fecfb34ca58ed9bd1c"
     },
     {
       "path": "frontend/public/data/cornare/adaptation_history.json",
@@ -656,8 +671,8 @@
     },
     {
       "path": "frontend/src/App.jsx",
-      "bytes": 24483,
-      "sha256": "d644e289804fb683deabfe397bce76d64300456581e990a9dc0de9d1c794d183"
+      "bytes": 26351,
+      "sha256": "0fc7d2671d95d064210ecee4709b3ffed88e03ae5100d8b82f1c1ccef8e18b81"
     },
     {
       "path": "frontend/src/components/ErrorBoundary.jsx",
@@ -690,6 +705,26 @@
       "sha256": "21dd56e6fe3725702e0d09387fef5b0ef376f11da45b43da2a1d3e17733da716"
     },
     {
+      "path": "frontend/src/cornare/ai/AuditBadge.jsx",
+      "bytes": 1440,
+      "sha256": "08b5cfc23ed3c53bff3bd7015efdc4ec9c5f316306c9ed237890b6a7da924e0d"
+    },
+    {
+      "path": "frontend/src/cornare/ai/CopilotDrawer.jsx",
+      "bytes": 5122,
+      "sha256": "a69e30af936bbbd3045098d1e774d42a610e610a6d45562a2ada9e1aedec1112"
+    },
+    {
+      "path": "frontend/src/cornare/ai/InterviewDemo.jsx",
+      "bytes": 2758,
+      "sha256": "f3868b786ec8f42753011ef1cbb257e7628b3c46c411cfd668dfa146043e7c62"
+    },
+    {
+      "path": "frontend/src/cornare/ai/client.js",
+      "bytes": 2776,
+      "sha256": "d7b7e8f839aaf07b251a5f225721f1689b295014366f17d552060dd9d4cd818c"
+    },
+    {
       "path": "frontend/src/cornare/briefLayout.js",
       "bytes": 4362,
       "sha256": "5345f99f51d91dd4b7da254281848054de0385ffc2836bc4518db18a7ec8ce56"
@@ -711,8 +746,8 @@
     },
     {
       "path": "frontend/src/cornare/exportDecision.js",
-      "bytes": 1478,
-      "sha256": "063594103e88dbab6ac39226dc86051d8d65418747e39cacf522b5c0da456b7f"
+      "bytes": 1654,
+      "sha256": "ee571cb21496c5b0fc15e71b9ad175cc9351b5d2bdd1463274adafab69e1e00c"
     },
     {
       "path": "frontend/src/cornare/jpegEncode.js",
@@ -738,6 +773,11 @@
       "path": "frontend/src/cornare/map/focus.js",
       "bytes": 1727,
       "sha256": "789667ff215890e231dfa4340fb13c2069fae7331e08b4d948384d785887f6b0"
+    },
+    {
+      "path": "frontend/src/cornare/products.js",
+      "bytes": 3979,
+      "sha256": "657417cfc610df741fdeced4c9e55171c8f1ad2682aa0839e1c1e587550043a7"
     },
     {
       "path": "frontend/src/domain/comparison.js",
@@ -821,8 +861,8 @@
     },
     {
       "path": "frontend/src/styles/cornare.css",
-      "bytes": 20659,
-      "sha256": "d96fe8b4c5936ca54fed031d2a91820d5594c5a29d1c2a45ac23fb7175685529"
+      "bytes": 22710,
+      "sha256": "834abbade6895582a2e7d4aa0f41a72490ae9919ee506a96f0415b13d108b6bc"
     },
     {
       "path": "frontend/src/styles/index.css",
@@ -876,13 +916,18 @@
     },
     {
       "path": "qa_mac_linux.sh",
-      "bytes": 722,
-      "sha256": "56e4fd924ea0a16f134d588af44276b961d2dc276edc5cb0765e30e721422672"
+      "bytes": 766,
+      "sha256": "8b128e45dfd7a7d59d74f77a722e44589570b79712cc1b0f853cfdcc9dded337"
     },
     {
       "path": "qa_windows.bat",
-      "bytes": 853,
-      "sha256": "dd6be3b255bf86022caf1502943142aa55f7e4fce0c374dacba657bb93b8929f"
+      "bytes": 897,
+      "sha256": "4f865f66bc0594f75addb8caf4a85ab26801948b4ae73ff2499a47a90335031c"
+    },
+    {
+      "path": "requirements-ai.txt",
+      "bytes": 395,
+      "sha256": "7ef7289a666f6f2384da9e514a11c5a8397ce9fd39ad8c5d1c26bdd0fc9e30f9"
     },
     {
       "path": "requirements.txt",
@@ -961,8 +1006,208 @@
     },
     {
       "path": "scripts/make_manifest.py",
-      "bytes": 7589,
-      "sha256": "ff8a5779898431808554a91243b36531c2c3028ea86c3755ec8f281e33f03383"
+      "bytes": 7600,
+      "sha256": "beafb1fda5033362f098e0b238936e6971828f82c3918143388b5ee275f31fac"
+    },
+    {
+      "path": "services/__init__.py",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "services/decision_ai/__init__.py",
+      "bytes": 199,
+      "sha256": "4ac69311ca60e6cc489f60324b3badebeea05f1a6de2d4497ca5ba863b21b01f"
+    },
+    {
+      "path": "services/decision_ai/agents/__init__.py",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "services/decision_ai/agents/auditor/__init__.py",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "services/decision_ai/agents/auditor/graph.py",
+      "bytes": 4183,
+      "sha256": "b1fd287076ec1daa4191214588bfc9d2d4619dde6112dafd2cb059a39f5319e2"
+    },
+    {
+      "path": "services/decision_ai/agents/auditor/prompt.md",
+      "bytes": 1029,
+      "sha256": "676a811175ea89f158b497668277c915510a7ed0f8b5d804bcd487d1c057159a"
+    },
+    {
+      "path": "services/decision_ai/agents/copilot/__init__.py",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "services/decision_ai/agents/copilot/graph.py",
+      "bytes": 9352,
+      "sha256": "34e991bd43f347af616f7ebf356cd2a733edaae5db2fe53e4fb54c1ac2ff92d9"
+    },
+    {
+      "path": "services/decision_ai/agents/copilot/prompt.md",
+      "bytes": 4987,
+      "sha256": "7d0a2a91bd539ccba02171df6b41b53d9d9b94c144cea9ef2df6378a861a4e8e"
+    },
+    {
+      "path": "services/decision_ai/agents/copilot/refusals.py",
+      "bytes": 3872,
+      "sha256": "fbff5349db4ed1b42f95b1006bfdd929999d1402c79a810a91fb606c3cce3bdb"
+    },
+    {
+      "path": "services/decision_ai/agents/interviewer/__init__.py",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "services/decision_ai/agents/interviewer/graph.py",
+      "bytes": 9209,
+      "sha256": "251c9494bb3dc28d413932ed539dec507ba52a37eea863a77f2f04ff4bc972bd"
+    },
+    {
+      "path": "services/decision_ai/agents/interviewer/prompt.md",
+      "bytes": 653,
+      "sha256": "eb59c8c1cfeff426d46df065101dc530df7af31451f086f7bae39657e270c39d"
+    },
+    {
+      "path": "services/decision_ai/agents/interviewer/variables.py",
+      "bytes": 2158,
+      "sha256": "e41537960ffe252036579fc8334a2896fac3e34236e5ed7754a5a3f597f45b29"
+    },
+    {
+      "path": "services/decision_ai/agents/shared/__init__.py",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "services/decision_ai/agents/shared/answer.py",
+      "bytes": 1297,
+      "sha256": "566e0af3a98882e8941e1ed57bf53894a6226d91f65d2281447fb43d1003b0fa"
+    },
+    {
+      "path": "services/decision_ai/agents/shared/model.py",
+      "bytes": 941,
+      "sha256": "edcf3999a8ae87666d83752a7c267d0120388515c7f816dbef7f88e1baa87d6b"
+    },
+    {
+      "path": "services/decision_ai/agents/shared/verify.py",
+      "bytes": 4850,
+      "sha256": "0134f7ad45601f2b9b68b00c8df53137fc9eb7911187bb393be5265a51fcb445"
+    },
+    {
+      "path": "services/decision_ai/app.py",
+      "bytes": 6276,
+      "sha256": "30875263970c33a4b3da99a703aeddb18f39b0fbb52ae98997482283f9d01c9f"
+    },
+    {
+      "path": "services/decision_ai/ask.py",
+      "bytes": 1246,
+      "sha256": "8bf01c88e16c4e8dd1a3e3174d605b9636eb0e7741ecacba23887728d6e3ee93"
+    },
+    {
+      "path": "services/decision_ai/audit/__init__.py",
+      "bytes": 82,
+      "sha256": "9b1c0487d7455e3b6daa471deabddf41aeb7a5572f7723a625a0a7071be9cc5f"
+    },
+    {
+      "path": "services/decision_ai/audit/__main__.py",
+      "bytes": 818,
+      "sha256": "15ee130f59273a2e2e5caf757a9de6aad2c55e6c80ccb863e708439940570f17"
+    },
+    {
+      "path": "services/decision_ai/audit/checks.py",
+      "bytes": 8772,
+      "sha256": "f7200b4ecee1df2c30aef4ddca22ec4ea8fd6204ed5bd4f7b8bbb7474a524a4e"
+    },
+    {
+      "path": "services/decision_ai/audit/forbidden.py",
+      "bytes": 1636,
+      "sha256": "886dce723e9887a72cce78d78ab7c8346052b3b08711863e861726c9624cebf9"
+    },
+    {
+      "path": "services/decision_ai/audit/forbidden_claims.json",
+      "bytes": 3449,
+      "sha256": "bb98d5459745ce3d90c8dc0fa0d0ce0dd7e8cbc672c987e89a5b503cc9b23c11"
+    },
+    {
+      "path": "services/decision_ai/audit/numbers.py",
+      "bytes": 3303,
+      "sha256": "100a0eaa8b8711c62cd5a355393b1e5e75bd672d7dc0fb4c088fdc1f0c3bdcf6"
+    },
+    {
+      "path": "services/decision_ai/config.py",
+      "bytes": 1890,
+      "sha256": "1ce32c03aeadc2d72e826c6b57850f77690d644942de9d97cc444198499545aa"
+    },
+    {
+      "path": "services/decision_ai/demo/synthetic_flower_grower.json",
+      "bytes": 906,
+      "sha256": "684e6ae13cc193a8ce811c8bedb2f3815bfb8b0e7e719fabd18f288f4e91453e"
+    },
+    {
+      "path": "services/decision_ai/engine/__init__.py",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "services/decision_ai/engine/adapter.py",
+      "bytes": 5789,
+      "sha256": "686cf424f30b18ca1b7ca6a5450e986b642cb8c5052a0e6dd1c064189b7014f0"
+    },
+    {
+      "path": "services/decision_ai/engine/dataset.py",
+      "bytes": 1186,
+      "sha256": "5e1795fbdd3344ee2794e5ffa701a4ebb64e712ca2193304ab92ee62b05562bf"
+    },
+    {
+      "path": "services/decision_ai/eval.py",
+      "bytes": 2544,
+      "sha256": "2c57433257bee40bb714c6a44b8f9ad29f3cfdd77127afcd954aa225e7d539fd"
+    },
+    {
+      "path": "services/decision_ai/tools/__init__.py",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "services/decision_ai/tools/call_log.py",
+      "bytes": 1677,
+      "sha256": "5b515efe6b8666047c83189c1429d0134f582e76ab62c4acd1e2e4895babac38"
+    },
+    {
+      "path": "services/decision_ai/tools/registry.py",
+      "bytes": 3098,
+      "sha256": "2e71fdb5adc9eff53d8443d8172d8f6506160debef508c2a8f35ba7dbbeeaad3"
+    },
+    {
+      "path": "services/decision_ai/tools/schemas.py",
+      "bytes": 4673,
+      "sha256": "4c26efff7ce806cf680b91e0075679e3783821d0a5e69cb11da41711754d2842"
+    },
+    {
+      "path": "tests/ai_fakes.py",
+      "bytes": 1659,
+      "sha256": "db688d93fac97b451f0c403b94e493d2cf0e576d1a65a5ea35163fe64ae15da5"
+    },
+    {
+      "path": "tests/fixtures/ai/copilot_questions.jsonl",
+      "bytes": 2888,
+      "sha256": "f4f0962aba56e56d749f716452814fba0d9cf54f3273f4faaaf4e231fd47172c"
+    },
+    {
+      "path": "tests/fixtures/ai/seeded_bad_bundle.json",
+      "bytes": 336,
+      "sha256": "70d03cf5048de1ef873b41d346d627c041ec74cf2ef357cd84f07d6145079055"
+    },
+    {
+      "path": "tests/js/audit_bundle.mjs",
+      "bytes": 1016,
+      "sha256": "e60322b05278b3289418e5737425501c1fcaaf63d863b0c55309981b2a3865c3"
     },
     {
       "path": "tests/js/fingerprint_fixtures.mjs",
@@ -973,6 +1218,31 @@
       "path": "tests/js/world0_reference.mjs",
       "bytes": 1704,
       "sha256": "17cfca74fcb2e4081b374589a3b4a6cf9aa69c1f7ee4368f9fe71ce17d4a73b5"
+    },
+    {
+      "path": "tests/test_ai_app.py",
+      "bytes": 5122,
+      "sha256": "081c19552a2d7d5dcd1b3e2b6051afb7fc4ec33cf8d7ff53a58ed7336b9358f5"
+    },
+    {
+      "path": "tests/test_ai_audit.py",
+      "bytes": 6547,
+      "sha256": "dee4aa0b64c3f014123a1260ccd9480e1d37d70209e9e0fe92f4f90efdfa25d8"
+    },
+    {
+      "path": "tests/test_ai_graphs.py",
+      "bytes": 11155,
+      "sha256": "9b4bf6ffffc072f9616957a69e32c45daaba49481fed743a3a43c6c04bb3b40a"
+    },
+    {
+      "path": "tests/test_ai_tools.py",
+      "bytes": 6423,
+      "sha256": "092172a5965aaa3c5c5e78f2f055223e64a36c366ee4c4e6974ed730c3ad3174"
+    },
+    {
+      "path": "tests/test_ai_verify.py",
+      "bytes": 7512,
+      "sha256": "48963d9c4cfa58528e42229322fe36970efbae6ba30ae5459bea638ac67506ed"
     },
     {
       "path": "tests/test_climaterisk.py",

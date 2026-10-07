@@ -1,0 +1,68 @@
+{
+  "schema": "ourea.cornare.actor_competencies",
+  "provenance": "team_inference",
+  "evidence_label": "Inferencia del equipo",
+  "note": "Lectura del equipo de las competencias generales por ley. No es un concepto jurídico. Sirve para que el auditor marque, como hallazgo menor, una acción asignada a un actor que no la tiene.",
+  "laws": [
+    {"id": "ley-99-1993", "title": "Ley 99 de 1993, Sistema Nacional Ambiental"},
+    {"id": "ley-1523-2012", "title": "Ley 1523 de 2012, Política Nacional de Gestión del Riesgo de Desastres"}
+  ],
+  "actors": [
+    {
+      "id": "cornare",
+      "names": ["CORNARE", "Corporación Autónoma Regional"],
+      "level": "autoridad ambiental",
+      "competencies": ["administrar recursos naturales renovables", "otorgar concesiones de agua y permisos ambientales", "ordenar cuencas (POMCA)", "declarar y administrar áreas protegidas regionales", "asesorar a los municipios en gestión ambiental y del riesgo"],
+      "not_competent": ["construir y operar vías municipales", "prestar servicios públicos domiciliarios", "prestar servicios de salud"],
+      "law_ids": ["ley-99-1993", "ley-1523-2012"]
+    },
+    {
+      "id": "municipio",
+      "names": ["alcaldía", "alcaldías", "gobiernos municipales", "municipio", "municipios"],
+      "level": "municipal",
+      "competencies": ["dirigir la gestión del riesgo en su territorio", "ordenar el territorio (POT)", "invertir en reducción del riesgo y conocimiento del riesgo", "asegurar la prestación de servicios públicos", "mantener vías municipales"],
+      "not_competent": ["otorgar concesiones de agua", "declarar áreas protegidas regionales"],
+      "law_ids": ["ley-1523-2012"]
+    },
+    {
+      "id": "cmgrd",
+      "names": ["Consejo Municipal de Gestión del Riesgo", "CMGRD"],
+      "level": "municipal",
+      "competencies": ["coordinar el conocimiento del riesgo, la reducción y el manejo de desastres en el municipio", "operar sistemas de alerta temprana con el municipio"],
+      "not_competent": ["otorgar permisos ambientales"],
+      "law_ids": ["ley-1523-2012"]
+    },
+    {
+      "id": "gobernacion",
+      "names": ["Gobernación de Antioquia", "gobernación", "departamento"],
+      "level": "departamental",
+      "competencies": ["coordinar y apoyar la gestión del riesgo de los municipios", "complementar la inversión municipal"],
+      "not_competent": ["otorgar concesiones de agua"],
+      "law_ids": ["ley-1523-2012"]
+    },
+    {
+      "id": "ungrd",
+      "names": ["UNGRD", "Unidad Nacional para la Gestión del Riesgo de Desastres"],
+      "level": "nacional",
+      "competencies": ["coordinar el Sistema Nacional de Gestión del Riesgo"],
+      "not_competent": ["ejecutar obras municipales de forma directa como regla general"],
+      "law_ids": ["ley-1523-2012"]
+    },
+    {
+      "id": "servicios_publicos",
+      "names": ["empresas de servicios públicos", "acueductos", "acueducto"],
+      "level": "prestador",
+      "competencies": ["operar acueductos, energía y saneamiento", "gestionar el riesgo de su propia infraestructura"],
+      "not_competent": ["otorgar concesiones de agua", "declarar áreas protegidas"],
+      "law_ids": ["ley-1523-2012"]
+    },
+    {
+      "id": "comunidades",
+      "names": ["comunidades locales", "productores", "organizaciones"],
+      "level": "comunitario",
+      "competencies": ["participar en la planeación y el seguimiento", "implementar acuerdos voluntarios de conservación"],
+      "not_competent": ["otorgar permisos ambientales", "declarar áreas protegidas"],
+      "law_ids": ["ley-1523-2012"]
+    }
+  ]
+}
